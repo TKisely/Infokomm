@@ -75,6 +75,15 @@ A HTML-oldal szakaszazonosítói ezekből képződnek ékezet nélkül (pl. `mgP
 ## 5. Szövegszabályok (plan 6. pont)
 
 - A végleges HTML látható szövegében nincs gondolatjel és nincs pontosvessző. Tizedesvessző kell.
+
+### 5a. Kidolgozási szabály: minden lépés követhető (2026-11-15, a felhasználó kérése)
+A tömör „képlet = szám” megoldás nem elfogadható. Minden példában:
+1. **Adott és Keresett** lista: minden jel neve, jelentése és mértékegysége (pl. „$\Phi_D$: fázislöket, a fázis legnagyobb eltérése a vivőétől, rad”), és hogy a feladat melyik részéből jön.
+2. **Minden behelyettesített szám mellett ott a forrása**: a feladat szövege, leolvasás az ábráról, melyik korábbi lépés eredménye.
+3. **Minden képlet mellett, hogy miért alkalmazható** (melyik modell, milyen feltétel teljesül).
+4. **A 2–3 apró közbenső lépés is kiírva**: átrendezés, egységváltás (pl. ms és kHz), azonosság (pl. $\cos a\cos b$).
+5. **Minden eredmény a kérdéséhez kötve**: „a)”, „b)” betűvel és egy mondattal, mire válasz.
+6. A szöveges kérdésekre (miért, mi a szerepe) is indokolt válasz, nem csak kulcsszó.
 - **A jelenlegi md munkafájlok (`00`–`06`) még nem felelnek meg ennek**: van bennük gondolatjel és pontosvessző. A HTML-buildnél ezeket át kell fogalmazni, a forrásfájlokat (`Forrasok/`) nem módosítjuk.
 
 ---

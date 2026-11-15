@@ -118,6 +118,9 @@ A B) rész tételei megmaradnak, az átirat azonosítóival kiegészítve. Új t
 | H24 | `5o_22_3 d)` | R = 0,6, „lilás” | **R = 0, kék** | Cr = −0,3, R = Cr + Y = 0 |
 | H25 | `5o_30_2` | „A = h·λ = 6” | **h = A/λ ≈ 6 perc** | a 0,6 a lebonyolított forgalom, nem a tartási idő |
 | H26 | `aiD_6_2`, `5o_10_1` | legrosszabb eset 1,15 − 4·0,25 | **1,15 − 3·0,25 = 0,4** | négyszintű jelnél a szomszéd legfeljebb ±3 |
+| H27 ⚠️ | `5o_04_1` (oktatói levezetés), `ai2014_01_07_2` | 2πF·T₀ + μ(T₀) = 2π·8 → Φ = 8π/3 = 8,4 | **a t = 0-beli fázist le kell vonni: μ(T₀) − μ(0) = −2Φ, így ugyanabból a leolvasásból Φ = 2π ≈ 6,3 rad, f_D ≈ 15,7 kHz** | ugyanez jön ki az átlagolásból: átlagos eltérés = (2/π)·f_D, 10 kHz → 15,7 kHz. A beállított érték (az oktató szerint) 25 kHz, ehhez félperiódusonként kb. 7 és 13 vivőperiódus tartozna, a 8 és 12 durva leolvasás `[ELLENŐRIZENDŐ]` |
+| H28 | `ai2020_05_26_Q3` (ALL-IN példatár 4.1) | d(01010, 11011) = 3 | **2** | 01010 ⊕ 11011 = 10001. A döntés (01110) nem változik |
+| H29 | `5o_24_4` (megjegyzés) | — | alsó keverésnél az oszcillátor a sáv tetején (36 MHz) 18 MHz-en, a KF-en jár | a felső keverés ezért is jobb |
 
 ## F) Fájl-állapot
 
