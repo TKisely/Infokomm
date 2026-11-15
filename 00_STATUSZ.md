@@ -1,0 +1,50 @@
+# Infokomm – státusz és tartalomjegyzék
+
+Utolsó frissítés: 2026-11-15
+
+## Mappaszerkezet
+
+| Fájl / mappa | Mi van benne | Mire használd |
+|---|---|---|
+| `00_STATUSZ.md` | ez a fájl | áttekintés, mi kész és mi nincs |
+| `01_Kidolgozas_Kepletek_es_Receptek.md` | 12 témakör: képletek, megoldási lépések, csapdák | **tanulás és ismétlés, vizsga előtti átnézés** |
+| `02_Regi_Vizsgafeladatok_Megoldasokkal.md` | 2014–2020-as vizsgafeladatok témakörönként, ellenőrzött megoldással és a javítók megjegyzéseivel | **gyakorlás**: előbb oldd meg magad, utána ellenőrizd |
+| `03_Hibajegyzek.md` | a forrásokban talált hibák (A: régi md jegyzetek, B: hallgatói megoldások) | mielőtt régi megoldásból tanulsz |
+| `04_Claude_ai_projekt_megallapitasok.md` | a claude.ai projekt chatje írta: témakörök, a hiányzó részek listája, a projektbeli PDF-kidolgozások hibái | a még be nem dolgozott pontok listája |
+| `05_TMIT_Gyakorlatok_Kidolgozas.md` | a tanszéki gyakorlatanyag (gyak00–08) minden kidolgozott példája ellenőrizve, és **saját megoldás a gyakorló (G.) feladatokhoz** | **gyakorlás a hivatalos feladatokon** |
+| `Forrasok/Korabbi_md_jegyzetek/` | a `~/Downloads/infokomm_*.md` fájlok másolata, eredeti állapotban (javítás nélkül) | referencia; a hibáikat lásd a `03`-ban |
+| `Forrasok/TMIT_gyakorlatok/` | `gyak00, 01, 02, 04, 05, 06, 07, 08.pdf` (tmit.bme.hu, letöltve 2026-11-15). **Csak helyben van meg, a GitHubra nem kerül fel** (tanszéki anyag, a `.gitignore` kizárja). Eredeti: `https://www.tmit.bme.hu/sites/default/files/attachments/gyakNN.pdf` | eredeti feladatszövegek és ábrák |
+
+## Feldolgozott források
+
+| Forrás | Hely | Állapot |
+|---|---|---|
+| 7 modul + 30 feladat (md) | `Forrasok/Korabbi_md_jegyzetek/` (eredeti: `~/Downloads`) | ✅ teljesen átnézve, számolások ellenőrizve |
+| Hivatalos gyakorlati példatár, 1–5. gyak. | OneDrive: `InfoKomm összes/From Balázs/1-5 gyakorlatok.pdf` | ✅ beépítve a `01`-be |
+| Képletgyűjtemény | `Local Sources/BME/Infokom/Infokommunikáció-képletek-FINAL.pdf` | ✅ beépítve a `01`-be |
+| Régi vizsgák és megoldások | `Local Sources/BME/Infokom/ALL-IN-Infokomm-1.pdf` (szöveges része) | ✅ a `02`-ben |
+| „5-ösöm lesz infokommból” | `Local Sources/BME/Infokom/5-ösöm-lesz-infokommból.pdf` (szöveges része) | ✅ a `02`-ben |
+| TMIT gyakorlatanyag gyak00–08 (03 nélkül) | `Forrasok/TMIT_gyakorlatok/` | ✅ a `05`-ben (a P-példák ellenőrizve, a G-feladatok kidolgozva) |
+
+**A TMIT-oldalon nem elérhető füzetek:** `gyak03`, valamint `gyak09`–`gyak14` (404, más néven sem találtam; a `gyak00`-t így találtam meg).
+A témasorrend alapján a 03 a rádiós összeköttetés lehet. Ennek anyaga a OneDrive `1-5 gyakorlatok.pdf` 3. fejezetében van, és az `01` feldolgozza.
+A 09+ füzetek (cellás mobil, VoIP, forgalom) anyagát a `02` 7–8. fejezete pótolja. Ha valahol megvannak (pl. Moodle), töltsd be őket, és kidolgozom.
+
+## Még NEM feldolgozott források
+
+- **Képként beágyazott feladatszövegek és ábrák** az `ALL-IN` és az `5-ösöm` PDF-ben (oszcilloszkóp-képek, konstellációk, GSM-ábrák, a PAM elemi jele, Erlang-grafikon). A `02`-ben `[ÁBRA SZÜKSÉGES]` jelöli őket.
+- **Az ALL-IN „Infokommunikáció feladatok” része** (1.1–10.x, a példatár sorszámai szerint). Ennek csak a szöveges megjegyzései vannak meg, maguk a feladatok képek.
+- **Elméleti jegyzetek:** `Infokomm_jegyzet.pdf` (67 oldal), `Infokom__jegyzet.pdf` (165 oldal), OneDrive `Jelek_leírása.pdf`, `Mintavételezés_kvantálás.pdf`. Ezek a szóbelihez kellenek, a gyakorlati vizsgához kevésbé.
+- `Section2Final06062013.pdf`: angol nyelvű általános RF-fizika, nem tárgyspecifikus.
+- **Kézírásos fotók:** OneDrive `INFOKOMM/Gyakokról` (~45), `INFOKOMM/Konzis` (~11), `~/Downloads/BACKUP/INFOKOMM` (~60).
+- **Videók** (2021-es gyakorlatok és konzultációk).
+- **Korábbi INFOKOMM beszélgetések** a claude.ai INFOKOMM projektben: innen nem érhetők el.
+
+## Nyitott `[ELLENŐRIZENDŐ]` tételek
+
+1. FSK sávszélesség-konvenció: 2(f_D + 1/(2T)) vagy 2(f_D + 1/T) (`02` 5.2).
+2. 8-PSK 72 MHz-ben: mekkora α-t vár el a feladat (`02` 5.4).
+3. QAM-16 [160,100] 20 MHz: milyen α-val kell számolni (`02` 5.3).
+4. Mezőkovácsháza: h_T = 40 m (sík terep) a helyes, és nem a 136 m (`02` 1.2).
+5. 8-QAM konstellációk: az ábra kell hozzá (`02` 5.8).
+6. Call center d): a visszahívás tartási ideje (`02` 8.3).

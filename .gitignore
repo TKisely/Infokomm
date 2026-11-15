@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Szerzői jogvédett forrás-PDF-ek (tanszéki anyag): csak helyben, a repóba nem kerülnek fel
+*.pdf
