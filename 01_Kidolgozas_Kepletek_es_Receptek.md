@@ -216,6 +216,7 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
 
 ### Additív zaj okozta döntési hiba (képletgyűjtemény)
 - PAM-2: p = Φ(−h₀/σ); L szintű PAM: **p = 2·(L−1)/L · Φ(−h₀/σ)** (h₀ = a jelszint távolsága a küszöbtől, σ = a zaj szórása).
+- **Két jelölés, ugyanaz az érték:** ha Φ a sima eloszlásfüggvény (Koma, Marosi, előadás), akkor p = Φ(−h₀/σ). Ha Φ a **komplementer** eloszlásfüggvény (TMIT gyak05), akkor ugyanez p = Φ(h₀/σ). Példa: h₀/σ = 4 → p ≈ 3,2·10⁻⁵ mindkét alakban. A vizsgán írd le, melyik Φ-t használod.
 - Nyquist-feltétel a frekvenciatartományban: Σ_k H(f − k/T) = állandó → nincs ISI.
 
 ---

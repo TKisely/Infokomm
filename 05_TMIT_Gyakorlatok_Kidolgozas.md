@@ -181,7 +181,7 @@ Képlettel: k₂ = (m/2)/(1 + m²/4).
 |---|---|---|
 | P.5.2 háromszögspektrum (B) | h(t) = (sin πBt/πBt)², a nullhelyek 1/B többszöröseinél → az ISI-mentes jelzési idő **T = k/B** | ✅ |
 | P.5.3 illesztett szűrőpár | H_V = H_A = √(1 − |f·T|), ha |f| < 1/T | ✅ |
-| P.5.4 h₀ = 1,2 V, σ = 0,3 V | P_e = Φ(4) ≈ **3,2·10⁻⁵**. L szintre P_e = 2(L−1)/L·Φ(h₀/σ): 4 szinten +50%, 8 szinten +75%. A teljesítmény (L²−1)/3-szoros: 5× (**7 dB**), illetve 21× (**13 dB**) | ✅ |
+| P.5.4 h₀ = 1,2 V, σ = 0,3 V | P_e = Φ(4) ≈ **3,2·10⁻⁵** (itt Φ a komplementer eloszlásfüggvény; sima eloszlásfüggvénnyel ugyanez Φ(−4)). L szintre P_e = 2(L−1)/L·Φ(h₀/σ): 4 szinten +50%, 8 szinten +75%. A teljesítmény (L²−1)/3-szoros: 5× (**7 dB**), illetve 21× (**13 dB**) | ✅ |
 | P.5.5 időzítési hiba (m₀ = 0,99, m±1 = 0,1) | a fél ponttávolság 0,99 − d_max·0,2 → 2 szinten 0,79, 4 szinten 0,39, **8 szinten negatív** (zaj nélkül is hibázik) | ✅ |
 | P.5.6 m₀ = 1, m₁ = 0,1, m₋₁ = 0,15 | kétszintű esetben ±1,25, ±1,05, ±0,95, ±0,75. Négyszintűben a 3-as szint 2,25…3,75 közé, az 1-es 0,25…1,75 közé esik | ✅ |
 

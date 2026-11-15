@@ -58,5 +58,5 @@ A 09+ füzetek (cellás mobil, VoIP, forgalom) anyagát a `02` 7–8. fejezete p
 ## Következő lépések
 
 A részletes lista a `claude/INFOKOMM_feldolgozasi_standard.md` 8–9. fejezetében van. Röviden:
-1. A nyitott pontok tisztázása (különösen a Φ/Q jelölés).
+1. A nyitott pontok tisztázása (a Φ-jelölés eldöntve: mindkét alak szerepel).
 2. A könyvszerű HTML-oldal (KaTeX, build.js) a plan 4–7. pontja szerint, fejezetenként, az első fejezet a mintavételezés és kvantálás.

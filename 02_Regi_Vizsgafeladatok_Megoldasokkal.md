@@ -232,7 +232,7 @@ P = R²/2 = 1 W (1 Ω, R a csúcsamplitúdó). Ha már 11,25° fázishiba van, a
 - `[2020.05.26 Q2]` `[ÁBRA SZÜKSÉGES]` A PAM elemi jele 3T/4-es mintavételi fázisnál ±0,8 és ±1,7 értékeket ad, ezek a 0-s küszöb jó oldalán vannak, tehát kétszintű jelnél nincs ISI.
   Négyszintű jelnél viszont 1,25·1 + 0,45·3 = 2,6 > 2 → hibás döntés, ezért négyszintű átvitelre **nem alkalmas**.
 - `[5-ösöm 2.]` Koszinusz félhullám alakú elemi jel (gyökös Nyquist): a sávszélessége ≈ 1/T, ezért egy 1/T határfrekvenciájú aluláteresztő nem okoz számottevő ISI-t.
-- Additív zaj okozta döntési hiba: PAM-2 esetén p = Φ(−h₀/σ), L szintű PAM esetén **p = 2(L−1)/L · Φ(−h₀/σ)**.
+- Additív zaj okozta döntési hiba: PAM-2 esetén p = Φ(−h₀/σ), L szintű PAM esetén **p = 2(L−1)/L · Φ(−h₀/σ)** (sima eloszlásfüggvénnyel; komplementer Φ-vel, ahogy a TMIT gyak05 írja: Φ(h₀/σ)).
 
 ---
 

@@ -37,7 +37,7 @@ A HTML-oldal szakaszazonosítói ezekből képződnek ékezet nélkül (pl. `mgP
 |---|---|---|---|
 | **C** | csúcstényező | a források c-t és C-t is írnak; c egyben a fénysebesség és a hangsebesség | csúcstényező: **C**, terjedési sebesség: **c** |
 | **L̄** | átlagos kódszóhossz | Marosi λ-val jelöli, ez ütközik a hullámhosszal | átlagos kódszóhossz: **L̄**, hullámhossz: **λ** |
-| **Φ(x)** | a standard normális eloszlás **komplementer** eloszlásfüggvénye, P_e = Φ(h₀/σ) | a TMIT gyak05 komplementert ír; Koma, Marosi és az `01` Φ(−h₀/σ)-t (sima eloszlásfüggvényt) | a vizsgán egyet kell következetesen használni. A HTML-ben **Q(x)** jelöli a komplementert, és mindkét forrásjelölés zárójelben szerepel. `[a megerősítésed kell]` |
+| **Φ(x)** | a standard normális eloszlás **komplementer** eloszlásfüggvénye, P_e = Φ(h₀/σ) | a TMIT gyak05 komplementert ír; Koma, Marosi és az `01` Φ(−h₀/σ)-t (sima eloszlásfüggvényt) | **Eldöntve (2026-11-15):** mindkét alak szerepel, egymás mellett: p = Φ(−h₀/σ) (sima eloszlásfüggvény: előadás, Koma, Marosi) és p = Φ(h₀/σ) (komplementer: TMIT gyak05), egy plusz sorral, hogy melyik Φ melyik. Q(x) nem kerül be új jelként |
 | **Φ_D** | fázislöket [rad] | Koma m_p-nek, Marosi Φ_D-nek, a képletgyűjtemény φ_D-nek írja | **Φ_D**. A modulációs index m_f = Φ_D (szinuszos FM) |
 | **f_D** | frekvencialöket [Hz] | Koma m_f-et is ír rá (rad/s) | **f_D** Hz-ben |
 | **m** | AM modulációs mélység | – | **m** |
@@ -103,7 +103,6 @@ A központi lista a `03_Hibajegyzek.md`. Ami különösen fontos:
 
 ## 8. Nyitott pontok
 
-1. A Φ jelölés (komplementer vagy sima eloszlásfüggvény) a HTML-ben: Q(x) bevezetése (3. fejezet).
 2. A `00_STATUSZ.md` 1–7. `[ELLENŐRIZENDŐ]` tétele.
 3. Marosi-átirat 4 olvasási kérdése (az átirat végén).
 4. RS/FEC szerepkiosztás a DVB-ben (`03` G3).
