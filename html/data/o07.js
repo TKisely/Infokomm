@@ -14,7 +14,7 @@ module.exports = {
       src: R`5-ösöm 21. oldal · 5o_21_1 (a gyűjteményben nincs megoldás)`,
       task: R`<p>Milyen szín dominál a képpontban, ha $(Y,C_b,C_r)$ a) $(0{,}220;\ -0{,}120;\ 0{,}280)$, b) $(0{,}182;\ 0{,}118;\ 0{,}118)$?</p>`,
       ad: [R`$Y$: világossági jel, $C_b=B-Y$, $C_r=R-Y$: színkülönbségi jelek (a két hármas a feladatból)`],
-      ker: [R`$R$, $G$, $B$ színjelek, és melyik a legnagyobb`],
+      ker: [R`$R$, $G$, $B$: a vörös, a zöld és a kék színjel, és melyik a legnagyobb`],
       lv: [S('a) R és B', R`A két színkülönbségi jelből közvetlenül (A2).`, [
           ['behelyettesítés', R`B=C_b+Y=-0{,}120+0{,}220=0{,}10\qquad R=C_r+Y=0{,}280+0{,}220=0{,}50`, '']]),
         S('a) G', R`$Y$ képletéből kifejezzük $G$-t.`, [

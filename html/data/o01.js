@@ -29,7 +29,7 @@ module.exports = {
     { id: 'o1_01', num: '1.1', title: R`$3\sin+4\cos$ csúcstényezője, maximuma, teljesítménye`, tags: ['beugro', 'javitas'],
       src: R`5-ösöm 2. oldal · 5o_02_1`,
       task: R`<p>Határozza meg az $x(t)=3\sin(2\pi Ft)+4\cos(2\pi Ft)$ jel csúcstényezőjét, maximális értékét és teljesítményét!</p>`,
-      ad: [R`$x(t)$: két azonos, $F$ frekvenciájú tag összege, a szinuszos tag amplitúdója 3, a koszinuszosé 4 (a feladatból)`, R`$F$ értéke nem kell: az eredmény nem függ tőle`],
+      ad: [R`$x(t)$: két azonos, $F$ frekvenciájú tag összege, a szinuszos tag amplitúdója 3, a koszinuszosé 4 (a feladatból)`, R`$F$: a két tag közös frekvenciája. Az értéke nem kell, az eredmény nem függ tőle`],
       ker: [R`$C$: csúcstényező, $\hat x/x_\text{eff}$`, R`$\hat x$: a jel legnagyobb értéke`, R`$P$: átlagteljesítmény (1 Ω-on, $P=x_\text{eff}^2$)`],
       miert: [[R`Miért lehet egyetlen szinusszá összevonni?`, R`Két azonos frekvenciájú szinuszos jel összege mindig ugyanolyan frekvenciájú szinusz, csak más amplitúdóval és fázissal. Ebből a csúcsérték közvetlenül leolvasható.`]],
       lv: [S('Összevonás egyetlen szinusszá', R`Keressük $A\sin(\omega t+\varphi)$ alakban, $\omega=2\pi F$. Az addíciós tétellel kifejtjük, és a $\sin\omega t$, illetve $\cos\omega t$ együtthatóit egyeztetjük a feladatbeli 3-mal és 4-gyel.`, [
@@ -116,7 +116,7 @@ module.exports = {
       task: R`<p>80 kHz-es vivő, 20 kHz-es szinusz, csúcsérték 2,5 V, $m=25\%$. a) Rajz (50 µs). b) Időfüggvény, időegység, komponensek.</p>`,
       ad: [R`$f_v=80$ kHz, $f_m=20$ kHz`, R`$\hat s=2{,}5$ V: a modulált jel csúcsértéke`, R`$m=0{,}25$: modulációs mélység`],
       ker: [R`a) rajz 50 µs hosszan`, R`b) $s(t)$, az idő egysége, a spektrumvonalak`],
-      lv: [S('Amplitúdók', R`Ugyanaz a gondolatmenet, mint az 1.4-ben: a csúcsérték $U_v(1+m)$.`, [
+      lv: [S('Amplitúdók', R`A burkoló legnagyobb értéke $U_v+U_m=U_v(1+m)$, és a vivő ott is eléri az 1-et, ezért ez a jel csúcsértéke. Ebből kifejezzük $U_v$-t, majd $U_m=mU_v$.`, [
           ['behelyettesítés', R`U_v(1+0{,}25)=2{,}5\ \Rightarrow\ U_v=\frac{2{,}5}{1{,}25}=2\ \text{V}`, ''],
           ['számérték', R`U_m=mU_v=0{,}25\cdot2=0{,}5\ \text{V}`, '']]),
         S('b) Időfüggvény és időegység', R`A frekvenciák kHz-ben vannak, ezért $t$ ms-ban: így $2\pi\cdot80\,t$ radiánban jön ki.`, [

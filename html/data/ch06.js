@@ -280,7 +280,7 @@ module.exports = {
    "tags": [
     "beugro"
    ],
-   "task": "<p>Az előző, 33 szimbólumos forrás szimbólumait párosával kódoljuk, fix hosszú kóddal. Hány bites egy pár kódszava, mennyi az egy szimbólumra jutó átlagos kódszóhossz, és mennyi most a romlás?</p>",
+   "task": "<p>Egy forrás 33 különböző szimbólumot ad ki. A szimbólumait párosával kódoljuk, fix hosszú kóddal. Hány bites egy pár kódszava, mennyi az egy szimbólumra jutó átlagos kódszóhossz, és mennyi most a romlás?</p>",
    "ad": [
     "$N=33$",
     "párok kódolása fix hosszú kóddal"
@@ -567,7 +567,7 @@ module.exports = {
     "Sardinas és Patterson tesztje (kiegészítés) szerint az első kód nem, a második és a harmadik egyértelműen megfejthető."
    ],
    "hib": [
-    "A feltétel teljesülését a kód helyességének hiszik. Az $\\{1,10,00\\}$ kód nem az összegtől jó, hanem a szerkezetétől (6.4. példa).",
+    "A feltétel teljesülését a kód helyességének hiszik. Az $\\{1,10,00\\}$ kód nem az összegtől jó, hanem a szerkezetétől: bár az $1$ eleje a $10$-nek, a $00$ miatt mindig csak egyféleképpen bontható fel, csak nem azonnal.",
     "Elfelejtik, hogy a McMillan-feltétel csak szükséges: ha teljesül, a konkrét kódot még külön meg kell vizsgálni."
    ],
    "du": [
@@ -1202,7 +1202,7 @@ module.exports = {
    "chk": [
     "A független szkript minden kódszóra és minden 1, 2, 3 bites hibamintára kipróbálta: 2 hibáig minden hiba feltűnik, és 1 hiba mindig helyesen javul.",
     "Az 1. lépésben a páronkénti XOR eredménye mindig a kód egy szava (linearitás).",
-    "A 6.8. példa szindrómái is ezt mutatják: az öt egybites hiba öt különböző, nemnulla szindrómát ad."
+    "Ugyanezt mutatja a szindrómatábla: a kód $\mathbf H^{\mathsf T}$ mátrixának öt sora (110, 011, 100, 010, 001) mind különböző és nemnulla, ezért mind az öt egybites hiba más szindrómát ad, és javítható."
    ],
    "hib": [
     "A $\\lfloor d_{\\min}/2\\rfloor$ képletet használják (koma E2 így írja). Páros $d_{\\min}$ esetén ez eggyel többet ad: $d_{\\min}=4$ mellett 2 helyett csak 1 hiba javítható.",
@@ -1282,7 +1282,7 @@ module.exports = {
     ],
     [
      "Miért a legkisebb súlyú hibát választjuk?",
-     "Mert kis $p$ mellett az egy hiba sokkal valószínűbb, mint a kettő (6.6. példa). Ugyanahhoz a szindrómához több hibaminta is tartozik, ezek közül a legvalószínűbbet vesszük."
+     "Mert kis $p$ mellett az egy hiba sokkal valószínűbb, mint a kettő: például $n=1000$, $p=10^{-4}$ esetén $P(1)\approx0{,}09$, $P(2)\approx0{,}0045$. Ugyanahhoz a szindrómához több hibaminta is tartozik, ezek közül a legvalószínűbbet vesszük."
     ]
    ],
    "elm": [

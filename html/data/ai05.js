@@ -84,7 +84,7 @@ module.exports = {
       src: R`ALL-IN 20., 23…24. oldal · ai2016_01_05_5, ai2016_06_07_1`,
       task: R`<p>A spektrumon a vivő 100 kHz-en 3 dBV, az oldalsávok 80 és 120 kHz-en −9 dBV (effektív értékek). a) Időfüggvény. b) Modulációs mélység. c) Az oldalsávok és az összteljesítmény aránya. d) Demodulátor.</p>`,
       ad: [R`vivő: 100 kHz, 3 dBV`, R`oldalsávok: 80 és 120 kHz, −9 dBV`, R`dBV: effektív érték 1 V-hoz viszonyítva, $20\lg(U_\text{eff}/1\,\text{V})$`],
-      ker: [R`a) $s(t)$`, R`b) $m$`, R`c) $P_\text{oldal}/P$`, R`d) demodulátor`],
+      ker: [R`a) $s(t)$`, R`b) $m$`, R`c) $P_\text{oldal}/P$: az oldalsávok teljesítménye osztva a teljes teljesítménnyel`, R`d) demodulátor`],
       miert: [[R`Miért kell $\sqrt2$-vel szorozni?`, R`A dBV effektív értéket ad meg, az időfüggvényben csúcsérték (amplitúdó) szerepel. Szinusznál az amplitúdó az effektív érték $\sqrt2$-szöröse.`]],
       lv: [S('Amplitúdók a dBV-értékekből', R`Először a $20\lg$ visszafordítása effektív értékre, aztán $\sqrt2$-vel amplitúdóra.`, [
           ['átalakítás', R`U=10^{3/20}\cdot\sqrt2=1{,}41\cdot1{,}41=2{,}0\ \text{V}`, 'vivő'],
@@ -148,7 +148,7 @@ module.exports = {
       src: R`ALL-IN 111…112. oldal · aiD_5_17`,
       task: R`<p>$s(t)=A[2+x(t)]\cos(2\pi Ft)$, $x(t)=0{,}1\sin(2\pi f_1t)+\cos(2\pi f_2t)$, $f_1=1$ kHz, $f_2=2$ kHz, $F=900$ kHz, $A=100$ V, $R=50\,\Omega$. a) $m$? b) Frekvenciák és teljesítmények? c) Oldalsávok aránya? d) A pillanatnyi teljesítmény minimuma és e) maximuma?</p>`,
       ad: [R`a burkoló $100\,[2+x(t)]$ V, a középértéke 200 V`, R`$R=50\ \Omega$: a teljesítményt ezen kell számolni, $P=U^2/(2R)$ amplitúdóból`],
-      ker: [R`a) $m$`, R`b) vonalak és teljesítményük`, R`c) $P_\text{oldal}/P$`, R`d), e) a burkolóhoz tartozó legkisebb és legnagyobb pillanatnyi teljesítmény`],
+      ker: [R`a) $m$`, R`b) vonalak és teljesítményük`, R`c) $P_\text{oldal}/P$: az oldalsávok teljesítménye osztva a teljes teljesítménnyel`, R`d), e) a burkolóhoz tartozó legkisebb és legnagyobb pillanatnyi teljesítmény`],
       lv: [S('a) Modulációs mélység', R`$m=\max|x|/2$. A legnagyobb abszolút érték a minimumnál van: ha $\sin=-1$ és $\cos=-1$ egyszerre. $t=0{,}75$ ms-ban $\sin(2\pi\cdot0{,}75)=\sin(1{,}5\pi)=-1$ és $\cos(2\pi\cdot2\cdot0{,}75)=\cos3\pi=-1$.`, [
           ['behelyettesítés', R`x(0{,}75\ \text{ms})=-0{,}1-1=-1{,}1`, ''],
           ['definíció', R`m=\frac{1{,}1}{2}=55\%`, '']]),
@@ -178,14 +178,14 @@ module.exports = {
         S('c) Demodulátor', R`Számláló típusú (nullátmenet-detektor → impulzusgenerátor → aluláteresztő), vagy deriváló + burkolódetektor. A Carson-sáv a beállított lökettel $2(25+2{,}5)=55$ kHz.`, [])],
       ered: [R`\text{a) FM}\qquad\text{b) leolvasásból }f_D\approx16\ \text{kHz, a beállított érték }f_D=25\ \text{kHz},\ \Phi_D=10\ \text{rad}`],
       gy: R`<p>A gyűjtemény szerint FM (ez helyes), de a fázislöketet a moduláló jel feszültségéből olvassa le: „$\Phi_D=4/2=2$ rad”, ebből $f_D=5$ kHz.</p>`,
-      fix: R`A moduláló jel voltban mért amplitúdója nem fázislöket (a modulátor érzékenysége nem ismert). Az oktató saját megjegyzése szerint a generátort ő állította be, $f_D=25$ kHz. A részletes levezetés, és hogy a 8 és 12 durva leolvasás: 5-ösöm példatár 1.6, hibajegyzék H27.`,
+      fix: R`A moduláló jel voltban mért amplitúdója nem fázislöket (a modulátor érzékenysége nem ismert). Az oktató saját megjegyzése szerint a generátort ő állította be, $f_D=25$ kHz. A 25 kHz-hez félperiódusonként $10\mp\tfrac2\pi\cdot25\cdot0{,}2=10\mp3{,}2$, azaz kb. 7 és 13 vivőperiódus tartozna: a 8 és 12 durva leolvasás, ezért ad a becslés kisebb löketet.`,
       hib: [R`A szögmodulált jel csúcstényezője $\sqrt2$, a burkoló állandó. Ha a burkoló változik, az nem szögmoduláció.`], links: [srcAI(['ai2014_01_07_2'])] },
 
     { id: 'ai5_11', num: '5.11', title: 'FM 1,5 GHz-en, 40 kHz-es sávban', tags: ['vizsga'],
       src: R`ALL-IN 109. oldal · aiD_5_1`,
       task: R`<p>20 Hz és 8 kHz közötti jelet FM-mel kell továbbítani 1,5 GHz-es vivőn, a sáv 40 kHz (számoljunk 8 kHz-cel). a) Frekvencialöket? b) $s(t)=5\cos(A\pi t+\varphi+B\sin(C\pi t))$ alakban ($t$ ms-ban) mi A, B, C?</p>`,
       ad: [R`$f_m=8$ kHz: a legnagyobb moduláló frekvencia (erre méretezünk)`, R`$B_v=40$ kHz: a rendelkezésre álló sáv`, R`$f_v=1{,}5$ GHz`],
-      ker: [R`a) $f_D$`, R`b) $A$, $B$, $C$`],
+      ker: [R`a) $f_D$`, R`b) a képlet három paramétere: $A$: a vivő tagjának együtthatója ($A\pi t$), $B$: a fázisban álló szinusz amplitúdója (a fázislöket), $C$: a moduláló tag együtthatója ($C\pi t$)`],
       lv: [S('a) Frekvencialöket', R`A Carson-szabályt $f_D$-re rendezzük.`, [
           ['tétel', R`2(f_D+8)=40\ \Rightarrow\ f_D=20-8=12\ \text{kHz}`, '']]),
         S('b) A vivő tagja: A', R`$A\pi t=2\pi f_vt$, $t$ ms-ban. $f_v=1{,}5\ \text{GHz}=1{,}5\cdot10^6\ \text{kHz}$, azaz $1{,}5\cdot10^6$ 1/ms.`, [

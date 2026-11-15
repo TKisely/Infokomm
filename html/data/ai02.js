@@ -53,7 +53,7 @@ module.exports = {
           ['számérték', R`B=75-45=30\ \text{kHz}\qquad\left\lfloor\frac{75}{30}\right\rfloor=\lfloor2{,}5\rfloor=2`, R`$k=1$ vagy $2$`]]),
         S('a) Aluláteresztővel', R`$k=1$: a legmagasabb komponens dönt.`, [
           ['behelyettesítés', R`f_s\ge2\cdot75=150\ \text{kHz}`, '']]),
-        S('b) Sávszűrővel', R`$k=2$ az A2 képletébe:`, [
+        S('b) Sávszűrővel', R`$k=2$-t behelyettesítjük a sáváteresztő mintavétel képletébe, $2f_H/k\le f_s\le2f_L/(k-1)$:`, [
           ['behelyettesítés', R`\frac{2\cdot75}{2}\le f_s\le\frac{2\cdot45}{1}\ \Rightarrow\ 75\le f_s\le90\ \text{kHz}`, '']]),
         S('c) Spektrum $f_s=75$ kHz-nél', R`A képek $n\cdot75\pm(45\ldots75)$:`, [
           ['számérték', R`n=1:\ 75-(45\ldots75)=0\ldots30\qquad75+(45\ldots75)=120\ldots150`, ''],
@@ -81,8 +81,8 @@ module.exports = {
 
     { id: 'ai2_04', num: '2.4', title: '60…108 kHz-es jel: hány bit kell?', tags: ['vizsga', 'javitas'],
       src: R`ALL-IN 56…57., 81…82., 94…95. oldal · ai2014_12_15_4, ai2014_01_14_2, aiD_2_2 d), aiD_2_5 b)`,
-      task: R`<p>Ugyanehhez a jelhez: a) $C=\sqrt3$, legalább 70 dB SNR. b) Szinuszos jel, 70 dB, minden választható tartományra. c) $C=\sqrt6$, $f_s=432$ kHz, legalább 60 dB. Hány bites egyenletes kvantáló kell?</p>`,
-      ad: [R`a jel 60…108 kHz, $B=48$ kHz, választható $f_s$: 108…120 kHz vagy legalább 216 kHz (2.3)`],
+      task: R`<p>Egy 60 és 108 kHz közötti komponensekből álló jelet közvetlenül digitalizálunk, egyenletes kvantálóval. a) $C=\sqrt3$, legalább 70 dB SNR. b) Szinuszos jel, 70 dB, minden választható tartományra. c) $C=\sqrt6$, $f_s=432$ kHz, legalább 60 dB. Hány bites egyenletes kvantáló kell?</p>`,
+      ad: [R`a jel 60 és 108 kHz között van, $B=48$ kHz`, R`a sáváteresztő mintavétel szerint választható $f_s$: 108 és 120 kHz között ($k=2$), vagy legalább 216 kHz ($k=1$), lásd az első lépést`],
       ker: [R`$n$ a három esetben`],
       lv: [S('a) Háromszögjel, 70 dB', R`$10\lg(3/C^2)=10\lg1=0$. A $108\ldots120$ kHz-es tartományban sávszűrővel ($B_z=48$ kHz) a túlmintavételezés $10\lg(f_s/96)=0{,}5\ldots1$ dB.`, [
           ['behelyettesítés', R`0+0{,}5+6{,}02\,n\ge70\ \Rightarrow\ n\ge\frac{69{,}5}{6{,}02}=11{,}5`, R`$f_s=108$ kHz, a legrosszabb eset`],
@@ -177,7 +177,7 @@ module.exports = {
       ker: [R`az $f_s$ tartományai`],
       lv: [S('A $k$ értékei', '', [
           ['számérték', R`B=30\ \text{kHz}\qquad\lfloor100/30\rfloor=\lfloor3{,}33\rfloor=3`, R`$k=1,2,3$`]]),
-        S('Tartományok', R`Behelyettesítés az A2 képletébe:`, [
+        S('Tartományok', R`Behelyettesítés a sáváteresztő mintavétel képletébe, $2f_H/k\le f_s\le2f_L/(k-1)$:`, [
           ['behelyettesítés', R`k=1:\ f_s\ge200\qquad k=2:\ \frac{200}{2}=100\le f_s\le\frac{140}{1}=140`, 'kHz'],
           ['behelyettesítés', R`k=3:\ \frac{200}{3}=66{,}7\le f_s\le\frac{140}{2}=70`, 'kHz']])],
       ered: [R`f_s\ge200\ \text{kHz}\qquad100\ldots140\ \text{kHz}\qquad66{,}7\ldots70\ \text{kHz}`],

@@ -24,7 +24,7 @@ module.exports = {
     { id: 'o9_01', num: '9.1', title: 'Budapest: hány klaszter, hányan beszélhetnek?', tags: ['vizsga'],
       src: R`5-ösöm 25. oldal · 5o_25_1`,
       task: R`<p>Budapest 525 km², FRF = 12, 525 cella. a) Hány klaszter? b) Hányan beszélhetnek egyszerre? c) Egy átlagos cellában hányan egy szolgáltatónál (kb. 40 csatorna)?</p>`,
-      ad: [R`525 cella (kb. 1 km²-enként egy)`, R`FRF $=12$: frekvencia-újrafelhasználási tényező, egy klaszter 12 cellából áll`, R`124 vivő, vivőnként 8 időrés (A2)`, R`c) egy szolgáltató kb. 40 vivőt használ`],
+      ad: [R`525 cella (kb. 1 km²-enként egy)`, R`FRF $=12$: frekvencia-újrafelhasználási tényező, egy klaszter 12 cellából áll`, R`124 vivő, vivőnként 8 időrés`, R`c) egy szolgáltató kb. 40 vivőt használ`],
       ker: [R`a) a klaszterek száma`, R`b) az egyszerre lehetséges beszélgetések száma`, R`c) egy cella egy szolgáltatójánál egyszerre beszélők száma`],
       lv: [S('a) Klaszterek', R`Minden klaszter 12 cellából áll.`, [
           ['számérték', R`\frac{525}{12}=43{,}75\approx44\ \text{klaszter}`, '']]),

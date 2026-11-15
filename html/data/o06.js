@@ -23,7 +23,7 @@ module.exports = {
       src: R`5-ösöm 17…18. oldal · 5o_17_1`,
       task: R`<p>$C_1$: $u_1u_2u_3u_4\to u_1u_2u_3u_4p_1p_2p_3$, $p_1=u_1\oplus u_2\oplus u_4$, $p_2=u_1\oplus u_3\oplus u_4$, $p_3=u_2\oplus u_3\oplus u_4$. $C_2$: ugyanez és $p_4=p_1\oplus p_2\oplus p_3$. a) $C_1$ kódszavai. b) $C_1$ paritásellenőrző mátrixa, hány bites a szindróma? c) Mi lehetett az üzenet 0110000 vételekor, biztos? d) $C_2$ generátormátrixa?</p>`,
       ad: [R`4 bites üzenet, 3 paritásbit a megadott XOR-képletekkel ($C_1$: $n=7$, $k=4$)`, R`$v=0110000$: a vett szó`],
-      ker: [R`a) a 16 kódszó`, R`b) $H$, $H^T$ és a szindróma hossza`, R`c) $\hat u$, és hogy biztos-e`, R`d) $G_2$`],
+      ker: [R`a) a 16 kódszó`, R`b) $H$ (paritásellenőrző mátrix), $H^T$ és a szindróma hossza`, R`c) $\hat u$, és hogy biztos-e`, R`d) $G_2$`],
       lv: [S('A generátormátrix', R`A $G$ sorai az 1000, 0100, 0010, 0001 üzenetek kódszavai. Például $u=1000$: $p_1=1$, $p_2=1$, $p_3=0$.`, [
           ['behelyettesítés', R`1000\to1000\,110\quad0100\to0100\,101\quad0010\to0010\,011\quad0001\to0001\,111`, 'a paritásképletekből'],
           ['definíció', R`G=[I\,|\,B],\qquad B=\begin{bmatrix}1&1&0\\1&0&1\\0&1&1\\1&1&1\end{bmatrix}`, '']]),
@@ -62,7 +62,7 @@ module.exports = {
       src: R`5-ösöm 19. oldal · 5o_19_1`,
       task: R`<p>00 → 00000, 01 → 01110, 10 → 10101, 11 → 11011. a) Szisztematikus G, legvalószínűbb kódszó $v=01010$-ra. b) H és a szindróma.</p>`,
       ad: [R`négy kódszó, $k=2$, $n=5$`, R`$v=01010$`],
-      ker: [R`a) $G$ és $\hat c$`, R`b) $H$ és $s$`],
+      ker: [R`a) $G$ és $\hat c$`, R`b) $H$ (paritásellenőrző mátrix) és $s$`],
       lv: [S('a) Generátormátrix', R`A $G$ sorai a 10 és a 01 üzenet kódszavai, így az eleje egységmátrix.`, [
           ['definíció', R`G=\begin{bmatrix}1&0&1&0&1\\0&1&1&1&0\end{bmatrix}=[I\,|\,B],\quad B=\begin{bmatrix}1&0&1\\1&1&0\end{bmatrix}`, '']]),
         S('a) A legközelebbi kódszó', R`Megszámoljuk, hány bitben tér el $v$ az egyes kódszavaktól.`, [
@@ -78,7 +78,7 @@ module.exports = {
       src: R`5-ösöm 19. oldal · 5o_19_2`,
       task: R`<p>$G=\begin{bmatrix}1&0&1&0&1\\0&1&0&1&1\end{bmatrix}$. a) Kódszavak, legvalószínűbb üzenet $v=11101$-re. b) H és a szindróma. c) Biztosan jelezhető és javítható hibák?</p>`,
       ad: [R`$G=[I\,|\,B]$, $B=\begin{bmatrix}1&0&1\\0&1&1\end{bmatrix}$`, R`$v=11101$`],
-      ker: [R`a) a kódszavak és $\hat u$`, R`b) $H$ és $s$`, R`c) jelezhető és javítható hibák száma`],
+      ker: [R`a) a kódszavak és $\hat u$`, R`b) $H$ (paritásellenőrző mátrix) és $s$`, R`c) jelezhető és javítható hibák száma`],
       lv: [S('a) Kódszavak', R`A négy üzenet: $00\to0$, $10\to$ 1. sor, $01\to$ 2. sor, $11\to$ a két sor XOR-ja.`, [
           ['számérték', R`00000,\quad10101,\quad01011,\quad10101\oplus01011=11110`, '']]),
         S('a) A legközelebbi kódszó', '', [

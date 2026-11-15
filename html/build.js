@@ -21,8 +21,11 @@ const BOOKS = {
 };
 const BOOK = BOOKS[process.argv[2] || 'main'];
 if (!BOOK) throw new Error('Ismeretlen könyv: ' + process.argv[2]);
-const CHAPTERS = BOOK.chapters.filter(n => fs.existsSync(path.join(__dirname, 'data', n + '.js')) || (console.warn('Hiányzó fejezet: ' + n), false)).map(n => require('./data/' + n + '.js'));
+const CHAPTERS = BOOK.chapters.filter(n => fs.existsSync(path.join(__dirname, 'data', n + '.js')) || (console.warn('Hiányzó fejezet: ' + n), false)).map(n => Object.assign(require('./data/' + n + '.js'), { _file: n }));
 const REPO = 'https://github.com/TKisely/Infokomm/blob/main/';
+const { explain } = require('./data/_gloss_core.js');
+const { glossFor } = require('./data/_gloss.js');
+const MISSING = [];
 const RAJZ = fs.existsSync(path.join(__dirname, 'data/_rajz.js')) ? require('./data/_rajz.js') : {};
 
 // ---------- KaTeX ----------
@@ -84,8 +87,12 @@ function example(e, ch) {
   h += '</div><a class="pin" href="#' + e.id + '" aria-label="Hivatkozás erre">#</a></header>';
   h += '<div class="task"><div class="lbl">Feladat</div>' + T(e.task) + '</div>';
   if (e.fig) h += '<div class="task"><div class="fig">' + e.fig + '</div></div>';
-  if (e.ad) h += '<div class="ak"><div><div class="lbl">Adott</div><ul>' + e.ad.map(x => '<li>' + T(x) + '</li>').join('') + '</ul></div>' +
-    '<div><div class="lbl">Keresett</div><ul>' + e.ker.map(x => '<li>' + T(x) + '</li>').join('') + '</ul></div></div>';
+  const refTxt = [e.task, e.gy, e.fix, ...(e.chk || []), ...(e.hib || []), ...(e.miert || []).flat(), ...e.lv.flatMap(x => [x.t, x.s, ...(x.m || []).map(r => r[2])])].join(' ');
+  const rm = refTxt.match(/\b\d{1,2}\.\d{1,2}\.?\s*(?:példa|-ben|-ban)|[Aa]z előző (?:feladat|példa|forrás)|Ugyanehhez|mint az \d/);
+  if (rm) MISSING.push(e.id + ': másik feladatra utal („' + rm[0] + '”)');
+  const G = glossFor(ch._file), ex1 = x => { const [t, miss] = explain(x, G); miss.forEach(m => MISSING.push(e.id + ': ' + m)); return t; };
+  if (e.ad) h += '<div class="ak"><div><div class="lbl">Adott</div><ul>' + e.ad.map(x => '<li>' + T(ex1(x)) + '</li>').join('') + '</ul></div>' +
+    '<div><div class="lbl">Keresett</div><ul>' + e.ker.map(x => '<li>' + T(ex1(x)) + '</li>').join('') + '</ul></div></div>';
   if (e.miert) h += '<div class="why"><div class="lbl">Miért így? Egyszerűen</div><dl>' + e.miert.map(q => '<dt>' + T(q[0]) + '</dt><dd>' + T(q[1]) + '</dd>').join('') + '</dl></div>';
   if (e.elm) h += '<div class="th"><div class="lbl">Felhasznált elmélet</div>' + e.elm.map(t => '<div class="thi"><b>' + T(t[0]) + '</b> ' + T(t[1]) + (t[2] ? disp(t[2]) : '') + '</div>').join('') + '</div>';
   h += '<div class="sol"><div class="lbl">Megoldás lépésenként</div>' + e.lv.map((st, i) =>
@@ -186,6 +193,7 @@ function stripKatex(s) {
 
 const html = page();
 const errs = checks(html);
+if (MISSING.length) errs.push('Önállósági hiba (magyarázat nélküli jel, vagy utalás másik feladatra): ' + [...new Set(MISSING)].join(', '));
 fs.mkdirSync(path.join(__dirname, 'dist'), { recursive: true });
 fs.writeFileSync(path.join(__dirname, 'dist/' + BOOK.out + '.html'), html);
 // önálló, teljes HTML dokumentum (helyi megnyitáshoz és böngészős ellenőrzéshez)

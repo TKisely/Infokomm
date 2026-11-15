@@ -27,7 +27,7 @@ module.exports = {
       src: R`ALL-IN 1. oldal · ai2020_05_26_Q1`,
       task: R`<p>$h_T=h_R=10$ m, $r=10$ km, $f=300$ MHz, $G_T=5$ dB, $G_R=3$ dB, tökéletes reflexió. a) Szakaszcsillapítás? b) A vevőantenna magasságának változtatásával mekkora $E_{\max}/E_{\min}$, ha $\Gamma=-0{,}8$?</p>`,
       ad: [R`$h_T=h_R=10$ m, $r=10$ km $=10^4$ m`, R`$f=300$ MHz $\Rightarrow\lambda=3\cdot10^8/3\cdot10^8=1$ m`, R`$G_T=5$ dB, $G_R=3$ dB`, R`b) $\Gamma=-0{,}8$`],
-      ker: [R`a) $a_\mathrm{sz}$`, R`b) $E_{\max}/E_{\min}$`],
+      ker: [R`a) $a_\mathrm{sz}$`, R`b) $E_{\max}/E_{\min}$: a legnagyobb és a legkisebb térerősség aránya, miközben a vevőantenna magasságát változtatjuk`],
       lv: [S('Melyik zónában van a vevő?', R`A zónahatár (A2):`, [
           ['behelyettesítés', R`\frac{4h_Th_R}{\lambda}=\frac{4\cdot10\cdot10}{1}=400\ \text{m}\ll10\ \text{km}`, 'távoli zóna, a kétutas képlet kell']]),
         S('a) Szakaszcsillapítás', '', [
@@ -74,7 +74,7 @@ module.exports = {
       src: R`ALL-IN 101. oldal · aiD_3_10`,
       task: R`<p>450 MHz, bázisállomás-antenna 50 m, vevők 1,5 m. a) Hol az interferenciazóna határa? b) A vevő magasságát változtatva mekkora $E_{\max}/E_{\min}$, ha $\Gamma=-1$, illetve $-0{,}9$? c) Kinek pozitív az antennanyeresége? d) Csillapítás a zóna határán ($\Gamma=-1$, nyereségek összege 6 dB)? e) 10 km-en mennyit változik a vett teljesítmény, a térerősség és a csillapítás, ha 3 m magasról hívunk?</p>`,
       ad: [R`$f=450$ MHz $\Rightarrow\lambda=2/3$ m`, R`$h_T=50$ m, $h_R=1{,}5$ m`, R`d) $G_T+G_R=6$ dB`],
-      ker: [R`a) zónahatár`, R`b) $E_{\max}/E_{\min}$`, R`c) antennanyereség`, R`d) $a_\mathrm{sz}$ a határon`, R`e) változások dB-ben`],
+      ker: [R`a) zónahatár`, R`b) $E_{\max}/E_{\min}$: a legnagyobb és a legkisebb térerősség aránya a vevő magasságát változtatva`, R`c) melyik antenna nyeresége pozitív`, R`d) $a_\mathrm{sz}$ a határon`, R`e) változások dB-ben`],
       lv: [S('a) Zónahatár', '', [
           ['behelyettesítés', R`\frac{4h_Th_R}{\lambda}=\frac{4\cdot50\cdot1{,}5}{2/3}=450\ \text{m}`, '']]),
         S('b) Arány', R`A2 szerint, $\Gamma=-1$-nél a minimum 0.`, [
@@ -91,7 +91,7 @@ module.exports = {
       src: R`ALL-IN 18. oldal · ai2016_01_05_2 (emlékezetből leírt feladat)`,
       task: R`<p>Kétutas terjedésnél egy adott távolságban a vett jel kétszerese volt a szükségesnek. Fogható-e még a jel, ha $h_R$-t felére csökkentjük?</p>`,
       ad: [R`a vett teljesítmény a szükséges kétszerese: 3 dB tartalék`, R`a vevő a távoli zónában van`],
-      ker: [R`fogható-e $h_R/2$-vel`],
+      ker: [R`fogható-e a jel, ha a vevőantenna magassága a felére ($h_R/2$) csökken`],
       lv: [S('Mennyit ront a felezés?', R`A távoli zónában $a_\mathrm{sz}=20\lg(r^2/(h_Th_R))-G_T-G_R$, tehát $h_R$ felezése $20\lg2$-vel növeli a csillapítást.`, [
           ['számérték', R`\Delta a=20\lg2=6\ \text{dB}`, ''],
           ['ellenőrzés', R`6\ \text{dB}>10\lg2=3\ \text{dB}`, 'a tartalék kevés']])],

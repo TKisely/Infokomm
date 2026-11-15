@@ -52,7 +52,7 @@ module.exports = {
       src: R`ALL-IN 46…48., 85…86. oldal · ai2016_01_12_3, ai2016_01_12c_3`,
       task: R`<p>Percenként 5 hívás, átlagosan 3 perc. a) Felajánlott forgalom? b) 100 hívásból hány hosszabb 6 percnél? c) Hány kiszolgáló kell 0,1%-hoz? d) Kihasználtság? e) Elfér-e a forgalom VoIP-pal egy 10 Mbit/s-os vonalon?</p>`,
       ad: [R`$\lambda=5$ hívás/perc, $h=3$ perc (exponenciális)`, R`$P_b\le0{,}1\%$`],
-      ker: [R`a) $A$`, R`b) $P(X>6\ \text{perc})$`, R`c) $N$`, R`d) $a$`, R`e) VoIP-kapacitás`],
+      ker: [R`a) $A$`, R`b) $P(X>6\ \text{perc})$: annak valószínűsége, hogy egy hívás 6 percnél tovább tart`, R`c) $N$`, R`d) $a$`, R`e) VoIP-kapacitás`],
       lv: [S('a) Forgalom', '', [['definíció', R`A=5\cdot3=15\ \text{Erl}`, '']]),
         S('b) Hosszú hívások', R`Exponenciális eloszlásnál $P(X>t)=e^{-t/h}$ (A1).`, [
           ['behelyettesítés', R`P(X>6)=e^{-6/3}=e^{-2}=0{,}135`, '100-ból kb. 13 vagy 14']]),

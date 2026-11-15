@@ -20,7 +20,7 @@ module.exports = {
     { id: 'ai6_01', num: '6.1', title: 'Elemi jel 1,25 és 0,45 (Moodle 2020)', tags: ['vizsga'],
       src: R`ALL-IN 2. oldal · ai2020_05_26_Q2`,
       task: R`<p>Bináris PAM, $h(t)=1{,}25$ a $(0,T)$-n, $0{,}45$ a $(T,2T)$-n. b) Van-e ISI, ha a mintavétel fázisa $T_0=3T/4$? c) Alkalmas-e négyszintű rendszerre?</p>`,
-      ad: [R`$h_0=1{,}25$ (az első időrésben), $h_1=0{,}45$ (a következő időrésben)`, R`mintavétel az időrés $3T/4$ pontjában`],
+      ad: [R`$h_0=1{,}25$: az elemi jel értéke a saját időrésében, $h_1=0{,}45$: az értéke a következő időrésben (ez lóg át a következő szimbólumba)`, R`mintavétel az időrés $3T/4$ pontjában`],
       ker: [R`b) van-e ISI, és hibázik-e a döntés`, R`c) négy szint`],
       lv: [S('A minta képlete', R`A $3T/4$-es pontban a saját elemi jel első szakasza (1,25) és az előző szimbólum második szakasza (0,45) adódik össze.`, [
           ['definíció', R`x_k=1{,}25\,d_k+0{,}45\,d_{k-1}`, '']]),
@@ -83,8 +83,8 @@ module.exports = {
     { id: 'ai6_05', num: '6.5', title: '1200 baudos PAM: válasszuk meg $f_1$-et, $f_2$-t és A-t', tags: ['vizsga'],
       src: R`ALL-IN 120. oldal · aiD_6_5 (hivatalos)`,
       task: R`<p>1200 baudos PAM. A teljes átviteli függvény emelt koszinusz: 0 Hz-en $A$, $f_2$-nél nulla, $f_1=f_2/2$-nél a fele. Biztosítson ISI-mentességet!</p>`,
-      ad: [R`$1/T=1200$ Bd`, R`a lecsengés 0-tól $f_2$-ig tart, a felénél ($f_1$) az érték $A/2$`],
-      ker: [R`$f_1$, $f_2$, $A$`],
+      ad: [R`$1/T=1200$ Bd`, R`a spektrum 0 Hz-en $A$, az $f_2$ frekvencián nulla, és $f_1=f_2/2$-nél éppen $A/2$`],
+      ker: [R`$f_1$: ahol a spektrum a felére csökken, $f_2$: ahol nullára csökken, $A$: a spektrum értéke 0 Hz-en`],
       lv: [S('A feltétel', R`Nyquist (A2): a lecsengésnek a $1/(2T)$ pontra kell szimmetrikusnak lennie, és ott kell felvennie a felét. Ez a pont tehát $f_1$.`, [
           ['tétel', R`f_1=\frac{1}{2T}=\frac{1200}{2}=600\ \text{Hz}\qquad f_2=2f_1=1200\ \text{Hz}`, R`$\alpha=1$`],
           ['ellenőrzés', R`A\ne0\ \text{tetszőleges}`, 'csak a jel nagyságát skálázza']])],

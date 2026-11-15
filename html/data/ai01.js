@@ -20,10 +20,10 @@ module.exports = {
     { id: 'ai1_01', num: '1.1', title: R`$3\sin+4\cos$: csúcsérték, teljesítmény, csúcstényező`, tags: ['beugro', 'javitas'],
       src: R`ALL-IN 90. oldal · aiD_1_1 (és 5-ösöm 2. oldal)`,
       task: R`<p>Határozza meg az $x(t)=3\sin(2\pi Ft)+4\cos(2\pi Ft)$ jel csúcstényezőjét, maximális értékét és teljesítményét!</p>`,
-      ad: [R`$x(t)$: két azonos, $F$ frekvenciájú tag, a szinuszos amplitúdója 3, a koszinuszosé 4`, R`$F$ értéke nem kell, az eredmény nem függ tőle`],
+      ad: [R`$x(t)$: két azonos, $F$ frekvenciájú tag, a szinuszos amplitúdója 3, a koszinuszosé 4`, R`$F$: a két tag közös frekvenciája. Az értéke nem kell, az eredmény nem függ tőle`],
       ker: [R`$C$: csúcstényező`, R`$\hat x$: legnagyobb érték`, R`$P$: átlagteljesítmény (1 Ω-on)`],
       miert: [[R`Miért nem $3+4=7$ a csúcs?`, R`Mert a szinusz és a koszinusz negyed periódussal el van tolva, soha nem érik el egyszerre a csúcsukat. Az eredő egyetlen szinusz (A2).`]],
-      lv: [S('Egyetlen szinusszá alakítás', R`A2 szerint $a=3$, $b=4$ ($\omega=2\pi F$).`, [
+      lv: [S('Egyetlen szinusszá alakítás', R`Az $a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi)$ összevonással, ahol $a=3$, $b=4$ és $\omega=2\pi F$.`, [
           ['tétel', R`A=\sqrt{a^2+b^2}=\sqrt{3^2+4^2}=\sqrt{25}=5`, ''],
           ['számérték', R`\mathrm{tg}\,\varphi=\tfrac43\ \Rightarrow\ \varphi=53{,}1°`, R`$x(t)=5\sin(\omega t+53{,}1°)$`]]),
         S('A maximális érték', R`A szinusz legnagyobb értéke 1, ezért a jelé az amplitúdó.`, [['számérték', R`\hat x=5`, '']]),
@@ -58,7 +58,7 @@ module.exports = {
       task: R`<p>Az $s(t)=4\sin(2\pi f_0t)-3\cos(2\pi f_0t)$ jel: A) csúcsértéke 4. B) csúcstényezője $1/\sqrt2$. C) $t=42/f_0$-ban az értéke $-4$. D) átlagteljesítménye 3,5. Melyik igaz?</p>`,
       ad: [R`azonos frekvenciájú szinusz (4) és koszinusz ($-3$)`],
       ker: [R`melyik állítás igaz`],
-      lv: [S('A) csúcsérték', R`A2 szerint $a=4$, $b=-3$.`, [['tétel', R`\hat s=\sqrt{4^2+(-3)^2}=5`, 'A hamis']]),
+      lv: [S('A) csúcsérték', R`Az $a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi)$ összevonással, ahol $a=4$, $b=-3$.`, [['tétel', R`\hat s=\sqrt{4^2+(-3)^2}=5`, 'A hamis']]),
         S('B) csúcstényező', R`Az összeg egyetlen szinusz, ezért $C=\sqrt2$. Az $1/\sqrt2$ már csak azért is rossz, mert $C\ge1$ mindig.`, [['számérték', R`C=\frac{5}{5/\sqrt2}=\sqrt2`, 'B hamis']]),
         S('C) érték $t=42/f_0$-ban', R`Behelyettesítve az argumentum $2\pi\cdot42$, ez egész számú periódus.`, [['behelyettesítés', R`s=4\sin(84\pi)-3\cos(84\pi)=4\cdot0-3\cdot1=-3`, 'C hamis']]),
         S('D) átlagteljesítmény', '', [['definíció', R`P=\frac{4^2}{2}+\frac{3^2}{2}=8+4{,}5=12{,}5`, 'D hamis']])],
@@ -71,7 +71,7 @@ module.exports = {
       task: R`<p>Határozza meg az $x(t)=2\sin(2\pi ft)+2\cos(2\pi ft)$ jel csúcstényezőjét!</p>`,
       ad: [R`azonos frekvenciájú szinusz és koszinusz, mindkettő 2 amplitúdójú`],
       ker: [R`$C$`],
-      lv: [S('Egyetlen szinusz', R`A2 szerint $a=b=2$.`, [
+      lv: [S('Egyetlen szinusz', R`Az $a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi)$ összevonással, ahol $a=b=2$.`, [
           ['tétel', R`A=\sqrt{2^2+2^2}=2\sqrt2\qquad\mathrm{tg}\,\varphi=1\ \Rightarrow\ \varphi=45°`, R`$x=2\sqrt2\sin(2\pi ft+45°)$`]]),
         S('Csúcstényező', R`Szinuszos jel, $\hat x=2\sqrt2$, $P=(2\sqrt2)^2/2=4$.`, [
           ['definíció', R`C=\frac{2\sqrt2}{\sqrt4}=\sqrt2`, '']])],

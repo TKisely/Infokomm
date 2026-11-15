@@ -84,6 +84,8 @@ A tömör „képlet = szám” megoldás nem elfogadható. Minden példában:
 4. **A 2–3 apró közbenső lépés is kiírva**: átrendezés, egységváltás (pl. ms és kHz), azonosság (pl. $\cos a\cos b$).
 5. **Minden eredmény a kérdéséhez kötve**: „a)”, „b)” betűvel és egy mondattal, mire válasz.
 6. A szöveges kérdésekre (miért, mi a szerepe) is indokolt válasz, nem csak kulcsszó.
+8. **Minden példa önmagában érthető.** Nincs visszautalás másik feladatra ("lásd 1.4", "az előző forrás", "ugyanehhez a jelhez"): az adatokat és a használt képletet a példa maga tartalmazza. A build hibát jelez, ha ilyen utalást talál.
+9. **Az Adott és Keresett listában minden jel mellett ott a jelentése.** Ha a tétel maga nem mondja meg, a build a témakör jelmagyarázatából (`html/data/_gloss.js`) odaírja. Ismeretlen jelnél a build hibát jelez.
 7. **Ahol a feladat rajzot kér** (jelalak, burkoló, spektrum, konstelláció, szemábra, blokkvázlat, klaszter), ott „Rajz: ezt kell felrajzolni” doboz van: a képletből számolt SVG (`html/data/_rajz.js`, segéd: `_fig.js`), alatta pontokba szedve, mire kell figyelni kézi rajzoláskor (tengelyek, szintek, periódusszámok).
 - **A jelenlegi md munkafájlok (`00`–`06`) még nem felelnek meg ennek**: van bennük gondolatjel és pontosvessző. A HTML-buildnél ezeket át kell fogalmazni, a forrásfájlokat (`Forrasok/`) nem módosítjuk.
 

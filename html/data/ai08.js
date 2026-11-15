@@ -90,7 +90,7 @@ module.exports = {
     { id: 'ai8_08', num: '8.8', title: 'Színsávok fekete-fehér TV-n és RGB-hármasok világossága', tags: ['beugro'],
       src: R`ALL-IN 134. oldal · aiD_8_4, aiD_8_7 (3.5.)`,
       task: R`<p>a) Három egyforma intenzitású sáv: kék, zöld, vörös. Melyik a legsötétebb a fekete-fehér képen, és hogyan olvaszthatnánk össze két csíkot a zöld fényességével? b) Melyik kelti a legnagyobb világosságérzetet: $(0{,}1;\ 0;\ 0{,}1)$, $(0{,}3;\ 0{,}1;\ 0{,}3)$, $(0;\ 0{,}1;\ 0{,}1)$, $(0{,}4;\ 0{,}1;\ 0{,}2)$?</p>`,
-      ad: [R`$Y=0{,}3R+0{,}59G+0{,}11B$ (A2)`, R`b) négy $(R;\ G;\ B)$ hármas`],
+      ad: [R`$Y=0{,}3R+0{,}59G+0{,}11B$: a világossági jel ($R$, $G$, $B$ a vörös, zöld és kék színjel)`, R`b) négy $(R;\ G;\ B)$ hármas`],
       ker: [R`a) a legsötétebb sáv, és a zöld csökkentése`, R`b) a legnagyobb $Y$`],
       lv: [S('a) Fekete-fehér kép', R`A fekete-fehér TV csak $Y$-t mutatja. Egyforma intenzitásnál a súlyok döntenek.`, [
           ['definíció', R`Y_G=0{,}59>Y_R=0{,}3>Y_B=0{,}11`, 'a kék a legsötétebb'],

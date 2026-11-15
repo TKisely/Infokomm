@@ -67,7 +67,7 @@ module.exports = {
     { id: 'ai9_05', num: '9.5', title: 'A sztereó multiplex jel és egy-egy fütty', tags: ['vizsga'],
       src: R`ALL-IN 45…46., 139. oldal · ai2016_01_12_2 c), aiD_9_5`,
       task: R`<p>a) Rajzolja fel a sztereó jelet az FM előtt! b) Milyen összetevők jelennek meg, ha valaki 440 Hz-et fütyül a bal mikrofonba? c) Ha a bal mikrofon 10 kHz-et vesz? d) Ha a jobb mikrofon 25 kHz-et?</p>`,
-      ad: [R`a multiplex jel felépítése (A2)`],
+      ad: [R`a multiplex jel: $M=L+R$ 15 kHz-ig, 19 kHz-es pilot, $S=L-R$ a 38 kHz-es elnyomott segédvivőn (23 és 53 kHz között), RDS 57 kHz-en`],
       ker: [R`b), c), d) a multiplex jel összetevői`],
       lv: [S('a) A spektrum', R`$M$: 0,05 és 15 kHz között, pilot 19 kHz-en, $S$ két oldalsávja 23 és 53 kHz között (a 38 kHz-es segédvivő elnyomva), RDS 57 kHz-en.`, []),
         S('b) 440 Hz balra', R`Csak $L$-ben van, ezért $M=L+R$ és $S=L-R$ is tartalmazza. $S$ a 38 kHz körül két oldalsávot ad.`, [
@@ -93,7 +93,7 @@ module.exports = {
       task: R`<p>a) Az FM sztereó alapsávi spektruma. b) Miért halljuk mono vevőn mindkét csatornát? c) Mi történik, ha az amplitúdóhelyes $M$-hez képest $S$ 6 dB-lel csillapodik?</p>`,
       ad: [R`$S$ az $M$-hez képest $-6$ dB, azaz feleakkora amplitúdójú`],
       ker: [R`a) spektrum`, R`b) indoklás`, R`c) a visszaállított $L'$, $R'$`],
-      lv: [S('a), b)', R`A spektrum A2 szerint. A mono vevő a 15 kHz-es aluláteresztő után csak $M=L+R$-et kapja, ebben mindkét csatorna benne van.`, []),
+      lv: [S('a), b)', R`A multiplex jel: $M=L+R$ 15 kHz-ig, 19 kHz-es pilot, $S=L-R$ a 38 kHz-es elnyomott segédvivő két oldalán (23 és 53 kHz között), RDS 57 kHz-en. A mono vevő a 15 kHz-es aluláteresztő után csak $M=L+R$-et kapja, ebben mindkét csatorna benne van.`, []),
         S('c) A vevő visszaállítása', R`Legyen $M=(L+R)/2$ és $S=(L-R)/2$, a vevő $L'=M+S$, $R'=M-S$-et képez. Ha $S$ fele akkora:`, [
           ['behelyettesítés', R`L'=\frac{L+R}{2}+\frac{L-R}{4}=0{,}75L+0{,}25R\qquad R'=0{,}25L+0{,}75R`, ''],
           ['számérték', R`20\lg\frac{0{,}75}{0{,}25}=20\lg3=9{,}5\ \text{dB}`, 'csatornaelválasztás']])],
@@ -103,7 +103,7 @@ module.exports = {
     { id: 'ai9_08', num: '9.8', title: 'DVB-C 256-QAM-mel, α = 1/3', tags: ['vizsga'],
       src: R`ALL-IN 32…34., 75…76., 127. oldal · ai2015_12_16_4, ai2014_01_07_9, aiD_7_11 (és 5-ösöm 6. oldal)`,
       task: R`<p>8 MHz-es raszter, 33,33%-os emelt koszinusz, 256-QAM (RS nélkül). a) Szimbólum- és bitsebesség? b) Hány 1,5 Mbit/s-os csatorna fér el, mi a 6 Mbit/s-os kódolás előnye és hátránya? c) Mi az 1024-QAM előnye és hátránya?</p>`,
-      ad: [R`$B=8$ MHz, $\alpha=1/3$, $M=256$`],
+      ad: [R`$B=8$ MHz: a csatorna sávszélessége`, R`$\alpha=1/3$: lekerekítési tényező`, R`$M=256$: a QAM pontjainak száma, $\log_2256=8$ bit/szimbólum`],
       ker: [R`a) $1/T$, $v$`, R`b) csatornaszám`, R`c) 1024-QAM`],
       lv: [S('a) Szimbólumsebesség', R`Vivőfrekvenciás emelt koszinusz: $(1+\alpha)/T\le B$.`, [
           ['tétel', R`\frac43\cdot\frac1T\le8\ \text{MHz}\ \Rightarrow\ \frac1T=6\ \text{MBd}`, '']]),
@@ -116,7 +116,7 @@ module.exports = {
     { id: 'ai9_09', num: '9.9', title: 'DVB-C 64-QAM-mel, α = 15%, RS(204,188)', tags: ['vizsga', 'javitas'],
       src: R`ALL-IN 58…60. oldal · ai2014_12_15_7`,
       task: R`<p>Hány 1,5 Mbit/s-os csatorna fér el egy 8 MHz-es raszterben 64-QAM-mel, 15%-os lekerekítéssel és RS(204,188) kóddal?</p>`,
-      ad: [R`$B=8$ MHz, $\alpha=0{,}15$, $M=64$ (6 bit), kódarány $188/204$`],
+      ad: [R`$B=8$ MHz: a csatorna sávszélessége`, R`$\alpha=0{,}15$: lekerekítési tényező`, R`$M=64$: a QAM pontjainak száma, $\log_264=6$ bit/szimbólum`, R`RS(204,188): 204 bájtból 188 hasznos, kódarány $188/204$`],
       ker: [R`a csatornák száma`],
       lv: [S('Szimbólumsebesség', R`$(1+\alpha)/T\le B$, ez felső korlát, felfelé nem kerekíthetünk.`, [
           ['tétel', R`\frac1T=\frac{8}{1{,}15}=6{,}957\ \text{MBd}`, '']]),

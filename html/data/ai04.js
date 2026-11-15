@@ -134,7 +134,7 @@ module.exports = {
       src: R`ALL-IN 106. oldal · aiD_4_7 (és 5-ösöm 19. oldal)`,
       task: R`<p>a) Kódszavak, legvalószínűbb üzenet $v=11101$-re. b) H és a szindróma. c) Hány hibát jelez és javít biztosan?</p>`,
       ad: [R`$G=[I_2\,|\,B]$, $B$ sorai: 101, 011`, R`$v=11101$`],
-      ker: [R`a) kódszavak és $\hat u$`, R`b) $H$ és $s$`, R`c) jelzés és javítás`],
+      ker: [R`a) kódszavak és $\hat u$`, R`b) $H$ (paritásellenőrző mátrix) és $s$`, R`c) jelzés és javítás`],
       lv: [S('a) Kódszavak', '', [
           ['számérték', R`00000,\ 10101,\ 01011,\ 11110`, ''],
           ['számérték', R`d(v,\cdot)=4,\ 1,\ 3,\ 2\ \Rightarrow\ \hat u=10`, '']]),
@@ -182,8 +182,8 @@ module.exports = {
     { id: 'ai4_12', num: '4.12', title: 'Hétszintű kvantáló, Huffman, bitsebesség', tags: ['vizsga'],
       src: R`ALL-IN 104. oldal · aiD_4_1`,
       task: R`<p>2 kHz-es alapsávi jel, Nyquist szerinti minimális $f_s$. A kvantáló hét szintje {−3…+3}, valószínűségük 1/16, 1/16, 1/8, 1/2, 1/8, 1/16, 1/16. a) A legkisebb átlagos kódszóhossz és bitsebesség? b) Huffman-kód. c) Elért sebesség?</p>`,
-      ad: [R`$B=2$ kHz $\Rightarrow f_s=2B=4$ kHz (4000 minta/s)`, R`$p(0)=1/2$, $p(\pm1)=1/8$, $p(\pm2)=p(\pm3)=1/16$`],
-      ker: [R`a) $H$ és a bitsebesség`, R`b) Huffman-kód`, R`c) $\bar L$ és a sebesség`],
+      ad: [R`$B=2$ kHz: a jel sávszélessége, ebből a minimális mintavételi frekvencia $f_s=2B=4$ kHz (4000 minta/s)`, R`$p(0)=1/2$, $p(\pm1)=1/8$, $p(\pm2)=p(\pm3)=1/16$`],
+      ker: [R`a) $H$ (entrópia) és a bitsebesség`, R`b) Huffman-kód`, R`c) $\bar L$ és a sebesség`],
       lv: [S('a) Entrópia', R`$H=\sum p_i\log_2(1/p_i)$, tagonként:`, [
           ['definíció', R`\tfrac12\cdot1+2\cdot\tfrac18\cdot3+4\cdot\tfrac1{16}\cdot4=0{,}5+0{,}75+1=2{,}25\ \text{bit}`, R`$\log_22=1$, $\log_28=3$, $\log_216=4$`],
           ['számérték', R`4000\cdot2{,}25=9000\ \text{bit/s}`, 'a legkisebb bitsebesség']]),
