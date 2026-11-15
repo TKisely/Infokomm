@@ -86,6 +86,39 @@ Az átíráskor már javított pontokat (a kg01 táblázatának sorcseréje, a k
 | G3 | `mg13_2` | „RS: véletlen hiba ellen, FEC: burstös hiba ellen” | `[ELLENŐRIZENDŐ]` | a DVB-ben a belső konvolúciós kód javítja a véletlen hibákat, a külső RS (interleaverrel) a csomós hibákat |
 | G4 | **A6 pontosítása** (`F29`) | 225 m vs. 450 m | az eredeti 2016-os feladat (`mgP_4 a)`) a **legtávolabbi minimumot** kérdezi, arra **225 m** a helyes. A **legtávolabbi maximum** (az interferenciazóna határa) 450 m | a két szövegváltozat két különböző kérdés. Mindig olvasd el, melyiket kérdezik |
 
+## H) Az ALL-IN és az 5-ösöm teljes, oldalankénti átirata (`Forrasok/ALL-IN/allin_atirat.md`, `Forrasok/5-osom/5osom_atirat.md`)
+
+A B) rész tételei megmaradnak, az átirat azonosítóival kiegészítve. Új tételek:
+
+| # | Hol | A forrásban | Helyesen | Miért |
+|---|---|---|---|---|
+| H1 ⚠️ | `ai2016_06_07_2` | „nem lehet 1-nél rövidebb” (nincs válasz) | **lehet**: párok Huffman-kódja 0,645 bit/szimbólum | H = 0,469 bit, blokk-kódolással megközelíthető |
+| H2 ⚠️ | `ai2014_12_15_7` | 1/T ≅ 7 MBd | **6,96 MBd**, felfelé nem kerekíthető | 7 MBd-hoz 8,05 MHz kellene. A csatornaszám (25) nem változik |
+| H3 ⚠️ | `ai2014_12_15_9` | 80 csatorna/cella | 1000/12 = **83** (124 vivővel 82) | a grafikonról 65 Erl helyett 67…68 Erl |
+| H4 ⚠️ | `ai2014_01_07_2`, `5o_05` | Φ_D = 2 rad (a moduláló jel feszültségéből) | **Φ_D ≈ 10 rad, f_D = 25 kHz** | az oktató saját elemzése (`5o_04_1`): ő állította be a generátort |
+| H5 ⚠️ | `aiD_1_1` | x̂ = 7/√2 | **5** | azonos frekvenciájú összetevők: √(3² + 4²) |
+| H6 ⚠️ | `aiD_1_3` | A, B, C bekarikázva | **egyik állítás sem igaz** | s(42/f₀) = −3, C = √2, P = 12,5 |
+| H7 ⚠️ | `aiD_2_2 d)` | n = 8 (és egy megjegyzésben n = 5) | **n = 10** | 60 dB = 10⁶ (teljesítményarány) |
+| H8 ⚠️ | `aiD_2_4` | f_s = 2f esetén visszaállítható | **nem biztosan** | a mintavételi tétel f_s > 2f_max-ot kíván |
+| H9 ⚠️ | `aiD_5_7` | B = 44 Hz | **≈ 55 Hz** (Carson) | 2(f_D + f_m) = 2(22 + 5,5) |
+| H10 ⚠️ | `aiD_7_3`, `5o_09_1` | „a fázishiba nagy: 130,73° ≠ 145°” | **a fázishiba kb. 4°** | atan2(0,93; −1,08) = 139,3°, a várt 135°. Tengelycsere és rossz síknegyed |
+| H11 ⚠️ | `aiD` 123. old. | bit/szimbólum = #QAM/4 | **log₂M** | 16-QAM-nél véletlen egyezés |
+| H12 ⚠️ | `aiD_7_16`, `5o_07_1 d)` | a sarokpontok áthelyezésével a fázistűrés nem változik | **romlik 8,1°-ra** | a (7, 1) pont arctg(1/7)-nél éri el az y = 0 határt |
+| H13 ⚠️ | `aiD` 131. old. | elfedés 100 µs és 20 µs | **kb. 100–200 ms és 20 ms** `[ELLENŐRIZENDŐ]` | szakirodalmi nagyságrend |
+| H14 ⚠️ | `aiD_8_6`, `5o_23_2` | váltott sor: „a fél kép fele idő alatt” | **azonos sávnál kétszeres villogási frekvencia** | 50 félkép/s a 25 kép/s helyett |
+| H15 ⚠️ | `aiD_9_11`, `aiD_9_13` | a 19 kHz-es pilot kimarad | **a pilot mindig összetevő** | 9.11: C, D. 9.13: A, B, D |
+| H16 | `aiD_9_14` | A, D | **A, C, D** `[ELLENŐRIZENDŐ]` | 125 µs/32 = 3,906 µs ≈ 3,9 µs ± 1% |
+| H17 ⚠️ | `aiD` 144. old. | „bruttó = nettó·(k/n)·FEC” | **nettó = bruttó·(k/n)·FEC** | a csatornaszám a nettóból jön (`5o_25_2` helyesen) |
+| H18 ⚠️ | `ai2016_01_05_7b`, `5o_27_1`, `5o_28_1` | beszélgetés közbeni mozgásról a HLR és a VLR is értesül | **csak BTS, BSC, MSC** (hívásátadás) `[ELLENŐRIZENDŐ]` | hívás közben nincs helyzetfrissítés (`03` A18 kiegészítése) |
+| H19 ⚠️ | `5o_27_1` | MS-B SMS-ét az SMSC_α kézbesíti | **SMSC_β** `[ELLENŐRIZENDŐ]` | a küldő honi SMSC-je (az ALL-IN ugyanerre SMSC_β-t ír) |
+| H20 | `5o_27_1 b)` | tiltólista: EIR_α | **EIR_β** `[ELLENŐRIZENDŐ]` | a kiszolgáló (látogatott) hálózat ellenőrzi az IMEI-t |
+| H21 ⚠️ | `5o_14_2` | 40 pW = 4·10⁻¹² W, 147 dB | **4·10⁻¹¹ W, 137 dB** | ezzel G_T ≈ −14 dB, bármilyen antenna elég |
+| H22 | `5o_14_3 b)` | 111 dB | **112,6 dB** | 20lg 83,3 = 38,4 (nem 40) |
+| H23 ⚠️ | `5o_20_1` | alsó korlát 4 bit | **log₂9 = 3,17 bit** (Huffman 3,22) | 9 állapot, egyenlő valószínűséggel `[ELLENŐRIZENDŐ]` |
+| H24 | `5o_22_3 d)` | R = 0,6, „lilás” | **R = 0, kék** | Cr = −0,3, R = Cr + Y = 0 |
+| H25 | `5o_30_2` | „A = h·λ = 6” | **h = A/λ ≈ 6 perc** | a 0,6 a lebonyolított forgalom, nem a tartási idő |
+| H26 | `aiD_6_2`, `5o_10_1` | legrosszabb eset 1,15 − 4·0,25 | **1,15 − 3·0,25 = 0,4** | négyszintű jelnél a szomszéd legfeljebb ±3 |
+
 ## F) Fájl-állapot
 
 - `~/Downloads/infokomm_feladatok_1-10-v2 (1).md` **sérült** másolat, eltűntek belőle a képletek. Nem másoltam át. A `infokomm_feladatok_1-10-v2.md` a jó.

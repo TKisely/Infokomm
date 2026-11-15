@@ -20,6 +20,8 @@ Utolsó frissítés: 2026-11-15
 | `06_Kereszthivatkozasok.md` | **végleges azonosítók**, témakör-mátrix (12 témakör × előadás, gyakorlat, TMIT, vizsga), azonos feladatok megfeleltetése egyezés-jelöléssel, a Koma-anyag új tartalma | **navigáció**: hol volt az elmélet, hol fordul még elő ugyanez |
 | `Forrasok/Koma/` | `koma-eloadasok.md` (12 előadás) és `koma-gyakorlatok.md` (10 gyakorlat): Koma kézírásos jegyzeteinek átirata (2021 tavasz), változtatás nélkül | eredeti jegyzet; a hibái a `03` D) részében |
 | `Forrasok/Marosi_2016/` | Marosi Gyula 2016-os gyakorlatai: `marosi_2016_atirat.md` (53 szkennelt oldal átirata: diák, kézírásos megoldások, `mgX_y` azonosítók). A két PDF csak helyben van meg | gyakorlatvezetői megoldások, köztük a **mobil- és forgalmi gyakorlat**, amely eddig hiányzott |
+| `Forrasok/ALL-IN/` | `allin_atirat.md`: az ALL-IN-Infokomm-1.pdf **teljes, oldalankénti átirata** (175 oldal: Moodle-vizsgák 2020, hallgatói vizsgamegoldások 2014–2016, témakörös feladatgyűjtemény 1–10), minden feladat ellenőrizve, `ai…` azonosítókkal. A PDF csak helyben | a régi vizsgák teljes anyaga, javításokkal (`03` H) |
+| `Forrasok/5-osom/` | `5osom_atirat.md`: az „5-ösöm lesz Infokommból” teljes átirata (30 oldal, `5o_…` azonosítók). Ugyanez az ALL-IN 146–175. oldala. A PDF csak helyben | témakörös gyűjtemény, sok beszkennelt oktatói megoldással |
 | `Forrasok/Korabbi_md_jegyzetek/` | a `~/Downloads/infokomm_*.md` fájlok másolata, eredeti állapotban (javítás nélkül) | referencia; a hibáikat lásd a `03`-ban |
 | `Forrasok/TMIT_gyakorlatok/` | `gyak00, 01, 02, 04, 05, 06, 07, 08.pdf` (tmit.bme.hu, letöltve 2026-11-15). **Csak helyben van meg, a GitHubra nem kerül fel** (tanszéki anyag, a `.gitignore` kizárja). Eredeti: `https://www.tmit.bme.hu/sites/default/files/attachments/gyakNN.pdf` | eredeti feladatszövegek és ábrák |
 
@@ -30,8 +32,8 @@ Utolsó frissítés: 2026-11-15
 | 7 modul + 30 feladat (md) | `Forrasok/Korabbi_md_jegyzetek/` (eredeti: `~/Downloads`) | ✅ teljesen átnézve, számolások ellenőrizve |
 | Hivatalos gyakorlati példatár, 1–5. gyak. | OneDrive: `InfoKomm összes/From Balázs/1-5 gyakorlatok.pdf` | ✅ beépítve a `01`-be |
 | Képletgyűjtemény | `Local Sources/BME/Infokom/Infokommunikáció-képletek-FINAL.pdf` | ✅ beépítve a `01`-be |
-| Régi vizsgák és megoldások | `Local Sources/BME/Infokom/ALL-IN-Infokomm-1.pdf` (szöveges része) | ✅ a `02`-ben |
-| „5-ösöm lesz infokommból” | `Local Sources/BME/Infokom/5-ösöm-lesz-infokommból.pdf` (szöveges része) | ✅ a `02`-ben |
+| Régi vizsgák és megoldások | `ALL-IN-Infokomm-1.pdf` | ✅ **teljes oldalankénti átirat** (képek is): `Forrasok/ALL-IN/allin_atirat.md`. A szöveges rész korábban a `02`-be került |
+| „5-ösöm lesz infokommból” | `5-ösöm-lesz-infokommból.pdf` | ✅ **teljes oldalankénti átirat**: `Forrasok/5-osom/5osom_atirat.md` |
 | TMIT gyakorlatanyag gyak00–08 (03 nélkül) | `Forrasok/TMIT_gyakorlatok/` | ✅ a `05`-ben (a P-példák ellenőrizve, a G-feladatok kidolgozva) |
 | Koma jegyzetei: 12 előadás, 10 gyakorlat (2021 tavasz, átirat) | `Forrasok/Koma/` | ✅ a `06`-ban kereszthivatkozva, az új tartalom beépítve az `01`-be és az `02` 11–12. fejezetébe |
 
@@ -41,8 +43,6 @@ A 09+ füzetek (cellás mobil, VoIP, forgalom) anyagát a `02` 7–8. fejezete p
 
 ## Még NEM feldolgozott források
 
-- **Képként beágyazott feladatszövegek és ábrák** az `ALL-IN` és az `5-ösöm` PDF-ben (oszcilloszkóp-képek, konstellációk, GSM-ábrák, a PAM elemi jele, Erlang-grafikon). A `02`-ben `[ÁBRA SZÜKSÉGES]` jelöli őket.
-- **Az ALL-IN „Infokommunikáció feladatok” része** (1.1–10.x, a példatár sorszámai szerint). Ennek csak a szöveges megjegyzései vannak meg, maguk a feladatok képek.
 - **Elméleti jegyzetek:** `Infokomm_jegyzet.pdf` (67 oldal), `Infokom__jegyzet.pdf` (165 oldal), OneDrive `Jelek_leírása.pdf`, `Mintavételezés_kvantálás.pdf`. Ezek a szóbelihez kellenek, a gyakorlati vizsgához kevésbé.
 - `Section2Final06062013.pdf`: angol nyelvű általános RF-fizika, nem tárgyspecifikus.
 - **Kézírásos fotók:** OneDrive `INFOKOMM/Gyakokról` (~45), `INFOKOMM/Konzis` (~11), `~/Downloads/BACKUP/INFOKOMM` (~60).
@@ -55,11 +55,14 @@ A 09+ füzetek (cellás mobil, VoIP, forgalom) anyagát a `02` 7–8. fejezete p
 2. 8-PSK 72 MHz-ben: mekkora α-t vár el a feladat (`02` 5.4).
 3. QAM-16 [160,100] 20 MHz: milyen α-val kell számolni (`02` 5.3).
 4. Mezőkovácsháza: h_T = 40 m (sík terep) a helyes, és nem a 136 m (`02` 1.2).
-5. 8-QAM konstellációk: az ábra kell hozzá (`02` 5.8).
-6. Call center d): a visszahívás tartási ideje (`02` 8.3).
-7. Roaming-kérdés: az `ea13_3` más szövegváltozatot old meg, mint a Moodle-vizsga (`03` D4).
+5. 8-QAM konstellációk: a koordináták az átirat képéről olvasva (`ai2014_12_15_6`), a (b) ábra pontos alakja bizonytalan.
+6. Call center d): kidolgozva `5o_30_1`-ben (P_B = 1,3%, a 18. munkatárs foglaltsága kb. 13%), a visszahívás tartási idejére tett feltevéssel.
+7. Roaming-kérdés: az `ea13_3` más szövegváltozatot old meg, mint a Moodle-vizsga (`03` D4). Ide tartozik a `03` H18–H20 is (mozgás hívás közben, SMSC, EIR).
+8. Az ALL-IN és az 5-ösöm átiratának további `[ELLENŐRIZENDŐ]` jelölései (21 + 8), a `03` H részében összegyűjtve.
 
 ## Következő lépések
+
+Folyamatban (2026-11-15): a két átiratból külön-külön önálló HTML-példatár, majd a három példatár összefésülése témakörönként, ismétlés nélkül.
 
 A részletes lista a `claude/INFOKOMM_feldolgozasi_standard.md` 8–9. fejezetében van. Röviden:
 1. A nyitott pontok tisztázása (a Φ-jelölés eldöntve: mindkét alak szerepel).

@@ -342,11 +342,11 @@ b) Add meg a paritásellenőrző mátrixot és a v szindrómáját! G = [E B] �
 - **`ai2014_01_07_2`** [Szürke X.] a) Frekvencia- vagy fázismodulált jel látható a képen, és miért?
   [kép: Agilent-képernyő, CH1 5,00 V/osztás, CH2 2,00 V/osztás, 100 µs/osztás. Felül a moduláló szinusz (CH2), alul a szögmodulált jel (CH1). Mérések: Freq(1) = 50 kHz, Pk-Pk(1) = 14,8 V, Freq(2) = 2,500 kHz. Valaki piros vízszintes vonalat húzott a moduláló jel csúcsaihoz.]
   Hallgatói válasz: frekvenciamodulált, mert a moduláló jel függvényében változik a modulált jel frekvenciája (sűrűsödnek, ritkulnak a nullátmenetek), az amplitúdó állandó.
-  ⚠️ »**Valószínűleg hibás.** A döntés kulcsa, hogy **hol** a legsűrűbb a jel. FM-nél a pillanatnyi frekvencia a moduláló jellel arányos, tehát a moduláló jel **csúcsánál** legsűrűbb. PM-nél a moduláló jel **deriváltjával** arányos, tehát a moduláló jel **emelkedő nullátmeneténél** legsűrűbb. A képen a legsűrűbb szakaszok a moduláló jel emelkedő nullátmeneteinél (két csúcs között félúton) vannak, a csúcsoknál (piros vonal) nem, ezért ez **fázismodulált** jel. A szürke X is erre utal. `[ELLENŐRIZENDŐ]` az eredeti, jobb felbontású ábrán.«
+  »A „frekvenciamodulált” válasz **a jel készítőjének szavai szerint helyes**: az 5-ösöm gyűjtemény 4. oldalán (`5o_04_1`) az oktató megjegyzése szerint a jelet ő állította be FM-re, f_D = 25 kHz-es lökettel. Megjegyzés: a döntés elvi kulcsa, hogy FM-nél a legsűrűbb szakasz a moduláló jel csúcsánál, PM-nél az emelkedő nullátmeneténél van. A gyenge minőségű képen ezt nem lehet biztosan leolvasni, ezért a feladat szövege (c: „Tételezze fel, hogy FM jelről van szó!”) a döntő.«
 
 ### 71. oldal · 2014.01.07 (folyt.)
 - b) Becsüld meg a jel frekvencia- és fázislöketét! Hallgató: s(t) = U·cos(2πf_c t + m(t)), m(t) = A·sin(2πf_m t). Leolvasva f_c = 50 kHz, f_m = 2,5 kHz (CH2, felül, moduláló). Fázislöket Φ_D = max{m(t)} = A. „A moduláló jel U_pp-je A ≈ 2 rad” → Φ_D = 2 rad. f_D = (1/2π)·max{ṁ(t)} = f_m·A = 2,5·2 = **5 kHz**.
-  »Az f_D = Φ_D·f_m összefüggés helyes (szinuszos modulációnál FM-re és PM-re is). A Φ_D = 2 rad azonban nem a moduláló jel feszültségéből olvasható le (a modulátor érzékenysége nem ismert), hanem a modulált jel legsűrűbb és legritkább szakaszának periódusidejéből: f_max, f_min → f_D = (f_max − f_min)/2, majd Φ_D = f_D/f_m. `[ELLENŐRIZENDŐ]` a képről leolvasható értékkel.«
+  ⚠️ »Az f_D = Φ_D·f_m összefüggés helyes, de a **Φ_D = 2 rad hibás**: a fázislöket nem a moduláló jel feszültségéből olvasható le (a modulátor érzékenysége nem ismert). A modulált jel ritka és sűrű szakaszának periódusaiból kell becsülni. Az oktató saját elemzése (5-ösöm 4. oldal): fél moduláló periódus alatt kb. 8, egy teljes alatt kb. 20 vivőperiódus, ebből Φ_D ≈ 8,4 rad, pontosabb leolvasással **Φ_D ≈ 10,5 rad**, és a beállított érték **f_D = 25 kHz** (Φ_D = 10 rad).«
 - c) Milyen demodulátort javasolsz? Rajzold fel a blokkvázlatát! Hallgató: PLL diszkriminátor. »FM-hez helyes. PM-hez a PLL hibajele (fázisdetektor kimenete) közvetlenül a fázist adja, vagy FM-demodulátor után integrátor kell.«
 
 ### 72. oldal · 2014.01.07 (folyt.)
@@ -761,4 +761,4 @@ Ellenőrizve (2026-11-15): az ALL-IN 146–175. oldala a `5-ösöm-lesz-infokomm
 
 ---
 
-**Feldolgozva: 1–175. oldal (teljes).** Összesen 31 ⚠️ javítás és 23 `[ELLENŐRIZENDŐ]` jelölés. A javítások a `03_Hibajegyzek.md` H részébe kerülnek.
+**Feldolgozva: 1–175. oldal (teljes).** Összesen 30 ⚠️ javítás és 21 `[ELLENŐRIZENDŐ]` jelölés. A javítások a `03_Hibajegyzek.md` H részébe kerülnek.
