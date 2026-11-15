@@ -103,13 +103,13 @@ module.exports = {
       ],
       lv: [
         { t: 'A mintasorozat spektruma', s: R`Az $1$ kHz-es bemenet a bemenő szűrőn csillapítatlanul átjut, a mintavétel után $n\cdot 8\pm1$ kHz-en lesznek vonalai.`,
-          m: [['definíció', R`f_\text{ki}=n f_s\pm f_\text{be}=n\cdot 8\pm 1\ \text{kHz}`, R`$n$ egész`], ['számérték', R`f_\text{ki}\in\{1;\ 7;\ 9;\ 15;\ 17;\ \ldots\}\ \text{kHz}`, '']] },
+          m: [['definíció', R`f_\text{ki}=n f_s\pm f_\text{be}=n\cdot 8\pm 1\ \text{kHz}`, R`$n$ egész`], ['számérték', R`f_\text{ki}\in\{1;\ 7;\ 9;\ 15;\ 17;\ \ldots\}\ \text{kHz}`, R`$n\cdot8\pm1$, $n=0,1,2$`]] },
         { t: 'A kimenő szűrő hatása az a) esetben', s: R`A kimenő szűrő $10$ kHz felett mindent levág, $5\ldots10$ kHz között $0{,}01$-szeresre csillapít.`,
           m: [['behelyettesítés', R`U_7=2\,\text{V}\cdot H_\text{be}(1)\cdot H_\text{ki}(7)=2\cdot1\cdot0{,}01=0{,}02\ \text{V}`, R`ugyanígy $U_9=0{,}02$ V`], ['ellenőrzés', R`H_\text{ki}(15)=H_\text{ki}(17)=0\ \Longrightarrow\ U_{15}=U_{17}=0`, 'a 10 kHz feletti másolatok eltűnnek']] },
         { t: 'A bemenő szűrő a b) esetben', s: R`A $4{,}5$ kHz-es komponens a bemenő szűrő ferde szakaszára esik.`,
-          m: [['behelyettesítés', R`H_\text{be}(4{,}5)=2{,}5-\frac{4{,}5}{2}=0{,}25`, ''], ['számérték', R`U_\text{minta}=2\,\text{V}\cdot0{,}25=0{,}5\ \text{V}`, 'ennyi jut a mintavevőre']] },
+          m: [['behelyettesítés', R`H_\text{be}(4{,}5)=2{,}5-\frac{4{,}5}{2}=0{,}25`, R`a ferde szakasz képlete, $f=4{,}5$`], ['számérték', R`U_\text{minta}=2\,\text{V}\cdot0{,}25=0{,}5\ \text{V}`, 'ennyi jut a mintavevőre']] },
         { t: 'Az álkép és a valódi komponens a kimeneten', s: R`A mintavétel után $n\cdot8\pm4{,}5$ kHz vonalak keletkeznek. A kimenő szűrő a $10$ kHz alattiakat engedi át: a $4{,}5$ és a $3{,}5$ kHz-est.`,
-          m: [['behelyettesítés', R`H_\text{ki}(4{,}5)=0{,}25\qquad H_\text{ki}(3{,}5)=2{,}5-\frac{3{,}5}{2}=0{,}75`, ''], ['számérték', R`U_{4{,}5}=0{,}5\cdot0{,}25=0{,}125\ \text{V}\qquad U_{3{,}5}=0{,}5\cdot0{,}75=0{,}375\ \text{V}`, 'az álkép háromszor erősebb'], ['ellenőrzés', R`H_\text{ki}(8+4{,}5)=H_\text{ki}(12{,}5)=0`, 'a többi másolat nem jut át']] }
+          m: [['behelyettesítés', R`H_\text{ki}(4{,}5)=0{,}25\qquad H_\text{ki}(3{,}5)=2{,}5-\frac{3{,}5}{2}=0{,}75`, R`a kimenő szűrő ugyanaz a trapéz, $3{,}5=8-4{,}5$`], ['számérték', R`U_{4{,}5}=0{,}5\cdot0{,}25=0{,}125\ \text{V}\qquad U_{3{,}5}=0{,}5\cdot0{,}75=0{,}375\ \text{V}`, 'az álkép háromszor erősebb'], ['ellenőrzés', R`H_\text{ki}(8+4{,}5)=H_\text{ki}(12{,}5)=0`, 'a többi másolat nem jut át']] }
       ],
       ered: [R`\text{a) } 1\ \text{kHz: } 2\ \text{V}\qquad 7\ \text{és}\ 9\ \text{kHz: } 0{,}02\ \text{V (szivárgás)}`, R`\text{b) } 4{,}5\ \text{kHz: } 0{,}125\ \text{V}\qquad 3{,}5\ \text{kHz: } 0{,}375\ \text{V (aliasing)}`],
       chk: [R`Mértékegység: $H$ dimenzió nélküli, a kimenet V.`, R`Határeset: ha $H_\text{be}(4{,}5)=0$ lenne, se jel, se álkép nem lenne. A szorzat ezt helyesen adja.`, R`A Koma-jegyzet, a TMIT-füzet és Marosi táblai megoldása ugyanezt adja.`],
@@ -131,11 +131,11 @@ module.exports = {
       elm: [[R`Álképek.`, R`A kimeneten $n f_s\pm f$ (A2).`], [R`Decibel amplitúdóban.`, R`$a_\mathrm{dB}=20\lg(U_1/U_2)$ (A8).`, R`U_2=U_1\cdot10^{-a/20}`]],
       lv: [
         { t: 'A 6,2 kHz-es komponens', s: R`Ez az $1{,}8$ kHz álképe az első másolatnál, a kimenő szűrő zárótartományában.`,
-          m: [['definíció', R`f=f_s-1{,}8=8-1{,}8=6{,}2\ \text{kHz}`, ''], ['behelyettesítés', R`U_{6{,}2}=2\,\text{V}\cdot10^{-40/20}=2\cdot0{,}01=0{,}02\ \text{V}`, '20 mV']] },
+          m: [['definíció', R`f=f_s-1{,}8=8-1{,}8=6{,}2\ \text{kHz}`, R`$n=1$, mínusz előjel`], ['behelyettesítés', R`U_{6{,}2}=2\,\text{V}\cdot10^{-40/20}=2\cdot0{,}01=0{,}02\ \text{V}`, '20 mV']] },
         { t: 'A többi kimenő komponens', s: R`Minden másolat megjelenik, a kimenő szűrő mindet $0{,}01$-szeresre csillapítja.`,
           m: [['definíció', R`f_\text{ki}=n\cdot8\pm1{,}8\ \text{kHz}\ \Longrightarrow\ 1{,}8;\ 6{,}2;\ 9{,}8;\ 14{,}2;\ 17{,}8;\ \ldots`, 'mind 20 mV, kivéve az 1,8 kHz-et (2 V)']] },
         { t: 'Egyenirányítás', s: R`A $|\sin|$ alakú jel alapfrekvenciája a kétszeres, és vannak felharmonikusai.`,
-          m: [['definíció', R`f_0=2\cdot1{,}8=3{,}6\ \text{kHz}\qquad f_k=k\cdot3{,}6\ \text{kHz}`, ''], ['átalakítás', R`f_\text{ki}=n\cdot8\pm k\cdot3{,}6\ \text{kHz}`, 'a mintavétel után'], ['számérték', R`n=1:\ 8-7{,}2=0{,}8\qquad 10{,}8-8=2{,}8\ \text{kHz}`, ''], ['számérték', R`n=2:\ 16-14{,}4=1{,}6\qquad 18-16=2{,}0\ \text{kHz}`, 'ezek is a 0,3…3,4 kHz-es sávban vannak']] }
+          m: [['definíció', R`f_0=2\cdot1{,}8=3{,}6\ \text{kHz}\qquad f_k=k\cdot3{,}6\ \text{kHz}`, R`az egyenirányított szinusz periódusa a fele`], ['átalakítás', R`f_\text{ki}=n\cdot8\pm k\cdot3{,}6\ \text{kHz}`, 'a mintavétel után'], ['számérték', R`n=1:\ 8-7{,}2=0{,}8\qquad 10{,}8-8=2{,}8\ \text{kHz}`, R`$k=2$: 7,2 kHz, $k=3$: 10,8 kHz`], ['számérték', R`n=2:\ 16-14{,}4=1{,}6\qquad 18-16=2{,}0\ \text{kHz}`, 'ezek is a 0,3…3,4 kHz-es sávban vannak']] }
       ],
       ered: [R`U_{6{,}2}=20\ \text{mV}`, R`f_\text{ki}=n\cdot8\pm1{,}8\ \text{kHz}`, R`\text{egyenirányítva a hasznos sávban: } 0{,}8;\ 1{,}6;\ 2{,}0;\ 2{,}8\ \text{kHz}`],
       fix: R`A források (OneDrive 2.2, Koma) példaként csak a $0{,}8$ és a $2{,}8$ kHz-et említik. A független ellenőrzés szerint a $2f_s$ körüli álképek közül az $1{,}6$ és a $2{,}0$ kHz is a hasznos sávba esik. Ez nem ellentmondás, csak kiegészítés.`,
@@ -158,7 +158,7 @@ module.exports = {
       elm: [[R`Parseval.`, R`A teljesítmény a spektrális sűrűség teljes integrálja.`, R`P=\int_{-\infty}^{\infty}s(f)\,\mathrm df`], [R`Feszültségből teljesítmény.`, R`$P=U^2/R$, ezért a feszültségnégyzet-sűrűség $R$-szeres.`]],
       lv: [
         { t: 'A sűrűség értéke', s: R`A kétoldalas sűrűség $2\cdot4$ kHz szélességben állandó.`,
-          m: [['tétel', R`P=s_0\cdot2B_\text{össz}`, 'Parseval'], ['átalakítás', R`s_0=\frac{P}{2B_\text{össz}}=\frac{0{,}2\ \text{mW}}{8\ \text{kHz}}=25\ \frac{\mu\text{W}}{\text{kHz}}`, ''], ['átalakítás', R`s_0'=R\cdot s_0=50\cdot25\cdot10^{-9}\ \frac{\text{V}^2}{\text{Hz}}=1{,}25\cdot10^{-6}\ \frac{\text{V}^2}{\text{Hz}}=1250\ \frac{\text{mV}^2}{\text{kHz}}`, 'feszültségnégyzet-sűrűség']] },
+          m: [['tétel', R`P=s_0\cdot2B_\text{össz}`, 'Parseval'], ['átalakítás', R`s_0=\frac{P}{2B_\text{össz}}=\frac{0{,}2\ \text{mW}}{8\ \text{kHz}}=25\ \frac{\mu\text{W}}{\text{kHz}}`, R`$P=0{,}2$ mW, $2B_\text{össz}=8$ kHz`], ['átalakítás', R`s_0'=R\cdot s_0=50\cdot25\cdot10^{-9}\ \frac{\text{V}^2}{\text{Hz}}=1{,}25\cdot10^{-6}\ \frac{\text{V}^2}{\text{Hz}}=1250\ \frac{\text{mV}^2}{\text{kHz}}`, 'feszültségnégyzet-sűrűség']] },
         { t: 'Aluláteresztő visszaállítás', s: R`A legmagasabb frekvencia $8$ kHz.`,
           m: [['tétel', R`f_s\ge2f_{\max}=16\ \text{kHz}`, 'aluláteresztő, határfrekvenciája 8 kHz és $f_s/2$ között']] },
         { t: 'Kisebb mintavételi frekvencia', s: R`A $7\ldots8$ kHz-es sáv negatív oldali másolatát ($-8\ldots-7$) $f_s$-sel eltolva a $3\ldots7$ kHz-es résbe kell tenni, és a $-3\ldots3$ kHz-es sáv másolata ($f_s-3\ldots f_s+3$) nem lóghat a $7\ldots8$ kHz-es sávba.`,
@@ -180,7 +180,7 @@ module.exports = {
       lv: [
         { t: 'Aluláteresztő eset', s: R`A legmagasabb komponens dönt.`, m: [['tétel', R`f_s\ge2f_H=2\cdot75=150\ \text{kHz}`, '$k=1$']] },
         { t: 'A $k=2$ tartomány', s: R`Behelyettesítünk a sáváteresztő képletbe.`,
-          m: [['behelyettesítés', R`\frac{2\cdot75}{2}\le f_s\le\frac{2\cdot45}{1}`, ''], ['számérték', R`75\ \text{kHz}\le f_s\le90\ \text{kHz}`, '']] },
+          m: [['behelyettesítés', R`\frac{2\cdot75}{2}\le f_s\le\frac{2\cdot45}{1}`, R`$k=2$, $f_H=75$, $f_L=45$ kHz`], ['számérték', R`75\ \text{kHz}\le f_s\le90\ \text{kHz}`, R`kiszámolva`]] },
         { t: 'Ellenőrzés a spektrumon', s: R`$f_s=75$ kHz-nél a negatív oldali sáv ($-75\ldots-45$) eltolva $0\ldots30$ kHz-re kerül, $2f_s$-sel $75\ldots105$ kHz-re. Egyik sem lóg bele a $45\ldots75$ kHz-be.`,
           m: [['ellenőrzés', R`f_s=75:\ \ [0;30]\ \text{és}\ [75;105]\ \cap\ [45;75]=\{75\}`, 'csak a sávszél érintkezik, ezért határeset']] }
       ],
@@ -199,10 +199,10 @@ module.exports = {
       elm: [[R`Sáváteresztő mintavétel.`, R`A3.`], [R`Jel-zaj viszony.`, R`A6.`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`]],
       lv: [
         { t: 'Mintavételi tartományok', s: R`$\lfloor70/30\rfloor=2$, tehát $k=1$ és $k=2$.`,
-          m: [['tétel', R`k=1:\ f_s\ge140\ \text{kHz}`, ''], ['behelyettesítés', R`k=2:\ \frac{140}{2}\le f_s\le\frac{80}{1}\ \Longrightarrow\ 70\le f_s\le80\ \text{kHz}`, '']] },
+          m: [['tétel', R`k=1:\ f_s\ge140\ \text{kHz}`, R`$2f_H=2\cdot70$`], ['behelyettesítés', R`k=2:\ \frac{140}{2}\le f_s\le\frac{80}{1}\ \Longrightarrow\ 70\le f_s\le80\ \text{kHz}`, R`$2f_H/2$ és $2f_L/1$`]] },
         { t: 'A szűrők', s: R`A $140$ kHz feletti esetben a be- és kimenő szűrő aluláteresztő, a $70\ldots80$ kHz-es esetben sáváteresztő ($40\ldots70$ kHz).`, m: [] },
         { t: 'A bitszám', s: R`Szinuszra $10\lg(3/2)=1{,}76$ dB, és $f_s/2B=1$.`,
-          m: [['behelyettesítés', R`1{,}76+0+6{,}02\,n\ge64`, ''], ['átalakítás', R`n\ge\frac{64-1{,}76}{6{,}02}=10{,}34`, ''], ['számérték', R`n=11\ \text{bit}`, 'felfelé kerekítve']] }
+          m: [['behelyettesítés', R`1{,}76+0+6{,}02\,n\ge64`, R`aluláteresztő visszaállítás: $10\lg(f_s/2B)=0$`], ['átalakítás', R`n\ge\frac{64-1{,}76}{6{,}02}=10{,}34`, R`$n$-re rendezve`], ['számérték', R`n=11\ \text{bit}`, 'felfelé kerekítve']] }
       ],
       ered: [R`f_s\ge140\ \text{kHz (aluláteresztő)}\qquad 70\le f_s\le80\ \text{kHz (sáváteresztő)}\qquad n=11\ \text{bit}`],
       chk: [R`$n=11$: $1{,}76+66{,}2=68{,}0$ dB $\ge64$ dB. $n=10$: $62{,}0$ dB, kevés.`, R`A javító 1+1+1 pontot adott erre a megoldásra.`],
@@ -219,9 +219,9 @@ module.exports = {
       elm: [[R`Sáváteresztő mintavétel.`, R`A3.`], [R`Jel-zaj viszony.`, R`A6.`]],
       lv: [
         { t: 'Mintavételi tartományok', s: R`$\lfloor108/48\rfloor=2$.`,
-          m: [['tétel', R`k=1:\ f_s\ge216\ \text{kHz}`, ''], ['behelyettesítés', R`k=2:\ \frac{216}{2}\le f_s\le\frac{120}{1}\ \Longrightarrow\ 108\le f_s\le120\ \text{kHz}`, ''], ['ellenőrzés', R`f_s\ge2B=96\ \text{kHz}`, 'teljesül']] },
+          m: [['tétel', R`k=1:\ f_s\ge216\ \text{kHz}`, R`$2f_H=2\cdot108$`], ['behelyettesítés', R`k=2:\ \frac{216}{2}\le f_s\le\frac{120}{1}\ \Longrightarrow\ 108\le f_s\le120\ \text{kHz}`, R`$2f_H/2$ és $2f_L/1=2\cdot60$`], ['ellenőrzés', R`f_s\ge2B=96\ \text{kHz}`, 'teljesül']] },
         { t: 'A bitszám', s: R`$10\lg(3/C^2)=10\lg1=0$ dB.`,
-          m: [['behelyettesítés', R`0+6{,}02\,n\ge70`, ''], ['átalakítás', R`n\ge\frac{70}{6{,}02}=11{,}63`, ''], ['számérték', R`n=12\ \text{bit}`, '']] }
+          m: [['behelyettesítés', R`0+6{,}02\,n\ge70`, R`túlmintavételezési nyereség nélkül`], ['átalakítás', R`n\ge\frac{70}{6{,}02}=11{,}63`, R`$n$-re rendezve`], ['számérték', R`n=12\ \text{bit}`, R`felfelé kerekítve`]] }
       ],
       ered: [R`f_s\ge216\ \text{kHz}\quad\text{vagy}\quad108\le f_s\le120\ \text{kHz}\qquad n=12\ \text{bit}`],
       chk: [R`$n=12$: $72{,}2$ dB $\ge70$. $n=11$: $66{,}2$ dB, kevés.`, R`A középfrekvenciás alak ($f_c=84$ kHz, $(2f_c\mp B)/(m)$) ugyanezt a $108\ldots120$ kHz-es tartományt adja.`],
@@ -238,10 +238,10 @@ module.exports = {
         [R`Honnan tudjuk, hogy a 7 és a 9 álkép?`, R`Az $5$ kHz hiányzik, tehát a bemenő szűrő $5$ kHz alatt vág. Akkor a $7$ és a $9$ sem juthatott át, csak a mintavétel hozhatta létre.`]],
       elm: [[R`Álképek.`, R`$n f_s\pm f$ (A2).`]],
       lv: [
-        { t: 'A bemenő szűrő', s: R`A $3$ kHz átjut, az $5$ kHz nem.`, m: [['ellenőrzés', R`3\ \text{kHz}<f_{AA}<5\ \text{kHz}`, '']] },
+        { t: 'A bemenő szűrő', s: R`A $3$ kHz átjut, az $5$ kHz nem.`, m: [['ellenőrzés', R`3\ \text{kHz}<f_{AA}<5\ \text{kHz}`, R`a 3 kHz átjut, az 5 kHz nem`]] },
         { t: 'A mintavételi frekvencia', s: R`A mintavétel után csak $1$ és $3$ kHz álképei lehetnek. A $7$ és a $9$ kHz ezek közül kettő: $f_s-3=7$ és $f_s-1=9$.`,
-          m: [['definíció', R`f_s-3=7\quad\text{és}\quad f_s-1=9\ \Longrightarrow\ f_s=10\ \text{kHz}`, ''], ['ellenőrzés', R`f_s=8:\ 8-3=5\ \text{kHz is megjelenne}`, 'rossz'], ['ellenőrzés', R`f_s=12:\ 12-3=9,\ 12-1=11\ \text{kHz, a 7 hiányozna}`, 'rossz']] },
-        { t: 'A visszaállító szűrő', s: R`$f_s=10$ kHz-nél a következő álképek $11$ és $13$ kHz. A $9$ átjut, a $11$ nem.`, m: [['ellenőrzés', R`9\ \text{kHz}<f_R<11\ \text{kHz}`, '']] }
+          m: [['definíció', R`f_s-3=7\quad\text{és}\quad f_s-1=9\ \Longrightarrow\ f_s=10\ \text{kHz}`, R`a 7 és a 9 kHz csak álkép lehet`], ['ellenőrzés', R`f_s=8:\ 8-3=5\ \text{kHz is megjelenne}`, 'rossz'], ['ellenőrzés', R`f_s=12:\ 12-3=9,\ 12-1=11\ \text{kHz, a 7 hiányozna}`, 'rossz']] },
+        { t: 'A visszaállító szűrő', s: R`$f_s=10$ kHz-nél a következő álképek $11$ és $13$ kHz. A $9$ átjut, a $11$ nem.`, m: [['ellenőrzés', R`9\ \text{kHz}<f_R<11\ \text{kHz}`, R`a 9 átjut, a $10+1=11$ nem`]] }
       ],
       ered: [R`3<f_{AA}<5\ \text{kHz}\qquad 9<f_R<11\ \text{kHz}\qquad f_s=10\ \text{kHz}`],
       chk: [R`A kimenet $f_s=10$ kHz-nél: $1$, $3$ (eredeti), $10-3=7$, $10-1=9$ (álkép), a $11$ és $13$ levágva. Pontosan a megadott lista.`],
@@ -258,11 +258,11 @@ module.exports = {
       elm: [[R`Kvantálási zaj.`, R`A5.`, R`P_\varepsilon=\frac{1}{f_s}M(\varepsilon^2)\int|H(f)|^2\mathrm df`]],
       lv: [
         { t: 'Mintavételi frekvenciák', s: R`Aluláteresztővel $2f_H$, tetszőleges szűrővel a sáváteresztő képlet $k=3$-ra.`,
-          m: [['tétel', R`\text{a) } f_s=2\cdot10B=20B`, ''], ['behelyettesítés', R`\text{b) } \frac{20B}{3}\le f_s\le\frac{14B}{2}=7B\ \Longrightarrow\ f_s=\frac{20B}{3}`, '']] },
+          m: [['tétel', R`\text{a) } f_s=2\cdot10B=20B`, R`$f_H=10B$`], ['behelyettesítés', R`\text{b) } \frac{20B}{3}\le f_s\le\frac{14B}{2}=7B\ \Longrightarrow\ f_s=\frac{20B}{3}`, R`$k=3$: $2f_H/3$ és $2f_L/2$`]] },
         { t: 'Zajteljesítmények', s: R`A szűrő átengedett sávja a) $2\cdot10B=20B$, b) $2\cdot3B=6B$ (két oldal).`,
-          m: [['behelyettesítés', R`\text{a) } P=\frac{1}{20B}M\cdot20B=M`, ''], ['behelyettesítés', R`\text{b) } P=\frac{3}{20B}M\cdot6B=0{,}9\,M`, 'a b) kicsit jobb'], ['behelyettesítés', R`\text{d) } P=\frac{1}{20B}M\cdot6B=0{,}3\,M`, 'a sűrű minták és a keskeny szűrő együtt']] },
+          m: [['behelyettesítés', R`\text{a) } P=\frac{1}{20B}M\cdot20B=M`, R`a zaj a teljes $f_s$ szélességben egyenletes`], ['behelyettesítés', R`\text{b) } P=\frac{3}{20B}M\cdot6B=0{,}9\,M`, 'a b) kicsit jobb'], ['behelyettesítés', R`\text{d) } P=\frac{1}{20B}M\cdot6B=0{,}3\,M`, 'a sűrű minták és a keskeny szűrő együtt']] },
         { t: 'Decibelben', s: R`A javulás a zajteljesítmények arányából.`,
-          m: [['számérték', R`10\lg\frac{1}{0{,}9}=0{,}46\ \text{dB}\qquad10\lg\frac{1}{0{,}3}=5{,}2\ \text{dB}`, '']] }
+          m: [['számérték', R`10\lg\frac{1}{0{,}9}=0{,}46\ \text{dB}\qquad10\lg\frac{1}{0{,}3}=5{,}2\ \text{dB}`, R`a megmaradó zaj aránya az eredetihez`]] }
       ],
       ered: [R`f_{s,a}=20B\qquad f_{s,b}=\tfrac{20}{3}B\qquad P_\varepsilon:\ M,\ 0{,}9M,\ 0{,}3M`],
       chk: [R`A Koma-jegyzet 20/20, 18/20 és 6/20 arányai ugyanezek.`, R`Marosi változata (8…10 kHz-es sáv) ugyanezt a logikát követi: azonos SNR, túlmintavételezéssel ötszörös.`],
@@ -277,9 +277,9 @@ module.exports = {
       elm: [[R`Sáváteresztő mintavétel.`, R`A3, $k_{\max}=\lfloor25/6\rfloor=4$.`], [R`Túlmintavételezés.`, R`A6: $10\lg(f_s/2B)$ tag.`]],
       lv: [
         { t: 'A legkisebb mintavételi frekvencia', s: R`$k=4$-re behelyettesítünk.`,
-          m: [['behelyettesítés', R`\frac{2\cdot25}{4}\le f_s\le\frac{2\cdot19}{3}\ \Longrightarrow\ 12{,}5\le f_s\le12{,}67\ \text{kHz}`, '']] },
+          m: [['behelyettesítés', R`\frac{2\cdot25}{4}\le f_s\le\frac{2\cdot19}{3}\ \Longrightarrow\ 12{,}5\le f_s\le12{,}67\ \text{kHz}`, R`$k=\lfloor25/6\rfloor=4$`]] },
         { t: 'A jel-zaj viszony változása', s: R`Csak az $f_s/2B$ tag változik, mert a kvantáló, a csúcstényező és a szűrő ugyanaz.`,
-          m: [['átalakítás', R`\Delta\text{SNR}=10\lg\frac{50}{f_{s,\min}}`, ''], ['számérték', R`10\lg\frac{50}{12{,}67}=5{,}96\ \text{dB}\ \ldots\ 10\lg\frac{50}{12{,}5}=6{,}02\ \text{dB}`, '']] }
+          m: [['átalakítás', R`\Delta\text{SNR}=10\lg\frac{50}{f_{s,\min}}`, R`a két $10\lg(f_s/2B)$ tag különbsége`], ['számérték', R`10\lg\frac{50}{12{,}67}=5{,}96\ \text{dB}\ \ldots\ 10\lg\frac{50}{12{,}5}=6{,}02\ \text{dB}`, R`a tartomány két végére`]] }
       ],
       ered: [R`f_{s,\min}=12{,}5\ \text{kHz}\qquad\Delta\text{SNR}\approx6\ \text{dB}`],
       chk: [R`$f_s=12{,}5$: $-25+4\cdot12{,}5=25$, épp érintkezik. $-19+3\cdot12{,}5=18{,}5<19$, nem lapolódik.`, R`$6$ dB ugyanannyi, mint egy bit, mert négyszeres a túlmintavételezés.`],
@@ -295,7 +295,7 @@ module.exports = {
       elm: [[R`Jel-zaj viszony.`, R`A6.`]],
       lv: [
         { t: 'Kiindulási jel-zaj viszony', s: R`Szinuszra vonatkoztatva ($C^2=2$).`,
-          m: [['behelyettesítés', R`\frac SN=\frac32\cdot\frac{44}{2\cdot15}\cdot2^{32}`, ''], ['számérték', R`10\lg\frac SN\approx99{,}8\ \text{dB}`, '']] },
+          m: [['behelyettesítés', R`\frac SN=\frac32\cdot\frac{44}{2\cdot15}\cdot2^{32}`, R`$C^2=2$, $f_s=44$, $B=15$ kHz, $n=16$`], ['számérték', R`10\lg\frac SN\approx99{,}8\ \text{dB}`, R`$1{,}76+1{,}66+96{,}3$`]] },
         { t: 'Négyszeres sűrűséggel', s: R`Csak az $f_s/2B$ tag változik.`,
           m: [['behelyettesítés', R`\frac SN=\frac32\cdot\frac{4\cdot44}{2\cdot15}\cdot2^{32}\ \Longrightarrow\ 105{,}8\ \text{dB}`, '+6 dB, mint egy bit']] },
         { t: 'Elsőfokú szűrővel', s: R`A legalacsonyabb szivárgó komponens $f_s-15$ kHz-nél van.`,
@@ -319,7 +319,7 @@ module.exports = {
         { t: '6 bit elhagyása', s: R`Minden bit $6$ dB.`,
           m: [['számérték', R`\Delta\text{SNR}=6\cdot6{,}02=36\ \text{dB}\qquad 2^{12}=4096\approx4000\text{-szeres zajteljesítmény}`, 'sistergés']] },
         { t: '26 dB hangosabban', s: R`Teljesítményarány a decibelből.`,
-          m: [['átalakítás', R`10^{26/10}=10^{2{,}6}\approx398\approx400`, '']] }
+          m: [['átalakítás', R`10^{26/10}=10^{2{,}6}\approx398\approx400`, R`dB-ből teljesítményarány`]] }
       ],
       ered: [R`\text{d) } -36\ \text{dB}\ (\approx4000\times\ \text{zaj})\qquad\text{e) } \approx400\times`],
       chk: [R`$26$ dB $=20+6$ dB, azaz $100\cdot4=400$: a fejszámolás egyezik.`],
@@ -335,9 +335,9 @@ module.exports = {
       elm: [[R`Álképek.`, R`$n f_s\pm f$.`]],
       lv: [
         { t: 'A torzítás komponensei', s: R`Erős túlvezérlésnél a jel a négyszöghöz közelít.`,
-          m: [['definíció', R`f_k=(2k+1)\cdot1{,}5\ \text{kHz}=1{,}5;\ 4{,}5;\ 7{,}5;\ 10{,}5;\ \ldots`, '']] },
+          m: [['definíció', R`f_k=(2k+1)\cdot1{,}5\ \text{kHz}=1{,}5;\ 4{,}5;\ 7{,}5;\ 10{,}5;\ \ldots`, R`a négyszögjel páratlan felharmonikusai`]] },
         { t: 'Mintavétel után', s: R`Minden komponensnek $n\cdot8\pm f_k$ álképe lesz.`,
-          m: [['számérték', R`8-4{,}5=3{,}5\qquad8-7{,}5=0{,}5\qquad10{,}5-8=2{,}5\ \text{kHz}`, ''], ['ellenőrzés', R`16-13{,}5=2{,}5\qquad16-16{,}5=-0{,}5\to0{,}5\ \text{kHz}`, 'a magasabbak ugyanezekre esnek']] }
+          m: [['számérték', R`8-4{,}5=3{,}5\qquad8-7{,}5=0{,}5\qquad10{,}5-8=2{,}5\ \text{kHz}`, R`$n\cdot8\pm f_k$, a 4 kHz alattiak`], ['ellenőrzés', R`16-13{,}5=2{,}5\qquad16-16{,}5=-0{,}5\to0{,}5\ \text{kHz}`, 'a magasabbak ugyanezekre esnek']] }
       ],
       ered: [R`\text{a) igen}\qquad\text{b) } 0{,}5;\ 1{,}5;\ 2{,}5;\ 3{,}5\ \text{kHz}`],
       chk: [R`Marosi táblai megoldása ugyanezt a négy frekvenciát adja.`, R`Mind $1$ kHz-es rácson van, félúton: ez az $n\cdot8\pm(2k+1)\cdot1{,}5$ alakból következik.`],

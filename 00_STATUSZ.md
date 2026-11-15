@@ -7,10 +7,10 @@ Utolsó frissítés: 2026-11-15
 | Példatár | Link | Tartalom | Forrás és ellenőrzés |
 |---|---|---|---|
 | **Infokomm példatár** (fő, elméleti alapokkal) | https://claude.ai/artifact/WnHjsiUtTy3B5H7YoVAyS4 | 2. fejezet kész (9 alapozó szakasz, 12 példa) | `html/data/ch02.js`, `check/verify_ch02.py` |
-| **ALL-IN példatár** | https://claude.ai/artifact/D88X7FaNkocZWMMUNbom5i | az ALL-IN 1…145. oldala, 11 fejezet, 104 példa | `html/data/ai01…ai11.js`, `check/verify_allin.py` (72 ellenőrzés) |
-| **5-ösöm példatár** | https://claude.ai/artifact/GJLVVebXiYeG1EDHCbJZnU | az „5-ösöm” 30 oldala, 10 fejezet, 49 példa | `html/data/o01…o10.js`, `check/verify_otosom.py` (54 ellenőrzés) |
+| **ALL-IN példatár** | https://claude.ai/artifact/D88X7FaNkocZWMMUNbom5i | az ALL-IN 1…145. oldala, 11 fejezet, 104 példa | `html/data/ai01…ai11.js`, `check/verify_allin.py` (117 ellenőrzés) |
+| **5-ösöm példatár** | https://claude.ai/artifact/GJLVVebXiYeG1EDHCbJZnU | az „5-ösöm” 30 oldala, 10 fejezet, 49 példa | `html/data/o01…o10.js`, `check/verify_otosom.py` (105 ellenőrzés) |
 
-Build: `cd html && node build.js` (fő), `node build.js allin`, `node build.js otos`. Minden példa a forrásoldal azonosítójával (`ai…`, `5o_…`) az átiratra mutat. Következő lépés: a három példatár összefésülése témakörönként, ismétlés nélkül.
+Build: `cd html && node build.js` (fő), `node build.js allin`, `node build.js otos`. Minden példa a forrásoldal azonosítójával (`ai…`, `5o_…`) az átiratra mutat. 2026-11-15: mindhárom példatár átdolgozva a szabvány 5a pontja szerint (minden jel megnevezve, minden szám forrása a sor mellett). Az élő fő példatárban egy másik munkamenetből származó 6. fejezet (Kódolástechnika, 8 példa) is van, ennek forrása nincs a repóban: tisztázandó, mielőtt a fő példatár újra közzé lesz téve. Következő lépés: a három példatár összefésülése (`claude/OSSZEFESULES_terv.md`).
 
 ## Mappaszerkezet
 
