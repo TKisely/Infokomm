@@ -315,3 +315,58 @@ A = 166,7 Erl → **N = 198**. ⚠️ Az egyik forrás 197-et ad, de ott B = 0,2
 - p = 1000·p₀ → 60 dB → 1 kHz-en **60 phon**.
 - **Y = 0,3R + 0,59G + 0,11B:** a zöld csík a legvilágosabb, utána a piros, a kék a legsötétebb. A zöld és a piros csík akkor olvad össze, ha a zöld fényességét 0,3/0,59-szeresére csökkentjük.
 - Mozgásérzékeléshez 10–20 kép/s kell. A villogásérzet 45–60 Hz-ig (fúziós frekvencia, a fényerőtől függ) van meg. Metamer szín: azonos színérzet különböző spektrumokkal.
+
+---
+
+## 10. „Példák #1” – Marosi Gyula vizsgafelkészítő sora (2016)
+
+Forrás: `Forrasok/Marosi_2016/marosi_2016_atirat.md`. A gyakorlatvezető saját kézírásos megoldása, az eredményeket újraszámoltam.
+
+| Feladat | Kérdés röviden | Eredmény |
+|---|---|---|
+| `mgP_1` | x = 3sin + 4cos: csúcstényező, csúcs, teljesítmény | √2; 5; **12,5** (1 Ω). ZH-változatok: 2sin + 2cos → 2√2, 4; 3sin + 3cos → 3√2, 9 |
+| `mgP_1b` | x = 3A·cos(2πf₀t) − 2A·sin(2πf₁t)·sin(2πf₀t) | f₁ = f₀ esetén az egyenszint **−A**. f₁ = f₀√2 esetén a csúcs A√13, az effektív érték A√(11/2), a csúcstényező **√(26/11) ≈ 1,54** |
+| `mgP_2` | előadásrögzítés: 4 kHz-es LP, 9 kHz, 14 bit | nem tökéletes (sávkorlát, kvantálási zaj); be- és kimenő szűrő is kell; 6 bit elhagyása **−36 dB** (≈ 4000× zaj); +26 dB ≈ **400×** teljesítmény |
+| `mgP_2b` | 8 kHz, 1,5 kHz-es jel, > 2 V-nál 3,5 kHz-es komponens | túlvezérlés → páratlan felharmonikusok ±(2k+1)·1,5 ∓ n·8 kHz → a 4 kHz alatt **1,5; 3,5; 0,5; 2,5 kHz** |
+| `mgP_3` | H = [110100; 101010; 011001] | G = [100110; 010101; 001011], szisztematikus, d = 3 (2-t jelez, 1-et javít). Az 1-es súlyú szindrómák (001, 010, 100) a 6., 5., 4. bit hibáját jelzik |
+| `mgP_4` | 450 MHz, 50 m / 1,5 m | a) legtávolabbi **minimum: 225 m**; b) Γ = −0,9 esetén ugyanott (de nem teljes a kioltás); c) ott a csillapítás végtelen; d) max/min arány: Γ = −1 esetén végtelen, Γ = −0,9 esetén **361**; e) h_R duplázása → +6 dB |
+| `mgP_4b` | 3 GHz, 0,5 m sugarú parabola | **30 dB** |
+| `mgP_5` | AM, U₀ = 2, x = 0,1sin + 0,5cos, 900 kHz, 100 V | AM-DSB, m = **30%**; komponensek 898…902 kHz; a pillanatnyi teljesítmény 50 Ω-on 0 és **1252,5 W** között |
+| `mgP_5b` | FM, 1 V, 1 kHz → 9 V, 9 kHz | Φ_D = **9 rad**; Bessel 26 kHz, Carson 20 kHz; a teljesítmény nem változik |
+| `mgP_6` | PAM 1,05 / 0,15, bitsor 101110 | van ISI; minták ±1,2 és ±0,9; 4 szint alkalmas; **8 szint nem** (1,05 − 7·0,15 = 0) |
+| `mgP_7` | FSK f₀ = 1/T, f₁ = 1,5/T | f_D = 1/(4T) → **MSK** |
+| `mgP_8` | 64QAM teljesítménycsökkentés | a (±7, ±7) sarokpontok áthelyezése (±9, ±1)-re: 98 → 82 (lásd `05` `tg06_P64`) |
+
+---
+
+## 11. Mobil és forgalom (Marosi 2016, Koma 2021)
+
+| Feladat | Kérdés röviden | Eredmény |
+|---|---|---|
+| `mgM_1` | mekkora késéssel érkezik A hangja B-hez GSM-en belül? | (20 + 1 + 8·4,615 ms)·2 ≈ **116 ms**, elfogadható |
+| `mgM_2` | α413 → α415 → α452 → α921 → β731 | nincs LU / LA-váltás / BSC-váltás / MSC-váltás (országváltás) |
+| `mgM_3` | mennyi egy 160 karakteres ékezetes SMS? | 16 bites kódolással **3 SMS**; redukált (7 bites) karakterkészlettel 1 |
+| `mgM_4`–`mgM_5` | hívásfelépítés, SMS Ausztriából Görögországba, hordozott számmal | SRI → HLR; SMS: a küldő SMSC-je → SRI4SM → FNR → a hívott HLR-je → ForwardSM a látogatott MSC-hez |
+| `mg13_4` | Budapest, szolgáltatónként 40 vivő, N = 12 | **14 000** egyidejű hívás; cellánként ≈ 26,7 |
+| `mg10_1` | E1-keretcsúszás, δ = 1 ppm | T = 1/(2δf₀) = **62,5 s** |
+| `mg10_2`–`mg10_3` | 20 Ft/megkezdett perc, átlag 2 perc | 39,35 / 23,87 / 14,47%; átlag **≈ 50,8 Ft**; másodperc-alapon ≈ 40 Ft |
+| `mg10_4` | N = 1, M = 50, 0,4 hívás/óra, 1 perc | A = ⅓ Erl, P_B = **25%**, Y = ¼ Erl |
+| `mg10_5`, `kg12_4` | 120 hívás/óra, 20 perc, 2% | A = 40 Erl, **N = 50**, Y_N = 39,2 Erl, Y₁ = 78,4% |
+| `kg12_5` | 2,48 hívás/30 s, P(L > 90 s) = 0,6, 0,01% | µ = 0,34 /perc, A = 14,565 Erl, **N = 31**, kihasználtság ≈ 47% |
+| `kg12_1` | 5,3 kbit/s, 20 B, 47 B fejléc | 33,125 csomag/s, **17,75 kbit/s** |
+| `kg12_2` | G.729, < 150 ms, 20 000 km | **n ≤ 2**, 26,8 kbit/s (+5% → 28,1) |
+| `kg12_3` | 30 Ft/megkezdett perc, átlag 2 perc | 30 Ft: 39,35%; 60 Ft: 23,87%; 90 Ft: 14,47%; több: 22,31% |
+
+---
+
+## 12. Koma gyakorlatainak új feladatai (2021)
+
+| Feladat | Kérdés röviden | Eredmény |
+|---|---|---|
+| `kg04_3` | 450 MHz, 3 km, 10–90 nW, 5 m-es periódus | Γ = −½, h_T = **200 m** (a 900 MHz-es Marosi-változatban 100 m) |
+| `kg04_4` | 1,1 m-es parabola, 12 GHz | G = 42,8 dB; a félszög ≈ 0,83° (a teljes nyílásszög ≈ 1,66°); G_T (2000 km-es folt) = 37,1 dB |
+| `kg06_3` | GPS, 25 W, 20 000 km, 13 + 3 dB, 1,5 GHz | a = 166 dB, P_R ≈ **6,3·10⁻¹⁶ W** (a jegyzetben elírva 0,625 nW, `03` D1) |
+| `kg06_2` | (7,3) kód d_min = 2 → javítani | egy sor cseréjével d_min = 3 (ellenőrizve) |
+| `kg06_5` | C(5,2), 1 hibát javít; v = 10001; lehet-e benne 11111? | G = [10011; 01110]; s = 010 → u = **10**; 11111 **nem** lehet kódszó (bizonyítás: `06` 4. fejezet) |
+| `kg06_6` | 5 fokozatú értékelés átlagosan 2 bit alatt | p = ½, ¼, ⅛, 1/16, 1/16 → 0, 10, 110, 1110, 1111, L̄ = H = **1,875** |
+| `kg05_extra` | FM-rendszer: 8 kHz, 1,5 GHz, 50 kHz-es sáv | f_D ≤ 17 kHz; Φ_D ≈ 2,125 |

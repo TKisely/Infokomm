@@ -3,3 +3,10 @@
 
 # Szerzői jogvédett forrás-PDF-ek (tanszéki anyag): csak helyben, a repóba nem kerülnek fel
 *.pdf
+
+# Videófelvételek: túl nagyok és tanszéki anyagok, csak helyben
+Videó felvételek/
+*.mp4
+*.mkv
+*.mov
+*.webm

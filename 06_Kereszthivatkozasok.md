@@ -27,6 +27,7 @@ Az azonosítók véglegesek, nem változnak, mert más fájlok és a későbbi H
 | `pdNN_x` | OneDrive `1-5 gyakorlatok.pdf`, NN. gyakorlat, x. példa | `pd03_2` |
 | `vzÉÉÉÉ_HH_NN_Qx` | régi vizsga (Moodle vagy hallgatói megoldás), dátum és feladatszám | `vz2020_06_02_Q7` |
 | `Mx-Tyyy`, `Fz` | a régi md jegyzetek moduljai és a feladatgyűjtemény (`Forrasok/Korabbi_md_jegyzetek/`) | `M2-T023`, `F29` |
+| `mg<gyak>_<feladat>` | Marosi Gyula 2016-os gyakorlatai (`Forrasok/Marosi_2016/marosi_2016_atirat.md`, gyakorlatvezetői kézírásos megoldások). `mgP_x` = „Példák #1” vizsgafelkészítő sor, `mgM_x` = mobil-gyakorlat, `mg4k_x` = a 4. (kódolás) gyakorlat | `mg4_5`, `mgP_4`, `mgM_1` |
 
 Fájlhivatkozások: `01 §5` = az `01_Kidolgozas…` 5. fejezete, `02 §3.4` = a `02_Regi_Vizsgafeladatok…` 3.4 pontja, `05 gyak04` = az `05_TMIT…` gyak04 része.
 
@@ -50,6 +51,24 @@ A tárgy 12 témaköre (YouTube-csatorna és a `04_Claude_ai_projekt_megallapita
 | 10 | Cellás mobiltelefónia | `ea10` | – (a Koma-sorozatból a gyak09 hiányzik) | – | – | `01 §9` | `02 §7` |
 | 11 | Forgalmi méretezés, VoIP | – | `kg12` | – | – | `01 §10–11` | `02 §8` |
 | 12 | Extra, vegyes | `ea11` (ABCDE5G, IoT), `ea13` (vizsgafelkészítő) | `kg06` (ZH-felkészítő) | – | – | – | – |
+
+**Marosi 2016 (`mg`) témakörönként:**
+
+| # | Témakör | Marosi-gyakorlat |
+|---|---|---|
+| 1 | Jelek leírása | `mg0_1`–`mg0_7`, `mgP_1`, `mgP_1b` |
+| 2 | Mintavételezés és kvantálás | `mg2_1`–`mg2_3`, `mgP_2`, `mgP_2b` |
+| 3 | Analóg moduláció | `mg6_1`–`mg6_8`, `mgP_5`, `mgP_5b` |
+| 4 | Digitális alapsávi átvitel | `mg7_1`–`mg7_6`, `mgP_6` |
+| 5 | Digitális vivős moduláció | `mg8_1`–`mg8_5`, `mgP_7`, `mgP_8` |
+| 6 | Kódolástechnika | `mg4k_1`–`mg4k_5`, `mgP_3` |
+| 7 | Hallás, látás | `mg9_2`–`mg9_8`, `mg9_zh`, `mg9_zh2` |
+| 8 | Rádiós összeköttetések | `mg4_1`–`mg4_5`, `mgP_4`, `mgP_4b` |
+| 9 | Műsorszóró rendszerek | `mg12_1`–`mg12_6`, `mg13_1`–`mg13_3` |
+| 10 | Cellás mobiltelefónia | `mg13_4`, `mgM_0`–`mgM_5` |
+| 11 | Forgalmi méretezés, VoIP | `mg10_1`–`mg10_5` |
+
+A Marosi-sorozat fedi a 10. és a 11. témakört is, amelyek a Koma- és a TMIT-anyagból hiányoznak.
 
 **Hiányzó részek forrásonként:**
 - A Koma-sorozatból hiányzik a 9. és a 11. gyakorlat (valószínűleg mobil és forgalom), valamint a 12. előadás (valószínűleg forgalom és VoIP).
@@ -160,6 +179,49 @@ A táblázat azt mutatja, hol szerepel **ugyanaz** a feladat (vagy egy változat
 
 ---
 
+### Marosi 2016 (`mg`) megfeleltetése
+
+| Marosi | Ugyanez máshol | Eredmény | Állapot |
+|---|---|---|---|
+| `mg0_2`–`mg0_4` csúcstényező | `tg00` 1–3., `kg01_1–3` | √2, 1, 2, √6; x₂ ≈ 1,79 (a jegyzetben „≈ 1,83”, ez csak felső korlát) | ✅ |
+| `mg0_5` mérőműszerek (4 V_pp, +3 V) | – (új) | RMS: négyszög √13 = 3,606 V, szinusz 3,317 V, háromszög 3,215 V | ✅ |
+| `mg0_7` decibel-táblázat | `01 §0` | 800 → 29 dB, 4·10¹² → 126 dB | ✅ |
+| `mg2_1` szivárgás, alias (1 és 4,5 kHz) | `tg01_P11`, `kg02_2` | 20 mV; 0,375 / 0,125 V | ✅ |
+| `mg2_2` 0–3 / 7–8 kHz | `pd02_1`, `tg01_P12`, `kg02_3` | s₀ = 1,25·10⁻⁶ V²/Hz; 11–14 kHz | ✅ |
+| `mg2_3` 8–10 kHz-es zajspektrum | `pd02_4`, `kg02_4` (7B–10B változat) | f_s,min = 4 kHz; azonos SNR; túlmintavételezésnél 5× | ✅ |
+| `mg4_1` 450 MHz, 10 km | `pd03_1`, `kg04_1` | 66 dB, 282 nW, 3,75 mV | ✅ |
+| `mg4_3` kétutas, 20/10 m | `pd03_2`, `kg04_2` | λ = 8 cm (3,75 GHz), 98 dB | ✅ |
+| `mg4_4` Γ a P_max/P_min arányból | `kg04_3` (450 MHz-es változat) | Γ = −½; 900 MHz-en **h_T = 100 m** (450 MHz-en 200 m) | ✅ |
+| `mg4_5` parabola, műhold | `kg04_4` (1,1 m-es változat) | 43 dB; α = 1,62° (teljes nyílásszög); G_T: a jegyzetben ≈ 31 dB ⚠️, helyesen **37,1 dB** | ⚠️ `03` G2 |
+| `mg4k_1`–`mg4k_2` | `pd04_1`, `tg02_P51`, `kg03_1` | Kraft = 1, H = 49/16 | ✅ |
+| `mg4k_3` Huffman-kód A–F | `kg03_2` | L̄ = 2,3; 46 kbps; H = 2,2356 → 44,7 kbps | ✅ |
+| `mg4k_4` Pistike-kód | `pd04_3`, `tg02_P53`, `kg03_3` | **2,35; 34,8%** | ✅ (megerősíti a `03` E1-et) |
+| `mg4k_5` (8,4) kód | `pd04_6`, `tg02_P56`, `kg03_5` | d = 3, c = 01101010, s = 0011 | ✅ |
+| `mg6_2` 50%/150%-os AM | `tg04_P41` | 11% / 53% | ✅ |
+| `mg6_3` AM, 800 kHz, 100 V | `pd05_2` | m = 60%, 100 + 13 W | ✅ |
+| `mg6_6` FM, m_f = 3,4, 20 kHz | – (új) | Bessel ≈ 250 kHz, Carson 176 kHz | ✅ |
+| `mg6_7` Armstrong-típusú FM-előállítás | – (új) | Φ₁₀ = 6,28/64 rad, ×64, SSB 57,6 MHz → 64 MHz | ✅ |
+| `mg6_8` fázistolós szorzó | `pd05_5`, `tg04_P46` | ½T·x_t | ✅ |
+| `mg7_3`–`mg7_6` PAM, ISI | `tg05_P52–P55`, `kg07` | T = k/(2f₀); T = k/B; 3,2·10⁻⁵; 0,79/0,39/<0 | ✅ |
+| `mg8_1d` OOK vs. BPSK | `tg06_P62`, `kg08_1` | 1 és ½ → kétszeres | ✅ |
+| `mg8_4` 16QAM tűrése | `tg06_P63`, `kg08_3` | 2/3 és 2; **16,87°** | ✅ |
+| `mg8_5` Doppler | `tg06_P65`, `kg08_Doppler` | ±3 Hz (1 m/s), ±90 Hz | ✅ |
+| `mg9_2` intenzitás ×100 | `F25` (hangnyomás ×100) | 20 dB = 20 phon (az `F25`-ben 40 dB, más adat) | ✅ |
+| `mg9_6`–`mg9_8` Y, színkülönbség, Yuv | `tg07_G72`, `tg07_G74` | Yuv → (0,5; 0; 0,5), bíbor, 20,5% | ✅ |
+| `mg12_1`–`mg12_4` szupervevő, sztereó, adók | `tg08_P81–P85`, `kg10_1–3` | 995/1450 kHz; 68 adó (egy adóhelyről 34) | ✅ |
+| `mg12_5` páratlan sorszám | `tg08` | a jegyzet a 625 = 5⁴ számlálóval indokol, a szokásos ok a váltott soros letapogatás | `[ELLENŐRIZENDŐ]` |
+| `mg13_1`–`mg13_3` DVB-C, DVB-T, SFN | `kg10_4–5`, `5-ösöm P.9.2`, `tg08` | 38,47; 22,394 Mbps; 67,2 km és 73,8 km | ✅ (az RS/FEC szerepe: `03` G3) |
+| `mg13_4` Budapest, szolgáltatónként 40 vivő | `F19`, `vz2016_06_07_Q3` | 525·40/12·8 = **14 000**; cellánként ≈ 26,7 | ✅ |
+| `mgP_4` kétutas, 50 m / 1,5 m / 450 MHz | `F29` | **a legtávolabbi minimum 225 m**; Γ = −0,9 esetén ugyanott; arány 361; h_R duplázása +6 dB | ✅ (`03` G4: az `F29` szövege maximumot kérdez → 450 m) |
+| `mgP_4b` parabola, 3 GHz, 0,5 m | `F26` (1,5 GHz, 1 m) | 30 dB | ✅ |
+| `mgP_5` AM, U₀ = 2, 900 kHz | `pd05_2`, `mg6_3` | m = 30%; a pillanatnyi teljesítmény 0 és 1252,5 W között | ✅ |
+| `mgP_5b` FM, 9 V, 9 kHz | – | Φ_D = 9 rad; Bessel 26 kHz, Carson 20 kHz | ✅ |
+| `mgP_6` PAM 1,05/0,15 | `tg05_G51`, `ea13_1` | 8 szint nem alkalmas (0) | ✅ |
+| `mgP_7` FSK f₀ = 1/T, f₁ = 1,5/T | `tg06` | f_D = 1/(4T) → MSK | ✅ |
+| `mg10_4` Erlang, N = 1, M = 50 | – (új) | A = ⅓ Erl, P_B = 25%, Y = ¼ Erl | ✅ |
+| `mg10_5` Erlang 40 Erl, 2% | `kg12_4` | N = 50, 39,2 Erl, 78,4% | ✅ |
+| `mg10_2`–`mg10_3` percdíj | `kg12_3` (30 Ft-os változat) | 39,35/23,87/14,47%; átlag 2,54 egység ≈ 50 Ft; másodperc-alapon ≈ 40 Ft | ✅ |
+
 ## 4. A koma-anyag új tartalma (eddig sehol nem szerepelt)
 
 Ezeket a régi fájlok még nem dolgozták fel. A következő kör ezeket építi be a megfelelő fejezetbe (`01`, `02`).
@@ -184,6 +246,23 @@ Ezeket a régi fájlok még nem dolgozták fel. A következő kör ezeket épít
 | `ea11` | ABCDE5G, IoT, kiberfizikai rendszerek | kifejtős kérdés |
 
 ---
+
+### A Marosi-anyag új tartalma
+
+| Azonosító | Tartalom | Ellenőrzött eredmény |
+|---|---|---|
+| `mgM_0` | GSM-beszédlánc: 8 kHz × 13 bit = 104 kbps → 13 kbps (260 bit/20 ms) + 196 bit ECC = 456 bit/20 ms = 4 burst × 114 bit; TDMA-keret 4,615 ms, időrés 577 µs, adás 546 µs | ✅ |
+| `mgM_1` | GSM-késleltetés (beszédkeret + kódolás + interleave) × 2 | (20 + 1 + 8·4,615)·2 ≈ **116 ms** |
+| `mgM_2` | LU (helyzetfrissítés) / HO (hívásátadás) / P (személyhívás) és az LU típusai (bekapcsolás, periodikus, cellaváltás, LA-, BSC-, MSC-váltás) | – |
+| `mgM_3` | SMS-hossz: 7 bites kódolással 160 karakter = 140 byte = 1 SMS; 16 bites (ékezetes) kódolással 70 karakter/SMS | 160 ékezetes karakter = **3 SMS** (67 karakter/rész) |
+| `mgM_4`–`mgM_5` | Hívásfelépítés (SRI a HLR felé, IMSI ↔ MSISDN csak a HLR-ben), SMS submit/deliver (SRI4SM, FNR számhordozás, ForwardSM) | – |
+| `mg10_1` | E1-keretcsúszás két ±δ pontosságú óra között: T = 1/(2δf₀) | δ = 1 ppm, f₀ = 8 kHz → **62,5 s** |
+| `mg10_2` | Megkezdett percenkénti díj várható értéke: 1/(1 − e^{−α}) egység | α = ½ → 2,54 egység ≈ 50,8 Ft |
+| `mg10_4` | Erlang-B N = 1-re: P_B = A/(1 + A) | ⅓ Erl → 25% |
+| `mg6_4` | SSB előállítása szűréssel (két lépcsőben) és fázistolással | – |
+| `mg6_7` | Kislöketű PM → integrálás → frekvenciasokszorozás → keverés (nagylöketű FM) | ✅ |
+| `mg0_5` | DC/AC/RMS mérése feszültségmérővel és oszcilloszkóppal | RMS = √(DC² + AC_eff²) |
+| `mg12_4` | URH/OIRT (65,8–73 MHz) és CCIR sáv; 600 kHz-es raszter egy adóhelyen | 34 adó/adóhely |
 
 ## 5. Forrásrangsor eltérés esetén
 

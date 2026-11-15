@@ -69,8 +69,18 @@ forrasok:
 - **Kábel + erősítő sorrendje** `[PDF 3.4]`: kábel elöl → F = L·F_erősítő (pl. 15 dB + 3 dB = 18 dB);
   erősítő elöl → F ≈ F_erősítő + (L−1)/G (≈ 3,6 dB). Tanulság: **a csillapítást az erősítő után tedd**.
 
+- **Γ meghatározása a vett teljesítmény ingadozásából** `[kg04_3]`, `[mg4_4]`: (1+|Γ|)/(1−|Γ|) = √(P_max/P_min).
+  10 és 90 nW → arány 3 → **Γ = −½**. A vevőantenna magasságában mért periódus: Δh_R = rλ/(2h_T) → h_T = rλ/(2Δh_R)
+  (900 MHz, 3 km, 5 m → 100 m; 450 MHz-en 200 m).
+- **Parabolaantenna nyalábja** `[kg04_4]`, `[mg4_5]`: G = (πd/λ)² (A_h = d²π/4). Nagy távolságban
+  **G ≈ 4/tg²(α/2)**, ahol α a teljes nyílásszög (a folt sugara R·tg(α/2)).
+  1,125 m, 12 GHz → 43 dB, α = 1,62°. 2000 km **átmérőjű** folt szinkronpályáról: tg(α/2) = 1000/35 786 → G_T ≈ 37,1 dB.
+- **Hosszú link (GPS)** `[kg06_3]`: 1,5 GHz, 20 000 km, 13 + 3 dB, 25 W → a = 166 dB → P_R = 14 dBW − 166 dB = −152 dBW ≈ **6,3·10⁻¹⁶ W**.
+  Mindig dBW-ben vagy dBm-ben számolj, így nem csúszik el a nagyságrend.
+
 ### Csapdák
-- Az interferenciazóna határa **4h_Th_R/λ**. A 2h_Th_R/λ távolság az **utolsó kioltás** (lásd a hibajegyzéket: `[F29]`).
+- Az interferenciazóna határa (a **legtávolabbi maximum**) **4h_Th_R/λ**. A **legtávolabbi minimum** (kioltás) 2h_Th_R/λ.
+  **Olvasd el, melyiket kérdezik:** az eredeti 2016-os feladat `[mgP_4]` a minimumot kérdezi (225 m), az `[F29]` szövege a maximumot (450 m). Lásd `03` G4.
 - A kétutas csillapításnak (r ≫ 4h_Th_R/λ) **nincs frekvenciafüggése**, csak az antennanyereségeknek van.
 
 ---
@@ -243,6 +253,10 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
   - 8-PSK kör (R = A/sin22,5° = 2,61A): **6,83A²**,
   - „csillag” 4+4 (belső (±A,±A), külső a tengelyeken ±(1+√3)A): **≈ 4,73A²** → ez a legtakarékosabb a három közül.
 - **Gray-kódolás:** a szomszédos pontok csak 1 bitben térnek el (QPSK körbe: 00, 01, 11, 10), így egy szimbólumhiba ≈ 1 bithiba.
+- **1024-QAM** `[kg08_3]`: erősítéstűrés 30/31 … 30/29, fázistűrés 45° − arcsin(30/(31√2)) ≈ **1,82°**.
+- **Többszörös hozzáférés** `[ea05]`: TDMA (időrés), FDMA (frekvencia, védősávval), OFDM(A) (ortogonális alvivők, 1/T₀ raszter, FFT-vel szétválasztható, nem kell védősáv), CDMA (szórókód, XNOR, a vevő ugyanazzal a kóddal szorozva és aluláteresztővel választja szét).
+- **SFN (egyfrekvenciás hálózat)** `[mg13_3]`: az OFDM védőintervalluma alatt érkező visszhang nem zavar → a megengedett útkülönbség Δl = c·T_GI. DVB-T (224 µs) → 67,2 km, DAB (246 µs) → 73,8 km.
+- **Sebességek modemen** `[mg8_2]`: 600 Baud mellett BPSK/DBPSK 600 bit/s, (D)QPSK 1200 bit/s. A DBPSK a bitet a fázisváltással jelzi, így nem kell abszolút fázisreferencia.
 - **16-QAM vs. 16-PSK** azonos átlagteljesítményen: d_min,QAM = 0,632√E_s > d_min,PSK = 0,390√E_s → a QAM a jobb.
 - **QPSK vs. 8-PSK:** 20lg(1,414/0,765) ≈ 5,3 dB a QPSK javára.
 - **DVB-C kapacitás** `[F17]`, `[M7-T093]`: R_s = 8 MHz/1,15 = 6,957 MBd → ×6 bit = 41,74 Mbit/s → ×188/204 = 38,46 Mbit/s → ÷ adásonkénti sebesség, **lefelé** kerekítve (1,5 Mbit/s → 25; 2 Mbit/s → 19).
@@ -275,6 +289,14 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
 - **Carson:** B ≈ 2(f_D + f_m). Finomabb becslés: B ≈ 2f_m(1 + Φ_D + √Φ_D) `[PDF 5.3]`.
 - Kiolvasás `[F21]`: cos(1000π·t[ms] + … + 5 sin(3π·t[ms] + 2)) → f_v = 500 kHz, f_m = 1,5 kHz, Φ_D = 5 rad, f_D = 7,5 kHz, B ≈ 18 kHz.
 - Pre-/de-emphasis: az FM-zaj spektruma f²-tel nő, ezért az adó kiemeli a magas hangokat, a vevő pedig elnyomja (τ = 50 µs Európában).
+- **Bessel és Carson** `[mg6_6]`, `[mgP_5b]`: Bessel szerint B ≈ 2f_m(1 + √m_f + m_f), Carson szerint B ≈ 2(f_D + f_m) (durvább, kisebb érték).
+  m_f = 3,4, f_m = 20 kHz → 250 kHz, illetve 176 kHz. NBFM: m_f < 0,1 (kis sáv), WBFM: m_f > 10 (kevésbé zajérzékeny).
+  A modulált jel amplitúdója és teljesítménye a moduláló jel amplitúdójától és frekvenciájától **nem** függ.
+- **FM-demodulátorok** `[ea05]`: félrehangolt rezgőkör (egyszerű, de torzít és az amplitúdózajt is átengedi), ellenütemű diszkriminátor (szélesebb lineáris tartomány), nullátmenet-számláló, fázistolós szorzó (koincidencia-demodulátor, amplitúdóra érzéketlen), PLL (amplitúdóra érzéketlen).
+- **Nagylöketű FM előállítása kislöketűből** `[mg6_7]`: PM-modulátor (Φ ≤ 0,1 rad) integrálóval → FM, majd frekvenciasokszorozás (×64: a vivő és a löket is 64-szeres), végül keverés a kívánt vivőre.
+  100 kHz, Φ₁ = 6,28/64 rad → ×64 → 6,4 MHz, 6,28 rad → 57,6 MHz-cel keverve 64 MHz.
+- **SSB előállítása** `[mg6_4]`: közvetlen szűrésnél a 300 Hz-es hangsáv alja miatt 0,6 kHz-en belül kellene vágni 100 kHz-en (túl meredek szűrő). Ezért két lépcsőben (20 kHz-re keverés és szűrés, majd 80 kHz-es eltolás), vagy fázistolással (cos·cos ∓ sin·sin).
+- **Sztereó vevő hibája** `[mg12_3]`: ha a 38 kHz-es segédvivő 180°-kal elcsúszik, S* = −S, és **felcserélődik a két csatorna**.
 
 ### Szuperheterodin vevő
 | | felső keverés (f₀ > f_v) | alsó keverés (f₀ < f_v) |
@@ -315,7 +337,21 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
 - További azonosítók: IMSI (SIM), IMEI (készülék), MSISDN (hívószám), TMSI (ideiglenes, 32 bit). FNR: hordozott számok. SMSC: SMS-központ.
 - Algoritmusok: A3 hitelesítés (SRES), A8 kulcsképzés (K_c), A5 titkosítás.
 
-### Recept – városi kapacitás `[F19]`
+### GSM beszédlánc és időzítés `[mgM_0]`, `[ea10]`
+- 8 kHz × 13 bit = 104 kbps → GSM-kódoló (full rate) **13 kbps** = 260 bit/20 ms → +196 bit hibavédelem → **456 bit/20 ms = 22,8 kbps** → 4 burst × 114 bit.
+- TDMA-keret 4,615 ms (26 keretből álló multikeret: 24 beszéd, 1 jelzés, 1 üres). Egy időrés 577 µs, ebből kb. 546 µs-ig ad a készülék (148 bit / 270,833 kbit/s).
+- **Késleltetés A-tól B-ig** `[mgM_1]`: (20 ms beszédkeret + 1 ms kódolás + 8 keret interleave·4,615 ms) × 2 (adás és vétel) ≈ **116 ms**. Ez a < 150 ms-os határon belül van, tehát elfogadható.
+- Interleave: a biteket több időrés között szétosztja, így a csomós hibából szétszórt, javítható egyedi hibák lesznek.
+
+### Helyzetkezelés és üzenetek `[mgM_2]`–`[mgM_5]`
+- **LU** (Location Update): ha nincs folyamatban hívás. Típusai: bekapcsoláskor, periodikus, LA-váltás, BSC- és MSC-váltás (országváltás is). A cellaváltás LA-n belül nem jár LU-val.
+- **HO** (Hand Over): folyamatban lévő hívásnál cellaváltáskor. **P** (Paging): a hálózat keresi a készüléket.
+- Hívásfelépítés: MSC_A → **SRI** (Send Routing Information) a hívott HLR-jéhez (MSISDN alapján) → a HLR megadja, melyik MSC/VLR alatt van (az **IMSI ↔ MSISDN összerendelés csak a HLR-ben** van) → paging.
+- SMS: SUBMIT (MS → MSC → **a küldő SMSC-je**), DELIVER (SMSC → SRI4SM a hívott HLR-jéhez, számhordozásnál **FNR** irányít → ForwardSM a látogatott MSC-hez → TMSI-vel a készülékhez), majd a Delivery report visszafelé.
+- **SMS-hossz:** 7 bites kódolással 160 karakter = 140 byte = 1 SMS. Ékezetes (16 bites) karakterrel 70 karakter/SMS, összefűzve 67/rész → 160 karakter = **3 SMS**.
+
+### Recept – városi kapacitás `[F19]`, `[mg13_4]`
+Szolgáltatónként számolva (pl. 124 vivőből 40 + 40 + 40 + 4): 525 cella · 40 vivő · (1/12) · 8 időrés = **14 000** egyidejű hívás, cellánként 40/12·8 ≈ 26,7.
 525 cella, N = 12, 124 vivő → 43,75 klaszter → 43,75 × 992 = **43 400** egyidejű hívás
 (ugyanez cellánként: 124·8/12 = 82,7 csatorna × 525). Ha csak teljes klasztereket számolsz: 43 × 992 = 42 656.
 Írd le, melyiket választod.
@@ -334,6 +370,12 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
 - Exponenciális tartási idő: P(tartás > t) = e^(−t/h) (pl. h = 3 perc, t = 6 perc → e⁻² ≈ 0,135).
 - VoIP-késleltetés: δ = n·t_sz + csomagolás + T (továbbítás) + γ (terjedés) + t_r (sorban állás) + kicsomagolás.
 - DTMF: alsó csoport 697/770/852/941 Hz (sorok), felső 1209/1336/1477/1633 Hz (oszlopok); egy gomb = 1 sor + 1 oszlop frekvencia.
+- **N = 1 kiszolgáló:** P_B = A/(1 + A). Példa `[mg10_4]`: 50 mobil × 0,4 hívás/óra × 1 perc → A = ⅓ Erl → **25%**, Y = A(1 − P_B) = ¼ Erl.
+- **Lebonyolított forgalom:** Y_N = A(1 − P_B), egy kiszolgálóra Y₁ = Y_N/N `[mg10_5]`, `[kg12_4]`: 40 Erl, 2% → N = 50, Y_N = 39,2 Erl, Y₁ = 78,4%.
+- **Tartási idő paramétere egy valószínűségből** `[kg12_5]`: P(L > t) = e^(−µt) → µ = −ln P/t (0,6 és 1,5 perc → 0,34 /perc, átlag 2,94 perc).
+- **Percdíjas számlázás** `[mg10_2]`, `[kg12_3]`: P(k−1 < L ≤ k) = e^(−µ(k−1)) − e^(−µk). A megkezdett percek várható száma **1/(1 − e^(−µ))**.
+  2 perces átlagnál (µ = ½) ez 2,54 → 20 Ft/perc mellett ≈ 50,8 Ft, másodperc-alapú elszámolással ≈ 40 Ft (= 2 perc × 20 Ft) `[mg10_3]`.
+- **E1-keretcsúszás** `[mg10_1]`: két, ±δ pontosságú óra között a legrosszabb esetben T = 1/(2δ·f₀). δ = 1 ppm, f₀ = 8 kHz → **62,5 s**-onként.
 
 ### Ellenőrzött eredmények
 | Feladat | A | P_b | N |
@@ -364,6 +406,10 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
 - Overhead: mondd meg, mihez viszonyítasz. 58/160 = 36% a payloadhoz, 58/218 = 27% a teljes csomaghoz.
 - VAD + CNG: GSM-ben akkumulátort és interferenciát spórol, VoIP-ban sávszélességet (≈ 30–50%). A vevő oldalon komfortzajt generál, SID-keretek alapján.
 - SIP: INVITE (SDP-vel) → 100 Trying → 180 Ringing → 200 OK → ACK → RTP. Jitter p-p = D_max − D_min, ennyi a de-jitter puffer minimuma.
+- **Késleltetési költségvetés** `[kg12_2]`: δ = n·t_sz + p_d (csomagolás) + T (továbbítás) + τ (terjedés) + t_r (sorban állás) + p_d (kicsomagolás) < 150 ms.
+  G.729 (10 B / 10 ms, 5 ms-os kódolási késleltetés), 2 Mbit/s, 20 000 km (τ = 100 ms), t_r = 10 ms → 120,4 + n·10 < 150 → **n ≤ 2**.
+  Ekkor 50 csomag/s, (20 + 47)·8·50 = **26,8 kbit/s**, +5% hívásszervezési többlet ≈ 28,1 kbit/s.
+- Kis bitsebességű kodek `[kg12_1]`: 5,3 kbit/s, 20 B/minta, 47 B fejléc → 33,125 csomag/s, 17,75 kbit/s.
 
 ---
 
@@ -373,6 +419,10 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
 - SPL = 20lg(p/p₀) = 10lg(I/I₀), p₀ = 20 µPa, I₀ = 10⁻¹² W/m², I = p²/(ρc); fájdalomküszöb 120 dB ↔ 20 Pa.
   Ha a vizsgán más értékkel (pl. 123 dB) számolsz, írd le. 2020-ban így is teljes pontot adtak.
 - Hangsebesség: c ≈ 331,5 + 0,6·ϑ [m/s] (ϑ °C-ban). „Éppen hallható” hang = **0 phon**, bármilyen frekvencián.
+- **Intenzitás vagy hangnyomás?** `[mg9_2]`: az intenzitás 100-szorosa +20 dB (20 phon 1 kHz-en), a **hangnyomás** 100-szorosa +40 dB `[F25]`. Mindig nézd meg, melyik adott.
+- **Jellemző szintek** `[ea08]`: suttogás 30 dB, beszéd 60–70 dB, városi zaj 85 dB, 90 dB felett tartósan halláskárosító, fájdalomküszöb kb. 120 dB.
+- **Elfedés** `[ea08]`: frekvenciabeli (egy erős hang megemeli a környező frekvenciák küszöbét), időbeli előelfedés (5–20 ms) és utóelfedés (kb. 100 ms). Erre épül a hangtömörítés (MP3, AAC).
+- **Szem** `[ea08]`: a **pálcikák** a világosságot (sötétben), a **csapok** a színt (világosban) érzékelik. A nappali érzékenység csúcsa 555 nm (zöld).
 - Pontforrás, szabad tér: −20lg(r₂/r₁) (dupla távolság −6 dB, tízszeres −20 dB).
 - Teljesítményarány ΔL dB-hez: 10^(ΔL/10) (93 → 120 dB: ×501).
 - Inkoherens források összege: L = 10lg Σ 10^(Lᵢ/10) (két egyforma: +3 dB; 82+85+85 → 89 dB).
@@ -384,6 +434,10 @@ Visszaállításhoz **sáváteresztő** szűrő kell (f_L…f_H), LPF eset (k=1)
 - **Y = 0,3R + 0,59G + 0,11B** (a zöld a legvilágosabb, a kék a legsötétebb). Cb = B−Y, Cr = R−Y. **Cb ↔ Cr csere** `[F24]`: fehér/szürke/fekete változatlan (Cb = Cr = 0).
   Általában azok a színek nem változnak, amelyekre R = B (szürkék, zöldek, bíborok). A világosság (Y) nem változik.
 - Váltott soros (interlace): 50 félkép/s → nem villog, de csak 25 teljes kép/s sávszélessége kell.
+- **Miért elég két színkülönbségi jel?** `[mg9_7]`: 0,3(R−Y) + 0,59(G−Y) + 0,11(B−Y) = 0, ezért a harmadik a másik kettőből számolható. A (G−Y)-t hagyják el: G−Y = −(0,3/0,59)(R−Y) − (0,11/0,59)(B−Y), és a kis együtthatók miatt a visszaállított jel zaja kisebb.
+- **Yuv** `[mg9_8]`: u = (B−Y)/2,03, v = (R−Y)/1,14. Példa: [0,205; 0,145; 0,259] → R = B = 0,5, G = 0 → bíbor, 20,5%-os fényesség, 100%-os telítettség.
+- **Y-értékek:** sárga (R+G) 0,89, encián/cián (G+B) 0,70, bíbor (R+B) 0,41 `[mg12_6]`.
+- **DC/AC/RMS mérése** `[mg0_5]`: RMS = √(DC² + AC_eff²). +3 V-os offszetű, 4 V_pp-s jelnél: négyszög √13 ≈ 3,61 V, szinusz √11 ≈ 3,32 V, háromszög √(31/3) ≈ 3,21 V.
 
 ---
 

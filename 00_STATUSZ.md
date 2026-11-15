@@ -8,10 +8,11 @@ Utolsó frissítés: 2026-11-15
 |---|---|---|
 | `00_STATUSZ.md` | ez a fájl | áttekintés, mi kész és mi nincs |
 | `01_Kidolgozas_Kepletek_es_Receptek.md` | 12 témakör: képletek, megoldási lépések, csapdák | **tanulás és ismétlés, vizsga előtti átnézés** |
-| `02_Regi_Vizsgafeladatok_Megoldasokkal.md` | 2014–2020-as vizsgafeladatok témakörönként, ellenőrzött megoldással és a javítók megjegyzéseivel | **gyakorlás**: előbb oldd meg magad, utána ellenőrizd |
+| `02_Regi_Vizsgafeladatok_Megoldasokkal.md` | 2014–2020-as vizsgafeladatok témakörönként, ellenőrzött megoldással és a javítók megjegyzéseivel; 10. „Példák #1” (Marosi), 11. mobil és forgalom, 12. Koma új feladatai | **gyakorlás**: előbb oldd meg magad, utána ellenőrizd |
 | `03_Hibajegyzek.md` | a forrásokban talált hibák (A: régi md jegyzetek, B: hallgatói megoldások, C: hivatalos megerősítések, D: Koma jegyzetei, E: a hivatalos anyag hibái) | mielőtt régi megoldásból tanulsz |
 | `04_Claude_ai_projekt_megallapitasok.md` | a claude.ai projekt chatje írta: témakörök, a hiányzó részek listája, a projektbeli PDF-kidolgozások hibái | a még be nem dolgozott pontok listája |
 | `05_TMIT_Gyakorlatok_Kidolgozas.md` | a tanszéki gyakorlatanyag (gyak00–08) minden kidolgozott példája ellenőrizve, és **saját megoldás a gyakorló (G.) feladatokhoz** | **gyakorlás a hivatalos feladatokon** |
+| `claude/INFOKOMM_feldolgozasi_standard.md` | a plan szerinti szabványdokumentum: forrásrangsor, jelölési döntések, szóhasználat, kész fejezetek, nyitott pontok, következő teendők | **a következő session ebből indul** |
 | `06_Kereszthivatkozasok.md` | **végleges azonosítók**, témakör-mátrix (12 témakör × előadás, gyakorlat, TMIT, vizsga), azonos feladatok megfeleltetése egyezés-jelöléssel, a Koma-anyag új tartalma | **navigáció**: hol volt az elmélet, hol fordul még elő ugyanez |
 | `Forrasok/Koma/` | `koma-eloadasok.md` (12 előadás) és `koma-gyakorlatok.md` (10 gyakorlat): Koma kézírásos jegyzeteinek átirata (2021 tavasz), változtatás nélkül | eredeti jegyzet; a hibái a `03` D) részében |
 | `Forrasok/Marosi_2016/` | Marosi Gyula 2016-os gyakorlatai: `marosi_2016_atirat.md` (53 szkennelt oldal átirata: diák, kézírásos megoldások, `mgX_y` azonosítók). A két PDF csak helyben van meg | gyakorlatvezetői megoldások, köztük a **mobil- és forgalmi gyakorlat**, amely eddig hiányzott |
@@ -28,7 +29,7 @@ Utolsó frissítés: 2026-11-15
 | Régi vizsgák és megoldások | `Local Sources/BME/Infokom/ALL-IN-Infokomm-1.pdf` (szöveges része) | ✅ a `02`-ben |
 | „5-ösöm lesz infokommból” | `Local Sources/BME/Infokom/5-ösöm-lesz-infokommból.pdf` (szöveges része) | ✅ a `02`-ben |
 | TMIT gyakorlatanyag gyak00–08 (03 nélkül) | `Forrasok/TMIT_gyakorlatok/` | ✅ a `05`-ben (a P-példák ellenőrizve, a G-feladatok kidolgozva) |
-| Koma jegyzetei: 12 előadás, 10 gyakorlat (2021 tavasz, átirat) | `Forrasok/Koma/` | ✅ a `06`-ban **kereszthivatkozva**, minden végeredmény újraszámolva. ⏳ Az új tartalom (`06` 4. fejezet) még nincs beépítve az `01`/`02` fejezeteibe |
+| Koma jegyzetei: 12 előadás, 10 gyakorlat (2021 tavasz, átirat) | `Forrasok/Koma/` | ✅ a `06`-ban kereszthivatkozva, az új tartalom beépítve az `01`-be és az `02` 11–12. fejezetébe |
 
 **A TMIT-oldalon nem elérhető füzetek:** `gyak03`, valamint `gyak09`–`gyak14` (404, más néven sem találtam; a `gyak00`-t így találtam meg).
 A témasorrend alapján a 03 a rádiós összeköttetés lehet. Ennek anyaga a OneDrive `1-5 gyakorlatok.pdf` 3. fejezetében van, és az `01` feldolgozza.
@@ -54,10 +55,8 @@ A 09+ füzetek (cellás mobil, VoIP, forgalom) anyagát a `02` 7–8. fejezete p
 6. Call center d): a visszahívás tartási ideje (`02` 8.3).
 7. Roaming-kérdés: az `ea13_3` más szövegváltozatot old meg, mint a Moodle-vizsga (`03` D4).
 
-## Következő lépések (az eredeti feldolgozási plan szerint)
+## Következő lépések
 
-0. A Marosi-átirat (`mg…` azonosítók) bevezetése a `06` témakör-mátrixába és feladat-megfeleltetésébe. Az új tartalom (GSM-késleltetés, LU/HO/P, SMS-útvonal, keretcsúszás, Erlang-mobil, „Példák #1”) beépítése az `01`/`02`-be.
-
-1. A `06` 4. fejezetében felsorolt új Koma-tartalom beépítése az `01` (elmélet, recept) és a `02` (feladat) megfelelő fejezetébe, az `ea`/`kg` azonosítókkal.
-2. A plan feldolgozási szabványdokumentuma (`INFOKOMM_feldolgozasi_standard.md`): források, jelölési és szóhasználati döntések, javítások, nyitott pontok.
-3. A könyvszerű HTML-oldal (KaTeX, build.js) a plan 4–7. pontja szerint, fejezetenként.
+A részletes lista a `claude/INFOKOMM_feldolgozasi_standard.md` 8–9. fejezetében van. Röviden:
+1. A nyitott pontok tisztázása (különösen a Φ/Q jelölés).
+2. A könyvszerű HTML-oldal (KaTeX, build.js) a plan 4–7. pontja szerint, fejezetenként, az első fejezet a mintavételezés és kvantálás.
