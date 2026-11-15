@@ -1,0 +1,53 @@
+'use strict';
+const { R, S, srcAI } = require('./_h.js');
+module.exports = {
+  id: 'f11', num: '11', short: 'Forgalom, VoIP', title: 'Forgalmi méretezés és VoIP',
+  lead: R`Erlang-B táblázat vagy grafikon, exponenciális tartási idő, kihasználtság, és a VoIP csomagsebesség és sávszélesség számítása.`,
+  alap: [
+    { id: 'a11-erlang', badge: 'A1', title: 'Erlang-B egyszerűen',
+      html: R`$$A=\lambda h\qquad P_b=\frac{A^N/N!}{\sum_{i=0}^NA^i/i!}\qquad a=\frac AN(1-P_b)$$<p>A felajánlott forgalmat táblázatnál <b>felfelé</b> kerekítjük, és azt a legkisebb $N$-et keressük, amelynél $P_b$ még a határ alatt van. Rekurzív alak: $B_0=1$, $B_n=AB_{n-1}/(n+AB_{n-1})$. Exponenciális tartási időnél $P(X>t)=e^{-t/h}$.</p>`,
+      key: R`Lebonyolított forgalom $=A(1-P_b)=$ az átlagosan foglalt kiszolgálók száma.` },
+    { id: 'a11-voip', badge: 'A2', title: 'VoIP sávszélesség',
+      html: R`$$v_\text{csomag}=\frac{v_\text{forrás}}{n\cdot l_p}\qquad B=(n\,l_p+l_\text{fej})\cdot8\cdot v_\text{csomag}$$<p>Több szegmens egy csomagban: kevesebb fejrész, kisebb sávszélesség, de nagyobb csomagolási késleltetés, és egy elveszett csomag több beszédet visz el.</p>` }
+  ],
+  ex: [
+    { id: 'ai11_01', num: '11.1', title: 'DTMF-vevők méretezése', tags: ['vizsga', 'javitas'],
+      src: R`ALL-IN 19., 39…40. oldal · ai2016_01_05_3, ai2016_01_05_3b`,
+      task: R`<p>A tárcsázás átlagosan 10 s, óránként legalább 60 000 hívás, a blokkolás legfeljebb 0,2%, exponenciális eloszlások. a) Felajánlott forgalom? b) Hány DTMF-vevő kell (a mellékelt táblázatból: 166 Erl → 197, 167 Erl → 198 a 0,2%-os oszlopban)? c) Kihasználtság?</p>`,
+      lv: [S('Megoldás', '', [['definíció', R`A=\frac{60\,000}{3600}\cdot10=166{,}67\ \text{Erl}\to167`, 'felfelé kerekítve'], ['számérték', R`N=198`, R`Erlang-B: 197-nél 0,212% > 0,2%`], ['számérték', R`a=\frac{166{,}67}{198}\cdot0{,}998\approx0{,}84`, '']])],
+      ered: [R`A=166{,}7\ \text{Erl}\qquad N=198\qquad a\approx0{,}84`],
+      fix: R`Az egyik kézírásos változat 166-ra kerekít lefelé, és 197-et ad. A gépelt változat (167 → 198) helyes.`, links: [srcAI(['ai2016_01_05_3', 'ai2016_01_05_3b'])] },
+    { id: 'ai11_02', num: '11.2', title: 'Autókölcsönző két kocsival', tags: ['vizsga'],
+      src: R`ALL-IN 30…31. oldal · ai2016_06_07_7`,
+      task: R`<p>Naponta átlagosan 4 ügyfél (Poisson), átlagos bérlés 1,5 nap (exponenciális), 2 kocsi. a) Mekkora a valószínűsége, hogy nem tudnak kocsit adni? b) Átlagos kihasználtság? c) Napi haszon, ha egy kocsi fenntartása 60 USD/nap, a díj 100 USD/nap?</p>`,
+      lv: [S('Erlang-B két kiszolgálóval', '', [['definíció', R`A=4\cdot1{,}5=6\ \text{Erl}`, ''], ['behelyettesítés', R`P_b=\frac{6^2/2}{1+6+18}=\frac{18}{25}=0{,}72`, 'a)'], ['számérték', R`a=\frac62\cdot0{,}28=0{,}84`, 'b)']]),
+        S('Haszon', '', [['számérték', R`2\cdot0{,}84\cdot100-2\cdot60=168-120=48\ \text{USD/nap}`, 'c)']])],
+      ered: [R`P_b=0{,}72\qquad a=0{,}84\qquad48\ \text{USD/nap}`],
+      chk: [R`A gyűjtemény az a)-ra „passz”-t ír, pedig a b)-ben kiszámolja ugyanezt, a c) nincs megoldva.`], links: [srcAI(['ai2016_06_07_7'])] },
+    { id: 'ai11_03', num: '11.3', title: '15 Erlang: hosszú hívások, kiszolgálók, VoIP', tags: ['vizsga', 'javitas'],
+      src: R`ALL-IN 46…48., 85…86. oldal · ai2016_01_12_3, ai2016_01_12c_3`,
+      task: R`<p>Percenként 5 hívás, átlagosan 3 perc. a) Felajánlott forgalom? b) 100 hívásból hány hosszabb 6 percnél? c) Hány kiszolgáló kell 0,1%-hoz? d) Kihasználtság? e) Elfér-e a forgalom VoIP-pal egy 10 Mbit/s-os vonalon?</p>`,
+      lv: [S('Megoldás', '', [['definíció', R`A=5\cdot3=15\ \text{Erl}`, ''], ['definíció', R`P(X>6)=e^{-6/3}=e^{-2}=0{,}135`, 'b) kb. 14'], ['számérték', R`N=28:\ P_b=0{,}086\%\qquad N=27:\ 0{,}160\%`, 'c)'], ['számérték', R`a=\frac{15}{28}\cdot0{,}999=0{,}54`, 'd)'], ['közelítés', R`28\cdot87\ \text{kbit/s}\approx2{,}4\ \text{Mbit/s}<10`, 'e) G.711 fejlécekkel is']])],
+      ered: [R`15\ \text{Erl}\qquad\approx14\qquad N=28\qquad a\approx0{,}54\qquad\text{belefér}`],
+      fix: R`A grafikonos változat 29 kiszolgálót olvas le, a közösségi gépelt kidolgozás a helyes 28-at.`, links: [srcAI(['ai2016_01_12_3', 'ai2016_01_12c_3'])] },
+    { id: 'ai11_04', num: '11.4', title: 'GSM-cella 1%-os blokkolással', tags: ['vizsga', 'javitas'],
+      src: R`ALL-IN 60…62. oldal · ai2014_12_15_9`,
+      task: R`<p>GSM, FRF = 12, a hívások átlagosan 2 percesek. Egy órában átlagosan hányan telefonálhatnak egy cellában, ha a blokkolás legfeljebb 1%?</p>`,
+      lv: [S('Csatornák egy cellában', '', [['számérték', R`\frac{125\cdot8}{12}=83{,}3\to83`, R`124 vivővel 82`]]),
+        S('Erlang-B és intenzitás', '', [['számérték', R`N=83:\ A=68{,}2\ \text{Erl}`, ''], ['számérték', R`\lambda=\frac Ah=\frac{68{,}2}{1/30\ \text{h}}\approx2040\ \text{hívás/óra}`, '']])],
+      ered: [R`\lambda\approx2000\ \text{hívás/óra}`],
+      fix: R`A gyűjtemény 80 csatornával 65 Erl-t olvas le (ez jó), és 1950 hívás/órát kap. A 83 csatornával 2040, 82-vel kb. 2020 jön ki. Nagyságrendileg mind jó, a kerekítést mindig írd le.`, links: [srcAI(['ai2014_12_15_9'])] },
+    { id: 'ai11_05', num: '11.5', title: 'Vállalati VoIP G.711-gyel (Moodle 2020)', tags: ['vizsga', 'javitas'],
+      src: R`ALL-IN 14. oldal · ai2020_06_02_Q6`,
+      task: R`<p>10 ms-os szegmensekből 80 byte, csomagonként két szegmens, a fejrészek 47 byte. a) Csomagsebesség? b) A csatorna bitsebessége? c) Milyen hátránya lenne négy szegmensnek csomagonként?</p>`,
+      lv: [S('Megoldás', '', [['definíció', R`v_\text{forrás}=\frac{80\cdot8}{10\ \text{ms}}=64\ \text{kbit/s}`, ''], ['behelyettesítés', R`v_\text{cs}=\frac{64\,000}{2\cdot640}=50\ \text{csomag/s}`, 'a)'], ['behelyettesítés', R`B=(160+47)\cdot8\cdot50=82{,}8\ \text{kbit/s}`, 'b)'], ['számérték', R`n=4:\ 25\ \text{csomag/s},\ 73{,}4\ \text{kbit/s}`, 'c)']])],
+      ered: [R`50\ \text{csomag/s}\qquad82{,}8\ \text{kbit/s}\qquad\text{c) 40 ms csomagolási késleltetés}`],
+      fix: R`A hallgató 50 és 100 „bps”-t írt (mértékegység-tévesztés, a fejrészt is kihagyta). A javító 1 + 0 + 0 pontot adott.`, links: [srcAI(['ai2020_06_02_Q6'])] },
+    { id: 'ai11_06', num: '11.6', title: 'IP feletti média, fair queuing, WFQ', tags: ['beugro'],
+      src: R`ALL-IN 28…29., 74. oldal · ai2016_06_07_5, ai2014_01_07_7`,
+      task: R`<p>a) Mi nehezíti a „best effort” IP-n a multimédiát? b) Miért nem érdemes RTP helyett TCP-t használni? c) Mire való az IGMP? d) A fair queuing előnye a szigorú prioritással szemben, és a WFQ előnye?</p>`,
+      lv: [S('Válaszok', 'a) Változó késleltetés (jitter), csomagvesztés, sorrendcsere, nincs garantált sáv. b) A TCP újraküldése olyan késést okoz, hogy a csomag már későn érkezik a lejátszáshoz, és a torlódásvezérlés is lassít. c) Multicast csoporttagság (IPTV-csatornaváltás). d) Fair queuing: nincs kiéheztetés. WFQ: a folyamok súlyuk arányában kapnak sávot.', [])],
+      ered: [R`\text{lásd a válaszokat}`],
+      chk: [R`A gyűjtemény a)-ra a DF és MLR mérőszámokat írja: ezek az IPTV-minőség mérőszámai, nem az okok.`], links: [srcAI(['ai2016_06_07_5', 'ai2014_01_07_7'])] }
+  ]
+};

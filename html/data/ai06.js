@@ -1,0 +1,51 @@
+'use strict';
+const { R, S, srcAI } = require('./_h.js');
+module.exports = {
+  id: 'f6', num: '6', short: 'PAM, ISI', title: 'Digitális alapsávi átvitel (PAM, ISI)',
+  lead: R`Az elemi jelből kell kiolvasni, hogy a mintavételi pillanatban mennyi „lóg át” a szomszéd szimbólumokból, és hogy ez elrontja-e a döntést két-, négy- vagy nyolcszintű jelnél.`,
+  alap: [
+    { id: 'a6-isi', badge: 'A1', title: 'Szimbólumközti áthallás és a többszintű jel próbája',
+      html: R`<p>A mintavételi pillanatban a minta $h_0d_k+\sum_{i\ne0}h_id_{k-i}$. A legrosszabb eset, ha a szomszédok a legnagyobb értékükkel ellene dolgoznak. $M$ szintű ($\pm1,\pm3,\ldots,\pm(M-1)$) jelnél a szem nyitott, ha</p>$$h_0-(M-1)\sum_{i\ne0}|h_i|>0$$<p>A döntési küszöbök $0,\ \pm2h_0,\ \pm4h_0,\ldots$</p>`,
+      key: R`A zaj nem ISI-ok: az ISI-t a hosszú (Nyquist-feltételt nem teljesítő) elemi jel és az időzítési hiba okozza.` },
+    { id: 'a6-nyquist', badge: 'A2', title: 'Nyquist-feltétel, emelt koszinusz',
+      html: R`<p>ISI-mentes az elemi jel, ha a spektrumát $1/T$-vel eltolva és összegezve frekvenciafüggetlen állandót kapunk. Az emelt koszinusz ilyen: $1/(2T)$-re pontszimmetrikus lecsengéssel, a sáv $(1+\alpha)/(2T)$ alapsávban, $(1+\alpha)/T$ vivőfrekvenciás átvitelnél. Fehér zajra az optimális vevőszűrő az illesztett szűrő: $H_V=\sqrt{H}$, ha az adó és a vevő osztozik.</p>` }
+  ],
+  ex: [
+    { id: 'ai6_01', num: '6.1', title: 'Elemi jel 1,25 és 0,45 (Moodle 2020)', tags: ['vizsga'],
+      src: R`ALL-IN 2. oldal · ai2020_05_26_Q2`,
+      task: R`<p>Bináris PAM, $h(t)=1{,}25$ a $(0,T)$-n, $0{,}45$ a $(T,2T)$-n. b) Van-e ISI, ha a mintavétel fázisa $T_0=3T/4$? c) Alkalmas-e négyszintű rendszerre?</p>`,
+      lv: [S('Kétszintű', '', [['számérték', R`1{,}25\pm0{,}45=1{,}7\ \text{és}\ 0{,}8`, 'van ISI, de a 0-s küszöböt nem lépi át']]),
+        S('Négyszintű', '', [['behelyettesítés', R`1{,}25-3\cdot0{,}45=-0{,}1<0`, 'a szem bezárul'], ['ellenőrzés', R`1{,}25+3\cdot0{,}45=2{,}6>2{,}5`, 'a felső küszöböt is átlépi']])],
+      ered: [R`\text{kétszintű: ISI van, de hibátlan döntés}\qquad\text{négyszintű: nem alkalmas}`], links: [srcAI(['ai2020_05_26_Q2'])] },
+    { id: 'ai6_02', num: '6.2', title: 'Elemi jel 1,05 és 0,15: két-, négy-, nyolcszintű', tags: ['vizsga'],
+      src: R`ALL-IN 116…117., 121. oldal · aiD_6_2, aiD_6_9 (3.4.)`,
+      task: R`<p>Bináris PAM, $h=1{,}05$ a $[0,T]$-n, $0{,}15$ a $[T,2T]$-n. Van-e ISI? Milyen mintákat ad a mintavevő? Alkalmas-e négy-, illetve nyolcszintű rendszerre? Illesztett szűrővel ISI-mentessé tehető-e?</p>`,
+      lv: [S('Minták', '', [['számérték', R`\pm1{,}05\pm0{,}15=\pm0{,}9,\ \pm1{,}2`, 'van ISI']]),
+        S('Többszintű próba', '', [['behelyettesítés', R`M=4:\ 1{,}05-3\cdot0{,}15=0{,}6>0`, 'alkalmas'], ['behelyettesítés', R`M=8:\ 1{,}05-7\cdot0{,}15=0`, 'a szem bezárul, nem alkalmas']])],
+      ered: [R`\pm0{,}9,\ \pm1{,}2\qquad M=4:\ \text{igen}\qquad M=8:\ \text{nem}`],
+      chk: [R`Az illesztett szűrő a zaj ellen véd, az ISI-t nem szünteti meg (az elemi jel nem fér el egy időrésben).`], links: [srcAI(['aiD_6_2', 'aiD_6_9'])] },
+    { id: 'ai6_03', num: '6.3', title: R`$H(f)=h_0T\cos^2(\pi fT/2)$`, tags: ['vizsga'],
+      src: R`ALL-IN 118…119. oldal · aiD_6_3`,
+      task: R`<p>Bináris PAM, az elemi jel spektruma $h_0T\cos^2(\tfrac\pi2fT)$, ha $|f|<1/T$. b) Elkerülhető-e az ISI? c) Milyen a fehér zajra optimalizált vevőszűrő? d) Okoz-e ISI-t egy 1200 Hz-es aluláteresztő, ha $T=833$ µs?</p>`,
+      lv: [S('Nyquist', '', [['átalakítás', R`\cos^2\left(\tfrac\pi2fT\right)=\tfrac12\left(1+\cos\pi fT\right)`, R`$\alpha=1$-es emelt koszinusz`], ['szimmetria', R`H\left(\tfrac1{2T}+\nu\right)+H\left(\tfrac1{2T}-\nu\right)=\text{áll.}`, 'nincs ISI']]),
+        S('Vevőszűrő és sáv', '', [['definíció', R`H_V(f)=\sqrt{H(f)}\propto\left|\cos\tfrac\pi2fT\right|`, 'illesztett szűrő'], ['számérték', R`\frac1T=\frac1{833\,\mu\text{s}}=1200\ \text{Hz}`, 'a spektrum is itt ér véget']])],
+      ered: [R`\text{ISI-mentes}\qquad H_V\propto\cos(\pi fT/2)\qquad\text{az 1200 Hz-es szűrő nem okoz ISI-t}`], links: [srcAI(['aiD_6_3'])] },
+    { id: 'ai6_04', num: '6.4', title: R`$\cos^2$ elemi jel időzítési hibával`, tags: ['vizsga', 'nehez'],
+      src: R`ALL-IN 119…120. oldal · aiD_6_4`,
+      task: R`<p>$h(t)=h_0\cos^2\left(\frac\pi2\cdot\frac{t-T}{T}\right)$, ha $t\in(0,2T)$. b) Hogyan válasszuk a mintavételt? c) Milyen minták jönnek $t_k=(1{,}1+k)T$-ben? d), e) Négy- és nyolcszintű rendszer a 0,1T-s hibával?</p>`,
+      lv: [S('Ideális mintavétel', '', [['ellenőrzés', R`t=(k+1)T:\ h(T)=h_0,\ h(2T)=h(0)=0`, 'ISI-mentes']]),
+        S('0,1T késés', '', [['behelyettesítés', R`h(1{,}1T)=h_0\cos^2(0{,}05\pi)=0{,}9755h_0\qquad h(0{,}1T)=0{,}0245h_0`, ''], ['számérték', R`\pm0{,}951h_0,\ \pm h_0`, ''], ['behelyettesítés', R`M=4:\ 0{,}9755-3\cdot0{,}0245=0{,}902\qquad M=8:\ 0{,}9755-7\cdot0{,}0245=0{,}804`, 'mindkettő > 0']])],
+      ered: [R`\pm0{,}951h_0,\ \pm h_0\qquad\text{négy- és nyolcszintű is működik}`], links: [srcAI(['aiD_6_4'])] },
+    { id: 'ai6_05', num: '6.5', title: '1200 baudos PAM: válasszuk meg $f_1$-et, $f_2$-t és A-t', tags: ['vizsga'],
+      src: R`ALL-IN 120. oldal · aiD_6_5 (hivatalos)`,
+      task: R`<p>A teljes átviteli függvény emelt koszinusz: $A$-nál éri el az ordinátát, $f_2$-nél a nullát, $f_1$ az $f_2$ felénél (a 0,5-ös pont). Biztosítson ISI-mentességet!</p>`,
+      lv: [S('Feltétel', '', [['tétel', R`f_1=\frac1{2T}=600\ \text{Hz}\qquad f_2=\frac1T=1200\ \text{Hz}`, R`$\alpha=1$`]])],
+      ered: [R`f_1=600\ \text{Hz},\ f_2=1200\ \text{Hz},\ A\ne0\ \text{tetszőleges}`], links: [srcAI(['aiD_6_5'])] },
+    { id: 'ai6_06', num: '6.6', title: 'Kétutas OOK és Doppler', tags: ['vizsga'],
+      src: R`ALL-IN 115…116. oldal · aiD_6_1`,
+      task: R`<p>Az OOK jel két úton jut a vevőbe: $T$ késleltetés és 3 dB csillapítás, illetve $2T$ és 9 dB. A jelzési idő $T$, a vivő $1/T$, az amplitúdósorozat 2022002. a) Rajzolja fel a vett jelet! b) Hogyan változik a jelzési sebesség, ha a vevő nagy sebességgel az adó felé halad?</p>`,
+      lv: [S('Amplitúdók', '', [['átalakítás', R`10^{-3/20}=0{,}71\qquad10^{-9/20}=0{,}35`, 'arányuk 1/2'], ['definíció', R`u_k=0{,}71\,a_{k-1}+0{,}35\,a_{k-2}`, 'egész periódusú vivő, azonos fázis']]),
+        S('Doppler', '', [['közelítés', R`f'=f\left(1+\tfrac vc\right)`, 'a jelzési sebesség is ennyiszeres']])],
+      ered: [R`\text{a vett burkoló }0{,}71a_{k-1}+0{,}35a_{k-2}\qquad\text{b) }(1+v/c)\text{-szeres}`], links: [srcAI(['aiD_6_1'])] }
+  ]
+};
