@@ -77,6 +77,15 @@ Az átíráskor már javított pontokat (a kg01 táblázatának sorcseréje, a k
 |---|---|---|---|---|
 | E1 ⚠️ | `tg02_P53` (TMIT 5.3), `pd04_3` (OneDrive 4.3), és ezt átvéve az `05` első változata | Pistike-kód: L̄ = 2,05 | **L̄ = 2,35**, az eltérés az entrópiától **34,8%** | 0,5·2 + 0,25·2 + 0,15·3 + 0,1·4 = 1 + 0,5 + 0,45 + 0,4 = 2,35. Koma gyakorlati jegyzete (`kg03_3`) helyesen 2,35-öt ad |
 
+## G) Marosi Gyula 2016-os gyakorlatai (`Forrasok/Marosi_2016/marosi_2016_atirat.md`)
+
+| # | Hol | A forrásban | Helyesen | Miért |
+|---|---|---|---|---|
+| G1 | `mg4k_4` | 2,35 bit/szimbólum, 34,8% | ✅ ez a gyakorlatvezető saját megoldása | **megerősíti az E1-et** (a hivatalos füzet 2,05-je elírás) |
+| G2 ⚠️ | `mg4_5 c)` | a műholdas adóantenna nyeresége ≈ 31 dB | **≈ 37,1 dB** | a dia 2000 km **átmérőt** ír, a 31 dB a 2000 km-es sugárral jön ki |
+| G3 | `mg13_2` | „RS: véletlen hiba ellen, FEC: burstös hiba ellen” | `[ELLENŐRIZENDŐ]` | a DVB-ben a belső konvolúciós kód javítja a véletlen hibákat, a külső RS (interleaverrel) a csomós hibákat |
+| G4 | **A6 pontosítása** (`F29`) | 225 m vs. 450 m | az eredeti 2016-os feladat (`mgP_4 a)`) a **legtávolabbi minimumot** kérdezi, arra **225 m** a helyes. A **legtávolabbi maximum** (az interferenciazóna határa) 450 m | a két szövegváltozat két különböző kérdés. Mindig olvasd el, melyiket kérdezik |
+
 ## F) Fájl-állapot
 
 - `~/Downloads/infokomm_feladatok_1-10-v2 (1).md` **sérült** másolat, eltűntek belőle a képletek. Nem másoltam át. A `infokomm_feladatok_1-10-v2.md` a jó.

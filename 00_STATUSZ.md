@@ -14,6 +14,7 @@ Utolsó frissítés: 2026-11-15
 | `05_TMIT_Gyakorlatok_Kidolgozas.md` | a tanszéki gyakorlatanyag (gyak00–08) minden kidolgozott példája ellenőrizve, és **saját megoldás a gyakorló (G.) feladatokhoz** | **gyakorlás a hivatalos feladatokon** |
 | `06_Kereszthivatkozasok.md` | **végleges azonosítók**, témakör-mátrix (12 témakör × előadás, gyakorlat, TMIT, vizsga), azonos feladatok megfeleltetése egyezés-jelöléssel, a Koma-anyag új tartalma | **navigáció**: hol volt az elmélet, hol fordul még elő ugyanez |
 | `Forrasok/Koma/` | `koma-eloadasok.md` (12 előadás) és `koma-gyakorlatok.md` (10 gyakorlat): Koma kézírásos jegyzeteinek átirata (2021 tavasz), változtatás nélkül | eredeti jegyzet; a hibái a `03` D) részében |
+| `Forrasok/Marosi_2016/` | Marosi Gyula 2016-os gyakorlatai: `marosi_2016_atirat.md` (53 szkennelt oldal átirata: diák, kézírásos megoldások, `mgX_y` azonosítók). A két PDF csak helyben van meg | gyakorlatvezetői megoldások, köztük a **mobil- és forgalmi gyakorlat**, amely eddig hiányzott |
 | `Forrasok/Korabbi_md_jegyzetek/` | a `~/Downloads/infokomm_*.md` fájlok másolata, eredeti állapotban (javítás nélkül) | referencia; a hibáikat lásd a `03`-ban |
 | `Forrasok/TMIT_gyakorlatok/` | `gyak00, 01, 02, 04, 05, 06, 07, 08.pdf` (tmit.bme.hu, letöltve 2026-11-15). **Csak helyben van meg, a GitHubra nem kerül fel** (tanszéki anyag, a `.gitignore` kizárja). Eredeti: `https://www.tmit.bme.hu/sites/default/files/attachments/gyakNN.pdf` | eredeti feladatszövegek és ábrák |
 
@@ -54,6 +55,8 @@ A 09+ füzetek (cellás mobil, VoIP, forgalom) anyagát a `02` 7–8. fejezete p
 7. Roaming-kérdés: az `ea13_3` más szövegváltozatot old meg, mint a Moodle-vizsga (`03` D4).
 
 ## Következő lépések (az eredeti feldolgozási plan szerint)
+
+0. A Marosi-átirat (`mg…` azonosítók) bevezetése a `06` témakör-mátrixába és feladat-megfeleltetésébe. Az új tartalom (GSM-késleltetés, LU/HO/P, SMS-útvonal, keretcsúszás, Erlang-mobil, „Példák #1”) beépítése az `01`/`02`-be.
 
 1. A `06` 4. fejezetében felsorolt új Koma-tartalom beépítése az `01` (elmélet, recept) és a `02` (feladat) megfelelő fejezetébe, az `ea`/`kg` azonosítókkal.
 2. A plan feldolgozási szabványdokumentuma (`INFOKOMM_feldolgozasi_standard.md`): források, jelölési és szóhasználati döntések, javítások, nyitott pontok.
