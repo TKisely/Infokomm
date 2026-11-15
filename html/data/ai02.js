@@ -82,7 +82,7 @@ module.exports = {
     { id: 'ai2_04', num: '2.4', title: '60…108 kHz-es jel: hány bit kell?', tags: ['vizsga', 'javitas'],
       src: R`ALL-IN 56…57., 81…82., 94…95. oldal · ai2014_12_15_4, ai2014_01_14_2, aiD_2_2 d), aiD_2_5 b)`,
       task: R`<p>Egy 60 és 108 kHz közötti komponensekből álló jelet közvetlenül digitalizálunk, egyenletes kvantálóval. a) $C=\sqrt3$, legalább 70 dB SNR. b) Szinuszos jel, 70 dB, minden választható tartományra. c) $C=\sqrt6$, $f_s=432$ kHz, legalább 60 dB. Hány bites egyenletes kvantáló kell?</p>`,
-      ad: [R`a jel 60 és 108 kHz között van, $B=48$ kHz`, R`a sáváteresztő mintavétel szerint választható $f_s$: 108 és 120 kHz között ($k=2$), vagy legalább 216 kHz ($k=1$), lásd az első lépést`],
+      ad: [R`a jel 60 és 108 kHz között van, $B=48$ kHz`, R`a választható mintavételi frekvenciák: a sáváteresztő mintavétel képletéből ($2f_H/k\le f_s\le2f_L/(k-1)$, $k\le\lfloor108/48\rfloor=2$): $k=1$-re $f_s\ge2\cdot108=216$ kHz, $k=2$-re $216/2=108\le f_s\le2\cdot60=120$ kHz`],
       ker: [R`$n$ a három esetben`],
       lv: [S('a) Háromszögjel, 70 dB', R`$10\lg(3/C^2)=10\lg1=0$. A $108\ldots120$ kHz-es tartományban sávszűrővel ($B_z=48$ kHz) a túlmintavételezés $10\lg(f_s/96)=0{,}5\ldots1$ dB.`, [
           ['behelyettesítés', R`0+0{,}5+6{,}02\,n\ge70\ \Rightarrow\ n\ge\frac{69{,}5}{6{,}02}=11{,}5`, R`$f_s=108$ kHz, a legrosszabb eset`],

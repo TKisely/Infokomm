@@ -29,7 +29,9 @@ const MISSING = [];
 const RAJZ = fs.existsSync(path.join(__dirname, 'data/_rajz.js')) ? require('./data/_rajz.js') : {};
 
 // ---------- KaTeX ----------
+const DOTS = [];
 function k(tex, display) {
+  if (/\d\.\d/.test(tex.replace(/\\ldots|\\dots/g, ''))) DOTS.push(tex.slice(0, 60));
   try { return katex.renderToString(tex, { displayMode: display, throwOnError: true, output: 'html', strict: 'ignore', trust: false }); }
   catch (e) { throw new Error('KaTeX hiba ebben: ' + tex + '\n' + e.message.split('\n')[0]); }
 }
@@ -193,6 +195,7 @@ function stripKatex(s) {
 
 const html = page();
 const errs = checks(html);
+if (DOTS.length) errs.push('Tizedespont tizedesvessző helyett: ' + [...new Set(DOTS)].join(' | '));
 if (MISSING.length) errs.push('Önállósági hiba (magyarázat nélküli jel, vagy utalás másik feladatra): ' + [...new Set(MISSING)].join(', '));
 fs.mkdirSync(path.join(__dirname, 'dist'), { recursive: true });
 fs.writeFileSync(path.join(__dirname, 'dist/' + BOOK.out + '.html'), html);

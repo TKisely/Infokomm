@@ -67,7 +67,7 @@ module.exports = {
     { id: 'o9_04', num: '9.4', title: 'AuC, FDM és TDM, VAD, a betűszavak', tags: ['beugro'],
       src: R`5-ösöm 21., 27…28. oldal · 5o_21_2, 5o_27_1, 5o_28_1`,
       task: R`<p>Mi az AuC szerepe? Mit jelent, hogy a GSM FDM-et és TDM-et is használ? Mi a VAD előnye GSM-ben és VoIP-ban, és hogyan tartják fenn a kapcsolat érzetét? Ismertesse: HLR, VLR, EIR, MSC, BSC, BTS, FNR.</p>`,
-      ad: [R`a betűszavak jelentése az A1 táblázatban`],
+      ad: [R`fogalmi kérdések a GSM hálózat elemeiről és működéséről`],
       ker: [R`rövid, indokolt válaszok`],
       lv: [S('AuC', R`A SIM titkos kulcsát (Ki) tárolja. Hitelesítéskor véletlen számot (RAND) küld a készüléknek, és a Ki-ből az A3 algoritmussal kiszámolja a várt választ (SRES). Ha a SIM ugyanezt adja, a SIM valódi. Az A8 algoritmussal ugyanebből a rejtjelező kulcs (Kc) is előáll, ezzel titkosítják a rádiós szakaszt (A5).`, []),
         S('FDM és TDM', R`FDM: a sáv 200 kHz-es vivőkre van osztva. TDM: minden vivőn egy keret 8 időrésből áll, mindegyik időrés egy-egy beszélgetésé. Egy beszélgetést tehát egy vivő és egy időrés jelöl ki.`, []),

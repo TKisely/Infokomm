@@ -128,7 +128,7 @@ module.exports = {
         [R`Miért csak a kimenő szűrő számít a $6{,}2$ kHz-nél?`, R`Az $1{,}8$ kHz a bemenő szűrőn csillapítatlanul átjut. A $6{,}2$ kHz a mintavétel után keletkezik ($8-1{,}8$), ezért csak a kimenő szűrőn csillapodik.`],
         [R`Miért veszélyes az egyenirányítás?`, R`Az egyenirányított szinusz periodikus, de nem szinuszos: alapfrekvenciája $2\cdot1{,}8=3{,}6$ kHz, és sok felharmonikusa van. A $4$ kHz feletti felharmonikusok a bemenő szűrőn csak csillapodnak, és az álképeik a hasznos sávba eshetnek.`]
       ],
-      elm: [[R`Álképek.`, R`A kimeneten $n f_s\pm f$ (A2).`], [R`Decibel amplitúdóban.`, R`$a_\mathrm{dB}=20\lg(U_1/U_2)$ (A8).`, R`U_2=U_1\cdot10^{-a/20}`]],
+      elm: [[R`Álképek.`, R`Egy $f$ frekvenciájú bemenet a mintavétel után az $n f_s\pm f$ frekvenciákon is megjelenik ($n$ egész).`], [R`Decibel amplitúdóban.`, R`Feszültség- (amplitúdó-) arányra $a_\mathrm{dB}=20\lg(U_1/U_2)$.`, R`U_2=U_1\cdot10^{-a/20}`]],
       lv: [
         { t: 'A 6,2 kHz-es komponens', s: R`Ez az $1{,}8$ kHz álképe az első másolatnál, a kimenő szűrő zárótartományában.`,
           m: [['definíció', R`f=f_s-1{,}8=8-1{,}8=6{,}2\ \text{kHz}`, R`$n=1$, mínusz előjel`], ['behelyettesítés', R`U_{6{,}2}=2\,\text{V}\cdot10^{-40/20}=2\cdot0{,}01=0{,}02\ \text{V}`, '20 mV']] },
@@ -176,7 +176,7 @@ module.exports = {
       ad: [R`$f_L=45$ kHz, $f_H=75$ kHz, $B=30$ kHz`], ker: [R`a) $f_s$ aluláteresztővel`, R`b) a sáváteresztő tartományok`, R`c) a legkisebb $f_s$`],
       miert: [[R`Miért van értelme a sáváteresztő mintavételnek?`, R`A jel csak $30$ kHz széles, de magasan van. Ha a másolatok a sávok közé esnek, $150$ kHz helyett már $75$ kHz is elég.`],
         [R`Meddig kell $k$-t növelni?`, R`$k\le\lfloor f_H/B\rfloor=\lfloor75/30\rfloor=2$. Nagyobb $k$-ra az alsó határ meghaladná a felsőt.`]],
-      elm: [[R`Sáváteresztő mintavétel.`, R`A3.`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`]],
+      elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`]],
       lv: [
         { t: 'Aluláteresztő eset', s: R`A legmagasabb komponens dönt.`, m: [['tétel', R`f_s\ge2f_H=2\cdot75=150\ \text{kHz}`, '$k=1$']] },
         { t: 'A $k=2$ tartomány', s: R`Behelyettesítünk a sáváteresztő képletbe.`,
@@ -196,7 +196,7 @@ module.exports = {
       ad: [R`$f_L=40$, $f_H=70$ kHz, $B=30$ kHz`, R`$C=\sqrt2$, $\text{SNR}\ge64$ dB`], ker: [R`a) $f_s$ tartományok`, R`b) a szűrők típusa`, R`c) $n$`],
       miert: [[R`Miért $f_s=2B$ a c) részben?`, R`Aluláteresztő visszaállításnál a szűrő sávja $B=70$ kHz, és a legkisebb $f_s=140$ kHz. Ekkor $f_s/2B=1$, a túlmintavételezés nem ad nyereséget.`],
         [R`Miért felfelé kerekítünk?`, R`Mert a $64$ dB alsó korlát. $10$ bittel $62$ dB lenne, az kevés.`]],
-      elm: [[R`Sáváteresztő mintavétel.`, R`A3.`], [R`Jel-zaj viszony.`, R`A6.`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`]],
+      elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`], [R`Jel-zaj viszony.`, R`Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`]],
       lv: [
         { t: 'Mintavételi tartományok', s: R`$\lfloor70/30\rfloor=2$, tehát $k=1$ és $k=2$.`,
           m: [['tétel', R`k=1:\ f_s\ge140\ \text{kHz}`, R`$2f_H=2\cdot70$`], ['behelyettesítés', R`k=2:\ \frac{140}{2}\le f_s\le\frac{80}{1}\ \Longrightarrow\ 70\le f_s\le80\ \text{kHz}`, R`$2f_H/2$ és $2f_L/1$`]] },
@@ -216,7 +216,7 @@ module.exports = {
       ad: [R`$f_L=60$, $f_H=108$ kHz, $B=48$ kHz`, R`$C=\sqrt3$, $\text{SNR}\ge70$ dB`], ker: [R`a) $f_s$ tartományok`, R`b) $n$`],
       miert: [[R`Miért pont a háromszögjel kényelmes?`, R`Mert $3/C^2=1$, így a konstans tag eltűnik, és $\text{SNR}_{\mathrm{dB}}\approx6{,}02\,n$.`],
         [R`Miért $f_s=2B$-vel számolunk a bitszámnál?`, R`A forrásmegoldás ezt a legkisebb, „célszerűen választott” mintavételt veszi. Nagyobb $f_s$-nél kevesebb bit is elég lehet (A6).`]],
-      elm: [[R`Sáváteresztő mintavétel.`, R`A3.`], [R`Jel-zaj viszony.`, R`A6.`]],
+      elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`], [R`Jel-zaj viszony.`, R`Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`]],
       lv: [
         { t: 'Mintavételi tartományok', s: R`$\lfloor108/48\rfloor=2$.`,
           m: [['tétel', R`k=1:\ f_s\ge216\ \text{kHz}`, R`$2f_H=2\cdot108$`], ['behelyettesítés', R`k=2:\ \frac{216}{2}\le f_s\le\frac{120}{1}\ \Longrightarrow\ 108\le f_s\le120\ \text{kHz}`, R`$2f_H/2$ és $2f_L/1=2\cdot60$`], ['ellenőrzés', R`f_s\ge2B=96\ \text{kHz}`, 'teljesül']] },
@@ -236,7 +236,7 @@ module.exports = {
       ad: [R`négyszögjel: komponensek $1,3,5,7,9,\ldots$ kHz (páratlan felharmonikusok)`, R`kimenet: $\{1;3;7;9\}$ kHz`], ker: [R`a) $f_{AA}$ és $f_R$`, R`b) $f_s$`],
       miert: [[R`Miért csak páratlan felharmonikusok vannak?`, R`A szimmetrikus négyszögjel félhullám-szimmetrikus, ezért a Fourier-sorában csak páratlan harmonikusok vannak.`],
         [R`Honnan tudjuk, hogy a 7 és a 9 álkép?`, R`Az $5$ kHz hiányzik, tehát a bemenő szűrő $5$ kHz alatt vág. Akkor a $7$ és a $9$ sem juthatott át, csak a mintavétel hozhatta létre.`]],
-      elm: [[R`Álképek.`, R`$n f_s\pm f$ (A2).`]],
+      elm: [[R`Álképek.`, R`Egy $f$ frekvenciájú komponens a mintavétel után az $n f_s\pm f$ frekvenciákon is megjelenik.`]],
       lv: [
         { t: 'A bemenő szűrő', s: R`A $3$ kHz átjut, az $5$ kHz nem.`, m: [['ellenőrzés', R`3\ \text{kHz}<f_{AA}<5\ \text{kHz}`, R`a 3 kHz átjut, az 5 kHz nem`]] },
         { t: 'A mintavételi frekvencia', s: R`A mintavétel után csak $1$ és $3$ kHz álképei lehetnek. A $7$ és a $9$ kHz ezek közül kettő: $f_s-3=7$ és $f_s-1=9$.`,
@@ -255,7 +255,7 @@ module.exports = {
       ad: [R`sáv: $7B\ldots10B$, szélessége $3B$`], ker: [R`a), b) $f_s$`, R`c), d) a zajteljesítmények aránya`],
       miert: [[R`Miért $20B/3$ a b) eset?`, R`$\lfloor10B/3B\rfloor=3$, és $k=3$-ra $2\cdot10B/3\le f_s\le2\cdot7B/2$, azaz $6{,}67B\le f_s\le7B$. A legkisebb $20B/3$.`],
         [R`Miért függ a zaj a szűrőtől?`, R`A kvantálási zaj fehér, $1/f_s$ sűrűségű. Amennyi sávot a szűrő átenged, annyi zajt kapunk (A5).`]],
-      elm: [[R`Kvantálási zaj.`, R`A5.`, R`P_\varepsilon=\frac{1}{f_s}M(\varepsilon^2)\int|H(f)|^2\mathrm df`]],
+      elm: [[R`Kvantálási zaj.`, R`A kvantálási zaj fehér, a $0\ldots f_s$ sávban egyenletesen oszlik el: a visszaállító szűrőn átjutó része a szűrő sávszélességével arányos.`, R`P_\varepsilon=\frac{1}{f_s}M(\varepsilon^2)\int|H(f)|^2\mathrm df`]],
       lv: [
         { t: 'Mintavételi frekvenciák', s: R`Aluláteresztővel $2f_H$, tetszőleges szűrővel a sáváteresztő képlet $k=3$-ra.`,
           m: [['tétel', R`\text{a) } f_s=2\cdot10B=20B`, R`$f_H=10B$`], ['behelyettesítés', R`\text{b) } \frac{20B}{3}\le f_s\le\frac{14B}{2}=7B\ \Longrightarrow\ f_s=\frac{20B}{3}`, R`$k=3$: $2f_H/3$ és $2f_L/2$`]] },
@@ -274,7 +274,7 @@ module.exports = {
       task: R`<p>Egy valós jel a $19$ és $25$ kHz közötti sávon kívül nem tartalmaz komponenst. a) Mi a legkisebb $f_s$, amelynél elvileg tökéletesen visszaállítható? b) Hány dB-lel javul a jel-zaj viszony, ha a határfrekvencia kétszeresével ($50$ kHz) veszünk mintát, ugyanazzal a kvantálóval és szűrővel?</p>`,
       ad: [R`$f_L=19$, $f_H=25$ kHz, $B=6$ kHz`], ker: [R`a) $f_{s,\min}$`, R`b) $\Delta\text{SNR}$`],
       miert: [[R`Miért nem $2B=12$ kHz a válasz?`, R`$25/6$ nem egész. $12$ kHz-nél a $4\cdot12$-vel eltolt sáv ($23\ldots29$ kHz) ráesne a jelre.`]],
-      elm: [[R`Sáváteresztő mintavétel.`, R`A3, $k_{\max}=\lfloor25/6\rfloor=4$.`], [R`Túlmintavételezés.`, R`A6: $10\lg(f_s/2B)$ tag.`]],
+      elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`], [R`Túlmintavételezés.`, R`A jel-zaj viszonyban a $10\lg(f_s/2B)$ tag: ha ugyanazzal a kvantálóval és szűrővel sűrűbben mintázunk, a kvantálási zaj szélesebb sávra terül szét, és kevesebb jut a szűrő sávjába.`]],
       lv: [
         { t: 'A legkisebb mintavételi frekvencia', s: R`$k=4$-re behelyettesítünk.`,
           m: [['behelyettesítés', R`\frac{2\cdot25}{4}\le f_s\le\frac{2\cdot19}{3}\ \Longrightarrow\ 12{,}5\le f_s\le12{,}67\ \text{kHz}`, R`$k=\lfloor25/6\rfloor=4$`]] },
@@ -292,7 +292,7 @@ module.exports = {
       ad: [R`$B=15$ kHz, $f_s=44$ kHz, D/A: $n=16$ bit`], ker: [R`a) $\text{SNR}$ előtte és utána`, R`b) a szivárgó komponensek`],
       miert: [[R`Miért a D/A bitszáma számít?`, R`A pontos ($20$ bites) mintákat a $16$ bites D/A kerekíti. A visszaállított jel kvantálási zaját ez a kerekítés adja.`],
         [R`Miért segít az interpoláció?`, R`A közbenső minták számolhatók a pontos mintákból. A D/A négyszer sűrűbben dolgozik, így a zaj négyszer szélesebb sávra oszlik szét.`]],
-      elm: [[R`Jel-zaj viszony.`, R`A6.`]],
+      elm: [[R`Jel-zaj viszony.`, R`Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`]],
       lv: [
         { t: 'Kiindulási jel-zaj viszony', s: R`Szinuszra vonatkoztatva ($C^2=2$).`,
           m: [['behelyettesítés', R`\frac SN=\frac32\cdot\frac{44}{2\cdot15}\cdot2^{32}`, R`$C^2=2$, $f_s=44$, $B=15$ kHz, $n=16$`], ['számérték', R`10\lg\frac SN\approx99{,}8\ \text{dB}`, R`$1{,}76+1{,}66+96{,}3$`]] },
@@ -312,7 +312,7 @@ module.exports = {
       ad: [R`$B=4$ kHz, $f_s=9$ kHz, $n=14$ bit`], ker: [R`a)…c) szövegesen`, R`d) $\Delta\text{SNR}$`, R`e) teljesítményarány`],
       miert: [[R`Miért nem tökéletes, ha $f_s>2B$?`, R`Mintavétel szempontjából rendben van, de a $4$ kHz-es sávkorlát a beszéd magasabb összetevőit levágja, és a kvantálási zaj sem tűnik el soha.`],
         [R`Miért $6$ dB egy bit?`, R`Minden bit kétszer annyi szintet ad, a lépcső felére csökken, a zajteljesítmény negyedére. $10\lg4=6{,}02$ dB.`]],
-      elm: [[R`Jel-zaj viszony.`, R`A6.`], [R`Decibel.`, R`A8.`]],
+      elm: [[R`Jel-zaj viszony.`, R`Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`], [R`Decibel.`, R`Teljesítményarányra $10\lg$, feszültségre $20\lg$: 3 dB kétszeres, 10 dB tízszeres, 20 dB százszoros teljesítmény.`]],
       lv: [
         { t: 'Tökéletes-e?', s: R`Nem: a sávkorlát ($4$ kHz az érthetőséghez elég) és a kvantálási zaj miatt. Átlapolódás nincs, mert $9>2\cdot4$.`, m: [] },
         { t: 'Szűrők', s: R`A bemeneten kell, különben a $4{,}5$ kHz feletti zaj és hang átlapolódna. A kimeneten is kell, mert a D/A után ott vannak az $n\cdot9\pm f$ másolatok.`, m: [] },
@@ -332,7 +332,7 @@ module.exports = {
       ad: [R`$f_s=8$ kHz, $f=1{,}5$ kHz, $f_R=4$ kHz`], ker: [R`a) magyarázat`, R`b) a $4$ kHz alatti komponensek`],
       miert: [[R`Miért páratlan felharmonikusok?`, R`A szimmetrikus vágás (túlvezérlés) a szinuszt a négyszög felé torzítja, amelynek csak páratlan felharmonikusai vannak.`],
         [R`Hogyan lesz $4{,}5$ kHz-ből $3{,}5$ kHz?`, R`A $3\cdot1{,}5=4{,}5$ kHz az $f_s/2$ felett van, álképe $8-4{,}5=3{,}5$ kHz (A2).`]],
-      elm: [[R`Álképek.`, R`$n f_s\pm f$.`]],
+      elm: [[R`Álképek.`, R`Egy $f$ frekvenciájú komponens a mintavétel után az $n f_s\pm f$ frekvenciákon is megjelenik.`]],
       lv: [
         { t: 'A torzítás komponensei', s: R`Erős túlvezérlésnél a jel a négyszöghöz közelít.`,
           m: [['definíció', R`f_k=(2k+1)\cdot1{,}5\ \text{kHz}=1{,}5;\ 4{,}5;\ 7{,}5;\ 10{,}5;\ \ldots`, R`a négyszögjel páratlan felharmonikusai`]] },

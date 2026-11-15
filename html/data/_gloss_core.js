@@ -20,6 +20,7 @@ function explain(item, G) {
     const tl = (item.slice(end).match(TAIL) || ['', ''])[1].length;
     const before = item.slice(0, m.index), after = item.slice(end + tl);
     const local = after.split(/[,;]/)[0].toLowerCase();
+    const plainAll = item.replace(/\$[^$]*\$/g, ' ').toLowerCase();
     let ins = '';
     if (!before.includes(':') && !/^\s*[:(]/.test(after)) {
       const ds = [];
@@ -27,7 +28,7 @@ function explain(item, G) {
         if (!isSym(key)) continue;
         const d = variants(key).map(k => G[k]).find(x => x !== undefined);
         if (d === undefined) missing.push(key);
-        else if (d) { const w = (d.toLowerCase().match(/[a-záéíóöőúüű]{4,}/g) || [''])[0].slice(0, 6); if (!w || !local.includes(w)) if (!ds.includes(d)) ds.push(d); }
+        else if (d) { const ws = (d.toLowerCase().match(/[a-záéíóöőúüű0-9]{3,}/g) || []).filter(x => !['egy', 'két'].includes(x)); const ph = ws.slice(0, 2).map(x => x.slice(0, 6)); const has = ph.length > 0 && ph.every(x => plainAll.includes(x)); if (!has && !ds.includes(d)) ds.push(d); }
       }
       if (ds.length) ins = ' (' + ds.join(', ') + ')';
     }

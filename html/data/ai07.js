@@ -37,7 +37,7 @@ module.exports = {
       task: R`<p>Bináris FSK (MSK), $f_1=22{,}2$ kHz, $f_2=24{,}2$ kHz. a) Frekvencialöket? b) Vivőfrekvencia? c) MSK-nál a bitsebesség? d) Miért jobb az MSK, hol használnak GMSK-t?</p>`,
       ad: [R`a két jelzőfrekvencia: 22,2 és 24,2 kHz`],
       ker: [R`a) $f_D$`, R`b) $F$`, R`c) $1/T$`, R`d) indoklás`],
-      lv: [S('a), b) Löket és vivő', R`A1 szerint a vivő a két frekvencia átlaga, a löket a különbség fele.`, [
+      lv: [S('a), b) Löket és vivő', R`FSK-nál a vivő a két jelzőfrekvencia átlaga, a löket a különbségük fele.`, [
           ['definíció', R`f_D=\frac{24{,}2-22{,}2}{2}=1\ \text{kHz}\qquad F=\frac{22{,}2+24{,}2}{2}=23{,}2\ \text{kHz}`, '']]),
         S('c) Bitsebesség MSK-nál', R`MSK-feltétel: $f_DT=1/4$.`, [
           ['tétel', R`T=\frac{1}{4f_D}=\frac1{4\ \text{kHz}}=0{,}25\ \text{ms}\ \Rightarrow\ \frac1T=4\ \text{kbit/s}`, '']]),
@@ -133,7 +133,7 @@ module.exports = {
       task: R`<p>36-féle szimbólum, négyzetrács. a) Konstelláció. b) A négyzetrács előnye. c) Erősítés- és csillapítástűrés zajmentesen. d) Egy kolléga a sarokpontokat a tengelyek mellé tenné. Mi javul, mi romlik?</p>`,
       ad: [R`$M=36=6\times6$: tengelyenként 6 szint`],
       ker: [R`a) konstelláció`, R`b) előny`, R`c) tűrések`, R`d) a sarokpontok áthelyezése`],
-      lv: [S('a) Konstelláció', '', [['definíció', R`\text{szintek: }\pm1,\pm3,\pm5\qquad\text{határok: }0,\pm2,\pm4`, '']]),
+      lv: [S('a) Konstelláció', R`$36=6\times6$: tengelyenként 6 szint, egyenlő (2 egységnyi) közökkel, a nullára szimmetrikusan. A döntési határok a szintek között félúton vannak.`, [['definíció', R`\text{szintek: }\pm1,\pm3,\pm5\qquad\text{határok: }0,\pm2,\pm4`, '']]),
         S('b) Előny', R`A két koordinátáról egymástól függetlenül, egyszerű küszöbökkel lehet dönteni: két hatszintű PAM-döntés.`, []),
         S('c) Amplitúdótűrés', R`Csillapításnál az 5-ös szint ér le a 4-es határra, erősítésnél a 3-as ér fel a 4-esre.`, [
           ['számérték', R`5k>4\Rightarrow k>0{,}8\ (-20\%)\qquad3k<4\Rightarrow k<1{,}33\ (+33\%)`, '']]),

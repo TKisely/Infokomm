@@ -28,7 +28,7 @@ module.exports = {
         S('b) Vevők száma', R`A táblázatban felfelé kerekítünk (167 Erl), különben a blokkolás a határ fölé kerülhet.`, [
           ['számérték', R`167\ \text{Erl}\ \to\ N=198`, ''],
           ['ellenőrzés', R`P_b(166{,}67;\ 197)=0{,}212\%>0{,}2\%\qquad P_b(166{,}67;\ 198)=0{,}178\%`, 'rekurzióval: 197 kevés']]),
-        S('c) Kihasználtság', '', [
+        S('c) Kihasználtság', R`Egy kiszolgáló kihasználtsága a lebonyolított forgalom, $A(1-P_b)$, osztva a kiszolgálók számával.`, [
           ['definíció', R`a=\frac{166{,}67\cdot(1-0{,}0018)}{198}=0{,}84`, '']])],
       ered: [R`\text{a) }A=166{,}7\ \text{Erl}\qquad\text{b) }N=198\qquad\text{c) }a\approx84\%`],
       fix: R`Az egyik kézírásos változat 166-ra kerekít lefelé, és 197-et ad. A gépelt változat (167 → 198) helyes.`, links: [srcAI(['ai2016_01_05_3', 'ai2016_01_05_3b'])] },
@@ -41,7 +41,7 @@ module.exports = {
       lv: [S('a) Blokkolás', R`Felajánlott forgalom, majd Erlang-B $N=2$-re.`, [
           ['definíció', R`A=4\cdot1{,}5=6\ \text{Erl}`, ''],
           ['behelyettesítés', R`P_b=\frac{6^2/2!}{1+6+6^2/2!}=\frac{18}{25}=0{,}72`, '']]),
-        S('b) Kihasználtság', '', [
+        S('b) Kihasználtság', R`Egy kocsi kihasználtsága a lebonyolított forgalom, $A(1-P_b)$ (ennyi kocsi van átlagosan kint), osztva a kocsik számával.`, [
           ['definíció', R`a=\frac{6\cdot(1-0{,}72)}{2}=\frac{1{,}68}{2}=0{,}84`, 'átlagosan 1,68 kocsi van kint']]),
         S('c) Haszon', R`A bevétel a kint lévő kocsik átlagos száma szorozva a napi díjjal, a költség minden kocsira jár.`, [
           ['számérték', R`1{,}68\cdot100-2\cdot60=168-120=48\ \text{USD/nap}`, '']])],
@@ -56,9 +56,9 @@ module.exports = {
       lv: [S('a) Forgalom', '', [['definíció', R`A=5\cdot3=15\ \text{Erl}`, '']]),
         S('b) Hosszú hívások', R`Exponenciális eloszlásnál $P(X>t)=e^{-t/h}$ (A1).`, [
           ['behelyettesítés', R`P(X>6)=e^{-6/3}=e^{-2}=0{,}135`, '100-ból kb. 13 vagy 14']]),
-        S('c) Kiszolgálók', R`Erlang-B rekurzióval (vagy táblázatból) a legkisebb $N$, ahol $P_b\le0{,}1\%$.`, [
+        S('c) Kiszolgálók', R`Erlang-B rekurzióval ($E_0=1$, $E_n=AE_{n-1}/(n+AE_{n-1})$, $P_b=E_N$) vagy táblázatból a legkisebb $N$, ahol $P_b\le0{,}1\%$.`, [
           ['számérték', R`N=27:\ P_b=0{,}160\%\qquad N=28:\ P_b=0{,}086\%`, R`$N=28$`]]),
-        S('d) Kihasználtság', '', [['definíció', R`a=\frac{15\cdot0{,}999}{28}=0{,}54`, '']]),
+        S('d) Kihasználtság', R`A lebonyolított forgalom, $A(1-P_b)$, osztva a kiszolgálók számával.`, [['definíció', R`a=\frac{15\cdot0{,}999}{28}=0{,}54`, '']]),
         S('e) VoIP', R`Legfeljebb 28 egyidejű hívás. Egy G.711-es (64 kbit/s) hívás a fejrészekkel kb. 80 és 90 kbit/s között (A2).`, [
           ['közelítés', R`28\cdot87\ \text{kbit/s}\approx2{,}4\ \text{Mbit/s}<10\ \text{Mbit/s}`, 'belefér, kétirányú forgalommal is']])],
       ered: [R`\text{a) }15\ \text{Erl}\quad\text{b) }\approx14\quad\text{c) }N=28\quad\text{d) }a\approx54\%\quad\text{e) belefér}`],
@@ -69,7 +69,7 @@ module.exports = {
       task: R`<p>GSM, FRF = 12, a hívások átlagosan 2 percesek. Egy órában átlagosan hányan telefonálhatnak egy cellában, ha a blokkolás legfeljebb 1%?</p>`,
       ad: [R`124 vivő, 8 időrés, FRF $=12$`, R`$h=2$ perc $=1/30$ óra`, R`$P_b\le1\%$`],
       ker: [R`$\lambda$: hívás/óra egy cellában`],
-      lv: [S('Csatornák egy cellában', R`A vivők a klaszter 12 cellája között oszlanak meg (A1 a 10. fejezetben).`, [
+      lv: [S('Csatornák egy cellában', R`Egy 12 cellás klaszter a GSM 900 mind a 124 vivőjét egyszer használja fel, vivőnként 8 időréssel, így egy cellára a klaszter csatornáinak tizenketted része jut.`, [
           ['számérték', R`\frac{124\cdot8}{12}=82{,}7\ \Rightarrow\ N=82`, R`a gyűjtemény 125 vivővel 83-at, kerekítve 80-at vesz`]]),
         S('A megengedett forgalom', R`Erlang-B: az a legnagyobb $A$, amelynél $P_b$ még 1%.`, [
           ['számérték', R`N=82:\ A=67{,}2\ \text{Erl}\qquad(N=80:\ 65{,}4\qquad N=83:\ 68{,}2)`, '']]),

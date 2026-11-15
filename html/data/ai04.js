@@ -31,7 +31,7 @@ module.exports = {
           ['számérték', R`d(v,00000)=2\quad d(v,01110)=1\quad d(v,10101)=5\quad d(v,11011)=2`, R`pl. $01010\oplus11011=10001$, súlya 2`],
           ['számérték', R`\hat c=01110,\ \hat u=01`, '']]),
         S('b) Szindróma', R`$H^T$ felül $B$, alul egységmátrix. $v$-ben a 2. és a 4. bit 1-es.`, [
-          ['definíció', HT(['101', '110', '100', '010', '001']), ''],
+          ['definíció', HT(['101', '110', '100', '010', '001']), R`maga a paritásellenőrző mátrix ennek transzponáltja: $H=[B^T\,|\,I]=\begin{bmatrix}1&1&1&0&0\\0&1&0&1&0\\1&0&0&0&1\end{bmatrix}$`],
           ['behelyettesítés', R`s=110\oplus010=100`, R`$H^T$ 3. sora: a 3. bit hibás, $01010\oplus00100=01110$`]]),
         S('c) Kódtávolság', R`A nem nulla kódszavak súlya.`, [
           ['számérték', R`w(01110)=3,\ w(10101)=3,\ w(11011)=4\ \Rightarrow\ d_{\min}=3`, 'jelez 2, javít 1']])],
@@ -45,7 +45,7 @@ module.exports = {
       ad: [R`$n=5$, $k=2$, szisztematikus`, R`két kódszó: 10101, 01101 (ezek eleje 10 és 01)`, R`$v=11001$`],
       ker: [R`a) $G$, $H^T$`, R`b) $d_{\min}$`, R`c) $s$, $\hat c$, $\hat u$`],
       lv: [S('a) Mátrixok', R`Szisztematikus kódnál a 10 és 01 üzenet kódszavai adják $G$ sorait.`, [
-          ['definíció', R`G=\begin{bmatrix}1&0&1&0&1\\0&1&1&0&1\end{bmatrix}\qquad ` + HT(['101', '101', '100', '010', '001']), '']]),
+          ['definíció', R`G=\begin{bmatrix}1&0&1&0&1\\0&1&1&0&1\end{bmatrix}\qquad ` + HT(['101', '101', '100', '010', '001']), R`$H^T$: felül $B$, alul egységmátrix. Maga $H=[B^T\,|\,I]=\begin{bmatrix}1&1&1&0&0\\0&0&0&1&0\\1&1&0&0&1\end{bmatrix}$`]]),
         S('b) Kódtávolság', R`A negyedik kódszó a két sor XOR-ja.`, [
           ['számérték', R`\{00000,\ 10101,\ 01101,\ 11000\}\qquad w:\ 3,\ 3,\ 2`, ''],
           ['tétel', R`d_{\min}=2:\ \text{jelez }1,\ \text{javít }0`, '']]),
@@ -66,7 +66,7 @@ module.exports = {
         S('b) Szindróma', R`$v$-ben az 5., 6., 7. bit 1-es.`, [
           ['behelyettesítés', R`s=100\oplus010\oplus001=111`, R`$H^T$ 4. sora`],
           ['átalakítás', R`\hat c=0000111\oplus0001000=0001111\ \Rightarrow\ \hat u=0001`, 'egy hibát feltételezve']]),
-        S('c) Jelzés és javítás', R`$H^T$ sorai mind különbözők és nem nullák, ezért minden egybites hiba más szindrómát ad: 1 hiba javítható. Két oszlop összege soha nem 0, de három sor összege lehet 0 (pl. 110 ⊕ 101 ⊕ 011), ezért $d_{\min}=3$.`, [
+        S('c) Jelzés és javítás', R`$H^T$ sorai mind különbözők és nem nullák, ezért minden egybites hiba más szindrómát ad: 1 hiba javítható. Két különböző sor XOR-ja soha nem 0, de három sor összege lehet 0 (pl. 110 ⊕ 101 ⊕ 011), ezért $d_{\min}=3$.`, [
           ['tétel', R`1+n\le2^{n-k}:\ 1+7=8=2^3`, 'egyenlőség: perfekt kód'],
           ['számérték', R`d_{\min}=3:\ \text{jelez }2,\ \text{javít }1`, '']]),
         S('d) Üzenethossz', R`$G$ sorainak száma.`, [['számérték', R`k=4\ \text{bit}`, ''] ])],

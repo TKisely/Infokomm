@@ -15,9 +15,9 @@ module.exports = {
       task: R`<p>Milyen szín dominál a képpontban, ha $(Y,C_b,C_r)$ a) $(0{,}220;\ -0{,}120;\ 0{,}280)$, b) $(0{,}182;\ 0{,}118;\ 0{,}118)$?</p>`,
       ad: [R`$Y$: világossági jel, $C_b=B-Y$, $C_r=R-Y$: színkülönbségi jelek (a két hármas a feladatból)`],
       ker: [R`$R$, $G$, $B$: a vörös, a zöld és a kék színjel, és melyik a legnagyobb`],
-      lv: [S('a) R és B', R`A két színkülönbségi jelből közvetlenül (A2).`, [
+      lv: [S('a) R és B', R`$C_b=B-Y$ és $C_r=R-Y$, ezért $B=C_b+Y$ és $R=C_r+Y$.`, [
           ['behelyettesítés', R`B=C_b+Y=-0{,}120+0{,}220=0{,}10\qquad R=C_r+Y=0{,}280+0{,}220=0{,}50`, '']]),
-        S('a) G', R`$Y$ képletéből kifejezzük $G$-t.`, [
+        S('a) G', R`A világossági jel $Y=0{,}3R+0{,}59G+0{,}11B$. Ebből kifejezzük $G$-t, és behelyettesítjük a már ismert $R$-t és $B$-t.`, [
           ['behelyettesítés', R`G=\frac{Y-0{,}3R-0{,}11B}{0{,}59}=\frac{0{,}22-0{,}15-0{,}011}{0{,}59}=\frac{0{,}059}{0{,}59}=0{,}10`, ''],
           ['számérték', R`(R,G,B)=(0{,}5;\ 0{,}1;\ 0{,}1)`, 'a vörös dominál']]),
         S('b)', 'Ugyanígy.', [

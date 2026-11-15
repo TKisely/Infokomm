@@ -62,7 +62,7 @@ module.exports = {
           ['tétel', R`a_\mathrm{sz}=20\lg\frac{r^2}{h_Th_R}-G_T-G_R`, '']]),
         S('b) Behelyettesítés', R`$r^2=(15\cdot10^3)^2=2{,}25\cdot10^8$, $h_Th_R=50\cdot1{,}66=83{,}3$. A lg-et tényezőkre bontjuk, a megadott logaritmusokkal.`, [
           ['átalakítás', R`20\lg(2{,}25\cdot10^8)=20(\lg225+6)=20\cdot8{,}35=167`, R`$\lg225\approx2{,}35$`],
-          ['átalakítás', R`20\lg83{,}3=20(\lg833-1)\approx20\cdot1{,}92=38{,}4`, ''],
+          ['átalakítás', R`20\lg83{,}3=20(\lg833-1)\approx20\cdot1{,}92=38{,}4`, R`$\lg833\approx2{,}92$, a feladat „lg 830 ≈ 3” tippje itt túl durva`],
           ['számérték', R`a_\mathrm{sz}=167-38{,}4-13-3=112{,}6\ \text{dB}`, '']])],
       ered: [R`\text{a) }h_T=50\ \text{m}\qquad\text{b) }a_\mathrm{sz}\approx112{,}6\ \text{dB}`],
       chk: [R`A kézírás $20\lg83{,}3$ helyett 40-et ír (a „lg 830 ≈ 3” durva tippjével), így 111 dB-t kap. Pontosan $\lg830=2{,}92$.`], links: [src5(['5o_14_3'])] },

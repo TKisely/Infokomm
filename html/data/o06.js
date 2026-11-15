@@ -31,7 +31,8 @@ module.exports = {
           ['számérték', R`0000000,\ 0001111,\ 0010011,\ 0011100,\ 0100101,\ 0101010,\ 0110110,\ 0111001`, ''],
           ['számérték', R`1000110,\ 1001001,\ 1010101,\ 1011010,\ 1100011,\ 1101100,\ 1110000,\ 1111111`, R`a legkisebb nem nulla súly 3, $d_{\min}=3$`]]),
         S('b) Paritásellenőrző mátrix', R`$H^T$ felül $B$, alul a $3\times3$-as egységmátrix. A szindróma annyi bites, ahány paritásbit van.`, [
-          ['definíció', HT(['110', '101', '011', '111', '100', '010', '001']), R`3 bites szindróma, $H=[B^T\,|\,I]$`]]),
+          ['definíció', HT(['110', '101', '011', '111', '100', '010', '001']), R`3 bites szindróma`],
+          ['definíció', R`H=[B^T\,|\,I]=\begin{bmatrix}1&1&0&1&1&0&0\\1&0&1&1&0&1&0\\0&1&1&1&0&0&1\end{bmatrix}`, R`$B$ transzponáltja mellé a $3\times3$-as egységmátrix`]]),
         S('c) Dekódolás', R`$v=0110000$ a 2. és a 3. helyen 1-es, ezért $H^T$ 2. és 3. sorát adjuk össze.`, [
           ['behelyettesítés', R`s=101\oplus011=110`, ''],
           ['ellenőrzés', R`110=H^T\ \text{1. sora}\ \Rightarrow\ e=1000000`, 'egy hibát feltételezve az 1. bit romlott el'],
@@ -100,7 +101,7 @@ module.exports = {
       miert: [[R`Miért 9 állapot és nem 16?`, R`Mindkét színből van szemcse, így egy szín a bal, a jobb vagy mindkét félben lehet: színenként 3 lehetőség, összesen $3\cdot3=9$. A „sehol sincs” eset kizárt, ezért nem $2^4=16$.`]],
       lv: [S('a) Alsó korlát', R`Kilenc egyenlő valószínűségű állapot entrópiája:`, [
           ['definíció', R`H=\log_29=3{,}17\ \text{bit}`, '']]),
-        S('b) Huffman-kód', R`Kilenc egyforma valószínűségnél a Huffman-fa majdnem kiegyensúlyozott: 7 szó 3 bites, 2 szó 4 bites (Kraft: $7/8+2/16=1$).`, [
+        S('b) Huffman-kód', R`3 biten $2^3=8$ szó fér el, nekünk 9 kell. Ezért a 8 háromjegyű szó közül egyet kettébontunk két négyjegyűre: 7 szó 3 bites, 2 szó 4 bites. (Egyenlő valószínűségnél a Huffman-eljárás is ezt adja. Kraft: $7/8+2/16=1$.)`, [
           ['definíció', R`\bar L=\frac{7\cdot3+2\cdot4}{9}=\frac{29}{9}=3{,}22\ \text{bit}`, ''],
           ['ellenőrzés', R`3{,}17\le3{,}22<4`, R`több óra adatait együtt kódolva (blokk-kódolással) 3,17-hez tetszőlegesen közel juthatunk`]])],
       ered: [R`\text{a) }\bar L\ge\log_29=3{,}17\ \text{bit}\qquad\text{b) Huffman: 7 db 3 bites és 2 db 4 bites szó},\ \bar L=3{,}22\ \text{bit}`],

@@ -28,9 +28,9 @@ module.exports = {
       task: R`<p>$h_T=h_R=10$ m, $r=10$ km, $f=300$ MHz, $G_T=5$ dB, $G_R=3$ dB, tökéletes reflexió. a) Szakaszcsillapítás? b) A vevőantenna magasságának változtatásával mekkora $E_{\max}/E_{\min}$, ha $\Gamma=-0{,}8$?</p>`,
       ad: [R`$h_T=h_R=10$ m, $r=10$ km $=10^4$ m`, R`$f=300$ MHz $\Rightarrow\lambda=3\cdot10^8/3\cdot10^8=1$ m`, R`$G_T=5$ dB, $G_R=3$ dB`, R`b) $\Gamma=-0{,}8$`],
       ker: [R`a) $a_\mathrm{sz}$`, R`b) $E_{\max}/E_{\min}$: a legnagyobb és a legkisebb térerősség aránya, miközben a vevőantenna magasságát változtatjuk`],
-      lv: [S('Melyik zónában van a vevő?', R`A zónahatár (A2):`, [
+      lv: [S('Melyik zónában van a vevő?', R`A zónahatár (a legtávolabbi térerősség-maximum) helye $r_0=4h_Th_R/\lambda$. Ha a vevő ennél messzebb van, a távoli zónában van.`, [
           ['behelyettesítés', R`\frac{4h_Th_R}{\lambda}=\frac{4\cdot10\cdot10}{1}=400\ \text{m}\ll10\ \text{km}`, 'távoli zóna, a kétutas képlet kell']]),
-        S('a) Szakaszcsillapítás', '', [
+        S('a) Szakaszcsillapítás', R`A távoli zónában a kétutas képlet érvényes: $a_\mathrm{sz}=20\lg\frac{r^2}{h_Th_R}-G_T-G_R$.`, [
           ['behelyettesítés', R`a_\mathrm{sz}=20\lg\frac{(10^4)^2}{10\cdot10}-5-3=20\lg10^6-8=120-8=112\ \text{dB}`, '']]),
         S('b) Nem tökéletes reflexió', R`A vevő magasságát változtatva a két hullám hol azonos, hol ellentétes fázisban adódik össze: a térerősség $1+|\Gamma|$ és $1-|\Gamma|$ között változik (a direkt hullámhoz képest).`, [
           ['definíció', R`\frac{E_{\max}}{E_{\min}}=\frac{1+0{,}8}{1-0{,}8}=\frac{1{,}8}{0{,}2}=9`, R`$20\lg9=19$ dB`]])],
@@ -44,7 +44,7 @@ module.exports = {
       miert: [[R`Miért 40 m és nem 136 m?`, R`A kétutas modellben az antenna magassága a <b>visszaverő sík</b> fölött számít. Sík vidéken a talaj 96 m-es tengerszint feletti magassága érdektelen.`]],
       lv: [S('a), b) Keverés', R`Felső keverésnél az oszcillátor $f_\mathrm{KF}$-fel a vett frekvencia felett van, a tükör még $f_\mathrm{KF}$-fel feljebb.`, [
           ['behelyettesítés', R`f_\mathrm{osc}=83{,}3+10{,}7=94\ \text{MHz}\qquad f_t=94+10{,}7=104{,}7\ \text{MHz}`, '']]),
-        S('c) Zóna', R`A zónahatár (A2):`, [
+        S('c) Zóna', R`A zónahatár (a legtávolabbi térerősség-maximum) helye $r_0=4h_Th_R/\lambda$. Ha a vevő ennél messzebb van, a távoli zónában van.`, [
           ['behelyettesítés', R`\frac{4h_Th_R}{\lambda}=\frac{4\cdot40\cdot1}{3{,}6}=44{,}4\ \text{m}`, ''],
           ['ellenőrzés', R`650\ \text{m}>44{,}4\ \text{m}`, 'túl van a zónán']]),
         S('d) Kétutas csillapítás', R`A távoli zónában a kétutas képlet érvényes.`, [
@@ -75,9 +75,9 @@ module.exports = {
       task: R`<p>450 MHz, bázisállomás-antenna 50 m, vevők 1,5 m. a) Hol az interferenciazóna határa? b) A vevő magasságát változtatva mekkora $E_{\max}/E_{\min}$, ha $\Gamma=-1$, illetve $-0{,}9$? c) Kinek pozitív az antennanyeresége? d) Csillapítás a zóna határán ($\Gamma=-1$, nyereségek összege 6 dB)? e) 10 km-en mennyit változik a vett teljesítmény, a térerősség és a csillapítás, ha 3 m magasról hívunk?</p>`,
       ad: [R`$f=450$ MHz $\Rightarrow\lambda=2/3$ m`, R`$h_T=50$ m, $h_R=1{,}5$ m`, R`d) $G_T+G_R=6$ dB`],
       ker: [R`a) zónahatár`, R`b) $E_{\max}/E_{\min}$: a legnagyobb és a legkisebb térerősség aránya a vevő magasságát változtatva`, R`c) melyik antenna nyeresége pozitív`, R`d) $a_\mathrm{sz}$ a határon`, R`e) változások dB-ben`],
-      lv: [S('a) Zónahatár', '', [
+      lv: [S('a) Zónahatár', R`A zónahatár (a legtávolabbi maximum) helye $r_0=4h_Th_R/\lambda$.`, [
           ['behelyettesítés', R`\frac{4h_Th_R}{\lambda}=\frac{4\cdot50\cdot1{,}5}{2/3}=450\ \text{m}`, '']]),
-        S('b) Arány', R`A2 szerint, $\Gamma=-1$-nél a minimum 0.`, [
+        S('b) Arány', R`Ha a talaj reflexiós tényezője $\Gamma$, a vevő magasságát változtatva a térerősség a direkt hullám $(1+|\Gamma|)$- és $(1-|\Gamma|)$-szerese között ingadozik, ezért $E_{\max}/E_{\min}=(1+|\Gamma|)/(1-|\Gamma|)$. $\Gamma=-1$-nél a minimum 0.`, [
           ['definíció', R`\Gamma=-1:\ \frac{2}{0}=\infty\qquad\Gamma=-0{,}9:\ \frac{1{,}9}{0{,}1}=19`, '']]),
         S('c) Antennanyereség', R`A bázisállomás antennája irányított (a vízszintes sík felé koncentrál), nyeresége pozitív. A mobilkészülék antennája kicsi, közel körsugárzó, nyeresége 0 dB körüli, akár negatív.`, []),
         S('d) Csillapítás a határon', R`A határon a szinusz 1, a térerősség a szabadtéri kétszerese: a teljesítmény 4-szeres, ez 6 dB-lel kisebb csillapítás.`, [
@@ -102,7 +102,7 @@ module.exports = {
       task: R`<p>a) Egy 30 MHz-es antenna nyeresége $10\lg(4\pi)=11$ dB. Mekkora a hullámhossz és a hatásos felület? b) Egy 1,5 GHz-es parabola apertúrájának sugara 1 m. Mekkora a nyeresége dB-ben ($\pi^2\approx10$)?</p>`,
       ad: [R`a) $f=30$ MHz, $G=4\pi$`, R`b) $f=1{,}5$ GHz, $R=1$ m`],
       ker: [R`a) $\lambda$, $A_h$`, R`b) $G$ dB-ben`],
-      lv: [S('a)', R`$\lambda=c/f$, majd A3.`, [
+      lv: [S('a)', R`$\lambda=c/f$, majd a hatásos felület $A_h=G\lambda^2/(4\pi)$.`, [
           ['behelyettesítés', R`\lambda=\frac{3\cdot10^8}{3\cdot10^7}=10\ \text{m}`, ''],
           ['behelyettesítés', R`A_h=\frac{G\lambda^2}{4\pi}=\frac{4\pi\cdot10^2}{4\pi}=100\ \text{m}^2`, '']]),
         S('b)', R`$\lambda=3\cdot10^8/1{,}5\cdot10^9=0{,}2$ m. A hatásos felület a nyílás területe, $\pi R^2=\pi$ m².`, [

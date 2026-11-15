@@ -106,7 +106,7 @@ module.exports = {
       ad: [R`színjelenként 2 bit: 4 szint (0, 1/3, 2/3, 1)`],
       ker: [R`a) színek száma`, R`b) különböző $Y$ értékek`, R`c) szürkék`, R`d) 1 bites színek $Y$ szerint`],
       lv: [S('a) Színek', R`Három független jel, mindegyik 4 értékű.`, [['számérték', R`4^3=2^{3\cdot2}=64`, '']]),
-        S('b) Fényességértékek', R`$Y$ a $(30a+59b+11c)/3$ képletből jön, $a,b,c\in\{0,1,2,3\}$. A 64 kombináció mind különböző értéket ad.`, [['ellenőrzés', R`64\ \text{különböző }Y`, '']]),
+        S('b) Fényességértékek', R`A négy szint $R=a/3$, $G=b/3$, $B=c/3$, ahol $a,b,c\in\{0,1,2,3\}$. Ezért $Y=0{,}3R+0{,}59G+0{,}11B=(30a+59b+11c)/3$ százalék. A 64 kombináció mind különböző $Y$-t ad (a 30, 59 és 11 súlyok miatt nincs két egyforma összeg).`, [['ellenőrzés', R`64\ \text{különböző }Y`, '']]),
         S('c) Szürkék', R`Szürke: $R=G=B$.`, [['számérték', R`0,\ 33,\ 67,\ 100\%:\ 4\ \text{szürke}`, '']]),
         S('d) 1 bites színek', R`Minden jel 0 vagy 1, $Y$ az összeadott súlyok.`, [
           ['számérték', R`0,\ 11,\ 30,\ 41,\ 59,\ 70,\ 89,\ 100\%`, 'fekete, kék, vörös, bíbor, zöld, kékeszöld, sárga, fehér']])],

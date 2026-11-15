@@ -1,6 +1,7 @@
 'use strict';
 const { R, S, srcAI } = require('./_h.js');
-const amLines = (fv, fm, U, A) => R`f_v=${fv}\ \text{kHz: }${U}\ \text{V}\qquad f_v\pm f_m=${fv - fm}\ \text{és}\ ${fv + fm}\ \text{kHz: }${A}\ \text{V}`;
+const hu = v => String(v).replace('.', '{,}');
+const amLines = (fv, fm, U, A) => R`f_v=${fv}\ \text{kHz: }${hu(U)}\ \text{V}\qquad f_v\pm f_m=${fv - fm}\ \text{és}\ ${fv + fm}\ \text{kHz: }${hu(A)}\ \text{V}`;
 module.exports = {
   id: 'f5', num: '5', short: 'Analóg mod.', title: 'Analóg moduláció: AM és FM',
   lead: R`AM-nél a csúcsérték és a modulációs mélység adja a vivő és az oldalsávok amplitúdóját, a teljesítmény a három komponens teljesítményének összege. FM-nél a fázis- és a frekvencialöket kapcsolata ($f_D=\Phi_Df_m$) és a Carson-szabály a kulcs.`,
@@ -56,7 +57,7 @@ module.exports = {
       task: R`<p>100 kHz-es vivő, 20 kHz-es szinusz, $m=50\%$, csúcsérték 3 V. a) Rajz (50 µs). b) Időfüggvény, időegység, komponensek. c) Átlagteljesítmény.</p>`,
       ad: [R`$f_v=100$ kHz, $f_m=20$ kHz, $m=0{,}5$, $\hat s=3$ V`],
       ker: [R`a) rajz`, R`b) $s(t)$, az időegység, a vonalak`, R`c) $P$`],
-      lv: [S('Amplitúdók', '', [
+      lv: [S('Amplitúdók', R`A modulált jel csúcsértéke a burkoló maximuma, $U+U_m=U(1+m)$. Ebből $U$, majd $U_m=mU$, az oldalsávok amplitúdója $U_m/2$.`, [
           ['behelyettesítés', R`U\cdot1{,}5=3\ \Rightarrow\ U=2\ \text{V}\qquad U_m=0{,}5\cdot2=1\ \text{V}`, '']]),
         S('b) Időfüggvény', R`A frekvenciák kHz-ben, ezért $t$ ms-ban.`, [
           ['behelyettesítés', R`s(t)=\left[2+\cos(2\pi\cdot20\,t)\right]\cos(2\pi\cdot100\,t)\ \text{V},\ [t]=\text{ms}`, ''],
@@ -72,7 +73,7 @@ module.exports = {
       task: R`<p>80 kHz-es vivő, 20 kHz-es szinusz, csúcsérték 2,5 V, $m=25\%$. Időfüggvény és komponensek?</p>`,
       ad: [R`$f_v=80$ kHz, $f_m=20$ kHz, $m=0{,}25$, $\hat s=2{,}5$ V`],
       ker: [R`$s(t)$ és a vonalak`],
-      lv: [S('Amplitúdók', '', [
+      lv: [S('Amplitúdók', R`A modulált jel csúcsértéke a burkoló maximuma, $U+U_m=U(1+m)$. Ebből $U$, majd $U_m=mU$, az oldalsávok amplitúdója $U_m/2$.`, [
           ['behelyettesítés', R`U\cdot1{,}25=2{,}5\ \Rightarrow\ U=2\ \text{V}\qquad U_m=0{,}25\cdot2=0{,}5\ \text{V}`, '']]),
         S('Időfüggvény és vonalak', R`$t$ ms-ban, a frekvenciák kHz-ben.`, [
           ['behelyettesítés', R`s(t)=\left[2+0{,}5\cos(2\pi\cdot20\,t)\right]\cos(2\pi\cdot80\,t)\ \text{V}`, ''],

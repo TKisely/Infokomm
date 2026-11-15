@@ -58,7 +58,7 @@ module.exports = {
         S('b) Nyquist', R`A $0\le f\le1/T$ tartományban a $H(f)$ és a $1/T$-vel eltolt $H(f-1/T)$ fed át.`, [
           ['átalakítás', R`\cos^2\!\left(\tfrac\pi2fT-\tfrac\pi2\right)=\sin^2\!\left(\tfrac\pi2fT\right)`, ''],
           ['tétel', R`H(f)+H(f-\tfrac1T)=h_0T(\cos^2+\sin^2)=h_0T`, 'állandó: nincs ISI']]),
-        S('c) Vevőszűrő', '', [
+        S('c) Vevőszűrő', R`Fehér zajnál az illesztett szűrő az optimális: ha az adó- és a vevőszűrő egyformán osztozik a teljes $H(f)$-en, a vevőszűrő $\sqrt{H(f)}$-fel arányos.`, [
           ['definíció', R`H_V(f)=\sqrt{H(f)}\propto\cos\tfrac\pi2fT,\quad|f|<\tfrac1T`, 'illesztett szűrő, koszinusz félhullám']]),
         S('d) Az 1200 Hz-es szűrő', R`A spektrum $1/T$-nél ér véget.`, [
           ['számérték', R`\frac1T=\frac1{833\ \mu\text{s}}=1200\ \text{Hz}`, 'a szűrő semmit sem vág le']])],
