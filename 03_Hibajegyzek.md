@@ -59,7 +59,25 @@ keszult: 2026-11-15
 - **Fájdalomküszöb:** a gyak07 1 kHz-en kb. 130 dB-es tartományt ír, a vizsgamegoldások 120 vagy 123 dB-lel számoltak. Mindig írd le, melyiket használod.
 - **gyak00, 3. példa:** a forrás csak felső korlátot ad x₂ csúcstényezőjére (< 1,83). Numerikusan ≈ 1,79.
 
-## D) Fájl-állapot
+## D) Koma jegyzetei (`Forrasok/Koma/`, azonosítók: `06_Kereszthivatkozasok.md`)
+
+Az átíráskor már javított pontokat (a kg01 táblázatának sorcseréje, a kg03_2 0,55 → 0,35, a kg10_4 38,74 → 38,47, az ea02 ⌊d/2⌋ → ⌊(d−1)/2⌋, az ea08 csap/pálcika csere, az ea10 GSM-név) nem ismétlem.
+
+| # | Hol | A forrásban | Helyesen | Miért |
+|---|---|---|---|---|
+| D1 ⚠️ | `kg06_3` (GPS) | P_R ≈ 0,625 nW | **≈ 6,3·10⁻¹⁶ W = 0,63 fW** | 25 W = 14 dBW, 14 − 166 = −152 dBW. A 10^(−16,6) szorzóval 10⁻¹⁷ nagyságrend jön ki, nem 10⁻¹⁰ |
+| D2 | `kg04_4 b)` | α = 0,9° | **≈ 0,83°** | α = 2/√G = 2/√19 108 = 0,01447 rad. Apró kerekítés, de a vizsgán ellenőrizhető |
+| D3 ⚠️ | `ea10` | 124 vivő × 8 időrés → „992 felhasználó cellánként” | **992 / klaszter**, N = 12 esetén cellánként ≈ 83 | a 124 vivőn N cella osztozik (`01 §9`, `F19`) |
+| D4 | `ea13_3` | más válaszok, mint a Moodle-vizsgán (`vz2020_05_26_Q8`) | a kérdésváltozat más (MS-A2 hívásindítása, FNR) | `[ELLENŐRIZENDŐ]`: melyik szövegváltozat a mérvadó |
+| D5 | `kg06_5 c)` | a bizonyítás csak vázlatos | teljes bizonyítás: `06` 4. fejezet | B₁ ⊕ B₂ = 111 nem lehet, ha mindkettő súlya ≥ 2 |
+
+## E) Hivatalos anyag hibája (a független számolás dönt)
+
+| # | Hol | A forrásban | Helyesen | Miért |
+|---|---|---|---|---|
+| E1 ⚠️ | `tg02_P53` (TMIT 5.3), `pd04_3` (OneDrive 4.3), és ezt átvéve az `05` első változata | Pistike-kód: L̄ = 2,05 | **L̄ = 2,35**, az eltérés az entrópiától **34,8%** | 0,5·2 + 0,25·2 + 0,15·3 + 0,1·4 = 1 + 0,5 + 0,45 + 0,4 = 2,35. Koma gyakorlati jegyzete (`kg03_3`) helyesen 2,35-öt ad |
+
+## F) Fájl-állapot
 
 - `~/Downloads/infokomm_feladatok_1-10-v2 (1).md` **sérült** másolat, eltűntek belőle a képletek. Nem másoltam át. A `infokomm_feladatok_1-10-v2.md` a jó.
 - A `modul_02 … 07` és a `feladatok_21-30` fájlokban a LaTeX részben sérült (`\t`, `\f`, `\r`, `\b`, `\a` → `	ext`, `rac`, `egin`, `lpha`), ezért nem renderelődnek szépen. A tartalom olvasható, és **nem javítottam bennük**: az eredeti állapotban vannak a `Forrasok/` alatt.

@@ -16,6 +16,8 @@ forrasok:
 > **`02_Regi_Vizsgafeladatok_Megoldasokkal.md`** fájlban vannak. A tanszéki gyakorlatanyag (gyak00–08)
 > kidolgozása a **`05_TMIT_Gyakorlatok_Kidolgozas.md`** fájlban van. A forrásokban talált hibák a
 > **`03_Hibajegyzek.md`** fájlban. Ezeket javítsd ki fejben, mielőtt a régi megoldásokból tanulsz.
+> Hogy egy témakör melyik előadáson és melyik gyakorlaton volt (Koma jegyzetei), és ugyanaz a feladat hol fordul még elő,
+> azt a **`06_Kereszthivatkozasok.md`** mutatja (témakör-mátrix és feladat-megfeleltetés, végleges azonosítókkal).
 >
 > **Fejben számoláshoz:** lg2 = 0,3; lg3 = 0,48; lgπ ≈ 0,5; lg5 = 0,7; lg7 = 0,85; π² ≈ 10.
 

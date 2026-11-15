@@ -9,9 +9,11 @@ Utolsó frissítés: 2026-11-15
 | `00_STATUSZ.md` | ez a fájl | áttekintés, mi kész és mi nincs |
 | `01_Kidolgozas_Kepletek_es_Receptek.md` | 12 témakör: képletek, megoldási lépések, csapdák | **tanulás és ismétlés, vizsga előtti átnézés** |
 | `02_Regi_Vizsgafeladatok_Megoldasokkal.md` | 2014–2020-as vizsgafeladatok témakörönként, ellenőrzött megoldással és a javítók megjegyzéseivel | **gyakorlás**: előbb oldd meg magad, utána ellenőrizd |
-| `03_Hibajegyzek.md` | a forrásokban talált hibák (A: régi md jegyzetek, B: hallgatói megoldások) | mielőtt régi megoldásból tanulsz |
+| `03_Hibajegyzek.md` | a forrásokban talált hibák (A: régi md jegyzetek, B: hallgatói megoldások, C: hivatalos megerősítések, D: Koma jegyzetei, E: a hivatalos anyag hibái) | mielőtt régi megoldásból tanulsz |
 | `04_Claude_ai_projekt_megallapitasok.md` | a claude.ai projekt chatje írta: témakörök, a hiányzó részek listája, a projektbeli PDF-kidolgozások hibái | a még be nem dolgozott pontok listája |
 | `05_TMIT_Gyakorlatok_Kidolgozas.md` | a tanszéki gyakorlatanyag (gyak00–08) minden kidolgozott példája ellenőrizve, és **saját megoldás a gyakorló (G.) feladatokhoz** | **gyakorlás a hivatalos feladatokon** |
+| `06_Kereszthivatkozasok.md` | **végleges azonosítók**, témakör-mátrix (12 témakör × előadás, gyakorlat, TMIT, vizsga), azonos feladatok megfeleltetése egyezés-jelöléssel, a Koma-anyag új tartalma | **navigáció**: hol volt az elmélet, hol fordul még elő ugyanez |
+| `Forrasok/Koma/` | `koma-eloadasok.md` (12 előadás) és `koma-gyakorlatok.md` (10 gyakorlat): Koma kézírásos jegyzeteinek átirata (2021 tavasz), változtatás nélkül | eredeti jegyzet; a hibái a `03` D) részében |
 | `Forrasok/Korabbi_md_jegyzetek/` | a `~/Downloads/infokomm_*.md` fájlok másolata, eredeti állapotban (javítás nélkül) | referencia; a hibáikat lásd a `03`-ban |
 | `Forrasok/TMIT_gyakorlatok/` | `gyak00, 01, 02, 04, 05, 06, 07, 08.pdf` (tmit.bme.hu, letöltve 2026-11-15). **Csak helyben van meg, a GitHubra nem kerül fel** (tanszéki anyag, a `.gitignore` kizárja). Eredeti: `https://www.tmit.bme.hu/sites/default/files/attachments/gyakNN.pdf` | eredeti feladatszövegek és ábrák |
 
@@ -25,6 +27,7 @@ Utolsó frissítés: 2026-11-15
 | Régi vizsgák és megoldások | `Local Sources/BME/Infokom/ALL-IN-Infokomm-1.pdf` (szöveges része) | ✅ a `02`-ben |
 | „5-ösöm lesz infokommból” | `Local Sources/BME/Infokom/5-ösöm-lesz-infokommból.pdf` (szöveges része) | ✅ a `02`-ben |
 | TMIT gyakorlatanyag gyak00–08 (03 nélkül) | `Forrasok/TMIT_gyakorlatok/` | ✅ a `05`-ben (a P-példák ellenőrizve, a G-feladatok kidolgozva) |
+| Koma jegyzetei: 12 előadás, 10 gyakorlat (2021 tavasz, átirat) | `Forrasok/Koma/` | ✅ a `06`-ban **kereszthivatkozva**, minden végeredmény újraszámolva. ⏳ Az új tartalom (`06` 4. fejezet) még nincs beépítve az `01`/`02` fejezeteibe |
 
 **A TMIT-oldalon nem elérhető füzetek:** `gyak03`, valamint `gyak09`–`gyak14` (404, más néven sem találtam; a `gyak00`-t így találtam meg).
 A témasorrend alapján a 03 a rádiós összeköttetés lehet. Ennek anyaga a OneDrive `1-5 gyakorlatok.pdf` 3. fejezetében van, és az `01` feldolgozza.
@@ -48,3 +51,10 @@ A 09+ füzetek (cellás mobil, VoIP, forgalom) anyagát a `02` 7–8. fejezete p
 4. Mezőkovácsháza: h_T = 40 m (sík terep) a helyes, és nem a 136 m (`02` 1.2).
 5. 8-QAM konstellációk: az ábra kell hozzá (`02` 5.8).
 6. Call center d): a visszahívás tartási ideje (`02` 8.3).
+7. Roaming-kérdés: az `ea13_3` más szövegváltozatot old meg, mint a Moodle-vizsga (`03` D4).
+
+## Következő lépések (az eredeti feldolgozási plan szerint)
+
+1. A `06` 4. fejezetében felsorolt új Koma-tartalom beépítése az `01` (elmélet, recept) és a `02` (feladat) megfelelő fejezetébe, az `ea`/`kg` azonosítókkal.
+2. A plan feldolgozási szabványdokumentuma (`INFOKOMM_feldolgozasi_standard.md`): források, jelölési és szóhasználati döntések, javítások, nyitott pontok.
+3. A könyvszerű HTML-oldal (KaTeX, build.js) a plan 4–7. pontja szerint, fejezetenként.

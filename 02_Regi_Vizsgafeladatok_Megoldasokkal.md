@@ -18,6 +18,8 @@ forrasok:
 
 Minden számot újraszámoltam. Az Erlang-B értékek a rekurzív képlettel készültek, nem a táblázatból.
 
+**Kereszthivatkozás:** a feladatok azonosítója `vzÉÉÉÉ_HH_NN_Qx`. Hogy ugyanez a feladat melyik előadáson, Koma-gyakorlaton vagy TMIT-füzetben szerepel, azt a `06_Kereszthivatkozasok.md` mutatja.
+
 **Fejben számoláshoz (a vizsgán engedélyezett közelítések):** lg2 = 0,3; lg3 = 0,48; lgπ ≈ 0,5; lg5 = 0,7; lg7 = 0,85; lg e = 0,43; π² ≈ 10.
 
 ---

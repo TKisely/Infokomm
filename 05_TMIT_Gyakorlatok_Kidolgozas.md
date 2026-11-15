@@ -11,6 +11,7 @@ forras: "Forrasok/TMIT_gyakorlatok/gyak00.pdf … gyak08.pdf (letöltve: tmit.bm
 - **P.x**: kidolgozott példa. A megoldást minden esetben **újraszámoltam**, és ✅ jelöli, ha egyezik.
 - **G.x**: gyakorló feladat. **A forrásban ezekhez nincs megoldás**, a megoldásokat én készítettem, és ahol számolás van, szkripttel ellenőriztem.
 - `[ÁBRA SZÜKSÉGES]` jelöli, ahol a feladat ábrán alapul, `[ELLENŐRIZENDŐ]` pedig, ahol feltételezéssel számoltam.
+- **Kereszthivatkozás:** a példák azonosítója `tgNN_Px` / `tgNN_Gx`. Hogy ugyanez a feladat melyik előadáson, Koma-gyakorlaton és vizsgán szerepel, azt a `06_Kereszthivatkozasok.md` mutatja.
 
 **Hiányzó füzetek:** a `gyak03.pdf` és a `gyak09.pdf`-től felfelé minden fájl 404-es hibát ad a szerveren, és a tárgyoldal sem hivatkozik rájuk.
 - A témák sorrendje alapján a **03 valószínűleg a rádiós összeköttetés**. Ennek anyaga a OneDrive-on lévő `1-5 gyakorlatok.pdf` 3. fejezetében megvan, és az `01_Kidolgozas…` 1. fejezete feldolgozza.
@@ -108,7 +109,7 @@ Az áteresztősáv 4,5 kHz-ig tart, 500 Hz-es átmenet után 40 dB a csillapít�
 |---|---|---|
 | 5.1 hosszak 2,3,3,3,3,4,4,4,5,5 | Kraft = 1 → lehet; ha H = L̄, akkor pᵢ = 2^(−lᵢ) → **H = 49/16** | ✅ |
 | 5.2 Shannon-kód, p = 0,4/0,25/0,12/0,1/0,08/0,05 | 00, 01, 1010, 1100, 1101, 11110; L̄ = 2,75, H = 2,236 | ✅ |
-| 5.3 Pistike kódja {01, 10, 011, 1011} | nem egyértelmű (011·011 = 01·1011); Kraft szerint a 2,2,3,4 hosszakkal készíthető prefix kód: 00, 01, 100, 1100; L̄ = 2,05, H = 1,743 → **17,6%-kal** több | ✅ |
+| 5.3 Pistike kódja {01, 10, 011, 1011} | nem egyértelmű (011·011 = 01·1011); Kraft szerint a 2,2,3,4 hosszakkal készíthető prefix kód: 00, 01, 100, 1100; ⚠️ **L̄ = 0,5·2 + 0,25·2 + 0,15·3 + 0,1·4 = 2,35** (a forrásban 2,05 áll, ez számolási hiba); H = 1,743 → **34,8%-kal** több. Huffman-kóddal (1, 01, 001, 000) L̄ = 1,75 | ⚠️ javítva (`03` E1); az első változat tévesen ✅ volt |
 | 5.4 kódszavak 00000/10100/01110/11010 | G = {10100, 01110}; Hᵀ-ban az 1. és a 3. sor azonos (100) → ez a két egyhiba nem különböztethető meg; egy kódszó módosításával nem javítható, mert a linearitás miatt egy másik kódszónak is változnia kell | ✅ |
 | 5.5 Golay (23,12), 6 hibát jelez | d_min = 7, 3 hibát javít, 4096 kódszó, 2048 szindróma = 1 + 23 + 253 + 1771 → **perfekt**; 4 hiba nem különböztethető meg 3-tól; s = …1…1… → a 15. és a 21. bit hibás | ✅ |
 | 5.6 (8,4), nem szisztematikus G | a két utolsó sort összeadva lesz szisztematikus; u = 0110 → c = **01101010**; az 1. bit hibájára s = **0011**; d_min = 3 | ✅ |
