@@ -157,6 +157,8 @@ function checks(html) {
   let vis = html.replace(/<style>[\s\S]*?<\/style>/g, '').replace(/<script>[\s\S]*?<\/script>/g, '').replace(/<svg[\s\S]*?<\/svg>/g, ' ');
   vis = stripKatex(vis).replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&amp;|&lt;|&gt;|&quot;/g, ' ');
   ['—', '–', ';'].forEach(c => { let i = -1; while ((i = vis.indexOf(c, i + 1)) >= 0) errs.push('Tiltott írásjel „' + c + '”: …' + vis.slice(Math.max(0, i - 50), i + 15).replace(/\s+/g, ' ') + '…'); });
+  // elveszett visszaperjel nyoma (sima '…' stringben a \s, \b, \f eltűnik)
+  ['sqrt', 'frac', 'cdot', 'lfloor', 'qquad', 'mathrm', 'Rightarrow', 'Phi_', 'mu(t', 'eta'].forEach(w => { const m = vis.match(new RegExp('[^a-záéíóöőúüű]' + w.replace(/[()]/g, '\\$&') + '[^a-záéíóöőúüű]')); if (m) errs.push('Gyanús TeX-maradék „' + w + '”: …' + vis.slice(Math.max(0, m.index - 50), m.index + 30).replace(/\s+/g, ' ') + '…'); });
   ['$', '\\'].forEach(c => { let i = vis.indexOf(c); if (i >= 0) errs.push('Rendereletlen „' + c + '”: …' + vis.slice(Math.max(0, i - 60), i + 30).replace(/\s+/g, ' ') + '…'); });
   return errs;
 }

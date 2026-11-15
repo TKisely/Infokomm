@@ -90,7 +90,7 @@ module.exports = {
         S('b) Szinusz, 70 dB', R`$10\lg(3/2)=1{,}76$ dB.`, [
           ['behelyettesítés', R`1{,}76+6{,}02\,n\ge70\ \Rightarrow\ n\ge11{,}3\ \Rightarrow\ 12`, 'túlmintavételezés nélkül'],
           ['behelyettesítés', R`f_s=216,\ B_z=48:\ 10\lg\frac{216}{96}=3{,}5\ \text{dB}\ \Rightarrow\ n\ge\frac{70-1{,}76-3{,}5}{6{,}02}=10{,}75\ \Rightarrow\ 11`, 'csak sávszűrős visszaállításnál']]),
-        S('c) $C=\sqrt6$, 432 kHz, 60 dB', R`A 60 dB teljesítményarány, $10^{60/10}=10^6$. Sávszűrővel $B_z=48$ kHz.`, [
+        S(R`c) $C=\sqrt6$, 432 kHz, 60 dB`, R`A 60 dB teljesítményarány, $10^{60/10}=10^6$. Sávszűrővel $B_z=48$ kHz.`, [
           ['behelyettesítés', R`\frac{3}{6}\cdot\frac{432}{96}\cdot4^n\ge10^6\ \Rightarrow\ 2{,}25\cdot4^n\ge10^6\ \Rightarrow\ 4^n\ge444\,444`, R`$2^{2n}=4^n$`],
           ['átalakítás', R`n\ge\log_4444\,444=\frac{\lg444\,444}{\lg4}=9{,}4\ \Rightarrow\ n=10`, R`108 kHz-es aluláteresztővel is $9{,}97\to10$`]])],
       ered: [R`\text{a) }12\qquad\text{b) }12\ (f_s\ge216\ \text{kHz-nél sávszűrővel }11)\qquad\text{c) }10\ \text{bit}`],
