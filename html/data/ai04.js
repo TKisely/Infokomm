@@ -61,7 +61,7 @@ module.exports = {
       task: R`<p>$G=[1000110;\ 0100101;\ 0010011;\ 0001111]$. a) $H^T$? b) Szindróma $v=0000111$-re. c) Hány hibát jelez és javít, és miért? d) Hány bites üzenetek tartoznak hozzá?</p>`,
       ad: [R`$G=[I_4\,|\,B]$, $B$ sorai: 110, 101, 011, 111`, R`$v=0000111$`],
       ker: [R`a) $H^T$`, R`b) $s$`, R`c) jelzés és javítás`, R`d) $k$`],
-      lv: [S('a) $H^T$', R`Felül $B$, alul a $3\times3$-as egységmátrix.`, [
+      lv: [S('a) A paritásellenőrző mátrix transzponáltja ($H^T$)', R`Felül $B$, alul a $3\times3$-as egységmátrix.`, [
           ['definíció', HT(['110', '101', '011', '111', '100', '010', '001']), 'a 7 különböző nem nulla 3 bites szó']]),
         S('b) Szindróma', R`$v$-ben az 5., 6., 7. bit 1-es.`, [
           ['behelyettesítés', R`s=100\oplus010\oplus001=111`, R`$H^T$ 4. sora`],
@@ -77,7 +77,7 @@ module.exports = {
       task: R`<p>$G=[1000011;\ 0100110;\ 0010101;\ 0001111]$. a) $H^T$. b) Szindróma $v=1100001$-re. c) Hibajelző és -javító képesség.</p>`,
       ad: [R`$G=[I_4\,|\,B]$, $B$ sorai: 011, 110, 101, 111`, R`$v=1100001$`],
       ker: [R`a) $H^T$`, R`b) $s$ és a javítás`, R`c) jelzés és javítás`],
-      lv: [S('a) $H^T$', '', [['definíció', HT(['011', '110', '101', '111', '100', '010', '001']), '']]),
+      lv: [S('a) A paritásellenőrző mátrix transzponáltja ($H^T$)', '', [['definíció', HT(['011', '110', '101', '111', '100', '010', '001']), '']]),
         S('b) Szindróma', R`$v$-ben az 1., 2. és 7. bit 1-es.`, [
           ['behelyettesítés', R`s=011\oplus110\oplus001=100`, R`$H^T$ 5. sora`],
           ['átalakítás', R`\hat c=1100001\oplus0000100=1100101\ \Rightarrow\ \hat u=1100`, R`ellenőrzés: $G$ 1. és 2. sorának XOR-ja`]]),
@@ -91,10 +91,10 @@ module.exports = {
       ker: [R`a) $G$`, R`b) $n_{\min}$`, R`c) a kód súlya (a legkisebb nem nulla kódszósúly)`],
       lv: [S('A szükséges kódtávolság', R`$d_{\min}-1$ hibát jelez a kód.`, [
           ['definíció', R`d_{\min}-1=2\ \Rightarrow\ d_{\min}=3`, 'ez egy hiba javítását is jelenti']]),
-        S('b) A legkisebb $n$', R`Két korlátot nézünk. A Singleton-korlát szerint $d_{\min}\le n-k+1$. Mivel a kód 1 hibát javít, a Hamming-korlátnak is teljesülnie kell: a $2^{n-k}$ szindróma ki kell, hogy adja a hibátlan esetet és mind az $n$ egybites hibát.`, [
+        S('b) A legkisebb kódszóhossz ($n$)', R`Két korlátot nézünk. A Singleton-korlát szerint $d_{\min}\le n-k+1$. Mivel a kód 1 hibát javít, a Hamming-korlátnak is teljesülnie kell: a $2^{n-k}$ szindróma ki kell, hogy adja a hibátlan esetet és mind az $n$ egybites hibát.`, [
           ['tétel', R`n\ge d_{\min}+k-1=3+2-1=4`, 'Singleton'],
           ['tétel', R`1+n\le2^{n-2}:\ n=4:\ 5\not\le4\qquad n=5:\ 6\le8`, 'Hamming: $n=5$']]),
-        S('a) Egy jó $G$', R`$G=[I_2\,|\,B]$, a $B$ két sora legyen olyan, hogy minden nem nulla kódszó súlya legalább 3: mindkét sorban legalább két egyes, és a két sor legalább egy helyen különbözzön.`, [
+        S('a) Egy jó generátormátrix ($G$)', R`$G=[I_2\,|\,B]$, a $B$ két sora legyen olyan, hogy minden nem nulla kódszó súlya legalább 3: mindkét sorban legalább két egyes, és a két sor legalább egy helyen különbözzön.`, [
           ['definíció', R`G=\begin{bmatrix}1&0&1&1&1\\0&1&0&1&1\end{bmatrix}`, ''],
           ['ellenőrzés', R`10111\ (w=4),\quad01011\ (w=3),\quad11100\ (w=3)`, R`$d_{\min}=3$`]]),
         S('c) A kód súlya', R`A legkisebb nem nulla kódszósúly, lineáris kódnál egyenlő $d_{\min}$-nel.`, [['számérték', R`w_{\min}=3`, ''] ])],
@@ -138,7 +138,7 @@ module.exports = {
       lv: [S('a) Kódszavak', '', [
           ['számérték', R`00000,\ 10101,\ 01011,\ 11110`, ''],
           ['számérték', R`d(v,\cdot)=4,\ 1,\ 3,\ 2\ \Rightarrow\ \hat u=10`, '']]),
-        S('b) $H$ és szindróma', R`$H=[B^T\,|\,I]$, $H^T$ sorai 101, 011, 100, 010, 001. $v$-ben az 1., 2., 3. és 5. bit 1-es.`, [
+        S('b) A paritásellenőrző mátrix ($H$) és a szindróma', R`$H=[B^T\,|\,I]$, $H^T$ sorai 101, 011, 100, 010, 001. $v$-ben az 1., 2., 3. és 5. bit 1-es.`, [
           ['definíció', R`H=\begin{bmatrix}1&0&1&0&0\\0&1&0&1&0\\1&1&0&0&1\end{bmatrix}`, ''],
           ['behelyettesítés', R`s=101\oplus011\oplus100\oplus001=011`, R`$H^T$ 2. sora: $\hat c=10101$`]]),
         S('c) Kódtávolság', '', [['számérték', R`w:\ 3,\ 3,\ 4\ \Rightarrow\ d_{\min}=3`, 'jelez 2, javít 1']])],

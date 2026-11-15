@@ -177,9 +177,10 @@ module.exports = {
       miert: [[R`Miért van értelme a sáváteresztő mintavételnek?`, R`A jel csak $30$ kHz széles, de magasan van. Ha a másolatok a sávok közé esnek, $150$ kHz helyett már $75$ kHz is elég.`],
         [R`Meddig kell $k$-t növelni?`, R`$k\le\lfloor f_H/B\rfloor=\lfloor75/30\rfloor=2$. Nagyobb $k$-ra az alsó határ meghaladná a felsőt.`]],
       elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`]],
-      lv: [
+      lv: [{ t: R`Mit jelent a $k$? A Nyquist-zóna sorszáma`, s: R`A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. <b>$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:</b> $(k-1)\,f_s/2\le f_L$ és $f_H\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2f_H/k\le f_s\le2f_L/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2f_H$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge B$), $k$ legfeljebb $f_H/B$ lehet, lefelé kerekítve: $k_{\max}=\lfloor f_H/B\rfloor$.`, m: [] },
+        
         { t: 'Aluláteresztő eset', s: R`A legmagasabb komponens dönt.`, m: [['tétel', R`f_s\ge2f_H=2\cdot75=150\ \text{kHz}`, '$k=1$']] },
-        { t: 'A $k=2$ tartomány', s: R`Behelyettesítünk a sáváteresztő képletbe.`,
+        { t: 'A második Nyquist-zóna ($k=2$)', s: R`Behelyettesítünk a sáváteresztő képletbe.`,
           m: [['behelyettesítés', R`\frac{2\cdot75}{2}\le f_s\le\frac{2\cdot45}{1}`, R`$k=2$, $f_H=75$, $f_L=45$ kHz`], ['számérték', R`75\ \text{kHz}\le f_s\le90\ \text{kHz}`, R`kiszámolva`]] },
         { t: 'Ellenőrzés a spektrumon', s: R`$f_s=75$ kHz-nél a negatív oldali sáv ($-75\ldots-45$) eltolva $0\ldots30$ kHz-re kerül, $2f_s$-sel $75\ldots105$ kHz-re. Egyik sem lóg bele a $45\ldots75$ kHz-be.`,
           m: [['ellenőrzés', R`f_s=75:\ \ [0;30]\ \text{és}\ [75;105]\ \cap\ [45;75]=\{75\}`, 'csak a sávszél érintkezik, ezért határeset']] }
@@ -197,7 +198,8 @@ module.exports = {
       miert: [[R`Miért $f_s=2B$ a c) részben?`, R`Aluláteresztő visszaállításnál a szűrő sávja $B=70$ kHz, és a legkisebb $f_s=140$ kHz. Ekkor $f_s/2B=1$, a túlmintavételezés nem ad nyereséget.`],
         [R`Miért felfelé kerekítünk?`, R`Mert a $64$ dB alsó korlát. $10$ bittel $62$ dB lenne, az kevés.`]],
       elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`], [R`Jel-zaj viszony.`, R`Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`]],
-      lv: [
+      lv: [{ t: R`Mit jelent a $k$? A Nyquist-zóna sorszáma`, s: R`A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. <b>$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:</b> $(k-1)\,f_s/2\le f_L$ és $f_H\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2f_H/k\le f_s\le2f_L/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2f_H$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge B$), $k$ legfeljebb $f_H/B$ lehet, lefelé kerekítve: $k_{\max}=\lfloor f_H/B\rfloor$.`, m: [] },
+        
         { t: 'Mintavételi tartományok', s: R`$\lfloor70/30\rfloor=2$, tehát $k=1$ és $k=2$.`,
           m: [['tétel', R`k=1:\ f_s\ge140\ \text{kHz}`, R`$2f_H=2\cdot70$`], ['behelyettesítés', R`k=2:\ \frac{140}{2}\le f_s\le\frac{80}{1}\ \Longrightarrow\ 70\le f_s\le80\ \text{kHz}`, R`$2f_H/2$ és $2f_L/1$`]] },
         { t: 'A szűrők', s: R`A $140$ kHz feletti esetben a be- és kimenő szűrő aluláteresztő, a $70\ldots80$ kHz-es esetben sáváteresztő ($40\ldots70$ kHz).`, m: [] },
@@ -217,7 +219,8 @@ module.exports = {
       miert: [[R`Miért pont a háromszögjel kényelmes?`, R`Mert $3/C^2=1$, így a konstans tag eltűnik, és $\text{SNR}_{\mathrm{dB}}\approx6{,}02\,n$.`],
         [R`Miért $f_s=2B$-vel számolunk a bitszámnál?`, R`A forrásmegoldás ezt a legkisebb, „célszerűen választott” mintavételt veszi. Nagyobb $f_s$-nél kevesebb bit is elég lehet (A6).`]],
       elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`], [R`Jel-zaj viszony.`, R`Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`]],
-      lv: [
+      lv: [{ t: R`Mit jelent a $k$? A Nyquist-zóna sorszáma`, s: R`A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. <b>$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:</b> $(k-1)\,f_s/2\le f_L$ és $f_H\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2f_H/k\le f_s\le2f_L/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2f_H$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge B$), $k$ legfeljebb $f_H/B$ lehet, lefelé kerekítve: $k_{\max}=\lfloor f_H/B\rfloor$.`, m: [] },
+        
         { t: 'Mintavételi tartományok', s: R`$\lfloor108/48\rfloor=2$.`,
           m: [['tétel', R`k=1:\ f_s\ge216\ \text{kHz}`, R`$2f_H=2\cdot108$`], ['behelyettesítés', R`k=2:\ \frac{216}{2}\le f_s\le\frac{120}{1}\ \Longrightarrow\ 108\le f_s\le120\ \text{kHz}`, R`$2f_H/2$ és $2f_L/1=2\cdot60$`], ['ellenőrzés', R`f_s\ge2B=96\ \text{kHz}`, 'teljesül']] },
         { t: 'A bitszám', s: R`$10\lg(3/C^2)=10\lg1=0$ dB.`,
@@ -275,7 +278,8 @@ module.exports = {
       ad: [R`$f_L=19$, $f_H=25$ kHz, $B=6$ kHz`], ker: [R`a) $f_{s,\min}$`, R`b) $\Delta\text{SNR}$`],
       miert: [[R`Miért nem $2B=12$ kHz a válasz?`, R`$25/6$ nem egész. $12$ kHz-nél a $4\cdot12$-vel eltolt sáv ($23\ldots29$ kHz) ráesne a jelre.`]],
       elm: [[R`Sáváteresztő mintavétel.`, R`Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:`, R`\frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}`], [R`Túlmintavételezés.`, R`A jel-zaj viszonyban a $10\lg(f_s/2B)$ tag: ha ugyanazzal a kvantálóval és szűrővel sűrűbben mintázunk, a kvantálási zaj szélesebb sávra terül szét, és kevesebb jut a szűrő sávjába.`]],
-      lv: [
+      lv: [{ t: R`Mit jelent a $k$? A Nyquist-zóna sorszáma`, s: R`A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. <b>$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:</b> $(k-1)\,f_s/2\le f_L$ és $f_H\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2f_H/k\le f_s\le2f_L/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2f_H$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge B$), $k$ legfeljebb $f_H/B$ lehet, lefelé kerekítve: $k_{\max}=\lfloor f_H/B\rfloor$.`, m: [] },
+        
         { t: 'A legkisebb mintavételi frekvencia', s: R`$k=4$-re behelyettesítünk.`,
           m: [['behelyettesítés', R`\frac{2\cdot25}{4}\le f_s\le\frac{2\cdot19}{3}\ \Longrightarrow\ 12{,}5\le f_s\le12{,}67\ \text{kHz}`, R`$k=\lfloor25/6\rfloor=4$`]] },
         { t: 'A jel-zaj viszony változása', s: R`Csak az $f_s/2B$ tag változik, mert a kvantáló, a csúcstényező és a szűrő ugyanaz.`,
@@ -315,7 +319,7 @@ module.exports = {
       elm: [[R`Jel-zaj viszony.`, R`Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:`, R`\text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n`], [R`Decibel.`, R`Teljesítményarányra $10\lg$, feszültségre $20\lg$: 3 dB kétszeres, 10 dB tízszeres, 20 dB százszoros teljesítmény.`]],
       lv: [
         { t: 'Tökéletes-e?', s: R`Nem: a sávkorlát ($4$ kHz az érthetőséghez elég) és a kvantálási zaj miatt. Átlapolódás nincs, mert $9>2\cdot4$.`, m: [] },
-        { t: 'Szűrők', s: R`A bemeneten kell, különben a $4{,}5$ kHz feletti zaj és hang átlapolódna. A kimeneten is kell, mert a D/A után ott vannak az $n\cdot9\pm f$ másolatok.`, m: [] },
+        { t: 'Szűrők', s: R`A bemeneten kell, különben a $4{,}5$ kHz feletti zaj és hang átlapolódna. A kimeneten is kell, mert a D/A után ott vannak az $i\cdot9\pm f$ kHz-es másolatok ($i$ tetszőleges pozitív egész, $f$ a hang egy összetevőjének frekvenciája).`, m: [] },
         { t: '6 bit elhagyása', s: R`Minden bit $6$ dB.`,
           m: [['számérték', R`\Delta\text{SNR}=6\cdot6{,}02=36\ \text{dB}\qquad 2^{12}=4096\approx4000\text{-szeres zajteljesítmény}`, 'sistergés']] },
         { t: '26 dB hangosabban', s: R`Teljesítményarány a decibelből.`,

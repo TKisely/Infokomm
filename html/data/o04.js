@@ -71,7 +71,8 @@ module.exports = {
       task: R`<p>Egy jel 60 és 108 kHz között tartalmaz összetevőket. a) A büntetlenül választható mintavételi frekvenciák? b) Hány bit kell 70 dB-hez (szinuszos jel)?</p>`,
       ad: [R`$f_L=60$ kHz, $f_H=108$ kHz: a jel sávjának két széle`, R`$\text{SNR}\ge70$ dB, szinuszos jel: $C=\sqrt2$`],
       ker: [R`a) $f_s$ megengedett tartományai`, R`b) $n$: bitszám`],
-      lv: [S('a) A $k$ lehetséges értékei', R`A jel sávszélessége és a legnagyobb $k$:`, [
+      lv: [{ t: R`Mit jelent a $k$? A Nyquist-zóna sorszáma`, s: R`A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. <b>$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:</b> $(k-1)\,f_s/2\le f_L$ és $f_H\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2f_H/k\le f_s\le2f_L/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2f_H$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge B$), $k$ legfeljebb $f_H/B$ lehet, lefelé kerekítve: $k_{\max}=\lfloor f_H/B\rfloor$.`, m: [] },
+        S(R`a) Hány zóna jöhet szóba?`, R`A jel sávszélessége $B=f_H-f_L$, és $k$ legfeljebb $\lfloor f_H/B\rfloor$ lehet.`, [
           ['számérték', R`B=108-60=48\ \text{kHz}\qquad\left\lfloor\frac{108}{48}\right\rfloor=\lfloor2{,}25\rfloor=2`, R`$k=1$ vagy $2$`]]),
         S('a) A tartományok', R`Behelyettesítünk a sáváteresztő képletbe (A2).`, [
           ['behelyettesítés', R`k=1:\ f_s\ge\frac{2\cdot108}{1}=216\ \text{kHz}`, 'aluláteresztő visszaállítás'],

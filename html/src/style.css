@@ -234,3 +234,8 @@ svg polygon.gr{fill:none}
 .draw li{margin:3px 0}
 svg polyline{fill:none}
 svg .bt{font-size:17px}
+
+.jel{border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin:12px 26px}
+.jel ul{margin:0;padding-left:18px;columns:2 22em;column-gap:28px}
+.jel li{margin:2px 0;break-inside:avoid}
+@media (max-width:700px){.jel{margin-left:16px;margin-right:16px}}

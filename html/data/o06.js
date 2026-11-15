@@ -38,7 +38,7 @@ module.exports = {
           ['ellenőrzés', R`110=H^T\ \text{1. sora}\ \Rightarrow\ e=1000000`, 'egy hibát feltételezve az 1. bit romlott el'],
           ['számérték', R`\hat c=0110000\oplus1000000=1110000\ \Rightarrow\ \hat u=1110`, ''],
           ['ellenőrzés', R`d_{\min}=3`, 'biztos csak akkor, ha legfeljebb 1 hiba történt']]),
-        S('d) A $C_2$ kód', R`Kifejtjük a negyedik paritásbitet: minden $u_i$ annyiszor szerepel, ahány képletben benne van.`, [
+        S('d) A második kód ($C_2$) generátormátrixa', R`Kifejtjük a negyedik paritásbitet: minden $u_i$ annyiszor szerepel, ahány képletben benne van.`, [
           ['átalakítás', R`p_4=p_1\oplus p_2\oplus p_3=u_1\oplus u_1\oplus u_2\oplus u_2\oplus u_3\oplus u_3\oplus u_4\oplus u_4\oplus u_4=u_4`, R`$x\oplus x=0$`],
           ['definíció', R`G_2=\begin{bmatrix}1&0&0&0&1&1&0&0\\0&1&0&0&1&0&1&0\\0&0&1&0&0&1&1&0\\0&0&0&1&1&1&1&1\end{bmatrix}`, R`az 1. sor súlya 3, ezért $d_{\min}$ marad 3`]])],
       ered: [R`\text{b) 3 bites szindróma}\qquad\text{c) }\hat u=1110,\ \text{nem biztos (csak egy hibánál)}\qquad\text{d) }p_4=u_4,\ d_{\min}(C_2)=3`],

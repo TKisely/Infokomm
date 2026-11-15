@@ -60,7 +60,7 @@ module.exports = {
       ker: [R`melyik állítás igaz`],
       lv: [S('A) csúcsérték', R`Az $a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi)$ összevonással, ahol $a=4$, $b=-3$.`, [['tétel', R`\hat s=\sqrt{4^2+(-3)^2}=5`, 'A hamis']]),
         S('B) csúcstényező', R`Az összeg egyetlen szinusz, ezért $C=\sqrt2$. Az $1/\sqrt2$ már csak azért is rossz, mert $C\ge1$ mindig.`, [['számérték', R`C=\frac{5}{5/\sqrt2}=\sqrt2`, 'B hamis']]),
-        S('C) érték $t=42/f_0$-ban', R`Behelyettesítve az argumentum $2\pi\cdot42$, ez egész számú periódus.`, [['behelyettesítés', R`s=4\sin(84\pi)-3\cos(84\pi)=4\cdot0-3\cdot1=-3`, 'C hamis']]),
+        S('C) A jel értéke a $t=42/f_0$ időpontban', R`Behelyettesítve az argumentum $2\pi\cdot42$, ez egész számú periódus.`, [['behelyettesítés', R`s=4\sin(84\pi)-3\cos(84\pi)=4\cdot0-3\cdot1=-3`, 'C hamis']]),
         S('D) átlagteljesítmény', '', [['definíció', R`P=\frac{4^2}{2}+\frac{3^2}{2}=8+4{,}5=12{,}5`, 'D hamis']])],
       ered: [R`\text{egyik állítás sem igaz}`],
       fix: R`A gyűjtemény lapján A, B, C be van karikázva. Ha ez a „hamis” jelölése, a megoldás helyes, igaznak jelölve mindhárom rossz.`,

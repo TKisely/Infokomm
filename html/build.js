@@ -25,6 +25,10 @@ const CHAPTERS = BOOK.chapters.filter(n => fs.existsSync(path.join(__dirname, 'd
 const REPO = 'https://github.com/TKisely/Infokomm/blob/main/';
 const { explain } = require('./data/_gloss_core.js');
 const { glossFor } = require('./data/_gloss.js');
+const { JEL } = require('./data/_jel.js');
+const { scan, texOf } = require('./data/_symscan.js');
+const symV = k => [...new Set([k, k.replace(/_\{?\d+\}?$/, ''), k.replace(/\^\{\(\d\)\}$/, ''), k.replace(/\(t\)$/, '')])];
+const symTex = k => k.replace(/\\(hat|bar|mathcal|mathbf|mathsf)(?=[A-Za-z])/g, '\\$1 ');
 const MISSING = [];
 const RAJZ = fs.existsSync(path.join(__dirname, 'data/_rajz.js')) ? require('./data/_rajz.js') : {};
 
@@ -92,11 +96,21 @@ function example(e, ch) {
   const refTxt = [e.task, e.gy, e.fix, ...(e.chk || []), ...(e.hib || []), ...(e.miert || []).flat(), ...e.lv.flatMap(x => [x.t, x.s, ...(x.m || []).map(r => r[2])])].join(' ');
   const rm = refTxt.match(/\b\d{1,2}\.\d{1,2}\.?\s*(?:példa|-ben|-ban)|[Aa]z előző (?:feladat|példa|forrás)|Ugyanehhez|mint az \d/);
   if (rm) MISSING.push(e.id + ': másik feladatra utal („' + rm[0] + '”)');
-  const G = glossFor(ch._file), ex1 = x => { const [t, miss] = explain(x, G); miss.forEach(m => MISSING.push(e.id + ': ' + m)); return t; };
+  const J = JEL[e.id] || {}, G = Object.assign(glossFor(ch._file), J), ex1 = x => { const [t, miss] = explain(x, G); miss.forEach(m => MISSING.push(e.id + ': ' + m)); return t; };
   if (e.ad) h += '<div class="ak"><div><div class="lbl">Adott</div><ul>' + e.ad.map(x => '<li>' + T(ex1(x)) + '</li>').join('') + '</ul></div>' +
     '<div><div class="lbl">Keresett</div><ul>' + e.ker.map(x => '<li>' + T(ex1(x)) + '</li>').join('') + '</ul></div></div>';
   if (e.miert) h += '<div class="why"><div class="lbl">Miért így? Egyszerűen</div><dl>' + e.miert.map(q => '<dt>' + T(q[0]) + '</dt><dd>' + T(q[1]) + '</dd>').join('') + '</dl></div>';
   if (e.elm) h += '<div class="th"><div class="lbl">Felhasznált elmélet</div>' + e.elm.map(t => '<div class="thi"><b>' + T(t[0]) + '</b> ' + T(t[1]) + (t[2] ? disp(t[2]) : '') + '</div>').join('') + '</div>';
+  // a lépésekben, a feladatban és az eredményben használt, de az Adott/Keresett részben nem magyarázott jelek
+  const have = new Set([...(e.ad || []), ...(e.ker || [])].flatMap(texOf).flatMap(scan));
+  const body = [...texOf(e.task), ...e.lv.flatMap(s => [...texOf(s.t), ...texOf(s.s), ...(s.m || []).flatMap(r => [r[1], ...texOf(r[2])])]), ...e.ered.flatMap(x => /\$/.test(x) ? texOf(x) : [x])];
+  const jl = [];
+  for (const sym of new Set(body.flatMap(scan))) {
+    if (have.has(sym)) continue;
+    const vs = [sym].concat(symV(sym)), kj = vs.find(x => J[x] !== undefined), d = kj !== undefined ? J[kj] : vs.map(x => G[x]).find(x => x !== undefined);
+    if (d === undefined) MISSING.push(e.id + ': ' + sym + ' (a lépésekben)'); else if (d) jl.push([sym, d]);
+  }
+  if (jl.length) h += '<div class="jel"><div class="lbl">Jelölések ebben a példában</div><ul>' + jl.map(([sym, d]) => '<li>' + k(symTex(sym), false) + ': ' + T(d) + '</li>').join('') + '</ul></div>';
   h += '<div class="sol"><div class="lbl">Megoldás lépésenként</div>' + e.lv.map((st, i) =>
     '<div class="step"><div class="sn">' + (i + 1) + '</div><div class="sb"><h4>' + T(st.t) + '</h4><p>' + T(st.s) + '</p>' +
     (st.m && st.m.length ? '<div class="rows">' + st.m.map(r => {
@@ -122,9 +136,9 @@ function page() {
   let toc = '<div class="toch">Tartalom</div>', body = '';
   for (const ch of CHAPTERS) {
     toc += '<a href="#' + ch.id + '" class="part">' + ch.num + '. ' + esc(ch.title) + '</a>';
-    toc += '<div class="tsub">Alapok, egyszerűen</div>' + ch.alap.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}]/g, '').replace(/;/g, ','))) + '</a>').join('');
-    if (ch.elmelet) toc += '<div class="tsub">Elméleti összefoglaló</div>' + ch.elmelet.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}]/g, '').replace(/;/g, ','))) + '</a>').join('');
-    toc += '<div class="tsub">Példák</div>' + ch.ex.map(e => '<a href="#' + e.id + '" class="ex' + ((e.tags || []).includes('nehez') ? ' hard' : '') + '">' + e.num + ' ' + esc(e.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}]/g, '').replace(/;/g, ','))) + '</a>').join('');
+    toc += '<div class="tsub">Alapok, egyszerűen</div>' + ch.alap.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}_]/g, '').replace(/;/g, ','))) + '</a>').join('');
+    if (ch.elmelet) toc += '<div class="tsub">Elméleti összefoglaló</div>' + ch.elmelet.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}_]/g, '').replace(/;/g, ','))) + '</a>').join('');
+    toc += '<div class="tsub">Példák</div>' + ch.ex.map(e => '<a href="#' + e.id + '" class="ex' + ((e.tags || []).includes('nehez') ? ' hard' : '') + '">' + e.num + ' ' + esc(e.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}_]/g, '').replace(/;/g, ','))) + '</a>').join('');
     body += '<h2 class="part" id="' + ch.id + '"><span>' + ch.num + '.</span>' + esc(ch.title) + '</h2><p class="lead">' + T(ch.lead) + '</p>';
     body += '<h3 class="sub">Alapok, egyszerűen</h3>' + ch.alap.map(alap).join('');
     if (ch.elmelet) body += '<h3 class="sub">Elméleti összefoglaló</h3>' + ch.elmelet.map(alap).join('');
