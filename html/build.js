@@ -23,6 +23,7 @@ const BOOK = BOOKS[process.argv[2] || 'main'];
 if (!BOOK) throw new Error('Ismeretlen könyv: ' + process.argv[2]);
 const CHAPTERS = BOOK.chapters.filter(n => fs.existsSync(path.join(__dirname, 'data', n + '.js')) || (console.warn('Hiányzó fejezet: ' + n), false)).map(n => require('./data/' + n + '.js'));
 const REPO = 'https://github.com/TKisely/Infokomm/blob/main/';
+const RAJZ = fs.existsSync(path.join(__dirname, 'data/_rajz.js')) ? require('./data/_rajz.js') : {};
 
 // ---------- KaTeX ----------
 function k(tex, display) {
@@ -93,6 +94,8 @@ function example(e, ch) {
       const c = MK[r[0]]; if (!c) throw new Error('Ismeretlen jelölő: ' + r[0] + ' (' + e.id + ')');
       return '<div class="row"><span class="mk ' + c + '">' + r[0] + '</span><div class="rm">' + disp(r[1]) + '</div><div class="rn">' + T(r[2] || '') + '</div></div>';
     }).join('') + '</div>' : '') + '</div></div>').join('') + '</div>';
+  const rz = e.rajz || RAJZ[e.id];
+  if (rz) h += '<div class="draw"><div class="lbl">Rajz: ezt kell felrajzolni</div>' + rz.map(r => (r.t ? '<div class="dt">' + T(r.t) + '</div>' : '') + '<div class="fig">' + r.svg + '</div>' + (r.cap && r.cap.length ? '<ul>' + r.cap.map(c => '<li>' + T(c) + '</li>').join('') + '</ul>' : '')).join('') + '</div>';
   if (e.gy) h += '<div class="why"><div class="lbl">A gyűjtemény megoldása</div>' + T(e.gy) + '</div>';
   if (e.fix) h += '<div class="fix"><b>Javítás.</b> ' + T(e.fix) + '</div>';
   h += '<div class="res"><div class="lbl">Eredmény</div>' + e.ered.map(disp).join('') + '</div>';
@@ -110,9 +113,9 @@ function page() {
   let toc = '<div class="toch">Tartalom</div>', body = '';
   for (const ch of CHAPTERS) {
     toc += '<a href="#' + ch.id + '" class="part">' + ch.num + '. ' + esc(ch.title) + '</a>';
-    toc += '<div class="tsub">Alapok, egyszerűen</div>' + ch.alap.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$[^$]*\$/g, '')) + '</a>').join('');
-    if (ch.elmelet) toc += '<div class="tsub">Elméleti összefoglaló</div>' + ch.elmelet.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$[^$]*\$/g, '')) + '</a>').join('');
-    toc += '<div class="tsub">Példák</div>' + ch.ex.map(e => '<a href="#' + e.id + '" class="ex' + ((e.tags || []).includes('nehez') ? ' hard' : '') + '">' + e.num + ' ' + esc(e.title.replace(/\$[^$]*\$/g, '')) + '</a>').join('');
+    toc += '<div class="tsub">Alapok, egyszerűen</div>' + ch.alap.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}]/g, '').replace(/;/g, ','))) + '</a>').join('');
+    if (ch.elmelet) toc += '<div class="tsub">Elméleti összefoglaló</div>' + ch.elmelet.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}]/g, '').replace(/;/g, ','))) + '</a>').join('');
+    toc += '<div class="tsub">Példák</div>' + ch.ex.map(e => '<a href="#' + e.id + '" class="ex' + ((e.tags || []).includes('nehez') ? ' hard' : '') + '">' + e.num + ' ' + esc(e.title.replace(/\$([^$]*)\$/g, (_, t) => t.replace(/\\(sqrt)/g, '√').replace(/\\(mathbf|mathrm|text|tfrac|frac|left|right|,|;|\s)/g, '').replace(/\\/g, '').replace(/[{}]/g, '').replace(/;/g, ','))) + '</a>').join('');
     body += '<h2 class="part" id="' + ch.id + '"><span>' + ch.num + '.</span>' + esc(ch.title) + '</h2><p class="lead">' + T(ch.lead) + '</p>';
     body += '<h3 class="sub">Alapok, egyszerűen</h3>' + ch.alap.map(alap).join('');
     if (ch.elmelet) body += '<h3 class="sub">Elméleti összefoglaló</h3>' + ch.elmelet.map(alap).join('');

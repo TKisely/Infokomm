@@ -222,3 +222,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 h1,h2,h3,h4{text-wrap:balance}
 .src{font:13px var(--ui);color:var(--muted)}
+/* rajzok */
+svg .bj{fill:var(--jcol);fill-opacity:.16;stroke:var(--jcol);stroke-width:1.2}
+svg .ba{fill:var(--acc);fill-opacity:.16;stroke:var(--acc);stroke-width:1.2}
+svg .bb{fill:var(--bcol);fill-opacity:.2;stroke:var(--bcol);stroke-width:1.2}
+svg polygon.gr{fill:none}
+.draw{border:1px solid var(--line);border-left:4px solid var(--jcol);border-radius:10px;padding:10px 14px;margin:12px 0}
+.draw .fig{margin:8px 0}
+.draw .dt{font-weight:600;margin:6px 0 2px}
+.draw ul{margin:6px 0 2px;padding-left:20px}
+.draw li{margin:3px 0}
+svg polyline{fill:none}
+svg .bt{font-size:17px}
