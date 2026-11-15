@@ -2,6 +2,10 @@
 
 Utolsó frissítés: 2026-11-15
 
+## A jegyzet
+
+**Infokomm példatár** (könyvszerű HTML, az EMTA-jegyzet szerkezetében): https://claude.ai/artifact/WnHjsiUtTy3B5H7YoVAyS4 · forrás és build: `html/`. Kész: 2. Mintavételezés és kvantálás (9 alapozó szakasz, 12 ellenőrzött példa). A többi fejezet ebből a fájlokból készül, fejezetenként.
+
 ## Mappaszerkezet
 
 | Fájl / mappa | Mi van benne | Mire használd |

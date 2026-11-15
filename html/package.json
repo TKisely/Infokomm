@@ -1,0 +1,8 @@
+{
+  "name": "infokomm-jegyzet",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Infokommunikáció gyakorlati jegyzet: build KaTeX előrendereléssel",
+  "scripts": { "build": "node build.js" },
+  "dependencies": { "katex": "0.16.11" }
+}

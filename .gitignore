@@ -10,3 +10,4 @@ Videó felvételek/
 *.mkv
 *.mov
 *.webm
+node_modules/
