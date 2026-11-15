@@ -14,7 +14,7 @@ const BOOKS = {
     kicker: 'Infokommunikáció (BMEVITMAB03) · az ALL-IN gyűjtemény 1…145. oldala, ellenőrizve',
     intro: 'Az ALL-IN hallgatói gyűjtemény (Moodle-vizsgák 2020, vizsgamegoldások 2014 és 2016 között, témakörös feladatgyűjtemény) minden feladata témakörönként, egyszer. Minden példánál a gyűjtemény megoldása helyett ellenőrzött megoldás áll lépésekben, minden végeredményt független szkript számolt újra. Ahol a gyűjtemény hibázott, „Javítás” doboz mutatja, mi volt a hiba. A forrásoldal azonosítója (<code>ai…</code>) az átiratra mutat.',
     search: 'Keresés (pl. Erlang, Huffman, 8-QAM, ai2016)' },
-  otos: { chapters: ['o01', 'o02', 'o03', 'o04', 'o05', 'o06', 'o07', 'o08'], out: 'otosom_peldatar', idx: 'otosom', title: '5-ösöm példatár',
+  otos: { chapters: ['o01', 'o02', 'o03', 'o04', 'o05', 'o06', 'o07', 'o08', 'o09', 'o10'], out: 'otosom_peldatar', idx: 'otosom', title: '5-ösöm példatár',
     kicker: 'Infokommunikáció (BMEVITMAB03) · az „5-ösöm lesz Infokommból” gyűjtemény, ellenőrizve',
     intro: 'Az „5-ösöm lesz Infokommból” hallgatói gyűjtemény (30 oldal, sok beszkennelt oktatói megoldással) minden feladata témakörönként. Minden példánál ellenőrzött megoldás áll lépésekben, minden végeredményt független szkript számolt újra. Ahol a gyűjtemény hibázott, „Javítás” doboz mutatja. A forrásoldal azonosítója (<code>5o_…</code>) az átiratra mutat.',
     search: 'Keresés (pl. DVB-T, Huffman, GSM, 5o_14)' }

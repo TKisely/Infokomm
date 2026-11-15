@@ -88,6 +88,9 @@ A HTML-oldal szakaszazonosítói ezekből képződnek ékezet nélkül (pl. `mgP
 | `03` hibajegyzék | A–G részek |
 | `05` TMIT gyak00–08 | kész, a G-feladatokra saját megoldás |
 | `06` kereszthivatkozások | Koma, TMIT, Marosi, vizsgák megfeleltetése |
+| ALL-IN példatár | 11 fejezet, 104 példa: https://claude.ai/artifact/D88X7FaNkocZWMMUNbom5i · `html/data/ai*.js`, `check/verify_allin.py` |
+| 5-ösöm példatár | 10 fejezet, 49 példa: https://claude.ai/artifact/GJLVVebXiYeG1EDHCbJZnU · `html/data/o*.js`, `check/verify_otosom.py` |
+| Átiratok | `Forrasok/ALL-IN/allin_atirat.md` (175 oldal), `Forrasok/5-osom/5osom_atirat.md` (30 oldal), javítások: `03` H |
 | HTML-oldal („Infokomm példatár”) | **2. fejezet kész** (9 alap, 12 példa), közzétéve: https://claude.ai/artifact/WnHjsiUtTy3B5H7YoVAyS4 · forrás: `html/` (`build.js`, `data/ch02.js`, `check/verify_ch02.py`) |
 
 ---
@@ -112,6 +115,8 @@ A központi lista a `03_Hibajegyzek.md`. Ami különösen fontos:
 ---
 
 ## 9. A következő session teendői
+
+0. **A három példatár összefésülése** (a felhasználó terve): témakörönként egy közös fejezetszerkezet, minden feladattípus egyszer, a duplikátumok forrásai a „Forrás” sorban összevonva. A gyűjtemény-példatárak kompakt példaformátuma (`gy`: a gyűjtemény megoldása, `fix`: javítás, opcionális Adott/Keresett/Miért/elmélet) a `build.js`-ben már támogatott.
 
 1. A nyitott pontok tisztázása a felhasználóval.
 2. A következő HTML-fejezet (javasolt sorrend: 6. Kódolás, 8. Rádiós összeköttetések, 3. Analóg moduláció, 4–5. Digitális átvitel, 9. Műsorszórás, 10–11. Mobil és forgalom, 7. Hallás és látás, 1. Jelek). Fejezetenként: `data/chNN.js`, `check/verify_chNN.py`, build, böngészős ellenőrzés, újraközzététel ugyanarra az URL-re.
