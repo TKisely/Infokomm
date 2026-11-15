@@ -6,7 +6,7 @@ const path = require('path');
 const katex = require('katex');
 
 const BOOKS = {
-  main: { chapters: ['ch02'], out: 'infokomm_peldatar', idx: 'index', title: 'Infokomm példatár',
+  main: { chapters: ['ch02', 'ch06'], out: 'infokomm_peldatar', idx: 'index', title: 'Infokomm példatár',
     kicker: 'Infokommunikáció (BMEVITMAB03) · gyakorlati felkészítő jegyzet',
     intro: 'Előadás, gyakorlat, tanszéki füzet és régi vizsgák egy helyen. Minden példa elején egyszerű magyarázat arról, <b>miért</b> az a modell és az a képlet, utána a megoldás számozott lépésekben, minden matematikai sor mellett a jelölővel és az indoklással. Minden végeredményt független szkript számolt újra. A forrásbeli hibák „Javítás” dobozban szerepelnek.',
     search: 'Keresés a példákban (pl. aliasing, Kraft, 225 m)' },
@@ -111,10 +111,13 @@ function page() {
   for (const ch of CHAPTERS) {
     toc += '<a href="#' + ch.id + '" class="part">' + ch.num + '. ' + esc(ch.title) + '</a>';
     toc += '<div class="tsub">Alapok, egyszerűen</div>' + ch.alap.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$[^$]*\$/g, '')) + '</a>').join('');
+    if (ch.elmelet) toc += '<div class="tsub">Elméleti összefoglaló</div>' + ch.elmelet.map(a => '<a href="#' + a.id + '" class="alap">' + a.badge + ' ' + esc(a.title.replace(/\$[^$]*\$/g, '')) + '</a>').join('');
     toc += '<div class="tsub">Példák</div>' + ch.ex.map(e => '<a href="#' + e.id + '" class="ex' + ((e.tags || []).includes('nehez') ? ' hard' : '') + '">' + e.num + ' ' + esc(e.title.replace(/\$[^$]*\$/g, '')) + '</a>').join('');
     body += '<h2 class="part" id="' + ch.id + '"><span>' + ch.num + '.</span>' + esc(ch.title) + '</h2><p class="lead">' + T(ch.lead) + '</p>';
     body += '<h3 class="sub">Alapok, egyszerűen</h3>' + ch.alap.map(alap).join('');
+    if (ch.elmelet) body += '<h3 class="sub">Elméleti összefoglaló</h3>' + ch.elmelet.map(alap).join('');
     body += '<h3 class="sub">Példák</h3>' + ch.ex.map(e => example(e, ch)).join('');
+    if (ch.jav) { body += '<h3 class="sub">Javítások</h3><section class="sec alap" id="' + ch.jav.id + '">' + T(ch.jav.html) + '</section>'; toc += '<a href="#' + ch.jav.id + '" class="alap">Javítások</a>'; }
   }
   const chips = [['mind', 'Mind'], ['vizsga', 'Vizsga'], ['beugro', 'Beugró'], ['nehez', 'Nehezebb'], ['javitas', 'Javítás']]
     .concat(CHAPTERS.map(c => [c.id, c.num + '. ' + c.short]))
