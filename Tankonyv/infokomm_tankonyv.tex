@@ -1,0 +1,115 @@
+% Generálva: html/build_tex.js. Fordítás: pdflatex vagy xelatex (kétszer), vagy tectonic.
+\input{preambulum}
+\fancyhead[RE]{\small\sffamily Infokomm példatár}
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{30mm}
+{\sffamily\large BME VIK, BMEVITMAB03\par}
+\vspace{8mm}
+{\sffamily\bfseries\Huge Infokomm példatár\par}
+\vspace{6mm}
+{\sffamily\Large Gyakorlati tankönyv\par}
+\vspace{6mm}
+{\large Mintavételezés és kvantálás, kódolástechnika\par}
+\vspace{14mm}
+\begin{tikzpicture}[toll,x=1cm,y=1cm]
+\draw[tengely] (0,-1.4) -- (0,1.5);\draw[tengely] (0,0) -- (8.6,0) node[right] {$t$};
+\draw[szagg,domain=0:8.2,samples=120] plot (\x,{1+0.35*cos(\x*1.5 r)});\draw[szagg,domain=0:8.2,samples=120] plot (\x,{-1-0.35*cos(\x*1.5 r)});
+\draw[line width=0.5pt,domain=0:8.2,samples=900] plot (\x,{(1+0.35*cos(\x*1.5 r))*cos(\x*20 r)});
+\end{tikzpicture}
+\vfill
+{\small Az előadás, a gyakorlatok, a tanszéki füzet és a régi vizsgák alapján, minden eredmény újraszámolva.\par}
+\vspace{8mm}
+{\small 2026. november\par}
+\end{titlepage}
+\input{hasznalat}
+\tableofcontents
+\mainmatter
+\chapter*{Jelölések jegyzéke}\addcontentsline{toc}{chapter}{Jelölések jegyzéke}\markboth{Jelölések jegyzéke}{}
+A tárgyban kevés betűre sok mennyiség jut, ezért ugyanaz a jel a különböző témakörökben mást jelenthet. Az alábbi jegyzék a témakörök alapjelentéseit sorolja fel. Ha egy feladatban más a jelentés, azt a feladat „Jelölések ebben a feladatban” táblázata mondja meg, és az a mérvadó.
+
+{\small\renewcommand{\arraystretch}{1.2}\begin{longtable}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{8.2cm}>{\raggedright\arraybackslash}p{3.8cm}@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés} & \textbf{Témakör}\\\midrule\endhead
+$B$ & a jel sávszélessége & Mintavétel, kvantálás\\
+$B$ & a generátormátrix paritásrésze & Kódolás\\
+$\mathbf B$ & a generátormátrix paritásrésze & Kódolás\\
+$B_\text{be}$ & a bemenő szűrő sávja & Mintavétel, kvantálás\\
+$B_\text{ki}$ & a kimenő szűrő sávja & Mintavétel, kvantálás\\
+$B_\text{össz}$ & a jel teljes sávszélessége a pozitív frekvenciákon & Mintavétel, kvantálás\\
+$\hat c$ & a javított (becsült) kódszó & Kódolás\\
+$\hat{\mathbf c}$ & a javított (becsült) kódszó & Kódolás\\
+$C$ & csúcstényező & Mintavétel, kvantálás\\
+$\mathcal C$ & a kód, a kódszavak halmaza & Kódolás\\
+$C_1$ & az első kód & Kódolás\\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & Kódolás\\
+$\hat{\mathbf e}$ & a becsült hibavektor & Kódolás\\
+$f$ & a bemenő jel frekvenciája & Mintavétel, kvantálás\\
+$\mathcal F$ & a forrás (forrás ABC) & Kódolás\\
+$f_{AA}$ & a bemenő (antialiasing) szűrő határfrekvenciája & Mintavétel, kvantálás\\
+$f_H$ & a jel legnagyobb frekvenciája & Mintavétel, kvantálás\\
+$f_L$ & a jel legkisebb frekvenciája & Mintavétel, kvantálás\\
+$f_R$ & a visszaállító szűrő határfrekvenciája & Mintavétel, kvantálás\\
+$f_s$ & mintavételi frekvencia & Mintavétel, kvantálás\\
+$f_s$ & mintavételi frekvencia (minta/s) & Kódolás\\
+$f_{s,\min}$ & a legkisebb mintavételi frekvencia & Mintavétel, kvantálás\\
+$G$ & generátormátrix & Kódolás\\
+$\mathbf G$ & generátormátrix & Kódolás\\
+$G_2$ & a második kód generátormátrixa & Kódolás\\
+$H$ & a szűrő átvitele & Mintavétel, kvantálás\\
+$H_\text{be}(f)$ & a bemenő szűrő átvitele & Mintavétel, kvantálás\\
+$H(f)$ & a szűrő átviteli függvénye & Mintavétel, kvantálás\\
+$H(\mathcal F^2)$ & a szimbólumpárok entrópiája & Kódolás\\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & Kódolás\\
+$\mathbf H^{\mathsf T}$ & a paritásellenőrző mátrix transzponáltja & Kódolás\\
+$k$ & az üzenet hossza bitben & Kódolás\\
+$l$ & kódszóhossz & Kódolás\\
+$L$ & átlagos kódszóhossz egy szimbólumra & Kódolás\\
+$\bar L$ & átlagos kódszóhossz & Kódolás\\
+$L_1$ & kódszóhossz az első forrásnál & Kódolás\\
+$L_2$ & kódszóhossz a második forrásnál & Kódolás\\
+$l_a$ & az a kódszavának hossza & Kódolás\\
+$l_b$ & a b kódszavának hossza & Kódolás\\
+$l_c$ & a c kódszavának hossza & Kódolás\\
+$l_i$ & az i-edik kódszó hossza & Kódolás\\
+$L^{(2)}$ & egy szimbólumpár kódszavának hossza & Kódolás\\
+$n$ & a kvantáló bitszáma & Mintavétel, kvantálás\\
+$n$ & a kódszó hossza bitben & Kódolás\\
+$N$ & a forrás szimbólumainak száma & Kódolás\\
+$N_1$ & az első forrás szimbólumainak száma & Kódolás\\
+$N_2$ & a második forrás szimbólumainak száma & Kódolás\\
+$n_{\min}$ & a legkisebb kódszóhossz & Kódolás\\
+$p$ & egy bit hibavalószínűsége & Kódolás\\
+$P$ & a jel teljesítménye & Mintavétel, kvantálás\\
+$p_a$ & az a szimbólum valószínűsége & Kódolás\\
+$p_A$ & az A szimbólum valószínűsége & Kódolás\\
+$p_b$ & a b szimbólum valószínűsége & Kódolás\\
+$p_B$ & a B szimbólum valószínűsége & Kódolás\\
+$p_C$ & a C szimbólum valószínűsége & Kódolás\\
+$p(0)$ & a 0 szint valószínűsége & Kódolás\\
+$P(0)$ & annak valószínűsége, hogy egy bit sem hibás & Kódolás\\
+$P(1)$ & annak valószínűsége, hogy pontosan 1 bit hibás & Kódolás\\
+$P(2)$ & annak valószínűsége, hogy pontosan 2 bit hibás & Kódolás\\
+$p(\pm1)$ & a $\pm$1 szint valószínűsége & Kódolás\\
+$p(\pm2)$ & a $\pm$2 szint valószínűsége & Kódolás\\
+$p(\pm3)$ & a $\pm$3 szint valószínűsége & Kódolás\\
+$r$ & szimbólumsebesség (szimbólum/s) & Kódolás\\
+$R$ & az ellenállás & Mintavétel, kvantálás\\
+$s$ & szindróma & Kódolás\\
+$s_0$ & a teljesítménysűrűség & Mintavétel, kvantálás\\
+$\text{SNR}$ & jel-zaj viszony & Mintavétel, kvantálás\\
+$\Delta\text{SNR}$ & a jel-zaj viszony változása & Mintavétel, kvantálás\\
+$T$ & mintavételi idő & Mintavétel, kvantálás\\
+$T_1$ & első mintavételi idő & Mintavétel, kvantálás\\
+$T_2$ & második mintavételi idő & Mintavétel, kvantálás\\
+$\hat u$ & a becsült üzenet & Kódolás\\
+$\hat{\mathbf u}$ & a becsült üzenet & Kódolás\\
+$U$ & a bemenő jel amplitúdója & Mintavétel, kvantálás\\
+$U_{6{,}2}$ & a kimenő 6,2 kHz-es összetevő amplitúdója & Mintavétel, kvantálás\\
+$v$ & a vett szó & Kódolás\\
+$\mathbf v$ & a vett szó & Kódolás\\
+\bottomrule\end{longtable}}
+\input{fejezetek/ch02}
+\input{fejezetek/ch06}
+\end{document}

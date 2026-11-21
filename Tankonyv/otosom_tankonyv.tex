@@ -1,0 +1,247 @@
+% Generálva: html/build_tex.js. Fordítás: pdflatex vagy xelatex (kétszer), vagy tectonic.
+\input{preambulum}
+\fancyhead[RE]{\small\sffamily 5-ösöm példatár}
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{30mm}
+{\sffamily\large BME VIK, BMEVITMAB03\par}
+\vspace{8mm}
+{\sffamily\bfseries\Huge 5-ösöm példatár\par}
+\vspace{6mm}
+{\sffamily\Large Gyakorlati tankönyv\par}
+\vspace{6mm}
+{\large Az „5-ösöm lesz Infokommból” gyűjtemény minden feladata témakörönként\par}
+\vspace{14mm}
+\begin{tikzpicture}[toll,x=1cm,y=1cm]
+\draw[tengely] (0,-1.4) -- (0,1.5);\draw[tengely] (0,0) -- (8.6,0) node[right] {$t$};
+\draw[szagg,domain=0:8.2,samples=120] plot (\x,{1+0.35*cos(\x*1.5 r)});\draw[szagg,domain=0:8.2,samples=120] plot (\x,{-1-0.35*cos(\x*1.5 r)});
+\draw[line width=0.5pt,domain=0:8.2,samples=900] plot (\x,{(1+0.35*cos(\x*1.5 r))*cos(\x*20 r)});
+\end{tikzpicture}
+\vfill
+{\small Az „5-ösöm lesz Infokommból” hallgatói gyűjtemény és a beszkennelt oktatói megoldások alapján, minden eredmény újraszámolva.\par}
+\vspace{8mm}
+{\small 2026. november\par}
+\end{titlepage}
+\input{hasznalat}
+\tableofcontents
+\mainmatter
+\chapter*{Jelölések jegyzéke}\addcontentsline{toc}{chapter}{Jelölések jegyzéke}\markboth{Jelölések jegyzéke}{}
+A tárgyban kevés betűre sok mennyiség jut, ezért ugyanaz a jel a különböző témakörökben mást jelenthet. Az alábbi jegyzék a témakörök alapjelentéseit sorolja fel. Ha egy feladatban más a jelentés, azt a feladat „Jelölések ebben a feladatban” táblázata mondja meg, és az a mérvadó.
+
+{\small\renewcommand{\arraystretch}{1.2}\begin{longtable}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{8.2cm}>{\raggedright\arraybackslash}p{3.8cm}@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés} & \textbf{Témakör}\\\midrule\endhead
+$a$ & egy kiszolgáló kihasználtsága & VoIP, Erlang\\
+$A$ & a modulátor szorzója & AM, FM\\
+$A$ & a spektrum értéke 0 Hz-en & PAM, ISI\\
+$A$ & felajánlott forgalom & VoIP, Erlang\\
+$A_h$ & hatásos felület & Rádió\\
+$A_{h,T}$ & az adóantenna hatásos felülete & Rádió\\
+$a_k$ & a k-adik szimbólum amplitúdója & PAM, ISI\\
+$a_\mathrm{sz}$ & szakaszcsillapítás & Rádió\\
+$\alpha$ & lekerekítési tényező & QAM, PSK\\
+$B$ & B paraméter a képletben & AM, FM\\
+$B$ & a rendelkezésre álló sávszélesség & QAM, PSK\\
+$B$ & a jel sávszélessége & Mintavétel\\
+$B$ & a generátormátrix paritásrésze & Kódolás\\
+$B$ & kék színjel & Hang, látás\\
+$B$ & a csatorna sávszélessége & Műsorszórás\\
+$B$ & egy hívás sávigénye & VoIP, Erlang\\
+$\mathbf B$ & a generátormátrix paritásrésze & Kódolás\\
+$B_\text{be}$ & a bemenő szűrő sávja & Mintavétel\\
+$B_\text{ki}$ & a kimenő szűrő sávja & Mintavétel\\
+$B_{\min}$ & a legkisebb sávszélesség & QAM, PSK\\
+$B_\text{össz}$ & a jel teljes sávszélessége a pozitív frekvenciákon & Mintavétel\\
+$B_v$ & a modulált jel sávszélessége & AM, FM\\
+$\hat c$ & a javított (becsült) kódszó & Kódolás\\
+$\hat{\mathbf c}$ & a javított (becsült) kódszó & Kódolás\\
+$C$ & csúcstényező & AM, FM\\
+$\mathcal C$ & a kód, a kódszavak halmaza & Kódolás\\
+$C_1$ & az első kód & Kódolás\\
+$C_b$ & kék színkülönbségi jel & Hang, látás\\
+$c_k$ & a függőleges koordináta & QAM, PSK\\
+$C_r$ & vörös színkülönbségi jel & Hang, látás\\
+$d$ & átmérő & Rádió\\
+$d_k$ & a vízszintes koordináta & QAM, PSK\\
+$d_k$ & a k-adik szimbólum & PAM, ISI\\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & Kódolás\\
+$\hat{\mathbf e}$ & a becsült hibavektor & Kódolás\\
+$f$ & a bemenő jel frekvenciája & Mintavétel\\
+$f$ & vivőfrekvencia & Rádió\\
+$f$ & frekvencia & Hang, látás\\
+$F$ & vivőfrekvencia & AM, FM\\
+$\mathcal F$ & a forrás (forrás ABC) & Kódolás\\
+$f_0$ & a 0-s bit frekvenciája & QAM, PSK\\
+$f_1$ & az 1-es bit frekvenciája & QAM, PSK\\
+$f_1$ & a lapos rész vége & PAM, ISI\\
+$f_2$ & ahol a spektrum eléri a nullát & PAM, ISI\\
+$f_{AA}$ & a bemenő (antialiasing) szűrő határfrekvenciája & Mintavétel\\
+$f_c$ & vivőfrekvencia & AM, FM\\
+$f_D$ & frekvencialöket & AM, FM\\
+$f_H$ & a jel legnagyobb frekvenciája & Mintavétel\\
+$f_\mathrm{KF}$ & középfrekvencia & Rádió\\
+$f_L$ & a jel legkisebb frekvenciája & Mintavétel\\
+$f_m$ & a moduláló jel frekvenciája & AM, FM\\
+$f_m$ & a moduláló (mérő)jel frekvenciája & Rádió\\
+$f_\text{osc}$ & az oszcillátor frekvenciája & Rádió\\
+$f_R$ & a visszaállító szűrő határfrekvenciája & Mintavétel\\
+$f_s$ & mintavételi frekvencia & AM, FM\\
+$f_s$ & mintavételi frekvencia (minta/s) & Kódolás\\
+$f_{s,\min}$ & a legkisebb mintavételi frekvencia & Mintavétel\\
+$f_t$ & tükörfrekvencia & Rádió\\
+$f_v$ & vivőfrekvencia & AM, FM\\
+$f_v$ & a venni kívánt adó frekvenciája & Műsorszórás\\
+$G$ & antennanyereség & Rádió\\
+$G$ & generátormátrix & Kódolás\\
+$G$ & zöld színjel & Hang, látás\\
+$\mathbf G$ & generátormátrix & Kódolás\\
+$G_2$ & a második kód generátormátrixa & Kódolás\\
+$G_R$ & a vevőantenna nyeresége & Rádió\\
+$G_T$ & az adóantenna nyeresége & Rádió\\
+$\Gamma$ & a talaj reflexiós tényezője & Rádió\\
+$GI$ & a védőintervallum aránya & Műsorszórás\\
+$h$ & átlagos tartási idő & VoIP, Erlang\\
+$H$ & a szűrő átvitele & Mintavétel\\
+$h_0$ & az elemi jel a saját mintavételi pillanatában & PAM, ISI\\
+$h_1$ & az elemi jel egy jelzési idővel később & PAM, ISI\\
+$H_\text{be}(f)$ & a bemenő szűrő átvitele & Mintavétel\\
+$h_R$ & a vevőantenna magassága & Rádió\\
+$h_T$ & az adóantenna magassága & Rádió\\
+$H_V$ & a vevőszűrő átvitele & PAM, ISI\\
+$H_V(f)$ & a vevőszűrő átvitele & PAM, ISI\\
+$H(f)$ & az elemi jel spektruma & PAM, ISI\\
+$H(f)$ & a szűrő átviteli függvénye & Mintavétel\\
+$H(\mathcal F^2)$ & a szimbólumpárok entrópiája & Kódolás\\
+$h(t)$ & elemi jel & PAM, ISI\\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & Kódolás\\
+$\mathbf H^{\mathsf T}$ & a paritásellenőrző mátrix transzponáltja & Kódolás\\
+$I$ & hangintenzitás & Hang, látás\\
+$k$ & erősítési tényező & QAM, PSK\\
+$k$ & az üzenet hossza bitben & Kódolás\\
+$l$ & kódszóhossz & Kódolás\\
+$L$ & átlagos kódszóhossz egy szimbólumra & Kódolás\\
+$L$ & hangnyomásszint & Hang, látás\\
+$\bar L$ & átlagos kódszóhossz & Kódolás\\
+$L_1$ & kódszóhossz az első forrásnál & Kódolás\\
+$L_1$ & a szint az első helyen & Hang, látás\\
+$L_2$ & kódszóhossz a második forrásnál & Kódolás\\
+$L_2$ & a szint a második helyen & Hang, látás\\
+$l_a$ & az a kódszavának hossza & Kódolás\\
+$l_b$ & a b kódszavának hossza & Kódolás\\
+$l_c$ & a c kódszavának hossza & Kódolás\\
+$l_\text{fej}$ & a fejrészek hossza & VoIP, Erlang\\
+$l_i$ & az i-edik kódszó hossza & Kódolás\\
+$L_N$ & hangosságszint (phon) & Hang, látás\\
+$l_p$ & egy beszédszegmens hossza & VoIP, Erlang\\
+$L'$ & a vevő bal kimenete & Műsorszórás\\
+$L^{(2)}$ & egy szimbólumpár kódszavának hossza & Kódolás\\
+$\lambda$ & hullámhossz & Rádió\\
+$\lambda$ & hívásintenzitás & VoIP, Erlang\\
+$m$ & modulációs mélység & AM, FM\\
+$M$ & a konstelláció pontjainak száma & QAM, PSK\\
+$M$ & az összegjel (L+R) & Műsorszórás\\
+$\mu(t)$ & modulációs tartalom (a fázis eltérése a vivőétől) & AM, FM\\
+$n$ & a kvantáló bitszáma & Mintavétel\\
+$n$ & a kódszó hossza bitben & Kódolás\\
+$n$ & szegmensek száma csomagonként & VoIP, Erlang\\
+$N$ & a forrás szimbólumainak száma & Kódolás\\
+$N$ & az OFDM-vivők száma & Műsorszórás\\
+$N$ & a klaszter cellaszáma (FRF) & GSM\\
+$N$ & kiszolgálók száma & VoIP, Erlang\\
+$N_1$ & az első forrás szimbólumainak száma & Kódolás\\
+$N_2$ & a második forrás szimbólumainak száma & Kódolás\\
+$N_\text{hasznos}$ & az adatot vivő vivők száma & Műsorszórás\\
+$n_{\min}$ & a legkisebb kódszóhossz & Kódolás\\
+$p$ & egy bit hibavalószínűsége & Kódolás\\
+$p$ & hangnyomás & Hang, látás\\
+$P$ & átlagteljesítmény & AM, FM\\
+$P$ & a jel teljesítménye & Mintavétel\\
+$P$ & elektromos teljesítmény & Hang, látás\\
+$p_0$ & a hallásküszöb hangnyomása & Hang, látás\\
+$p_1$ & a keresett hangnyomás & Hang, látás\\
+$p_a$ & az a szimbólum valószínűsége & Kódolás\\
+$p_A$ & az A szimbólum valószínűsége & Kódolás\\
+$P_a$ & az a) elrendezés átlagteljesítménye & QAM, PSK\\
+$p_b$ & a b szimbólum valószínűsége & Kódolás\\
+$p_B$ & a B szimbólum valószínűsége & Kódolás\\
+$P_b$ & a b) elrendezés átlagteljesítménye & QAM, PSK\\
+$P_b$ & blokkolási valószínűség & VoIP, Erlang\\
+$p_C$ & a C szimbólum valószínűsége & Kódolás\\
+$P_c$ & a c) elrendezés átlagteljesítménye & QAM, PSK\\
+$P_R$ & vett teljesítmény & Rádió\\
+$P_{R,\min}$ & a vevő érzékenysége (a legkisebb vehető teljesítmény) & Rádió\\
+$P_T$ & adóteljesítmény & Rádió\\
+$p(0)$ & a 0 szint valószínűsége & Kódolás\\
+$P(0)$ & annak valószínűsége, hogy egy bit sem hibás & Kódolás\\
+$P(1)$ & annak valószínűsége, hogy pontosan 1 bit hibás & Kódolás\\
+$P(2)$ & annak valószínűsége, hogy pontosan 2 bit hibás & Kódolás\\
+$p(\pm1)$ & a $\pm$1 szint valószínűsége & Kódolás\\
+$p(\pm2)$ & a $\pm$2 szint valószínűsége & Kódolás\\
+$p(\pm3)$ & a $\pm$3 szint valószínűsége & Kódolás\\
+$\Phi_D$ & fázislöket & AM, FM\\
+$r$ & az adó és a vevő távolsága & Rádió\\
+$r$ & szimbólumsebesség (szimbólum/s) & Kódolás\\
+$R$ & terhelő ellenállás & AM, FM\\
+$R$ & az ellenállás & Mintavétel\\
+$R$ & a parabola sugara & Rádió\\
+$R$ & vörös színjel & Hang, látás\\
+$r_0$ & a zónahatár távolsága & Rádió\\
+$r_1$ & az első távolság & Hang, látás\\
+$r_2$ & a második távolság & Hang, látás\\
+$r_{\max}$ & a legnagyobb távolság & Rádió\\
+$R_s$ & szimbólumsebesség & QAM, PSK\\
+$R'$ & a vevő jobb kimenete & Műsorszórás\\
+$RC$ & a burkolódemodulátor időállandója & AM, FM\\
+$s$ & szindróma & Kódolás\\
+$\hat s$ & a modulált jel csúcsértéke & AM, FM\\
+$S$ & a különbségi (L$-$R) jel & Műsorszórás\\
+$s_0$ & a teljesítménysűrűség & Mintavétel\\
+$s_\mathrm{FM}(t)$ & az FM-jel & AM, FM\\
+$s_m(t)$ & a moduláló jel & AM, FM\\
+$s(t)$ & a modulált jel & AM, FM\\
+$\text{SNR}$ & jel-zaj viszony & AM, FM\\
+$\Delta\text{SNR}$ & a jel-zaj viszony változása & AM, FM\\
+$T$ & jelzési (bit-) idő & QAM, PSK\\
+$T$ & jelzési idő & PAM, ISI\\
+$T$ & mintavételi idő & Mintavétel\\
+$t_0$ & a mintavétel helye a jelzési időn belül & PAM, ISI\\
+$T_0$ & a moduláló jel félperiódusa & AM, FM\\
+$T_0$ & a mintavétel helye a jelzési időn belül & PAM, ISI\\
+$T_0$ & hasznos szimbólumidő & Műsorszórás\\
+$T_1$ & első mintavételi idő & Mintavétel\\
+$T_2$ & második mintavételi idő & Mintavétel\\
+$T_m$ & a moduláló jel periódusideje & AM, FM\\
+$\hat u$ & a becsült üzenet & Kódolás\\
+$\hat{\mathbf u}$ & a becsült üzenet & Kódolás\\
+$U$ & a modulált jel amplitúdója & AM, FM\\
+$U$ & a jel amplitúdója & QAM, PSK\\
+$U$ & a bemenő jel amplitúdója & Mintavétel\\
+$U_0$ & egyenszint (a burkoló középértéke) & AM, FM\\
+$U_{6{,}2}$ & a kimenő 6,2 kHz-es összetevő amplitúdója & Mintavétel\\
+$U_m$ & a burkoló kilengése & AM, FM\\
+$v$ & bitsebesség & QAM, PSK\\
+$v$ & a vett szó & Kódolás\\
+$\mathbf v$ & a vett szó & Kódolás\\
+$v_\text{cs}$ & csomagsebesség & VoIP, Erlang\\
+$v_\text{forrás}$ & a kodek bitsebessége & VoIP, Erlang\\
+$v_\text{nettó}$ & nettó bitsebesség & Műsorszórás\\
+$V(\lambda)$ & láthatósági függvény & Hang, látás\\
+$\varphi$ & fázishiba & QAM, PSK\\
+$\varphi_{\max}$ & a megengedett fázishiba & QAM, PSK\\
+$\hat x$ & a jel csúcsértéke & AM, FM\\
+$x(t)$ & a moduláló jel & AM, FM\\
+$x(t)$ & a PAM-jel & PAM, ISI\\
+$Y$ & világossági jel & Hang, látás\\
+\bottomrule\end{longtable}}
+\input{fejezetek/o01}
+\input{fejezetek/o02}
+\input{fejezetek/o03}
+\input{fejezetek/o04}
+\input{fejezetek/o05}
+\input{fejezetek/o06}
+\input{fejezetek/o07}
+\input{fejezetek/o08}
+\input{fejezetek/o09}
+\input{fejezetek/o10}
+\end{document}

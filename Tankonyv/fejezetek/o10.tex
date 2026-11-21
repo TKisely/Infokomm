@@ -1,0 +1,296 @@
+% Generálva: html/build_tex.js (o10.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{9}
+\chapter{\texorpdfstring{VoIP és forgalmi méretezés}{VoIP és forgalmi méretezés}}\label{f10}
+VoIP csomagsebesség és sávszélesség, Erlang-B méretezés és egy elsőre megtévesztő feladat a lebonyolított forgalomról.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. VoIP: jelölések és képletek}{A1. VoIP: jelölések és képletek}}\label{b10-voip}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés}\\\midrule
+undefined & a kodek bitsebessége\\
+undefined & egy beszédszegmens (keret) hossza bájtban\\
+undefined & ennyi szegmens kerül egy csomagba\\
+undefined & a fejrészek (IP, UDP, RTP, adatkapcsolati) együttes hossza bájtban\\
+undefined & csomagsebesség (csomag/s)\\
+undefined & egy hívás egy irányának sávigénye\\
+\bottomrule\end{tabularx}}\par
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{cs}=\frac{v_\text{forrás}}{8\,n\,l_p}\qquad B=8\,(n\,l_p+l_\text{fej})\cdot v_\text{cs}$}\end{center}
+
+A 8-as szorzó a bájt és a bit váltása.
+
+\subsection{\texorpdfstring{A2. Forgalom: jelölések és képletek}{A2. Forgalom: jelölések és képletek}}\label{b10-forg}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés}\\\midrule
+undefined & hívásintenzitás: átlagosan ennyi hívás érkezik időegységenként\\
+undefined & átlagos tartási idő\\
+undefined & felajánlott forgalom (Erlang)\\
+undefined & kiszolgálók (vonalak, munkatársak) száma\\
+undefined & blokkolási valószínűség (Erlang-B, a blokkolt hívás elveszik)\\
+undefined & egy kiszolgáló átlagos foglaltsága (kihasználtság)\\
+\bottomrule\end{tabularx}}\par
+
+A \textbf{lebonyolított forgalom} $A(1-P_b)$: ennyi kiszolgáló foglalt átlagosan, és ennyi ügyfél van átlagosan „bent”. Egy kiszolgáló foglaltsága $a=A(1-P_b)/N$. Az Erlang-B képlet rekurzióval: $E_0=1$, $E_n=AE_{n-1}/(n+AE_{n-1})$, $P_b=E_N$.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.1. feladat: 16 kbit/s-os kodek, 20 byte-os szegmens, 66 byte fej}{10.1. feladat: 16 kbit/s-os kodek, 20 byte-os szegmens, 66 byte fej}}\label{o10_01}
+\setcounter{lepes}{0}
+\begin{feladat}{10.1. feladat}
+Egy VoIP-hívásban 16 kbit/s-os kodeket használunk, a szegmensek 20 byte-osak, csomagonként egy szegmens, a fejrészek összesen 66 byte. a) Csomagsebesség? b) Hívásonkénti sávszélesség? c) Mi korlátozza, hogy több szegmenst tegyünk egy csomagba?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 29. oldal $\cdot$ 5o\_29\_2. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $v_\text{cs}$ (csomagsebesség)
+\item b) $B$ (egy hívás sávigénye)
+\item c) a korlát
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$v_\text{forrás}$ & a kodek bitsebessége & \\
+$\ca{l_p}$ & egy beszédszegmens hossza & $20$\,byte\\
+$\cb{n}$ & szegmensek száma csomagonként & $1$\\
+$l_\text{fej}$ & a fejrészek hossza & \\
+$v_\text{cs}$ & csomagsebesség & \emph{keresett}\\
+$B$ & egy hívás sávigénye & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Csomagsebesség}
+Másodpercenként 16 000 bit keletkezik, egy csomag ${\ca{20}}\cdot8=160$ bitet visz (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{cs}=\frac{16\,000}{160}=100\ \text{csomag/s}$}\end{center}
+\jegyzet{behelyettesítés}{egy szegmens $160/16\,000=10$ ms beszéd}
+
+\lepes{b) Sávszélesség}
+Egy csomag a szegmenssel és a fejjel együtt ${\ca{20}}+66=86$ byte.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B=86\cdot8\cdot100=68\,800\ \text{bit/s}=68{,}8\ \text{kbit/s}$}\end{center}
+\jegyzet{behelyettesítés}{a 16 kbit/s-nak több mint négyszerese}
+
+\lepes{c) A korlát}
+Több szegmenssel kevesebb fej jut egy bitnyi beszédre, de a csomag csak akkor indulhat, ha minden szegmense elkészült: minden további szegmens 10 ms-mal növeli a késleltetést. Egy elveszett csomag is több beszédet visz magával. A beszélgetéshez a teljes egyirányú késleltetés kb. 150 ms alatt kell, hogy maradjon.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }100\ \text{csomag/s}\qquad\text{b) }68{,}8\ \text{kbit/s}\qquad\text{c) a késleltetés (és a csomagvesztés hatása)}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjteményben a b) csak képletként szerepel.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.2. feladat: 10 byte, 5 ms, 47 byte fej: egy és két szegmens}{10.2. feladat: 10 byte, 5 ms, 47 byte fej: egy és két szegmens}}\label{o10_02}
+\setcounter{lepes}{0}
+\begin{feladat}{10.2. feladat}
+A kodek 5 ms-onként 10 byte-os szegmenst ad, a fejrészek 47 byte. a) Forrássebesség? b) Egy szegmens csomagonként: csomagsebesség és sávszélesség? c) Két szegmens csomagonként?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 29. oldal $\cdot$ 5o\_29\_3. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $v_\text{forrás}$ (a kodek bitsebessége)
+\item b), c) $v_\text{cs}$ (csomagsebesség) és $B$ (egy hívás sávigénye), ha $n=1$ (szegmensek száma csomagonként), illetve $n=2$ (szegmensek száma csomagonként)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{l_p}$ & egy beszédszegmens hossza & $10$\,byte\\
+$l_\text{fej}$ & a fejrészek hossza & \\
+$v_\text{forrás}$ & a kodek bitsebessége & \emph{keresett}\\
+$v_\text{cs}$ & csomagsebesség & \emph{keresett}\\
+$B$ & egy hívás sávigénye & \emph{keresett}\\
+$n$ & szegmensek száma csomagonként & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Forrássebesség}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{forrás}=\frac{10\cdot8\ \text{bit}}{5\ \text{ms}}=16\ \text{kbit/s}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{b) Egy szegmens csomagonként}
+5 ms-onként indul egy csomag, mérete $10+47=57$ byte.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{cs}=\frac{1}{5\ \text{ms}}=200\ \text{csomag/s}\qquad B=57\cdot8\cdot200=91{,}2\ \text{kbit/s}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{c) Két szegmens csomagonként}
+10 ms-onként indul egy csomag, mérete $2\cdot10+47=67$ byte.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{cs}=100\ \text{csomag/s}\qquad B=67\cdot8\cdot100=53{,}6\ \text{kbit/s}$}\end{center}
+\jegyzet{behelyettesítés}{kevesebb fej, de 5 ms-mal több késés}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }16\ \text{kbit/s}\qquad\text{b) }200\ \text{csomag/s},\ 91{,}2\ \text{kbit/s}\qquad\text{c) }100\ \text{csomag/s},\ 53{,}6\ \text{kbit/s}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.3. feladat: Ügyfélszolgálat 21 munkatárssal}{10.3. feladat: Ügyfélszolgálat 21 munkatárssal}}\label{o10_03}
+\setcounter{lepes}{0}
+\begin{feladat}{10.3. feladat}
+990 ezer ügyfél, 21 munkatárs, a csúcsidőben 0,1\%-os blokkolás. a) Hívásintenzitás, ha a tartási idő 200 s? b) Hányszor hív egy ügyfél évente, ha ez az intenzitás állandó? c) Foglaltság? d) Hármat elbocsátanak, 17 fogadja a hívásokat, a 18. csak a blokkoltakat hívja vissza. Mekkora az ő foglaltsága?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 30. oldal $\cdot$ 5o\_30\_1. Címkék: vizsga, nehezebb}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $\lambda$ (hívásintenzitás)
+\item b) hívás/ügyfél/év
+\item c) $a$: egy munkatárs foglaltsága
+\item d) a visszahívó munkatárs foglaltsága
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{N}$ & kiszolgálók száma & $21$\,m\\
+$\cb{P_b}$ & blokkolási valószínűség & $0{,}1$\\
+$\cc{h}$ & átlagos tartási idő & $200$\,s\\
+$\lambda$ & hívásintenzitás & \emph{keresett}\\
+$a$ & egy kiszolgáló kihasználtsága & \emph{keresett}\\
+$A$ & felajánlott forgalom & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 990 000 ügyfél
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) A felajánlott forgalom}
+Az Erlang-B táblázatból (vagy a rekurzióval) azt az $A$-t keressük, amelynél 21 kiszolgálóval a blokkolás éppen 0,1\%.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cb{P_b}}(A;\ {\ca{21}})=0{,}001\ \Rightarrow\ A=10{,}1\ \text{Erl}$}\end{center}
+\jegyzet{számérték}{a grafikonról kb. 10}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \lambda=\frac{A}{h}=\frac{10{,}1}{200\ \text{s}}=0{,}0505\ \tfrac1{\text{s}}$}\end{center}
+\jegyzet{átalakítás}{kb. 182 hívás óránként}
+
+\lepes{b) Hívás ügyfelenként}
+Ha egész évben ez lenne az intenzitás:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0{,}0505\cdot3600\cdot24\cdot365=1{,}59\cdot10^6\ \text{hívás/év}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{1{,}59\cdot10^6}{990\,000}=1{,}6\ \text{hívás/ügyfél/év}$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{c) Foglaltság}
+A lebonyolított forgalom megoszlik a 21 munkatárs között (A2).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a=\frac{A(1-{\cb{P_b}})}{N}=\frac{10{,}1\cdot0{,}999}{21}=0{,}48$}\end{center}
+\jegyzet{definíció}{kb. 48\%}
+
+\lepes{d) Blokkolás 17 munkatárssal}
+Ugyanaz a felajánlott forgalom, de csak 17 kiszolgáló.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cb{P_b}}(10{,}1;\ 17)=1{,}4\%$}\end{center}
+\jegyzet{számérték}{rekurzióval, a grafikonról kb. 1\%}
+
+\lepes{d) A visszahívó foglaltsága}
+A blokkolt hívások intenzitása $\lambda {\cb{P_b}}$. Ha minden visszahívás is átlagosan 200 s, a 18. munkatárs forgalma ebből számolható.
+\behely{\bh{\cc{h}}{\cc{200\un{s}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \lambda P_bh=0{,}0505\cdot0{,}014\cdot{\cc{200}}=0{,}14\ \text{Erl}$}\end{center}
+\jegyzet{behelyettesítés}{foglaltsága kb. 14\%}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }\lambda\approx0{,}05\ \tfrac1{\text{s}}\qquad\text{b) }\approx1{,}6\ \text{hívás/év}\qquad\text{c) }\approx48\%\qquad\text{d) }\approx14\%$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény a d)-nél $P_b\approx1\%$-nál abbamarad. A visszahívás tartási idejére tett feltevés (200 s) \texttt{[ELLENŐRIZENDŐ]}.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.4. feladat: Üzlet négy vásárlónak: mennyi a kiszolgálási idő?}{10.4. feladat: Üzlet négy vásárlónak: mennyi a kiszolgálási idő?}}\label{o10_04}
+\setcounter{lepes}{0}
+\begin{feladat}{10.4. feladat}
+A vásárlók között átlagosan 10 perc telik el, 4 fér el az üzletben, a többi nem vár. Átlagosan 0,6 vásárló van bent, a visszautasítás valószínűsége 0,2\%. Mekkora a kiszolgálási idő?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 30. oldal $\cdot$ 5o\_30\_2. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $h$: átlagos kiszolgálási (tartási) idő
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\lambda$ & hívásintenzitás & \\
+$\ca{N}$ & kiszolgálók száma & $4$\\
+$\cb{P_b}$ & blokkolási valószínűség & $0{,}002$\\
+$h$ & átlagos tartási idő & \emph{keresett}\\
+$A$ & felajánlott forgalom & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 0,6: átlagosan ennyi vásárló van bent
+\end{itemize}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Mi a 0,6?}\par Az egyszerre bent lévők átlagos száma a \textbf{lebonyolított} forgalom, $A(1-P_b)$ (A2). Ebből a felajánlott forgalom, abból és a beérkezési intenzitásból a tartási idő jön.
+\end{elmelet}
+
+\lepes{A felajánlott forgalom}
+A lebonyolított forgalomból visszaszámolunk.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A(1-{\cb{P_b}})=0{,}6\ \Rightarrow\ A=\frac{0{,}6}{1-{\cb{0{,}002}}}=0{,}601\ \text{Erl}$}\end{center}
+\jegyzet{átalakítás}{}
+
+\lepes{A tartási idő}
+$A=\lambda h$-ból kifejezzük $h$-t.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle h=\frac{A}{\lambda}=\frac{0{,}601}{0{,}1\ \text{1/perc}}=6{,}0\ \text{perc}$}\end{center}
+\jegyzet{átalakítás}{}
+\begin{tipp}[A gyűjtemény megoldása]
+A gyűjtemény „$A=h\lambda=10\cdot0{,}6=6$”-ot ír.
+\end{tipp}
+\begin{figyelem}[Javítás]
+A szám véletlenül jó, de a gondolatmenet rossz: a 6 a tartási idő percben, nem a forgalom, és a 10 perc nem $\lambda$, hanem $1/\lambda$. Megjegyzés: $A=0{,}6$ Erl és $N=4$ mellett az Erlang-B blokkolás 0,3\%, a feladat 0,2\%-a kerekített adat, az eredményt nem befolyásolja.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle h\approx6\ \text{perc}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.5. feladat: Fair queuing és WFQ}{10.5. feladat: Fair queuing és WFQ}}\label{o10_05}
+\setcounter{lepes}{0}
+\begin{feladat}{10.5. feladat}
+Mi a fair queuing előnye a szigorú prioritással szemben, és mi a WFQ előnye?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 29. oldal $\cdot$ 5o\_29\_1. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a két előny
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item ütemezési módszerek egy router kimeneti sorában
+\end{itemize}
+\end{jeloles}
+
+\lepes{Szigorú prioritás}
+Mindig a legmagasabb prioritású sor csomagja megy ki először. Ha abban folyamatosan van forgalom, az alacsonyabb sorok soha nem kerülnek sorra: \textbf{kiéheztetés}.
+
+\lepes{Fair queuing}
+Minden folyam saját sort kap, és a router körbejárva, felváltva szolgálja ki őket. Így egyetlen folyam sem éheztetheti ki a többit, mindegyik egyenlő részt kap a kapacitásból.
+
+\lepes{WFQ (súlyozott fair queuing)}
+Ugyanez súlyokkal: a folyamok a súlyuk arányában kapnak sávot. A fontosabb forgalom (pl. hang) több részt kap, de mindenki kap egy garantált minimumot, kiéheztetés továbbra sincs.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{fair queuing: nincs kiéheztetés}\qquad\text{WFQ: súlyozott, arányos részesedés garantált minimummal}$}\end{center}
+\end{eredmeny}

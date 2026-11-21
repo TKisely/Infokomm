@@ -1,0 +1,1234 @@
+% Generálva: html/build_tex.js (ch02.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{1}
+\chapter{\texorpdfstring{Mintavételezés és kvantálás}{Mintavételezés és kvantálás}}\label{f2}
+Az analóg jelből mintasorozat, abból kódszavak, majd vissza analóg jel. A fejezet példái három kérdés köré épülnek: milyen $f_s$ mellett állítható vissza a jel, milyen álképek (alias) és szivárgó komponensek jelennek meg, és mekkora a kvantálás miatti jel-zaj viszony.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. A digitalizálás lánca, egyszerűen}{A1. A digitalizálás lánca, egyszerűen}}\label{a2-lanc}
+A digitális átvitel lánca: \textbf{bemenő (előszűrő, antialiasing) szűrő $\to$ mintavevő $\to$ kvantáló $\to$ kódoló $\to$ átvitel $\to$ dekódoló $\to$ D/A (impulzusgenerátor) $\to$ visszaállító szűrő}. A digitalizálás = mintavételezés + kvantálás (ea01).
+
+Gondolj egy filmre. A mintavételezés azt dönti el, hány képkocka készül másodpercenként, a kvantálás azt, hány árnyalattal rajzolunk egy kockát. Ha túl ritkák a kockák, a gyors mozgás hamis lesz (a kocsikerék visszafelé forog): ez az \textbf{aliasing}. Ha kevés az árnyalat, a kép szemcsés: ez a \textbf{kvantálási zaj}.
+
+Mire jó? Minden mintavételes feladat ennek a láncnak egy-egy pontjáról kérdez: a bemenő szűrő az aliasing ellen véd, a visszaállító szűrő a szivárgás ellen, a kvantáló bitszáma a zajt szabja meg.
+
+\subsection{\texorpdfstring{A2. A mintavételi tétel és a szellemképek}{A2. A mintavételi tétel és a szellemképek}}\label{a2-mintaveteli-tetel}
+A $T=1/f_s$ közönként vett minták spektruma az eredeti spektrum $f_s$-enként eltolt másolatainak összege (ea01, gyak01):
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle X_p(f)=f_s\sum_i X(f-i f_s)\qquad \hat X(f)=H(f)\sum_i X(f-i f_s)$}\end{center}
+
+Úgy képzeld el, mint egy tapétát: a mintavétel a spektrumot $f_s$ lépésközzel újra és újra rámintázza a frekvenciatengelyre. A visszaállító szűrő dolga, hogy ebből a tapétából csak az eredeti darabot vágja ki.
+
+Ha a jel $B$ sávra korlátozott ($X(f)=0$, ha $|f|>B$), akkor a másolatok nem lapolódnak át, ha
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s\ge 2B$}\end{center}
+
+Ekkor egy $B$ határfrekvenciájú ideális aluláteresztő pontosan visszaadja a jelet. A határeset ($f_s=2B$) csak ideális szűrővel működik, ezért a gyakorlatban $f_s>2B$ (ea01).
+
+\subsection{\texorpdfstring{A3. Sáváteresztő (nem alapsávi) jel mintavételezése}{A3. Sáváteresztő (nem alapsávi) jel mintavételezése}}\label{a2-savatereszto}
+Ha a jel csak az $f_L\ldots f_H$ sávban van ($B=f_H-f_L$), nem kell $2f_H$-val mintavételezni. Elég, ha a másolatok a sávok közötti „üres helyre” esnek. A megengedett tartományok egész $k$-ra:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}\qquad 1\le k\le\left\lfloor\frac{f_H}{B}\right\rfloor$}\end{center}
+
+A $k=1$ eset a közönséges aluláteresztő mintavétel ($f_s\ge 2f_H$). A legkisebb elvi érték $f_s=2B$, de ez csak akkor jön ki, ha $f_H$ a $B$ egész számú többszöröse. Ilyenkor a visszaállításhoz \textbf{sáváteresztő} szűrő kell.
+
+Analógia: egy parkolóban az autók (a spektrum másolatai) sűrűbben is elférnek, ha az üres helyek pont akkorák, mint egy autó. Ha a sáv nem fér be pontosan, kicsit nagyobb $f_s$ kell.
+
+\subsection{\texorpdfstring{A4. Aliasing és szivárgás: melyik szűrő a hibás?}{A4. Aliasing és szivárgás: melyik szűrő a hibás?}}\label{a2-szivargas}
+\textbf{Aliasing (átlapolódás):} a bemenő szűrő nem vágott eléggé, ezért az $f_s/2$ feletti bemenő komponens a mintavétel után egy hasznos sávba eső álképet ad. Ezt később már semmilyen szűrő nem tudja eltávolítani, mert ugyanott van, ahol a hasznos jel.
+
+\textbf{Szivárgás:} a kimenő (visszaállító) szűrő nem vágott eléggé, ezért a D/A utáni $n f_s\pm f$ másolatok egy része átjut a kimenetre. Ez a hasznos sávon \textbf{kívül} jelenik meg.
+
+A két szűrő csillapítása szorzódik, ha egy komponens mindkettőn átmegy: a kimeneti amplitúdó = bemenő amplitúdó $\cdot$ $H_\text{be}(f_\text{be})$ $\cdot$ $H_\text{ki}(f_\text{ki})$ (gyak01 P.1.1).
+
+\subsection{\texorpdfstring{A5. Kvantálás és kvantálási zaj}{A5. Kvantálás és kvantálási zaj}}\label{a2-kvantalas}
+Az $n$ bites egyenletes kvantáló $N=2^n$ szintet használ, a lépcső $\Delta$. A minta $\hat x_k=x_k+\varepsilon_k$, ahol $|\varepsilon_k|\le\Delta/2$. A hibát egyenletes eloszlásúnak, a mintáktól függetlennek tekintjük (ea01, gyak01):
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle M(\varepsilon_k)=0\qquad M(\varepsilon_k^2)=\frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2}x^2\,\mathrm dx=\frac{\Delta^2}{12}$}\end{center}
+
+A visszaállított zaj spektrális sűrűsége és teljesítménye egy $B$ sávú ideális visszaállító szűrő után:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s_\varepsilon(f)=\frac{1}{f_s}\cdot\frac{\Delta^2}{12}\,|H(f)|^2\qquad P_\varepsilon=\frac{\Delta^2}{12}\cdot\frac{2B}{f_s}$}\end{center}
+
+Analógia: a zajteljesítmény egy adag homok. Ha a mintavételi frekvencia nagyobb, ugyanazt a homokot szélesebb sávra szórjuk szét, és a szűrő a kisebb sávból kevesebbet enged át. Ez a \textbf{túlmintavételezés} (oversampling) nyeresége.
+
+\subsection{\texorpdfstring{A6. A jel-zaj viszony képlete}{A6. A jel-zaj viszony képlete}}\label{a2-snr}
+Ha a jel teljes kivezérlésű ($U_{pp}=\Delta\cdot 2^n$), a csúcstényezője $C$, a visszaállító szűrő sávja $B<f_s/2$, akkor (ea01, gyak01, képletgyűjtemény):
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac SN=\frac{3}{C^2}\cdot\frac{f_s}{2B}\cdot 2^{2n}$}\end{center}
+
+Decibelben, mert $10\lg 2^{2n}=n\cdot 20\lg 2\approx 6{,}02\,n$:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \left(\frac SN\right)_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n$}\end{center}
+
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jelalak} & \textbf{undefined} & \textbf{undefined} & \textbf{Képlet undefined-nél}\\\midrule
+szinusz & undefined & undefined dB & undefined\\
+háromszög & undefined & undefined dB & undefined\\
+négyszög & undefined & undefined dB & undefined\\
+\bottomrule\end{tabularx}}\par
+
+Ökölszabályok: \textbf{minden bit 6 dB}, a mintavételi frekvencia minden duplázása (azonos szűrővel) \textbf{3 dB}, négyszeres túlmintavételezés tehát ugyanannyi, mint egy bit.
+
+\subsection{\texorpdfstring{A7. Csúcstényező, gyors emlékeztető}{A7. Csúcstényező, gyors emlékeztető}}\label{a2-csucstenyezo}
+A csúcstényező a csúcsérték és az effektív érték hányadosa (gyak00, ea, Marosi):
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C=\frac{x_{\max}}{\sqrt{P_x}}$}\end{center}
+
+Szinusz: $A/(A/\sqrt2)=\sqrt2$. Négyszög: $A/A=1$. Háromszög: $\sqrt3$. Két különböző frekvenciájú, egyforma szinusz összege: $2A/A=2$. A „hegyes” jel nagy csúcstényezőjű, és rosszabb a jel-zaj viszonya azonos kvantálónál, mert a csúcs miatt kell a teljes tartomány, a teljesítménye viszont kicsi.
+
+\subsection{\texorpdfstring{A8. Decibel fejben}{A8. Decibel fejben}}\label{a2-decibel}
+A decibel mindig teljesítményarány: $10\lg(P_2/P_1)$. Feszültségre, térerősségre, hangnyomásra $20\lg(U_2/U_1)$, mert a teljesítmény a négyzetükkel arányos (Marosi ik.3).
+
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{arány} & \textbf{2} & \textbf{4} & \textbf{5} & \textbf{8} & \textbf{10} & \textbf{100} & \textbf{400} & \textbf{800} & \textbf{4000}\\\midrule
+dB & 3 & 6 & 7 & 9 & 10 & 20 & 26 & 29 & 36\\
+\bottomrule\end{tabularx}}\par
+
+A fejszámoláshoz elég: $\lg2\approx0{,}3$, $\lg3\approx0{,}48$, $\lg5\approx0{,}7$, $\lg7\approx0{,}85$.
+
+\subsection{\texorpdfstring{A9. Beugró recept: így indulj neki}{A9. Beugró recept: így indulj neki}}\label{a2-recept}
+\begin{enumerate}
+\item \textbf{Rajzold fel a spektrumot} (pozitív és negatív frekvenciákon is, páros függvény).
+\item \textbf{Alapsávi vagy sáváteresztő a jel?} Ha $f_L>0$ és a sáv keskeny, írd fel a sáváteresztő táblázatot ($k=1,2,\ldots$).
+\item \textbf{Írd fel az álképeket:} $n f_s\pm f$ minden bemenő komponensre.
+\item \textbf{Szűrők:} a bemenő szűrő az eredeti frekvencián, a kimenő az álkép frekvenciáján csillapít. A két csillapítás szorzódik.
+\item \textbf{Kvantálás:} $\text{SNR}_{\mathrm{dB}}=10\lg(3/C^2)+10\lg(f_s/2B)+6{,}02\,n$, a bitszámot felfelé kerekítsd.
+\item \textbf{Ellenőrizd:} $f_s\ge 2B$ mindig teljesül-e, és a mértékegység (kHz és ms) összeillik-e.
+\end{enumerate}
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.1. feladat: Szivárgás és aliasing trapéz alakú szűrőkkel}{2.1. feladat: Szivárgás és aliasing trapéz alakú szűrőkkel}}\label{p2_01}
+\setcounter{lepes}{0}
+\begin{feladat}{2.1. feladat}
+Egy $f_s=8$ kHz-es mintavételes rendszer bemenő és kimenő szűrője azonos: $H=1$ ($|f|\le3$ kHz), $H=2{,}5-|f|/2$ ($3\ldots5$ kHz, $f$ kHz-ben), $H=0{,}01$ ($5\ldots10$ kHz), felette $0$. a) A bemenet $2$ V amplitúdójú, $1$ kHz-es szinusz. Mik a szivárgó komponensek? b) Mi jelenik meg a kimeneten, ha a bemenet $2$ V, $4{,}5$ kHz?
+\begin{center}\begin{tikzpicture}[x=0.01985cm,y=-0.01985cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (680,210);
+\path[draw=black,line width=0.7pt] (30,170) -- (660,170);
+\path[fill=black,draw=none] (660,170) -- (652,166) -- (652,174) -- cycle;
+\path[draw=black!45,line width=0.35pt] (40,166) -- (40,174);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (40,188) {0};
+\path[draw=black!45,line width=0.35pt] (190,166) -- (190,174);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (190,188) {3};
+\path[draw=black!45,line width=0.35pt] (215,166) -- (215,174);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (215,188) {3,5};
+\path[draw=black!45,line width=0.35pt] (265,166) -- (265,174);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (265,188) {4,5};
+\path[draw=black!45,line width=0.35pt] (290,166) -- (290,174);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (290,188) {5};
+\path[draw=black!45,line width=0.35pt] (440,166) -- (440,174);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (440,188) {8};
+\path[draw=black!45,line width=0.35pt] (540,166) -- (540,174);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (540,188) {10};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (660,188) {f [kHz]};
+\path[draw=black,line width=0.8pt] (40,50) -- (190,50) -- (290,170) -- (290,160.4) -- (540,160.4) -- (540,170);
+\node[anchor=base west,inner sep=0pt,font=\footnotesize] at (100,42) {H(f)};
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (350,152.4) {0,01 (rajzon nagyítva)};
+\path[draw=cB,line width=0.8pt] (265,170) -- (265,140);
+\path[fill=cB,draw=none] (265,140) circle[radius=0.079cm];
+\path[draw=cA,line width=0.8pt] (215,170) -- (215,80);
+\path[fill=cA,draw=none] (215,80) circle[radius=0.079cm];
+\node[anchor=base west,inner sep=0pt,font=\footnotesize] at (273,134) {valódi jel};
+\node[anchor=base east,inner sep=0pt,font=\footnotesize] at (207,72) {álkép (8 $-$ 4,5)};
+\end{tikzpicture}\end{center}
+
+
+{\footnotesize\sffamily Forrás: TMIT gyak01 P.1.1 $\cdot$ Koma gyak2/2 $\cdot$ Marosi ik.4 $\cdot$ azonosítók: tg01\_P11, kg02\_2, mg2\_1. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) a szivárgó komponensek frekvenciája és amplitúdója
+\item b) a kimenő komponensek frekvenciája és amplitúdója
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_s}$ & mintavételi frekvencia & $8$\,kHz\\
+$\cb{T}$ & mintavételi idő & $125$\,\textmu{}s\\
+$f$ & a bemenő jel frekvenciája & \\
+$H$ & a szűrő átvitele & \\
+$n$ & tetszőleges egész szám & \\
+$f_\text{ki}$ & egy kimenő összetevő frekvenciája & \\
+$f_\text{be}$ & a bemenő szinusz frekvenciája & \\
+$U_7$ & a kimenő 7 kHz-es összetevő amplitúdója & \\
+$U_9$ & a kimenő 9 kHz-es összetevő amplitúdója & \\
+$U_{15}$ & a kimenő 15 kHz-es összetevő amplitúdója & \\
+$U_{17}$ & a kimenő 17 kHz-es összetevő amplitúdója & \\
+$U_\text{minta}$ & a mintavevőre jutó összetevő amplitúdója (a bemenő szűrő után) & \\
+$U_{4{,}5}$ & a kimenő 4,5 kHz-es összetevő amplitúdója & \\
+$U_{3{,}5}$ & a kimenő 3,5 kHz-es összetevő amplitúdója & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item a) $2$ V, $1$ kHz
+\item b) $2$ V, $4{,}5$ kHz
+\end{itemize}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért elég a frekvenciákat egyenként végignézni?}\par Mert a lánc lineáris: minden szinuszos komponens külön utat jár be (bemenő szűrő $\to$ mintavétel $\to$ kimenő szűrő), és a végén összeadódnak.
+
+\textbf{Miért pont $n f_s\pm f$ helyeken vannak a másolatok?}\par Mert a mintavétel a spektrumot $f_s$-enként eltolva megismétli, és a valós szinusznak $+f$ és $-f$ vonala is van. A $-f$ vonal $f_s$-sel eltolva adja az $f_s-f$ álképet.
+
+\textbf{Miért nem a bemenő szűrő a hibás az a) részben?}\par Az $1$ kHz-et a bemenő szűrő változatlanul átengedi, ott nincs mit levágni. A $7$ és $9$ kHz-es komponens a D/A után keletkezik, és a kimenő szűrő engedi át gyengítve: ez \textbf{szivárgás}.
+
+\textbf{Miért rosszabb a b) eset?}\par A $4{,}5$ kHz az $f_s/2=4$ kHz fölött van, ezért az $8-4{,}5=3{,}5$ kHz-es álképe a hasznos sávba esik, ahol a kimenő szűrő alig csillapít. Ez \textbf{aliasing}, és a végén az álkép erősebb lesz, mint a valódi jel.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Mintavett jel spektruma.} A minták spektruma az eredeti $f_s$-enként eltolt másolatainak összege (A2).
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat X(f)=H_\text{ki}(f)\sum_i H_\text{be}(f-i f_s)\,X(f-i f_s)$}\end{center}
+
+
+\textbf{Szűrők láncban.} Egy komponens kimeneti amplitúdója a bemenő amplitúdó és a két szűrő értékének szorzata, mindegyik a saját frekvenciáján (A4).
+\end{elmelet}
+
+\lepes{A mintasorozat spektruma}
+Az $1$ kHz-es bemenet a bemenő szűrőn csillapítatlanul átjut, a mintavétel után $n\cdot 8\pm1$ kHz-en lesznek vonalai.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{ki}=n {\ca{f_s}}\pm f_\text{be}=n\cdot 8\pm 1\ \text{kHz}$}\end{center}
+\jegyzet{definíció}{$n$ egész}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{ki}\in\{1;\ 7;\ 9;\ 15;\ 17;\ \ldots\}\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{$n\cdot8\pm1$, $n=0,1,2$}
+
+\lepes{A kimenő szűrő hatása az a) esetben}
+A kimenő szűrő $10$ kHz felett mindent levág, $5\ldots10$ kHz között $0{,}01$-szeresre csillapít.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle U_7=2\,\text{V}\cdot H_\text{be}(1)\cdot H_\text{ki}(7)=2\cdot1\cdot0{,}01=0{,}02\ \text{V}$}\end{center}
+\jegyzet{behelyettesítés}{ugyanígy $U_9=0{,}02$ V}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H_\text{ki}(15)=H_\text{ki}(17)=0\ \Longrightarrow\ U_{15}=U_{17}=0$}\end{center}
+\jegyzet{ellenőrzés}{a 10 kHz feletti másolatok eltűnnek}
+
+\lepes{A bemenő szűrő a b) esetben}
+A $4{,}5$ kHz-es komponens a bemenő szűrő ferde szakaszára esik.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H_\text{be}(4{,}5)=2{,}5-\frac{4{,}5}{2}=0{,}25$}\end{center}
+\jegyzet{behelyettesítés}{a ferde szakasz képlete, $f=4{,}5$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle U_\text{minta}=2\,\text{V}\cdot0{,}25=0{,}5\ \text{V}$}\end{center}
+\jegyzet{számérték}{ennyi jut a mintavevőre}
+
+\lepes{Az álkép és a valódi komponens a kimeneten}
+A mintavétel után $n\cdot8\pm4{,}5$ kHz vonalak keletkeznek. A kimenő szűrő a $10$ kHz alattiakat engedi át: a $4{,}5$ és a $3{,}5$ kHz-est.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H_\text{ki}(4{,}5)=0{,}25\qquad H_\text{ki}(3{,}5)=2{,}5-\frac{3{,}5}{2}=0{,}75$}\end{center}
+\jegyzet{behelyettesítés}{a kimenő szűrő ugyanaz a trapéz, $3{,}5=8-4{,}5$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle U_{4{,}5}=0{,}5\cdot0{,}25=0{,}125\ \text{V}\qquad U_{3{,}5}=0{,}5\cdot0{,}75=0{,}375\ \text{V}$}\end{center}
+\jegyzet{számérték}{az álkép háromszor erősebb}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H_\text{ki}(8+4{,}5)=H_\text{ki}(12{,}5)=0$}\end{center}
+\jegyzet{ellenőrzés}{a többi másolat nem jut át}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) } 1\ \text{kHz: } 2\ \text{V}\qquad 7\ \text{és}\ 9\ \text{kHz: } 0{,}02\ \text{V (szivárgás)}$}\end{center}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) } 4{,}5\ \text{kHz: } 0{,}125\ \text{V}\qquad 3{,}5\ \text{kHz: } 0{,}375\ \text{V (aliasing)}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item Mértékegység: $H$ dimenzió nélküli, a kimenet V.
+\item Határeset: ha $H_\text{be}(4{,}5)=0$ lenne, se jel, se álkép nem lenne. A szorzat ezt helyesen adja.
+\item A Koma-jegyzet, a TMIT-füzet és Marosi táblai megoldása ugyanezt adja.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item Az álképet a bemenő szűrőn a $3{,}5$ kHz-en csillapítják ($0{,}75$), pedig ott még $4{,}5$ kHz a frekvencia ($0{,}25$).
+\item Elfelejtik, hogy a valódi $4{,}5$ kHz-es komponens kétszer csillapodik (be és ki), ezért lesz csak $0{,}125$ V.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Saját számpélda (kiegészítés, a forrásban nem szerepel)]
+\small
+\begin{verbatim}
+Ha a bemenet 4,2 kHz: H_be(4,2) = 0,4, álkép 3,8 kHz-en H_ki = 0,6.
+Kimenet: 4,2 kHz 2*0,4*0,4 = 0,32 V, 3,8 kHz 2*0,4*0,6 = 0,48 V.
+\end{verbatim}
+\end{tipp}
+\begin{tipp}[Kapcsolat és analógia]
+
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+bemenő szűrő gyenge & aliasing, a hasznos sávban, utólag nem javítható\\
+kimenő szűrő gyenge & szivárgás, a hasznos sávon kívül, jobb szűrővel javítható\\
+\bottomrule\end{tabularx}}\par
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.2. feladat: PCM, 1,8 kHz, 40 dB-es szűrők: szivárgás és egyenirányítás}{2.2. feladat: PCM, 1,8 kHz, 40 dB-es szűrők: szivárgás és egyenirányítás}}\label{p2_02}
+\setcounter{lepes}{0}
+\begin{feladat}{2.2. feladat}
+Egy $8$ kHz-es PCM rendszer bemenő és kimenő szűrője a zárótartományban ($4$ kHz felett) $40$ dB csillapítású, a $0{,}3\ldots3{,}4$ kHz sávban tökéletes. A bemenet $2$ V, $1{,}8$ kHz. a) Mekkora a kimenet $6{,}2$ kHz-es komponense? b) Milyen frekvenciák vannak még a kimeneten? c) Mi jelenhet meg, ha a bemenő jelet egyenirányítjuk?
+
+{\footnotesize\sffamily Forrás: OneDrive 1-5 gyakorlatok 2.2 $\cdot$ Koma gyak2/1 $\cdot$ TMIT G.1.1 $\cdot$ azonosítók: pd02\_2, kg02\_1, tg01\_G11. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $U_{6{,}2}$ (a kimenő 6,2 kHz-es összetevő amplitúdója)
+\item b) a kimenő frekvenciák listája
+\item c) az egyenirányított jel komponensei
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_s}$ & mintavételi frekvencia & $8$\,kHz\\
+$\cb{f}$ & a bemenő jel frekvenciája & $1{,}8$\,kHz\\
+$\cc{U}$ & a bemenő jel amplitúdója & $2$\,V\\
+$U_{6{,}2}$ & a kimenő 6,2 kHz-es összetevő amplitúdója & \emph{keresett}\\
+$n$ & tetszőleges egész szám & \\
+$f_\text{ki}$ & egy kimenő összetevő frekvenciája & \\
+$f_0$ & az egyenirányított jel alapfrekvenciája & \\
+$f_k$ & az egyenirányított jel k-adik felharmonikusának frekvenciája & \\
+$k$ & a felharmonikus sorszáma (pozitív egész) & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item zárótartomány: $40$ dB, azaz $\times0{,}01$ amplitúdóban
+\end{itemize}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért $0{,}01$ a 40 dB?}\par Mert amplitúdóra $20\lg$ kell: $10^{-40/20}=0{,}01$. Teljesítményben ez $10^{-4}$.
+
+\textbf{Miért csak a kimenő szűrő számít a $6{,}2$ kHz-nél?}\par Az $1{,}8$ kHz a bemenő szűrőn csillapítatlanul átjut. A $6{,}2$ kHz a mintavétel után keletkezik ($8-1{,}8$), ezért csak a kimenő szűrőn csillapodik.
+
+\textbf{Miért veszélyes az egyenirányítás?}\par Az egyenirányított szinusz periodikus, de nem szinuszos: alapfrekvenciája $2\cdot1{,}8=3{,}6$ kHz, és sok felharmonikusa van. A $4$ kHz feletti felharmonikusok a bemenő szűrőn csak csillapodnak, és az álképeik a hasznos sávba eshetnek.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Álképek.} Egy $f$ frekvenciájú bemenet a mintavétel után az $n f_s\pm f$ frekvenciákon is megjelenik ($n$ egész).
+
+\textbf{Decibel amplitúdóban.} Feszültség- (amplitúdó-) arányra $a_\mathrm{dB}=20\lg(U_1/U_2)$.
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle U_2=U_1\cdot10^{-a/20}$}\end{center}
+
+\end{elmelet}
+
+\lepes{A 6,2 kHz-es komponens}
+Ez az ${\cb{1{,}8}}$ kHz álképe az első másolatnál, a kimenő szűrő zárótartományában.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cb{f}}={\ca{f_s}}-{\cb{1{,}8}}=8-{\cb{1{,}8}}=6{,}2\ \text{kHz}$}\end{center}
+\jegyzet{definíció}{$n=1$, mínusz előjel}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle U_{6{,}2}=2\,\text{V}\cdot10^{-40/20}=2\cdot0{,}01=0{,}02\ \text{V}$}\end{center}
+\jegyzet{behelyettesítés}{20 mV}
+
+\lepes{A többi kimenő komponens}
+Minden másolat megjelenik, a kimenő szűrő mindet $0{,}01$-szeresre csillapítja.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{ki}=n\cdot8\pm{\cb{1{,}8}}\ \text{kHz}\ \Longrightarrow\ {\cb{1{,}8}};\ 6{,}2;\ 9{,}8;\ 14{,}2;\ 17{,}8;\ \ldots$}\end{center}
+\jegyzet{definíció}{mind 20 mV, kivéve az 1,8 kHz-et (2 V)}
+
+\lepes{Egyenirányítás}
+A $|\sin|$ alakú jel alapfrekvenciája a kétszeres, és vannak felharmonikusai.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_0=2\cdot{\cb{1{,}8}}=3{,}6\ \text{kHz}\qquad f_k=k\cdot3{,}6\ \text{kHz}$}\end{center}
+\jegyzet{definíció}{az egyenirányított szinusz periódusa a fele}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{ki}=n\cdot8\pm k\cdot3{,}6\ \text{kHz}$}\end{center}
+\jegyzet{átalakítás}{a mintavétel után}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle n=1:\ 8-7{,}2=0{,}8\qquad 10{,}8-8=2{,}8\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{$k=2$: 7,2 kHz, $k=3$: 10,8 kHz}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle n=2:\ 16-14{,}4=1{,}6\qquad 18-16=2{,}0\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{ezek is a 0,3\ldots{}3,4 kHz-es sávban vannak}
+\begin{figyelem}[Javítás]
+A források (OneDrive 2.2, Koma) példaként csak a $0{,}8$ és a $2{,}8$ kHz-et említik. A független ellenőrzés szerint a $2f_s$ körüli álképek közül az $1{,}6$ és a $2{,}0$ kHz is a hasznos sávba esik. Ez nem ellentmondás, csak kiegészítés.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle U_{6{,}2}=20\ \text{mV}$}\end{center}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{ki}=n\cdot8\pm1{,}8\ \text{kHz}$}\end{center}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{egyenirányítva a hasznos sávban: } 0{,}8;\ 1{,}6;\ 2{,}0;\ 2{,}8\ \text{kHz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item Az álképek nem harmonikusai az $1{,}8$ kHz-nek: ez hallható, „fals” torzítás.
+\item A felharmonikus amplitúdója a bemenő szűrőn $40$ dB-t csillapodik, mégis megjelenik. Ez mutatja, hogy a 40 dB nem végtelen.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item $10\lg$-gel számolnak amplitúdóra, és $10^{-4}$-et kapnak $0{,}01$ helyett.
+\item Az egyenirányított jelnél $1{,}8$ kHz-es alapharmonikussal számolnak. Az alapfrekvencia kétszeres lesz.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Saját számpélda (kiegészítés, a forrásban nem szerepel)]
+\small
+\begin{verbatim}
+30 dB-es zárótartomány esetén: U(6,2 kHz) = 2*10^(-30/20) = 2*0,0316 = 63 mV.
+\end{verbatim}
+\end{tipp}
+\begin{tipp}[Kapcsolat és analógia]
+
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+túlvezérlés (2.12) & a vágás páratlan felharmonikusokat ad, az egyenirányítás párosakat\\
+\bottomrule\end{tabularx}}\par
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.3. feladat: Két sávban lévő jel: teljesítménysűrűség és a mintavételi frekvencia}{2.3. feladat: Két sávban lévő jel: teljesítménysűrűség és a mintavételi frekvencia}}\label{p2_03}
+\setcounter{lepes}{0}
+\begin{feladat}{2.3. feladat}
+Egy $50\ \Omega$-os ellenálláson mért feszültség spektrális sűrűsége a pozitív frekvenciákon zérus, kivéve a $0\ldots3$ kHz és a $7\ldots8$ kHz sávot, ahol állandó. A jel teljesítménye $0{,}2$ mW. a) Hogyan viselkedik a spektrális sűrűség a negatív frekvenciákon? b) Mekkora a spektrális sűrűség? c) Milyen $f_s$ mellett állítható vissza a jel, és milyen szűrővel?
+
+{\footnotesize\sffamily Forrás: OneDrive 2.1 $\cdot$ TMIT P.1.2 $\cdot$ Koma gyak2/3 $\cdot$ Marosi ik.5 $\cdot$ azonosítók: pd02\_1, tg01\_P12, kg02\_3, mg2\_2. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) a spektrum szimmetriája
+\item b) $s_0$ teljesítmény- és feszültségnégyzet-sűrűségként
+\item c) a megengedett $f_s$ (mintavételi frekvencia) tartományok és a szűrők
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$B_\text{össz}$ & a jel teljes sávszélessége a pozitív frekvenciákon & \\
+$\ca{P}$ & a jel teljesítménye & $0{,}2$\,mW\\
+$\cb{R}$ & az ellenállás & $50$\\
+$s_0$ & a jel teljesítménysűrűség-spektruma, s(f) & \emph{keresett}\\
+$f_s$ & mintavételi frekvencia & \emph{keresett}\\
+$f_{\max}$ & a jel legnagyobb frekvenciája (8 kHz) & \\
+$s$ & a jel teljesítménysűrűség-spektruma, s(f) & \\
+$f$ & frekvencia (a spektrum változója) & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért páros a spektrális sűrűség?}\par Mert a jel valós. A kétoldalas spektrumban minden szinuszos komponens fele $+f$-en, fele $-f$-en van.
+
+\textbf{Miért $2\cdot4$ kHz a szélesség az integrálban?}\par Mert a kétoldalas sűrűséget a pozitív és a negatív frekvenciákon is integrálni kell.
+
+\textbf{Miért lehet $16$ kHz alatt is mintavételezni?}\par A $3\ldots7$ kHz között üres hely van. Ha a $7\ldots8$ kHz-es sáv álképe pont ebbe esik, nem lapolódik rá semmire.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Parseval.} A teljesítmény a spektrális sűrűség teljes integrálja.
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P=\int_{-\infty}^{\infty}s(f)\,\mathrm df$}\end{center}
+
+
+\textbf{Feszültségből teljesítmény.} $P=U^2/R$, ezért a feszültségnégyzet-sűrűség $R$-szeres.
+\end{elmelet}
+
+\lepes{A sűrűség értéke}
+A kétoldalas sűrűség $2\cdot4$ kHz szélességben állandó.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\ca{P}}=s_0\cdot2B_\text{össz}$}\end{center}
+\jegyzet{tétel}{Parseval}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s_0=\frac{P}{2B_\text{össz}}=\frac{0{,}2\ \text{mW}}{8\ \text{kHz}}=25\ \frac{\mu\text{W}}{\text{kHz}}$}\end{center}
+\jegyzet{átalakítás}{$P=0{,}2$ mW, $2B_\text{össz}=8$ kHz}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s_0'={\cb{R}}\cdot s_0={\cb{50}}\cdot25\cdot10^{-9}\ \frac{\text{V}^2}{\text{Hz}}=1{,}25\cdot10^{-6}\ \frac{\text{V}^2}{\text{Hz}}=1250\ \frac{\text{mV}^2}{\text{kHz}}$}\end{center}
+\jegyzet{átalakítás}{feszültségnégyzet-sűrűség}
+
+\lepes{Aluláteresztő visszaállítás}
+A legmagasabb frekvencia $8$ kHz.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s\ge2f_{\max}=16\ \text{kHz}$}\end{center}
+\jegyzet{tétel}{aluláteresztő, határfrekvenciája 8 kHz és $f_s/2$ között}
+
+\lepes{Kisebb mintavételi frekvencia}
+A $7\ldots8$ kHz-es sáv negatív oldali másolatát ($-8\ldots-7$) $f_s$-sel eltolva a $3\ldots7$ kHz-es résbe kell tenni, és a $-3\ldots3$ kHz-es sáv másolata ($f_s-3\ldots f_s+3$) nem lóghat a $7\ldots8$ kHz-es sávba.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s-8\ge3\ \Longrightarrow\ f_s\ge11\ \text{kHz}$}\end{center}
+\jegyzet{geometria}{a 7\ldots{}8 kHz álképe a 3 kHz felett}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s-7\le7\ \Longrightarrow\ f_s\le14\ \text{kHz}$}\end{center}
+\jegyzet{geometria}{és a 7 kHz alatt marad}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s-3\ge8\ \Longleftarrow\ f_s\ge11$}\end{center}
+\jegyzet{ellenőrzés}{az alapsáv másolata a 8 kHz felett van}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s(-f)=s(f)\qquad s_0=25\ \tfrac{\mu\text{W}}{\text{kHz}}=1250\ \tfrac{\text{mV}^2}{\text{kHz}}$}\end{center}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s\ge16\ \text{kHz (aluláteresztő)}\qquad 11\le f_s\le14\ \text{kHz (két áteresztősávú szűrő)}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $f_s=12$ kHz: álképek $4\ldots5$ kHz-en (a résben) és $9\ldots15$ kHz-en (a sáv felett). Jó.
+\item $f_s=15$ kHz: a $7\ldots8$ álképe $7\ldots8$ kHz-re esne, rá a jelre. Rossz.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item Egyoldalas szélességgel ($4$ kHz) osztanak, és kétszeres $s_0$-t kapnak.
+\item A $11\ldots14$ kHz-es tartománynál elfelejtik, hogy a visszaállításhoz nem aluláteresztő, hanem a két sávot kiválogató szűrő kell.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Saját számpélda (kiegészítés, a forrásban nem szerepel)]
+\small
+\begin{verbatim}
+P = 0,5 mW esetén: s0 = 0,5 mW / 8 kHz = 62,5 uW/kHz, x50 Ohm = 3125 mV^2/kHz.
+\end{verbatim}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.4. feladat: Sáváteresztő mintavétel: 45\ldots{}75 kHz}{2.4. feladat: Sáváteresztő mintavétel: 45…75 kHz}}\label{p2_04}
+\setcounter{lepes}{0}
+\begin{feladat}{2.4. feladat}
+Egy jelnek $45$ és $75$ kHz között vannak komponensei. a) Mekkora legyen $f_s$, ha aluláteresztő szűrővel állítjuk vissza? b) Sáváteresztő szűrő esetén mekkora lehet? c) Mekkora a legkisebb $f_s$?
+
+{\footnotesize\sffamily Forrás: Vizsga 2016.01.05 1. $\cdot$ régi jegyzet F12 és M1-T012 $\cdot$ azonosítók: vz2016\_01\_05\_Q1, F12. Címkék: vizsga, beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_s$ (mintavételi frekvencia) aluláteresztővel
+\item b) a sáváteresztő tartományok
+\item c) a legkisebb $f_s$ (mintavételi frekvencia)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_L}$ & a jel legkisebb frekvenciája & $45$\,kHz\\
+$\cb{f_H}$ & a jel legnagyobb frekvenciája & $75$\,kHz\\
+$\cc{B}$ & a jel sávszélessége & $30$\,kHz\\
+$f_s$ & mintavételi frekvencia & \emph{keresett}\\
+$k$ & a Nyquist-zóna sorszáma: a frekvenciatengelyt $f_s/2$ széles sávokra osztjuk, és $k$ annak a sávnak a sorszáma, amelybe a jel teljes sávja beleesik & \\
+$k_{\max}$ & a legnagyobb szóba jöhető zónasorszám, $\lfloor f_H/B\rfloor$ & \\
+$f_{s,\min}$ & a legkisebb mintavételi frekvencia & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért van értelme a sáváteresztő mintavételnek?}\par A jel csak $30$ kHz széles, de magasan van. Ha a másolatok a sávok közé esnek, $150$ kHz helyett már $75$ kHz is elég.
+
+\textbf{Meddig kell $k$-t növelni?}\par $k\le\lfloor f_H/B\rfloor=\lfloor75/30\rfloor=2$. Nagyobb $k$-ra az alsó határ meghaladná a felsőt.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Sáváteresztő mintavétel.} Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}$}\end{center}
+
+\end{elmelet}
+
+\lepes{Mit jelent a $k$? A Nyquist-zóna sorszáma}
+A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. \textbf{$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:} $(k-1)\,f_s/2\le {\ca{f_L}}$ és ${\cb{f_H}}\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2{\cb{f_H}}/k\le f_s\le2{\ca{f_L}}/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2{\cb{f_H}}$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge {\cc{B}}$), $k$ legfeljebb ${\cb{f_H}}/{\cc{B}}$ lehet, lefelé kerekítve: $k_{\max}=\lfloor {\cb{f_H}}/{\cc{B}}\rfloor$.
+
+\lepes{Aluláteresztő eset}
+A legmagasabb komponens dönt.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s\ge2{\cb{f_H}}=2\cdot{\cb{75}}=150\ \text{kHz}$}\end{center}
+\jegyzet{tétel}{$k=1$}
+
+\lepes{A második Nyquist-zóna ($k=2$)}
+Behelyettesítünk a sáváteresztő képletbe.
+\behely{\bh{\ca{f_L}}{\ca{45\un{kHz}}} \bh{\cb{f_H}}{\cb{75\un{kHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{2\cdot{\cb{75}}}{2}\le f_s\le\frac{2\cdot{\ca{45}}}{1}$}\end{center}
+\jegyzet{behelyettesítés}{$k=2$, $f_H=75$, $f_L=45$ kHz}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cb{75}}\ \text{kHz}\le f_s\le90\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{kiszámolva}
+
+\lepes{Ellenőrzés a spektrumon}
+$f_s={\cb{75}}$ kHz-nél a negatív oldali sáv ($-{\cb{75}}\ldots-{\ca{45}}$) eltolva $0\ldots{\cc{30}}$ kHz-re kerül, $2f_s$-sel ${\cb{75}}\ldots105$ kHz-re. Egyik sem lóg bele a ${\ca{45}}\ldots{\cb{75}}$ kHz-be.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s={\cb{75}}:\ \ [0;{\cc{30}}]\ \text{és}\ [{\cb{75}};105]\ \cap\ [{\ca{45}};{\cb{75}}]=\{75\}$}\end{center}
+\jegyzet{ellenőrzés}{csak a sávszél érintkezik, ezért határeset}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) } f_s\ge150\ \text{kHz}\qquad\text{b) } 75\le f_s\le90\ \text{kHz}\qquad\text{c) } f_{s,\min}=75\ \text{kHz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $f_s\ge2B=60$ kHz minden megoldásra teljesül.
+\item A vizsgamegoldás ugyanezt adja az $f_s-45\le45$ és $2f_s-75\ge75$ feltételekből.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item $2B=60$ kHz-et mondanak legkisebbnek. Az csak akkor jó, ha $f_H/B$ egész, itt $2{,}5$.
+\item Sáváteresztő mintavételnél aluláteresztő visszaállító szűrőt rajzolnak.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Saját számpélda (kiegészítés, a forrásban nem szerepel)]
+\small
+\begin{verbatim}
+60...80 kHz (B = 20): k = 4 -> csak 40 kHz, k = 3 -> 53,3...60 kHz, k = 2 ->
+  80...120 kHz.
+\end{verbatim}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.5. feladat: 40\ldots{}70 kHz, gyök 2-es csúcstényező, 64 dB}{2.5. feladat: 40…70 kHz, gyök 2-es csúcstényező, 64 dB}}\label{p2_05}
+\setcounter{lepes}{0}
+\begin{feladat}{2.5. feladat}
+Tervezzen mintavevő rendszert egyenletes kvantálóval, amely egy valós, $\sqrt2$ csúcstényezőjű, teljes kivezérlésű jel visszaállításakor legalább $64$ dB-es jel-zaj viszonyt ad. A jel $40$ és $70$ kHz között tartalmaz komponenseket. a) Mik az átlapolódásmentes mintavételi frekvenciák? b) Milyen szűrők kellenek? c) Hány bites kvantáló kell, ha aluláteresztő szűrőkkel állítjuk vissza?
+
+{\footnotesize\sffamily Forrás: Moodle-vizsga 2020.06.02 Q8 (3/3 pont) $\cdot$ F14 $\cdot$ azonosító: vz2020\_06\_02\_Q8. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_s$ (mintavételi frekvencia) tartományok
+\item b) a szűrők típusa
+\item c) $n$ (a kvantáló bitszáma)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_L}$ & a jel legkisebb frekvenciája & $40$\\
+$\cb{f_H}$ & a jel legnagyobb frekvenciája & $70$\,kHz\\
+$\cc{B}$ & a jel sávszélessége & $30$\,kHz\\
+$C$ & csúcstényező & \\
+$f_s$ & mintavételi frekvencia & \emph{keresett}\\
+$n$ & a kvantáló bitszáma & \emph{keresett}\\
+$k$ & a Nyquist-zóna sorszáma: a frekvenciatengelyt $f_s/2$ széles sávokra osztjuk, és $k$ annak a sávnak a sorszáma, amelybe a jel teljes sávja beleesik & \\
+$k_{\max}$ & a legnagyobb szóba jöhető zónasorszám, $\lfloor f_H/B\rfloor$ & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért $f_s=2B$ a c) részben?}\par Aluláteresztő visszaállításnál a szűrő sávja $B=70$ kHz, és a legkisebb $f_s=140$ kHz. Ekkor $f_s/2B=1$, a túlmintavételezés nem ad nyereséget.
+
+\textbf{Miért felfelé kerekítünk?}\par Mert a $64$ dB alsó korlát. $10$ bittel $62$ dB lenne, az kevés.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Sáváteresztő mintavétel.} Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}$}\end{center}
+
+
+\textbf{Jel-zaj viszony.} Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n$}\end{center}
+
+\end{elmelet}
+
+\lepes{Mit jelent a $k$? A Nyquist-zóna sorszáma}
+A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. \textbf{$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:} $(k-1)\,f_s/2\le {\ca{f_L}}$ és ${\cb{f_H}}\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2{\cb{f_H}}/k\le f_s\le2{\ca{f_L}}/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2{\cb{f_H}}$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge {\cc{B}}$), $k$ legfeljebb ${\cb{f_H}}/{\cc{B}}$ lehet, lefelé kerekítve: $k_{\max}=\lfloor {\cb{f_H}}/{\cc{B}}\rfloor$.
+
+\lepes{Mintavételi tartományok}
+$\lfloor{\cb{70}}/{\cc{30}}\rfloor=2$, tehát $k=1$ és $k=2$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle k=1:\ f_s\ge140\ \text{kHz}$}\end{center}
+\jegyzet{tétel}{$2f_H=2\cdot70$}
+\behely{\bh{\cb{f_H}}{\cb{70\un{kHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle k=2:\ \frac{140}{2}\le f_s\le\frac{80}{1}\ \Longrightarrow\ {\cb{70}}\le f_s\le80\ \text{kHz}$}\end{center}
+\jegyzet{behelyettesítés}{$2f_H/2$ és $2f_L/1$}
+
+\lepes{A szűrők}
+A $140$ kHz feletti esetben a be- és kimenő szűrő aluláteresztő, a ${\cb{70}}\ldots80$ kHz-es esetben sáváteresztő (${\ca{40}}\ldots{\cb{70}}$ kHz).
+
+\lepes{A bitszám}
+Szinuszra $10\lg(3/2)=1{,}76$ dB, és $f_s/2{\cc{B}}=1$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 1{,}76+0+6{,}02\,n\ge64$}\end{center}
+\jegyzet{behelyettesítés}{aluláteresztő visszaállítás: $10\lg(f_s/2B)=0$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle n\ge\frac{64-1{,}76}{6{,}02}=10{,}34$}\end{center}
+\jegyzet{átalakítás}{$n$-re rendezve}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle n=11\ \text{bit}$}\end{center}
+\jegyzet{számérték}{felfelé kerekítve}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s\ge140\ \text{kHz (aluláteresztő)}\qquad 70\le f_s\le80\ \text{kHz (sáváteresztő)}\qquad n=11\ \text{bit}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $n=11$: $1{,}76+66{,}2=68{,}0$ dB $\ge64$ dB. $n=10$: $62{,}0$ dB, kevés.
+\item A javító 1+1+1 pontot adott erre a megoldásra.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item $6n\ge64$-ből $n=11$ jön ki, de az $1{,}76$ dB elhagyása szerencsés esetben ugyanazt adja, máskor nem. Írd fel a teljes képletet.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Saját számpélda (kiegészítés, a forrásban nem szerepel)]
+\small
+\begin{verbatim}
+Ha 80 dB kell: n >= (80 - 1,76)/6,02 = 13,0 -> 13 bit (13*6,02 + 1,76 = 80,0 dB,
+  épp elég).
+\end{verbatim}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.6. feladat: 60\ldots{}108 kHz, háromszögjel, 70 dB}{2.6. feladat: 60…108 kHz, háromszögjel, 70 dB}}\label{p2_06}
+\setcounter{lepes}{0}
+\begin{feladat}{2.6. feladat}
+Egyenletes kvantálót kell tervezni, amely egy $\sqrt3$ csúcstényezőjű (háromszög alakú), teljes kivezérlésű jel visszaállításakor legalább $70$ dB-es jel-zaj viszonyt ad. A jel $60$ és $108$ kHz között tartalmaz komponenseket. a) Mik a választható mintavételi frekvenciák? b) Hány bites kvantáló kell?
+
+{\footnotesize\sffamily Forrás: Hallgatói vizsgamegoldás 2014.12.15/4 és 2014.01.14/2 $\cdot$ azonosító: vz2014\_12\_15\_Q4. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_s$ (mintavételi frekvencia) tartományok
+\item b) $n$ (a kvantáló bitszáma)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_L}$ & a jel legkisebb frekvenciája & $60$\\
+$\cb{f_H}$ & a jel legnagyobb frekvenciája & $108$\,kHz\\
+$\cc{B}$ & a jel sávszélessége & $48$\,kHz\\
+$C$ & csúcstényező & \\
+$f_s$ & mintavételi frekvencia & \emph{keresett}\\
+$n$ & a kvantáló bitszáma & \emph{keresett}\\
+$k$ & a Nyquist-zóna sorszáma: a frekvenciatengelyt $f_s/2$ széles sávokra osztjuk, és $k$ annak a sávnak a sorszáma, amelybe a jel teljes sávja beleesik & \\
+$k_{\max}$ & a legnagyobb szóba jöhető zónasorszám, $\lfloor f_H/B\rfloor$ & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért pont a háromszögjel kényelmes?}\par Mert $3/C^2=1$, így a konstans tag eltűnik, és $\text{SNR}_{\mathrm{dB}}\approx6{,}02\,n$.
+
+\textbf{Miért $f_s=2B$-vel számolunk a bitszámnál?}\par A forrásmegoldás ezt a legkisebb, „célszerűen választott” mintavételt veszi. Nagyobb $f_s$-nél kevesebb bit is elég lehet (A6).
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Sáváteresztő mintavétel.} Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}$}\end{center}
+
+
+\textbf{Jel-zaj viszony.} Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n$}\end{center}
+
+\end{elmelet}
+
+\lepes{Mit jelent a $k$? A Nyquist-zóna sorszáma}
+A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. \textbf{$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:} $(k-1)\,f_s/2\le {\ca{f_L}}$ és ${\cb{f_H}}\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2{\cb{f_H}}/k\le f_s\le2{\ca{f_L}}/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2{\cb{f_H}}$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge {\cc{B}}$), $k$ legfeljebb ${\cb{f_H}}/{\cc{B}}$ lehet, lefelé kerekítve: $k_{\max}=\lfloor {\cb{f_H}}/{\cc{B}}\rfloor$.
+
+\lepes{Mintavételi tartományok}
+$\lfloor{\cb{108}}/{\cc{48}}\rfloor=2$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle k=1:\ f_s\ge216\ \text{kHz}$}\end{center}
+\jegyzet{tétel}{$2f_H=2\cdot108$}
+\behely{\bh{\cb{f_H}}{\cb{108\un{kHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle k=2:\ \frac{216}{2}\le f_s\le\frac{120}{1}\ \Longrightarrow\ {\cb{108}}\le f_s\le120\ \text{kHz}$}\end{center}
+\jegyzet{behelyettesítés}{$2f_H/2$ és $2f_L/1=2\cdot60$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s\ge2{\cc{B}}=96\ \text{kHz}$}\end{center}
+\jegyzet{ellenőrzés}{teljesül}
+
+\lepes{A bitszám}
+$10\lg(3/C^2)=10\lg1=0$ dB.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0+6{,}02\,n\ge70$}\end{center}
+\jegyzet{behelyettesítés}{túlmintavételezési nyereség nélkül}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle n\ge\frac{70}{6{,}02}=11{,}63$}\end{center}
+\jegyzet{átalakítás}{$n$-re rendezve}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle n=12\ \text{bit}$}\end{center}
+\jegyzet{számérték}{felfelé kerekítve}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s\ge216\ \text{kHz}\quad\text{vagy}\quad108\le f_s\le120\ \text{kHz}\qquad n=12\ \text{bit}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $n=12$: $72{,}2$ dB $\ge70$. $n=11$: $66{,}2$ dB, kevés.
+\item A középfrekvenciás alak ($f_c=84$ kHz, $(2f_c\mp B)/(m)$) ugyanezt a $108\ldots120$ kHz-es tartományt adja.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item $\sqrt3$ helyett $\sqrt2$-vel számolnak, és $1{,}76$ dB-t adnak hozzá. Ez itt egy bitet is jelenthet.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Saját számpélda (kiegészítés, a forrásban nem szerepel)]
+\small
+\begin{verbatim}
+Ha f_s = 216 kHz, de a visszaállító szűrő csak a 60...108 kHz-et engedi át
+  (sáváteresztő): f_s/2B = 216/96 = 2,25 -> +3,5 dB, n >= 66,5/6,02 = 11,05 -> 12
+  bit (épp nem lesz elég a 11).
+\end{verbatim}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.7. feladat: Négyszögjel: a kimeneten 1, 3, 7 és 9 kHz}{2.7. feladat: Négyszögjel: a kimeneten 1, 3, 7 és 9 kHz}}\label{p2_07}
+\setcounter{lepes}{0}
+\begin{feladat}{2.7. feladat}
+A láncban ideális aluláteresztő bemenő ($f_{AA}$) és visszaállító ($f_R$) szűrő van, a sávszélességük nem egyezik. A bemenetre $1$ kHz-es szimmetrikus négyszögjelet adunk. A kimeneten csak $1$, $3$, $7$ és $9$ kHz-es komponensek jelennek meg. a) Mekkora lehet a két szűrő sávszélessége? b) Mekkora a mintavételi frekvencia?
+\begin{center}\begin{tikzpicture}[x=0.01985cm,y=-0.01985cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (680,200);
+\path[draw=black,line width=0.7pt] (30,160) -- (660,160);
+\path[fill=black,draw=none] (660,160) -- (652,156) -- (652,164) -- cycle;
+\path[draw=black!45,line width=0.35pt] (40,156) -- (40,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (40,178) {0};
+\path[draw=black!45,line width=0.35pt] (80,156) -- (80,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (80,178) {1};
+\path[draw=black!45,line width=0.35pt] (160,156) -- (160,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (160,178) {3};
+\path[draw=black!45,line width=0.35pt] (240,156) -- (240,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (240,178) {5};
+\path[draw=black!45,line width=0.35pt] (320,156) -- (320,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (320,178) {7};
+\path[draw=black!45,line width=0.35pt] (400,156) -- (400,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (400,178) {9};
+\path[draw=black!45,line width=0.35pt] (440,156) -- (440,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (440,178) {10};
+\path[draw=black!45,line width=0.35pt] (480,156) -- (480,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (480,178) {11};
+\path[draw=black!45,line width=0.35pt] (560,156) -- (560,164);
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (560,178) {13};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (660,178) {f [kHz]};
+\path[draw=black,line width=0.8pt] (80,160) -- (80,50);
+\path[fill=black,draw=none] (80,50) circle[radius=0.079cm];
+\path[draw=black,line width=0.8pt] (160,160) -- (160,123.3);
+\path[fill=black,draw=none] (160,123.3) circle[radius=0.079cm];
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (320,160) -- (320,123.3);
+\path[fill=cB,draw=none] (320,123.3) circle[radius=0.079cm];
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (400,160) -- (400,50);
+\path[fill=cB,draw=none] (400,50) circle[radius=0.079cm];
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (480,160) -- (480,50);
+\path[fill=cB,draw=none] (480,50) circle[radius=0.079cm];
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (560,160) -- (560,123.3);
+\path[fill=cB,draw=none] (560,123.3) circle[radius=0.079cm];
+\path[draw=cA,line width=0.8pt,dash pattern=on 3pt off 2pt] (440,33.5) -- (440,160);
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (440,27.5) {f$_s$ = 10 kHz};
+\path[draw=black!45,line width=0.35pt,dash pattern=on 3pt off 2pt] (40,22.5) rectangle (436,160);
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (52,16.5) {a kimenő szűrő áteresztő sávja (9 és 11 kHz között vág)};
+\end{tikzpicture}\end{center}
+
+
+{\footnotesize\sffamily Forrás: Koma gyak6/4 (ZH-felkészítő) $\cdot$ 5-ösöm 3. fejezet $\cdot$ azonosítók: kg06\_4. Címkék: vizsga, beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_{AA}$ (a bemenő (antialiasing) szűrő határfrekvenciája) és $f_R$ (a visszaállító szűrő határfrekvenciája)
+\item b) $f_s$ (mintavételi frekvencia)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$f_{AA}$ & a bemenő (antialiasing) szűrő határfrekvenciája & \emph{keresett}\\
+$f_R$ & a visszaállító szűrő határfrekvenciája & \emph{keresett}\\
+$f_s$ & mintavételi frekvencia & \emph{keresett}\\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item négyszögjel: komponensek $1,3,5,7,9,\ldots$ kHz (páratlan felharmonikusok)
+\item kimenet: $\{1;3;7;9\}$ kHz
+\end{itemize}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért csak páratlan felharmonikusok vannak?}\par A szimmetrikus négyszögjel félhullám-szimmetrikus, ezért a Fourier-sorában csak páratlan harmonikusok vannak.
+
+\textbf{Honnan tudjuk, hogy a 7 és a 9 álkép?}\par Az $5$ kHz hiányzik, tehát a bemenő szűrő $5$ kHz alatt vág. Akkor a $7$ és a $9$ sem juthatott át, csak a mintavétel hozhatta létre.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Álképek.} Egy $f$ frekvenciájú komponens a mintavétel után az $n f_s\pm f$ frekvenciákon is megjelenik.
+\end{elmelet}
+
+\lepes{A bemenő szűrő}
+A $3$ kHz átjut, az $5$ kHz nem.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 3\ \text{kHz}<f_{AA}<5\ \text{kHz}$}\end{center}
+\jegyzet{ellenőrzés}{a 3 kHz átjut, az 5 kHz nem}
+
+\lepes{A mintavételi frekvencia}
+A mintavétel után csak $1$ és $3$ kHz álképei lehetnek. A $7$ és a $9$ kHz ezek közül kettő: $f_s-3=7$ és $f_s-1=9$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s-3=7\quad\text{és}\quad f_s-1=9\ \Longrightarrow\ f_s=10\ \text{kHz}$}\end{center}
+\jegyzet{definíció}{a 7 és a 9 kHz csak álkép lehet}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s=8:\ 8-3=5\ \text{kHz is megjelenne}$}\end{center}
+\jegyzet{ellenőrzés}{rossz}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_s=12:\ 12-3=9,\ 12-1=11\ \text{kHz, a 7 hiányozna}$}\end{center}
+\jegyzet{ellenőrzés}{rossz}
+
+\lepes{A visszaállító szűrő}
+$f_s=10$ kHz-nél a következő álképek $11$ és $13$ kHz. A $9$ átjut, a $11$ nem.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 9\ \text{kHz}<f_R<11\ \text{kHz}$}\end{center}
+\jegyzet{ellenőrzés}{a 9 átjut, a $10+1=11$ nem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 3<f_{AA}<5\ \text{kHz}\qquad 9<f_R<11\ \text{kHz}\qquad f_s=10\ \text{kHz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A kimenet $f_s=10$ kHz-nél: $1$, $3$ (eredeti), $10-3=7$, $10-1=9$ (álkép), a $11$ és $13$ levágva. Pontosan a megadott lista.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item Azt hiszik, a $7$ és a $9$ kHz a négyszögjel saját felharmonikusa. Az $5$ hiánya miatt ez lehetetlen.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Kapcsolat és analógia]
+
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+2.12 (túlvezérlés) & ugyanez a gondolatmenet: a hiányzó és a megjelenő komponensekből kell visszakövetkeztetni\\
+\bottomrule\end{tabularx}}\par
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.8. feladat: A kvantálási zaj spektrális viselkedése}{2.8. feladat: A kvantálási zaj spektrális viselkedése}}\label{p2_08}
+\setcounter{lepes}{0}
+\begin{feladat}{2.8. feladat}
+Egy gyengén stacionárius jel spektrális sűrűsége $s(f)=6s_0\,(1-|f|/(12B))$, ha $7B<|f|<10B$, különben zérus. a) Mekkora a legkisebb $f_s$, ha a D/A utáni szűrő aluláteresztő? b) Ha a szűrő tetszőleges? c) Azonos átalakítókkal melyik esetben jobb a jel-zaj viszony? d) Mi változik, ha az a) sűrűségű mintákból a b) szűrővel állítjuk vissza a jelet?
+
+{\footnotesize\sffamily Forrás: OneDrive 2.4 $\cdot$ Koma gyak2/4 $\cdot$ Marosi ik.5 (más számokkal) $\cdot$ azonosítók: pd02\_4, kg02\_4, mg2\_3. Címkék: nehezebb}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a), b) $f_s$ (mintavételi frekvencia)
+\item c), d) a zajteljesítmények aránya
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$B$ & a jel sávszélessége & \\
+$f_s$ & mintavételi frekvencia & \emph{keresett}\\
+$s$ & a jel spektrális sűrűsége, s(f) & \\
+$f$ & frekvencia (a spektrum változója) & \\
+$s_0$ & a jel spektrális sűrűsége, s(f) & \\
+$f_H$ & a jel legnagyobb frekvenciája & \\
+$k$ & a Nyquist-zóna sorszáma a sáváteresztő mintavételnél & \\
+$f_L$ & a jel legkisebb frekvenciája & \\
+$P$ & a visszaállító szűrőn átjutó kvantálási zaj teljesítménye & \\
+$M$ & a kvantálási zaj teljesítménye a teljes $f_s$ szélességben & \\
+$f_{s,a}$ & a legkisebb $f_s$ aluláteresztő visszaállító szűrővel & \\
+$f_{s,b}$ & a legkisebb $f_s$ tetszőleges visszaállító szűrővel & \\
+$P_\varepsilon$ & a jel sávjába eső kvantálási zaj teljesítménye & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item sáv: $7B\ldots10B$, szélessége $3B$
+\end{itemize}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért $20B/3$ a b) eset?}\par $\lfloor10B/3B\rfloor=3$, és $k=3$-ra $2\cdot10B/3\le f_s\le2\cdot7B/2$, azaz $6{,}67B\le f_s\le7B$. A legkisebb $20B/3$.
+
+\textbf{Miért függ a zaj a szűrőtől?}\par A kvantálási zaj fehér, $1/f_s$ sűrűségű. Amennyi sávot a szűrő átenged, annyi zajt kapunk (A5).
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Kvantálási zaj.} A kvantálási zaj fehér, a $0\ldots f_s$ sávban egyenletesen oszlik el: a visszaállító szűrőn átjutó része a szűrő sávszélességével arányos.
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_\varepsilon=\frac{1}{f_s}M(\varepsilon^2)\int|H(f)|^2\mathrm df$}\end{center}
+
+\end{elmelet}
+
+\lepes{Mintavételi frekvenciák}
+Aluláteresztővel $2f_H$, tetszőleges szűrővel a sáváteresztő képlet $k=3$-ra.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) } f_s=2\cdot10B=20B$}\end{center}
+\jegyzet{tétel}{$f_H=10B$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) } \frac{20B}{3}\le f_s\le\frac{14B}{2}=7B\ \Longrightarrow\ f_s=\frac{20B}{3}$}\end{center}
+\jegyzet{behelyettesítés}{$k=3$: $2f_H/3$ és $2f_L/2$}
+
+\lepes{Zajteljesítmények}
+A szűrő átengedett sávja a) $2\cdot10B=20B$, b) $2\cdot3B=6B$ (két oldal).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) } P=\frac{1}{20B}M\cdot20B=M$}\end{center}
+\jegyzet{behelyettesítés}{a zaj a teljes $f_s$ szélességben egyenletes}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) } P=\frac{3}{20B}M\cdot6B=0{,}9\,M$}\end{center}
+\jegyzet{behelyettesítés}{a b) kicsit jobb}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{d) } P=\frac{1}{20B}M\cdot6B=0{,}3\,M$}\end{center}
+\jegyzet{behelyettesítés}{a sűrű minták és a keskeny szűrő együtt}
+
+\lepes{Decibelben}
+A javulás a zajteljesítmények arányából.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10\lg\frac{1}{0{,}9}=0{,}46\ \text{dB}\qquad10\lg\frac{1}{0{,}3}=5{,}2\ \text{dB}$}\end{center}
+\jegyzet{számérték}{a megmaradó zaj aránya az eredetihez}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_{s,a}=20B\qquad f_{s,b}=\tfrac{20}{3}B\qquad P_\varepsilon:\ M,\ 0{,}9M,\ 0{,}3M$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A Koma-jegyzet 20/20, 18/20 és 6/20 arányai ugyanezek.
+\item Marosi változata (8\ldots{}10 kHz-es sáv) ugyanezt a logikát követi: azonos SNR, túlmintavételezéssel ötszörös.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item Egyoldalas sávszélességgel integrálnak, és fele akkora zajt kapnak.
+\end{itemize}
+\end{figyelem}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.9. feladat: 19\ldots{}25 kHz-es jel és a túlmintavételezés hatása}{2.9. feladat: 19…25 kHz-es jel és a túlmintavételezés hatása}}\label{p2_09}
+\setcounter{lepes}{0}
+\begin{feladat}{2.9. feladat}
+Egy valós jel a $19$ és $25$ kHz közötti sávon kívül nem tartalmaz komponenst. a) Mi a legkisebb $f_s$, amelynél elvileg tökéletesen visszaállítható? b) Hány dB-lel javul a jel-zaj viszony, ha a határfrekvencia kétszeresével ($50$ kHz) veszünk mintát, ugyanazzal a kvantálóval és szűrővel?
+
+{\footnotesize\sffamily Forrás: TMIT gyak01 P.1.3 $\cdot$ azonosító: tg01\_P13. Címkék: nehezebb}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_{s,\min}$ (a legkisebb mintavételi frekvencia)
+\item b) $\Delta\text{SNR}$ (a jel-zaj viszony változása)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_L}$ & a jel legkisebb frekvenciája & $19$\\
+$\cb{f_H}$ & a jel legnagyobb frekvenciája & $25$\,kHz\\
+$\cc{B}$ & a jel sávszélessége & $6$\,kHz\\
+$f_{s,\min}$ & a legkisebb mintavételi frekvencia & \emph{keresett}\\
+$f_s$ & mintavételi frekvencia & \\
+$k$ & a Nyquist-zóna sorszáma: a frekvenciatengelyt $f_s/2$ széles sávokra osztjuk, és $k$ annak a sávnak a sorszáma, amelybe a jel teljes sávja beleesik & \\
+$k_{\max}$ & a legnagyobb szóba jöhető zónasorszám, $\lfloor f_H/B\rfloor$ & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért nem $2B=12$ kHz a válasz?}\par $25/6$ nem egész. $12$ kHz-nél a $4\cdot12$-vel eltolt sáv ($23\ldots29$ kHz) ráesne a jelre.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Sáváteresztő mintavétel.} Ha a jel csak $f_L$ és $f_H$ között van ($B=f_H-f_L$), a megengedett mintavételi frekvenciák egész $k$-ra, $1\le k\le\lfloor f_H/B\rfloor$:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{2f_H}{k}\le f_s\le\frac{2f_L}{k-1}$}\end{center}
+
+
+\textbf{Túlmintavételezés.} A jel-zaj viszonyban a $10\lg(f_s/2B)$ tag: ha ugyanazzal a kvantálóval és szűrővel sűrűbben mintázunk, a kvantálási zaj szélesebb sávra terül szét, és kevesebb jut a szűrő sávjába.
+\end{elmelet}
+
+\lepes{Mit jelent a $k$? A Nyquist-zóna sorszáma}
+A mintavétel után a spektrum $f_s$-enként ismétlődik. Osszuk fel a frekvenciatengelyt $f_s/2$ széles sávokra (Nyquist-zónákra): $0\ldots f_s/2$ az első, $f_s/2\ldots f_s$ a második, és így tovább. \textbf{$k$ annak a zónának a sorszáma, amelybe a jel teljes sávja beleesik:} $(k-1)\,f_s/2\le {\ca{f_L}}$ és ${\cb{f_H}}\le k\,f_s/2$. A két egyenlőtlenséget $f_s$-re rendezve kapjuk a megengedett tartományt, $2{\cb{f_H}}/k\le f_s\le2{\ca{f_L}}/(k-1)$. A $k=1$ eset a szokásos aluláteresztő mintavétel ($f_s\ge2{\cb{f_H}}$). Mivel a zóna nem lehet keskenyebb a jelnél ($f_s/2\ge {\cc{B}}$), $k$ legfeljebb ${\cb{f_H}}/{\cc{B}}$ lehet, lefelé kerekítve: $k_{\max}=\lfloor {\cb{f_H}}/{\cc{B}}\rfloor$.
+
+\lepes{A legkisebb mintavételi frekvencia}
+$k=4$-re behelyettesítünk.
+\behely{\bh{\ca{f_L}}{\ca{19}} \bh{\cb{f_H}}{\cb{25\un{kHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{2\cdot{\cb{25}}}{4}\le f_s\le\frac{2\cdot{\ca{19}}}{3}\ \Longrightarrow\ 12{,}5\le f_s\le12{,}67\ \text{kHz}$}\end{center}
+\jegyzet{behelyettesítés}{$k=\lfloor25/6\rfloor=4$}
+
+\lepes{A jel-zaj viszony változása}
+Csak az $f_s/2{\cc{B}}$ tag változik, mert a kvantáló, a csúcstényező és a szűrő ugyanaz.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \Delta\text{SNR}=10\lg\frac{50}{f_{s,\min}}$}\end{center}
+\jegyzet{átalakítás}{a két $10\lg(f_s/2B)$ tag különbsége}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10\lg\frac{50}{12{,}67}=5{,}96\ \text{dB}\ \ldots\ 10\lg\frac{50}{12{,}5}=6{,}02\ \text{dB}$}\end{center}
+\jegyzet{számérték}{a tartomány két végére}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_{s,\min}=12{,}5\ \text{kHz}\qquad\Delta\text{SNR}\approx6\ \text{dB}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $f_s=12{,}5$: $-25+4\cdot12{,}5=25$, épp érintkezik. $-19+3\cdot12{,}5=18{,}5<19$, nem lapolódik.
+\item $6$ dB ugyanannyi, mint egy bit, mert négyszeres a túlmintavételezés.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item $2B=12$ kHz-et adnak meg. A sáváteresztő táblázat nélkül ez nem derül ki.
+\end{itemize}
+\end{figyelem}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.10. feladat: Túlmintavételezés interpolált mintákkal}{2.10. feladat: Túlmintavételezés interpolált mintákkal}}\label{p2_10}
+\setcounter{lepes}{0}
+\begin{feladat}{2.10. feladat}
+A $15$ kHz sávszélességű jelet $44$ kHz-cel mintavételezzük, $20$ bites mintákkal. A visszaállító D/A átalakító $16$ bites, a szűrő ideális aluláteresztő. a) Mennyit javul a jel-zaj viszony, ha négyszeres sűrűségű interpolált mintákkal állítjuk vissza? b) Mire számíthatunk, ha a szűrő $15$ kHz-es töréspontú elsőfokú aluláteresztő?
+
+{\footnotesize\sffamily Forrás: TMIT gyak01 P.1.4 $\cdot$ azonosító: tg01\_P14}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $\text{SNR}$ (jel-zaj viszony) előtte és utána
+\item b) a szivárgó komponensek
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{B}$ & a jel sávszélessége & $15$\,kHz\\
+$\cb{f_s}$ & mintavételi frekvencia & $44$\,kHz\\
+$\cc{n}$ & a kvantáló bitszáma & $16$\,bit\\
+$C$ & csúcstényező & \\
+$S$ & a jel teljesítménye & \\
+$N$ & a kvantálási zaj teljesítménye & \\
+$H$ & a szűrő átvitele & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért a D/A bitszáma számít?}\par A pontos ($20$ bites) mintákat a $16$ bites D/A kerekíti. A visszaállított jel kvantálási zaját ez a kerekítés adja.
+
+\textbf{Miért segít az interpoláció?}\par A közbenső minták számolhatók a pontos mintákból. A D/A négyszer sűrűbben dolgozik, így a zaj négyszer szélesebb sávra oszlik szét.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Jel-zaj viszony.} Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n$}\end{center}
+
+\end{elmelet}
+
+\lepes{Kiindulási jel-zaj viszony}
+Szinuszra vonatkoztatva ($C^2=2$).
+\behely{\bh{\ca{B}}{\ca{15\un{kHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac SN=\frac32\cdot\frac{44}{2\cdot{\ca{15}}}\cdot2^{32}$}\end{center}
+\jegyzet{behelyettesítés}{$C^2=2$, $f_s=44$, $B=15$ kHz, $n=16$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10\lg\frac SN\approx99{,}8\ \text{dB}$}\end{center}
+\jegyzet{számérték}{$1{,}76+1{,}66+96{,}3$}
+
+\lepes{Négyszeres sűrűséggel}
+Csak az ${\cb{f_s}}/2{\ca{B}}$ tag változik.
+\behely{\bh{\ca{B}}{\ca{15\un{kHz}}} \bh{\cb{f_s}}{\cb{44\un{kHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac SN=\frac32\cdot\frac{4\cdot{\cb{44}}}{2\cdot{\ca{15}}}\cdot2^{32}\ \Longrightarrow\ 105{,}8\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{+6 dB, mint egy bit}
+
+\lepes{Elsőfokú szűrővel}
+A legalacsonyabb szivárgó komponens ${\cb{f_s}}-{\ca{15}}$ kHz-nél van.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cb{44}}-{\ca{15}}=29\ \text{kHz}\qquad 4\cdot{\cb{44}}-{\ca{15}}=161\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{interpolációval sokkal messzebb}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle |H(161)|\approx\frac{15}{161}\approx0{,}093\ \Longrightarrow\ \approx20\ \text{dB}$}\end{center}
+\jegyzet{közelítés}{elsőfokú szűrő, 20 dB/dekád}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 99{,}8\ \text{dB}\ \longrightarrow\ 105{,}8\ \text{dB}\qquad\text{szivárgás } 29\ \text{kHz helyett } 161\ \text{kHz-től, ott kb. 20 dB csillapítás}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $10\lg4=6{,}02$ dB, és egy bit $6{,}02$ dB: a TMIT-füzet ugyanezt állapítja meg.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item A $20$ bites forrással számolnak. A kimenet pontosságát a $16$ bites D/A korlátozza.
+\end{itemize}
+\end{figyelem}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.11. feladat: Az előadás felvétele: 4 kHz, 9 kHz, 14 bit}{2.11. feladat: Az előadás felvétele: 4 kHz, 9 kHz, 14 bit}}\label{p2_11}
+\setcounter{lepes}{0}
+\begin{feladat}{2.11. feladat}
+Az előadást digitális hangtechnikával rögzítjük. A mikrofon jelét $4$ kHz-es ideális aluláteresztő szűri, a mintavétel $9$ kHz, a kvantálás $14$ bites, egyenletes. a) Sikerül-e így tökéletes felvétel? b) Ha nem, miért? c) Kell-e szűrő a bemeneten és a kimeneten? d) Milyen hallható változást okoz, ha minden mintából elhagyjuk a legkisebb helyiértékű $6$ bitet? e) Ha a tréfás hallgató $26$ dB-lel hangosabban beszél, hányszoros a teljesítményigénye?
+
+{\footnotesize\sffamily Forrás: Marosi „Példák \#1” 2. (2016) $\cdot$ azonosító: mgP\_2. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a)\ldots{}c) szövegesen
+\item d) $\Delta\text{SNR}$ (a jel-zaj viszony változása)
+\item e) teljesítményarány
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{B}$ & a jel sávszélessége & $4$\,kHz\\
+$\cb{f_s}$ & mintavételi frekvencia & $9$\,kHz\\
+$\cc{n}$ & a kvantáló bitszáma & $14$\,bit\\
+$i$ & tetszőleges pozitív egész & \\
+$f$ & a bemenő jel frekvenciája & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért nem tökéletes, ha $f_s>2B$?}\par Mintavétel szempontjából rendben van, de a $4$ kHz-es sávkorlát a beszéd magasabb összetevőit levágja, és a kvantálási zaj sem tűnik el soha.
+
+\textbf{Miért $6$ dB egy bit?}\par Minden bit kétszer annyi szintet ad, a lépcső felére csökken, a zajteljesítmény negyedére. $10\lg4=6{,}02$ dB.
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Jel-zaj viszony.} Egyenletes kvantálásnál, $C$ csúcstényezőjű, teljes kivezérlésű jelre, $n$ bittel, $B$ sávú visszaállító szűrővel:
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{SNR}_{\mathrm{dB}}=10\lg\frac{3}{C^2}+10\lg\frac{f_s}{2B}+6{,}02\,n$}\end{center}
+
+
+\textbf{Decibel.} Teljesítményarányra $10\lg$, feszültségre $20\lg$: 3 dB kétszeres, 10 dB tízszeres, 20 dB százszoros teljesítmény.
+\end{elmelet}
+
+\lepes{Tökéletes-e?}
+Nem: a sávkorlát ($4$ kHz az érthetőséghez elég) és a kvantálási zaj miatt. Átlapolódás nincs, mert $9>2\cdot4$.
+
+\lepes{Szűrők}
+A bemeneten kell, különben a $4{,}5$ kHz feletti zaj és hang átlapolódna. A kimeneten is kell, mert a D/A után ott vannak az $i\cdot9\pm f$ kHz-es másolatok ($i$ tetszőleges pozitív egész, $f$ a hang egy összetevőjének frekvenciája).
+
+\lepes{6 bit elhagyása}
+Minden bit $6$ dB.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \Delta\text{SNR}=6\cdot6{,}02=36\ \text{dB}\qquad 2^{12}=4096\approx4000\text{-szeres zajteljesítmény}$}\end{center}
+\jegyzet{számérték}{sistergés}
+
+\lepes{26 dB hangosabban}
+Teljesítményarány a decibelből.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10^{26/10}=10^{2{,}6}\approx398\approx400$}\end{center}
+\jegyzet{átalakítás}{dB-ből teljesítményarány}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{d) } -36\ \text{dB}\ (\approx4000\times\ \text{zaj})\qquad\text{e) } \approx400\times$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $26$ dB $=20+6$ dB, azaz $100\cdot4=400$: a fejszámolás egyezik.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item $20\lg$-gel számolnak a teljesítménynél, és $20$-szorost kapnak.
+\end{itemize}
+\end{figyelem}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.12. feladat: Túlvezérlés: honnan jön a 3,5 kHz?}{2.12. feladat: Túlvezérlés: honnan jön a 3,5 kHz?}}\label{p2_12}
+\setcounter{lepes}{0}
+\begin{feladat}{2.12. feladat}
+Egy $8$ kHz-es mintavételi frekvenciájú rendszer egy $1{,}5$ kHz-es szinuszt hibátlanul visz át. Ha a bemenő amplitúdó $2$ V fölé nő, a kimeneten egy kis $3{,}5$ kHz-es komponens is megjelenik (a visszaállító szűrő $4$ kHz-es, jó minőségű aluláteresztő). a) Magyarázható-e ez a rendszer bemenő fokozatának túlvezérlésével? b) Milyen további frekvenciák lehetnek a kimeneten?
+
+{\footnotesize\sffamily Forrás: Marosi „Példák \#1” 2/b (2016) $\cdot$ azonosító: mgP\_2b. Címkék: vizsga, nehezebb}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) magyarázat
+\item b) a $4$ kHz alatti komponensek
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_s}$ & mintavételi frekvencia & $8$\,kHz\\
+$\cb{f}$ & a bemenő jel frekvenciája & $1{,}5$\,kHz\\
+$\cc{f_R}$ & a visszaállító szűrő határfrekvenciája & $4$\,kHz\\
+$f_k$ & a négyszögjel egy felharmonikusának frekvenciája & \\
+$k$ & nemnegatív egész, a 2k+1 a felharmonikus (páratlan) sorszáma & \\
+$n$ & tetszőleges egész szám (hányadik mintavételi többszörös) & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért páratlan felharmonikusok?}\par A szimmetrikus vágás (túlvezérlés) a szinuszt a négyszög felé torzítja, amelynek csak páratlan felharmonikusai vannak.
+
+\textbf{Hogyan lesz $4{,}5$ kHz-ből $3{,}5$ kHz?}\par A $3\cdot1{,}5=4{,}5$ kHz az $f_s/2$ felett van, álképe $8-4{,}5=3{,}5$ kHz (A2).
+\end{elmelet}
+\begin{elmelet}[Felhasznált elmélet]
+\textbf{Álképek.} Egy $f$ frekvenciájú komponens a mintavétel után az $n f_s\pm f$ frekvenciákon is megjelenik.
+\end{elmelet}
+
+\lepes{A torzítás komponensei}
+Erős túlvezérlésnél a jel a négyszöghöz közelít.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_k=(2k+1)\cdot{\cb{1{,}5}}\ \text{kHz}={\cb{1{,}5}};\ 4{,}5;\ 7{,}5;\ 10{,}5;\ \ldots$}\end{center}
+\jegyzet{definíció}{a négyszögjel páratlan felharmonikusai}
+
+\lepes{Mintavétel után}
+Minden komponensnek $n\cdot8\pm f_k$ álképe lesz.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 8-4{,}5=3{,}5\qquad8-7{,}5=0{,}5\qquad10{,}5-8=2{,}5\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{$n\cdot8\pm f_k$, a 4 kHz alattiak}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 16-13{,}5=2{,}5\qquad16-16{,}5=-0{,}5\to0{,}5\ \text{kHz}$}\end{center}
+\jegyzet{ellenőrzés}{a magasabbak ugyanezekre esnek}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) igen}\qquad\text{b) } 0{,}5;\ 1{,}5;\ 2{,}5;\ 3{,}5\ \text{kHz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item Marosi táblai megoldása ugyanezt a négy frekvenciát adja.
+\item Mind $1$ kHz-es rácson van, félúton: ez az $n\cdot8\pm(2k+1)\cdot1{,}5$ alakból következik.
+\end{itemize}
+\end{tipp}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item Csak a $4{,}5$ kHz álképét keresik, a $7{,}5$ és a $10{,}5$ kHz-es felharmonikust elfelejtik.
+\end{itemize}
+\end{figyelem}
+\begin{tipp}[Kapcsolat és analógia]
+
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+2.2 (egyenirányítás) & páros felharmonikusok, $n\cdot8\pm k\cdot3{,}6$ kHz\\
+2.7 (négyszögjel) & ugyanez a felharmonikus-logika szándékos négyszögjellel\\
+\bottomrule\end{tabularx}}\par
+\end{tipp}

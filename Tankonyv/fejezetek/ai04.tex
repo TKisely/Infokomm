@@ -1,0 +1,795 @@
+% Generálva: html/build_tex.js (ai04.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{3}
+\chapter{\texorpdfstring{Forráskódolás és hibavédő kódolás}{Forráskódolás és hibavédő kódolás}}\label{f4}
+Két feladatcsalád: a forráskódolás (Kraft, entrópia, Huffman) és a lineáris blokk-kódok (generátormátrix, paritásellenőrző mátrix, szindróma, kódtávolság). A blokk-kódos feladatok mindig ugyanazt a receptet követik.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Forráskódolás: Kraft, entrópia, Huffman}{A1. Forráskódolás: Kraft, entrópia, Huffman}}\label{a4-forras}
+$p_i$: az $i$-edik szimbólum valószínűsége, $l_i$: a kódszavának hossza bitben. Átlagos kódszóhossz $\bar L=\sum p_il_i$.
+
+\textbf{Kraft és McMillan:} egyértelműen megfejthető (és prefix) kód $l_i$ hosszakkal akkor és csak akkor létezik, ha $\sum2^{-l_i}\le1$. \textbf{Entrópia:} $H=\sum p_i\log_2(1/p_i)$, ez az átlagos kódszóhossz alsó korlátja: $\bar L\ge H$. A \textbf{Huffman-kód} a két legkisebb valószínűséget vonja össze, újra és újra, amíg egy marad, az ágakra 0-t és 1-et írva. Ha a valószínűségek 2 hatványai, $\bar L=H$ pontosan.
+
+Ha egy szimbólumonként kódolva $\bar L\ge1$ bit, de $H<1$, \textbf{blokk-kódolással} (szimbólumpárok, hármasok) közelíthetjük $H$-t.
+
+\subsection{\texorpdfstring{A2. Lineáris blokk-kód: jelölések és recept}{A2. Lineáris blokk-kód: jelölések és recept}}\label{a4-blokk}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés}\\\midrule
+undefined & az üzenet és a kódszó hossza bitben, C(undefined,undefined)\\
+undefined & üzenet, kódszó undefined, vett szó undefined, hibavektor undefined\\
+undefined & generátormátrix, sorai az egységvektor-üzenetek kódszavai\\
+undefined & a paritásellenőrző mátrix transzponáltja, undefined minden kódszóra\\
+undefined & szindróma, undefined\\
+undefined, undefined & súly (egyesek száma), kódtávolság (két kódszó legkisebb eltérése)\\
+\bottomrule\end{tabularx}}\par
+
+Szisztematikus kód: $G=[I_k\,|\,B]$, $H^T=\begin{bmatrix}B\\I_{n-k}\end{bmatrix}$, $H=[B^T\,|\,I]$. A szindróma azoknak a $H^T$-soroknak az XOR-ja, ahol $v$-ben 1 áll. Ha $s$ megegyezik $H^T$ $i$-edik sorával, egy hibát feltételezve az $i$-edik bit hibás.
+
+Lineáris kódnál $d_{\min}$ = a legkisebb nem nulla kódszósúly. Biztosan jelez $d_{\min}-1$, javít $\lfloor(d_{\min}-1)/2\rfloor$ hibát.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.1. feladat: 2 bites üzenetek, öt bites kódszavak: G, H, szindróma}{4.1. feladat: 2 bites üzenetek, öt bites kódszavak: G, H, szindróma}}\label{ai4_01}
+\setcounter{lepes}{0}
+\begin{feladat}{4.1. feladat}
+A kód: 00 $\to$ 00000, 01 $\to$ 01110, 10 $\to$ 10101, 11 $\to$ 11011. a) Szisztematikus generátormátrix, és melyik kódszót küldték a legnagyobb valószínűséggel, ha $v=(01010)$? b) Paritásellenőrző mátrix és $v$ szindrómája. c) Hány hibát jelez és javít biztosan?
+
+{\footnotesize\sffamily Forrás: ALL-IN 3., 68\ldots{}69. oldal $\cdot$ ai2020\_05\_26\_Q3, ai2014\_01\_07\_1 (és 5-ösöm 19. oldal). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $G$ (generátormátrix) és $\hat c$ (a javított (becsült) kódszó)
+\item b) $H^T$ (a paritásellenőrző mátrix transzponáltja) és $s$ (szindróma)
+\item c) jelzés és javítás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{k}$ & az üzenet hossza bitben & $2$\\
+$\cb{n}$ & a kódszó hossza bitben & $5$\\
+$\cc{v}$ & a vett szó & $01010$\\
+$G$ & generátormátrix & \emph{keresett}\\
+$\hat c$ & a javított (becsült) kódszó & \emph{keresett}\\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & \emph{keresett}\\
+$s$ & szindróma & \emph{keresett}\\
+$B$ & a generátormátrix paritásrésze & \\
+$d$ & két szó Hamming-távolsága: hány helyen különböznek & \\
+$\hat u$ & a becsült üzenet & \\
+$H$ & paritásellenőrző mátrix & \\
+$B^T$ & a $B$ paritásrész transzponáltja & \\
+$I$ & egységmátrix & \\
+$w$ & egy szó súlya: az egyesek száma & \\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Generátormátrix}
+A $G$ sorai a 10 és a 01 üzenet kódszavai, így az eleje egységmátrix.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G=\begin{bmatrix}1&0&1&0&1\\0&1&1&1&0\end{bmatrix},\qquad B=\begin{bmatrix}1&0&1\\1&1&0\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{a) A legközelebbi kódszó}
+Megszámoljuk, hány bitben tér el ${\cc{v}}$ az egyes kódszavaktól (XOR, majd az egyesek száma).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d({\cc{v}},00000)=2\quad d({\cc{v}},01110)=1\quad d({\cc{v}},10101)=5\quad d({\cc{v}},11011)=2$}\end{center}
+\jegyzet{számérték}{pl. $01010\oplus11011=10001$, súlya 2}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat c=01110,\ \hat u=01$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{b) Szindróma}
+$H^T$ felül $B$, alul egységmátrix. ${\cc{v}}$-ben a 2. és a 4. bit 1-es.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H^T=\begin{bmatrix}1&0&1\\1&1&0\\1&0&0\\0&1&0\\0&0&1\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{maga a paritásellenőrző mátrix ennek transzponáltja: $H=[B^T\,|\,I]=\begin{bmatrix}1&1&1&0&0\\0&1&0&1&0\\1&0&0&0&1\end{bmatrix}$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s=110\oplus010=100$}\end{center}
+\jegyzet{behelyettesítés}{$H^T$ 3. sora: a 3. bit hibás, $01010\oplus00100=01110$}
+
+\lepes{c) Kódtávolság}
+A nem nulla kódszavak súlya.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle w(01110)=3,\ w(10101)=3,\ w(11011)=4\ \Rightarrow\ d_{\min}=3$}\end{center}
+\jegyzet{számérték}{jelez 2, javít 1}
+\begin{figyelem}[Javítás]
+A példatár korábbi változata a 11011 távolságát 3-nak írta, helyesen 2 (hibajegyzék H28). A döntést nem befolyásolja.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }\hat c=01110,\ \hat u=01\qquad\text{b) }s=100\qquad\text{c) 2 hibát jelez, 1-et javít}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.2. feladat: C(5,2) kód, amely csak jelezni tud}{4.2. feladat: C(5,2) kód, amely csak jelezni tud}}\label{ai4_02}
+\setcounter{lepes}{0}
+\begin{feladat}{4.2. feladat}
+Egy C(5,2) szisztematikus lineáris kód kódszavai között szerepel az 10101 és a 01101. a) G és H. b) $d_{\min}$, jelezhető és javítható hibák. c) A vett szó $v=11001$: szindróma, javítás, üzenet?
+
+{\footnotesize\sffamily Forrás: ALL-IN 34\ldots{}36., 78\ldots{}79. oldal $\cdot$ ai2015\_12\_16\_3, ai2014\_01\_14\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $G$ (generátormátrix), $H^T$ (a paritásellenőrző mátrix transzponáltja)
+\item b) $d_{\min}$ (kódtávolság, két kódszó legkisebb eltérése)
+\item c) $s$ (szindróma), $\hat c$ (a javított (becsült) kódszó), $\hat u$ (a becsült üzenet)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{n}$ & a kódszó hossza bitben & $5$\\
+$\cb{k}$ & az üzenet hossza bitben & $2$\\
+$\cc{v}$ & a vett szó & $11001$\\
+$G$ & generátormátrix & \emph{keresett}\\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & \emph{keresett}\\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \emph{keresett}\\
+$s$ & szindróma & \emph{keresett}\\
+$\hat c$ & a javított (becsült) kódszó & \emph{keresett}\\
+$\hat u$ & a becsült üzenet & \emph{keresett}\\
+$B$ & a generátormátrix paritásrésze & \\
+$H$ & paritásellenőrző mátrix & \\
+$B^T$ & a $B$ paritásrész transzponáltja & \\
+$I$ & egységmátrix & \\
+$w$ & egy kódszó súlya: az egyesek száma & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item két kódszó: 10101, 01101 (ezek eleje 10 és 01)
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Mátrixok}
+Szisztematikus kódnál a 10 és 01 üzenet kódszavai adják $G$ sorait.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G=\begin{bmatrix}1&0&1&0&1\\0&1&1&0&1\end{bmatrix}\qquad H^T=\begin{bmatrix}1&0&1\\1&0&1\\1&0&0\\0&1&0\\0&0&1\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{$H^T$: felül $B$, alul egységmátrix. Maga $H=[B^T\,|\,I]=\begin{bmatrix}1&1&1&0&0\\0&0&0&1&0\\1&1&0&0&1\end{bmatrix}$}
+
+\lepes{b) Kódtávolság}
+A negyedik kódszó a két sor XOR-ja.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \{00000,\ 10101,\ 01101,\ 11000\}\qquad w:\ 3,\ 3,\ 2$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d_{\min}=2:\ \text{jelez }1,\ \text{javít }0$}\end{center}
+\jegyzet{tétel}{}
+
+\lepes{c) Szindróma}
+${\cc{v}}$-ben az 1., 2. és 5. bit 1-es.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s=101\oplus101\oplus001=001$}\end{center}
+\jegyzet{behelyettesítés}{$H^T$ 5. sora}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat c={\cc{11001}}\oplus00001=11000\ \Rightarrow\ \hat u=11$}\end{center}
+\jegyzet{átalakítás}{csak valószínűsíthető}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) }d_{\min}=2\ (\text{1 hibát jelez, javítani nem tud})\qquad\text{c) }s=001,\ \hat u=11\ \text{(nem garantált)}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item $d_{\min}=2$ miatt egy hibát csak jelezni lehet. A 001-es szindróma itt egyetlen egybites hibához tartozik, ezért a „valószínűleg 11” válasz indokolt. Az 1. és a 2. bit hibája viszont ugyanazt a szindrómát (101) adná: ezeket nem lehet megkülönböztetni.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.3. feladat: Hamming(7,4) kód (2016.01.12.)}{4.3. feladat: Hamming(7,4) kód (2016.01.12.)}}\label{ai4_03}
+\setcounter{lepes}{0}
+\begin{feladat}{4.3. feladat}
+$G=[1000110;\ 0100101;\ 0010011;\ 0001111]$. a) $H^T$? b) Szindróma $v=0000111$-re. c) Hány hibát jelez és javít, és miért? d) Hány bites üzenetek tartoznak hozzá?
+
+{\footnotesize\sffamily Forrás: ALL-IN 42\ldots{}44., 84\ldots{}85. oldal $\cdot$ ai2016\_01\_12\_1, ai2016\_01\_12c\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $H^T$ (a paritásellenőrző mátrix transzponáltja)
+\item b) $s$ (szindróma)
+\item c) jelzés és javítás
+\item d) $k$ (az üzenet hossza bitben)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$G$ & generátormátrix & \\
+$B$ & a generátormátrix paritásrésze & \\
+$\ca{v}$ & a vett szó & $0000111$\\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & \emph{keresett}\\
+$s$ & szindróma & \emph{keresett}\\
+$k$ & az üzenet hossza bitben & \emph{keresett}\\
+$\hat c$ & a javított (becsült) kódszó & \\
+$\hat u$ & a becsült üzenet & \\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \\
+$n$ & a kódszó hossza bitben & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) A paritásellenőrző mátrix transzponáltja ($H^T$)}
+Felül $B$, alul a $3\times3$-as egységmátrix.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H^T=\begin{bmatrix}1&1&0\\1&0&1\\0&1&1\\1&1&1\\1&0&0\\0&1&0\\0&0&1\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{a 7 különböző nem nulla 3 bites szó}
+
+\lepes{b) Szindróma}
+${\ca{v}}$-ben az 5., 6., 7. bit 1-es.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s=100\oplus010\oplus001=111$}\end{center}
+\jegyzet{behelyettesítés}{$H^T$ 4. sora}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat c={\ca{0000111}}\oplus0001000=0001111\ \Rightarrow\ \hat u=0001$}\end{center}
+\jegyzet{átalakítás}{egy hibát feltételezve}
+
+\lepes{c) Jelzés és javítás}
+$H^T$ sorai mind különbözők és nem nullák, ezért minden egybites hiba más szindrómát ad: 1 hiba javítható. Két különböző sor XOR-ja soha nem 0, de három sor összege lehet 0 (pl. 110 $\oplus$ 101 $\oplus$ 011), ezért $d_{\min}=3$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 1+n\le2^{n-k}:\ 1+7=8=2^3$}\end{center}
+\jegyzet{tétel}{egyenlőség: perfekt kód}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d_{\min}=3:\ \text{jelez }2,\ \text{javít }1$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{d) Üzenethossz}
+$G$ sorainak száma.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle k=4\ \text{bit}$}\end{center}
+\jegyzet{számérték}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) }s=111\ (\hat c=0001111)\qquad\text{c) }d_{\min}=3:\ \text{jelez 2, javít 1}\qquad\text{d) }k=4$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.4. feladat: Másik (7,4) kód, $v=1100001$}{4.4. feladat: Másik (7,4) kód, v=1100001}}\label{ai4_04}
+\setcounter{lepes}{0}
+\begin{feladat}{4.4. feladat}
+$G=[1000011;\ 0100110;\ 0010101;\ 0001111]$. a) $H^T$. b) Szindróma $v=1100001$-re. c) Hibajelző és -javító képesség.
+
+{\footnotesize\sffamily Forrás: ALL-IN 65\ldots{}66. oldal $\cdot$ ai2014\_12\_22\_4. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $H^T$ (a paritásellenőrző mátrix transzponáltja)
+\item b) $s$ (szindróma) és a javítás
+\item c) jelzés és javítás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$G$ & generátormátrix & \\
+$B$ & a generátormátrix paritásrésze & \\
+$\ca{v}$ & a vett szó & $1100001$\\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & \emph{keresett}\\
+$s$ & szindróma & \emph{keresett}\\
+$\hat c$ & a javított (becsült) kódszó & \\
+$\hat u$ & a becsült üzenet & \\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) A paritásellenőrző mátrix transzponáltja ($H^T$)}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H^T=\begin{bmatrix}0&1&1\\1&1&0\\1&0&1\\1&1&1\\1&0&0\\0&1&0\\0&0&1\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{b) Szindróma}
+${\ca{v}}$-ben az 1., 2. és 7. bit 1-es.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s=011\oplus110\oplus001=100$}\end{center}
+\jegyzet{behelyettesítés}{$H^T$ 5. sora}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat c={\ca{1100001}}\oplus0000100=1100101\ \Rightarrow\ \hat u=1100$}\end{center}
+\jegyzet{átalakítás}{ellenőrzés: $G$ 1. és 2. sorának XOR-ja}
+
+\lepes{c) Kódtávolság}
+Ez is Hamming(7,4) kód (a $H^T$ sorai a 7 különböző nem nulla szó), ezért $d_{\min}=3$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d_{\min}=3$}\end{center}
+\jegyzet{tétel}{jelez 2, javít 1}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) }s=100,\ \hat u=1100\qquad\text{c) }d_{\min}=3:\ \text{jelez 2, javít 1}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.5. feladat: Tervezzünk kódot: 2 bites üzenet, 2 hiba jelzése}{4.5. feladat: Tervezzünk kódot: 2 bites üzenet, 2 hiba jelzése}}\label{ai4_05}
+\setcounter{lepes}{0}
+\begin{feladat}{4.5. feladat}
+Egy szisztematikus lineáris kódnak 2 bites üzenetei vannak, és 2 hibát tud detektálni. a) Mi lehet a generátormátrix? b) A legkisebb kódszóhossz? c) A kód súlya?
+
+{\footnotesize\sffamily Forrás: ALL-IN 19\ldots{}20. oldal $\cdot$ ai2016\_01\_05\_4. Címkék: vizsga, nehezebb}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $G$ (generátormátrix)
+\item b) $n_{\min}$ (a legkisebb kódszóhossz)
+\item c) a kód súlya (a legkisebb nem nulla kódszósúly)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{k}$ & az üzenet hossza bitben & $2$\\
+$G$ & generátormátrix & \emph{keresett}\\
+$n_{\min}$ & a legkisebb kódszóhossz & \emph{keresett}\\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \\
+$n$ & a kódszó hossza bitben & \\
+$I_2$ & 2$\times$2-es egységmátrix & \\
+$B$ & a generátormátrix paritásrésze & \\
+$w$ & egy kódszó súlya: az egyesek száma & \\
+$w_{\min}$ & a legkisebb nem nulla kódszósúly & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 2 hiba biztos jelzése
+\end{itemize}
+\end{jeloles}
+
+\lepes{A szükséges kódtávolság}
+$d_{\min}-1$ hibát jelez a kód.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d_{\min}-1=2\ \Rightarrow\ d_{\min}=3$}\end{center}
+\jegyzet{definíció}{ez egy hiba javítását is jelenti}
+
+\lepes{b) A legkisebb kódszóhossz ($n$)}
+Két korlátot nézünk. A Singleton-korlát szerint $d_{\min}\le n-{\ca{k}}+1$. Mivel a kód 1 hibát javít, a Hamming-korlátnak is teljesülnie kell: a $2^{n-{\ca{k}}}$ szindróma ki kell, hogy adja a hibátlan esetet és mind az $n$ egybites hibát.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle n\ge d_{\min}+{\ca{k}}-1=3+2-1=4$}\end{center}
+\jegyzet{tétel}{Singleton}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 1+n\le2^{n-2}:\ n=4:\ 5\not\le4\qquad n=5:\ 6\le8$}\end{center}
+\jegyzet{tétel}{Hamming: $n=5$}
+
+\lepes{a) Egy jó generátormátrix ($G$)}
+$G=[I_2\,|\,B]$, a $B$ két sora legyen olyan, hogy minden nem nulla kódszó súlya legalább 3: mindkét sorban legalább két egyes, és a két sor legalább egy helyen különbözzön.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G=\begin{bmatrix}1&0&1&1&1\\0&1&0&1&1\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10111\ (w=4),\quad01011\ (w=3),\quad11100\ (w=3)$}\end{center}
+\jegyzet{ellenőrzés}{$d_{\min}=3$}
+
+\lepes{c) A kód súlya}
+A legkisebb nem nulla kódszósúly, lineáris kódnál egyenlő $d_{\min}$-nel.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle w_{\min}=3$}\end{center}
+\jegyzet{számérték}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) pl. }G=[10111;\ 01011]\qquad\text{b) }n=5\qquad\text{c) }w_{\min}=d_{\min}=3$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.6. feladat: Nem szisztematikus (7,3) kód három kódszóból}{4.6. feladat: Nem szisztematikus (7,3) kód három kódszóból}}\label{ai4_06}
+\setcounter{lepes}{0}
+\begin{feladat}{4.6. feladat}
+Lineáris kód: 001 $\to$ 0101011, 110 $\to$ 1011011, 101 $\to$ 1000110. a) A 000 kódszava? b) Hány kódszó és legfeljebb hány szindróma? c) Hibajelző és -javító képesség?
+
+{\footnotesize\sffamily Forrás: ALL-IN 104\ldots{}105. oldal $\cdot$ aiD\_4\_2. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) a 000 kódszava
+\item b) kódszavak és szindrómák száma
+\item c) $d_{\min}$ (kódtávolság, két kódszó legkisebb eltérése)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{k}$ & az üzenet hossza bitben & $3$\\
+$\cb{n}$ & a kódszó hossza bitben & $7$\\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \emph{keresett}\\
+$G$ & generátormátrix & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item lineáris: két üzenet XOR-jának kódszava a két kódszó XOR-ja
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) A 000 kódszava}
+Lineáris kódban $0\cdot G=0$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 000\to0000000$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{A többi kódszó a linearitásból}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 100=001\oplus101\to0101011\oplus1000110=1101101$}\end{center}
+\jegyzet{átalakítás}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 010=110\oplus100\to1011011\oplus1101101=0110110$}\end{center}
+\jegyzet{átalakítás}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 011\to0011101\qquad111\to1110000$}\end{center}
+\jegyzet{átalakítás}{$010\oplus001$, illetve $110\oplus001$}
+
+\lepes{b) Darabszámok}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 2^{\ca{k}}=2^3=8\ \text{kódszó}\qquad2^{n-{\ca{k}}}=2^4=16\ \text{szindróma}$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{c) Kódtávolság}
+A hét nem nulla kódszó súlya:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 4,\ 5,\ 3,\ 5,\ 4,\ 4,\ 3\ \Rightarrow\ d_{\min}=3$}\end{center}
+\jegyzet{számérték}{jelez 2, javít 1}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }0000000\qquad\text{b) 8 kódszó, 16 szindróma}\qquad\text{c) }d_{\min}=3:\ \text{jelez 2, javít 1}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.7. feladat: $G=[10011;\,01110]$, $v=10101$}{4.7. feladat: G=[10011;01110], v=10101}}\label{ai4_07}
+\setcounter{lepes}{0}
+\begin{feladat}{4.7. feladat}
+Bináris, lineáris, szisztematikus kód, $G=[10011;\ 01110]$. a) Kódszavak, legvalószínűbb üzenet $v=10101$-re. b) Paritásellenőrző mátrix és szindróma.
+
+{\footnotesize\sffamily Forrás: ALL-IN 105. oldal $\cdot$ aiD\_4\_3 (a gyűjteményben nincs megoldás). Címkék: vizsga, saját megoldás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) kódszavak és $\hat u$ (a becsült üzenet)
+\item b) $H^T$ (a paritásellenőrző mátrix transzponáltja) és $s$ (szindróma)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$G$ & generátormátrix & \\
+$B$ & a generátormátrix paritásrésze & \\
+$\ca{v}$ & a vett szó & $10101$\\
+$\hat u$ & a becsült üzenet & \emph{keresett}\\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & \emph{keresett}\\
+$s$ & szindróma & \emph{keresett}\\
+$d$ & két szó Hamming-távolsága: hány helyen különböznek & \\
+$\hat c$ & a javított (becsült) kódszó & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Kódszavak és távolságok}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 00000,\ 10011,\ 01110,\ 10011\oplus01110=11101$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d({\ca{v}},\cdot)=3,\ 2,\ 4,\ 1\ \Rightarrow\ \hat c=11101,\ \hat u=11$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{b) Szindróma}
+${\ca{v}}$-ben az 1., 3. és 5. bit 1-es.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H^T=\begin{bmatrix}0&1&1\\1&1&0\\1&0&0\\0&1&0\\0&0&1\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s=011\oplus100\oplus001=110$}\end{center}
+\jegyzet{behelyettesítés}{$H^T$ 2. sora: a 2. bit hibás, egyezik az a) résszel}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }\hat c=11101,\ \hat u=11\qquad\text{b) }s=110$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A feladat adatai elmosódott képről olvasva \texttt{[ELLENŐRIZENDŐ]}.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.8. feladat: $G=[10101;\,01011]$, $v=11101$}{4.8. feladat: G=[10101;01011], v=11101}}\label{ai4_08}
+\setcounter{lepes}{0}
+\begin{feladat}{4.8. feladat}
+a) Kódszavak, legvalószínűbb üzenet $v=11101$-re. b) H és a szindróma. c) Hány hibát jelez és javít biztosan?
+
+{\footnotesize\sffamily Forrás: ALL-IN 106. oldal $\cdot$ aiD\_4\_7 (és 5-ösöm 19. oldal). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) kódszavak és $\hat u$ (a becsült üzenet)
+\item b) $H$ (paritásellenőrző mátrix) és $s$ (szindróma)
+\item c) jelzés és javítás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$G$ & generátormátrix & \\
+$I_2$ & egységmátrix & \\
+$B$ & a generátormátrix paritásrésze & \\
+$\ca{v}$ & a vett szó & $11101$\\
+$\hat u$ & a becsült üzenet & \emph{keresett}\\
+$s$ & szindróma & \emph{keresett}\\
+$d$ & két szó Hamming-távolsága: hány helyen különböznek & \\
+$B^T$ & a $B$ paritásrész transzponáltja & \\
+$I$ & egységmátrix & \\
+$H^T$ & a paritásellenőrző mátrix transzponáltja & \\
+$\hat c$ & a javított (becsült) kódszó & \\
+$w$ & egy szó súlya: az egyesek száma & \\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Kódszavak}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 00000,\ 10101,\ 01011,\ 11110$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d({\ca{v}},\cdot)=4,\ 1,\ 3,\ 2\ \Rightarrow\ \hat u=10$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{b) A paritásellenőrző mátrix ($H$) és a szindróma}
+$H=[B^T\,|\,I]$, $H^T$ sorai 101, 011, 100, 010, 001. ${\ca{v}}$-ben az 1., 2., 3. és 5. bit 1-es.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H=\begin{bmatrix}1&0&1&0&0\\0&1&0&1&0\\1&1&0&0&1\end{bmatrix}$}\end{center}
+\jegyzet{definíció}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s=101\oplus011\oplus100\oplus001=011$}\end{center}
+\jegyzet{behelyettesítés}{$H^T$ 2. sora: $\hat c=10101$}
+
+\lepes{c) Kódtávolság}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle w:\ 3,\ 3,\ 4\ \Rightarrow\ d_{\min}=3$}\end{center}
+\jegyzet{számérték}{jelez 2, javít 1}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }\hat u=10\qquad\text{b) }s=011\qquad\text{c) 2 hibát jelez, 1-et javít}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.9. feladat: Öt kódszó: négy állítás}{4.9. feladat: Öt kódszó: négy állítás}}\label{ai4_09}
+\setcounter{lepes}{0}
+\begin{feladat}{4.9. feladat}
+Kódszavak: 10101, 01010, 00011, 11100, 11111. A) $d_{\min}=2$. B) Egy bithiba mindig javítható. C) Egy bithiba mindig észlelhető. D) Nem szisztematikus kód.
+
+{\footnotesize\sffamily Forrás: ALL-IN 105. oldal $\cdot$ aiD\_4\_5 (3.6.). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item melyik állítás igaz
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{n}$ & a kódszó hossza bitben & $5$\\
+$d_{\min}$ & kódtávolság, két kódszó legkisebb eltérése & \\
+$d$ & két szó Hamming-távolsága: hány helyen különböznek & \\
+$k$ & az üzenet hossza bitben & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{A) Kódtávolság}
+A kód nem lineáris (nincs benne 00000), ezért a páronkénti távolságokat kell nézni.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d(10101,11111)=2\qquad d(01010,00011)=2\qquad d(11100,11111)=2$}\end{center}
+\jegyzet{számérték}{nincs 1-es távolság: $d_{\min}=2$, A igaz}
+
+\lepes{B), C)}
+$d_{\min}=2$: $d_{\min}-1=1$ hibát jelez, $\lfloor1/2\rfloor=0$-t javít.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{B hamis, C igaz}$}\end{center}
+\jegyzet{tétel}{}
+
+\lepes{D) Szisztematikus-e?}
+Szisztematikus kódnál $2^k$ kódszó van, és az üzenet bitjei változatlanul megjelennek. 5 nem kettő hatványa.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 5\ne2^k$}\end{center}
+\jegyzet{ellenőrzés}{D igaz}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{A, C, D igaz, B hamis}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.10. feladat: Kraft: 2,2,3,3,3,4,4,4,4 és 2,2,3,3,3,5,5,5,5}{4.10. feladat: Kraft: 2,2,3,3,3,4,4,4,4 és 2,2,3,3,3,5,5,5,5}}\label{ai4_10}
+\setcounter{lepes}{0}
+\begin{feladat}{4.10. feladat}
+a) Lehet-e egyértelműen megfejthető kódot készíteni a 2,2,3,3,3,4,4,4,4 hosszakkal? b) Készítsen prefixmentes kódot a 2,2,3,3,3,5,5,5,5 hosszakkal!
+
+{\footnotesize\sffamily Forrás: ALL-IN 11., 77\ldots{}78. oldal $\cdot$ ai2020\_06\_02\_Q1, ai2014\_01\_07\_10 (és 5-ösöm 20. oldal). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) létezik-e
+\item b) egy prefix kód
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$l_i$ & az i-edik kódszó hossza & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item $l_i$: a kódszóhosszak
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Kraft-összeg}
+McMillan: egyértelműen megfejthető kódhoz $\sum2^{-l_i}\le1$ kell (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 2\cdot\tfrac14+3\cdot\tfrac18+4\cdot\tfrac1{16}=0{,}5+0{,}375+0{,}25=1{,}125>1$}\end{center}
+\jegyzet{behelyettesítés}{nem lehet}
+
+\lepes{b) Kraft-összeg}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 2\cdot\tfrac14+3\cdot\tfrac18+4\cdot\tfrac1{32}=0{,}5+0{,}375+0{,}125=1$}\end{center}
+\jegyzet{behelyettesítés}{lehet, és a kódfa teljes}
+
+\lepes{b) Egy prefix kód}
+Kódfából: a 2 bites szavak 00 és 11, a 3 bitesek 010, 011, 100, a maradék 101 ágat 2 bittel tovább bontjuk négy 5 bites szóra.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 00,\ 11,\ 010,\ 011,\ 100,\ 10100,\ 10101,\ 10110,\ 10111$}\end{center}
+\jegyzet{számérték}{egyik sem eleje egy másiknak}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) nem (Kraft-összeg }1{,}125)\qquad\text{b) }00,\ 11,\ 010,\ 011,\ 100,\ 10100,\ 10101,\ 10110,\ 10111$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.11. feladat: a $\to$ 1, b $\to$ 10, c $\to$ 100}{4.11. feladat: a → 1, b → 10, c → 100}}\label{ai4_11}
+\setcounter{lepes}{0}
+\begin{feladat}{4.11. feladat}
+Kód: a $\to$ 1, b $\to$ 10, c $\to$ 100. A) Az 1011001001 a „bacca” kódja. B) Ez prefix kód. C) Létezik prefix kód ugyanezekkel a hosszakkal. D) A kód egyértelműen dekódolható.
+
+{\footnotesize\sffamily Forrás: ALL-IN 106. oldal $\cdot$ aiD\_4\_6 (4.5.). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item melyik állítás igaz
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item három kódszó: 1, 10, 100
+\end{itemize}
+\end{jeloles}
+
+\lepes{A) „bacca”}
+Összefűzzük a kódszavakat: b=10, a=1, c=100, c=100, a=1.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10\,|\,1\,|\,100\,|\,100\,|\,1=1011001001$}\end{center}
+\jegyzet{számérték}{A igaz}
+
+\lepes{B) Prefix-e?}
+Prefix kódban egyik szó sem eleje egy másiknak.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 1\ \text{eleje a}\ 10\text{-nek}$}\end{center}
+\jegyzet{ellenőrzés}{B hamis}
+
+\lepes{C) Létezik-e prefix kód?}
+Kraft-összeg a hosszakra (1, 2, 3).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 2^{-1}+2^{-2}+2^{-3}=0{,}875\le1$}\end{center}
+\jegyzet{tétel}{C igaz, pl. 0, 10, 110}
+
+\lepes{D) Egyértelmű dekódolás}
+Minden kódszó 1-gyel kezdődik, és utána csak 0-k jönnek: minden 1-es egy új szó elejét jelzi (vesszőkód). Ezért mindig egyértelműen szétvágható.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{D igaz}$}\end{center}
+\jegyzet{ellenőrzés}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{A, C, D igaz, B hamis}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.12. feladat: Hétszintű kvantáló, Huffman, bitsebesség}{4.12. feladat: Hétszintű kvantáló, Huffman, bitsebesség}}\label{ai4_12}
+\setcounter{lepes}{0}
+\begin{feladat}{4.12. feladat}
+2 kHz-es alapsávi jel, Nyquist szerinti minimális $f_s$. A kvantáló hét szintje \{$-$3\ldots{}+3\}, valószínűségük 1/16, 1/16, 1/8, 1/2, 1/8, 1/16, 1/16. a) A legkisebb átlagos kódszóhossz és bitsebesség? b) Huffman-kód. c) Elért sebesség?
+
+{\footnotesize\sffamily Forrás: ALL-IN 104. oldal $\cdot$ aiD\_4\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $H$ (entrópia) és a bitsebesség
+\item b) Huffman-kód
+\item c) $\bar L$ (átlagos kódszóhossz) és a sebesség
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{B}$ & a generátormátrix paritásrésze & $2$\,kHz\\
+$\cb{f_s}$ & mintavételi frekvencia (minta/s) & $4$\,kHz\\
+$p$ & egy bit hibavalószínűsége & \\
+$\bar L$ & átlagos kódszóhossz & \emph{keresett}\\
+$p_i$ & az i-edik kvantálási szint valószínűsége & \\
+$l_i$ & az i-edik kódszó hossza & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Entrópia}
+$H=\sum p_i\log_2(1/p_i)$, tagonként:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \tfrac12\cdot1+2\cdot\tfrac18\cdot3+4\cdot\tfrac1{16}\cdot4=0{,}5+0{,}75+1=2{,}25\ \text{bit}$}\end{center}
+\jegyzet{definíció}{$\log_22=1$, $\log_28=3$, $\log_216=4$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 4000\cdot2{,}25=9000\ \text{bit/s}$}\end{center}
+\jegyzet{számérték}{a legkisebb bitsebesség}
+
+\lepes{b) Huffman-kód}
+A valószínűségek 2 hatványai, ezért a Huffman-kód hosszai $l_i=\log_2(1/p_i)$: 1, 3, 3, 4, 4, 4, 4.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0\to0\qquad\pm1\to100,\ 101\qquad\pm2,\ \pm3\to1100,\ 1101,\ 1110,\ 1111$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{c) Elért sebesség}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \bar L=\tfrac12\cdot1+2\cdot\tfrac18\cdot3+4\cdot\tfrac1{16}\cdot4=2{,}25=H$}\end{center}
+\jegyzet{ellenőrzés}{eléri az alsó korlátot}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 4000\cdot2{,}25=9000\ \text{bit/s}$}\end{center}
+\jegyzet{számérték}{3 bites fix kóddal 12 000 bit/s lenne}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }H=2{,}25\ \text{bit},\ 9000\ \text{bit/s}\qquad\text{c) }\bar L=H,\ 9000\ \text{bit/s}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{4.13. feladat: 90 és 10\%-os forrás: lehet 1 bit alatt?}{4.13. feladat: 90 és 10-os forrás: lehet 1 bit alatt?}}\label{ai4_13}
+\setcounter{lepes}{0}
+\begin{feladat}{4.13. feladat}
+Bináris forrás: „a” 90\%, „b” 10\%. Ha lehetséges, tervezzen prefixmentes kódot, amelynek szimbólumonkénti átlagos hossza szigorúan kisebb 1-nél. Ha nem, indokolja!
+
+{\footnotesize\sffamily Forrás: ALL-IN 25. oldal $\cdot$ ai2016\_06\_07\_2. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item prefix kód $\bar L<1$ bit/szimbólummal (átlagos kódszóhossz), vagy indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{p_a}$ & az a szimbólum valószínűsége & $0{,}9$\\
+$\cb{p_b}$ & a b szimbólum valószínűsége & $0{,}1$\\
+$\bar L$ & átlagos kódszóhossz & \emph{keresett}\\
+$H$ & a forrás entrópiája & \\
+$a$ & a gyakori (0,9 valószínűségű) szimbólum & \\
+$b$ & a ritka (0,1 valószínűségű) szimbólum & \\
+$\bar L_2$ & átlagos kódszóhossz & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért segít a párosítás?}\par Egyenként legalább 1 bit kell minden szimbólumra. Párokban a gyakori „aa” egyetlen bitet kaphat, ez két szimbólum, így fél bit szimbólumonként.
+\end{elmelet}
+
+\lepes{Az alsó korlát}
+Ha az entrópia 1 alatt van, elvben lehetséges.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle H={\ca{0{,}9}}\log_2\tfrac1{0{,}9}+{\cb{0{,}1}}\log_2\tfrac1{0{,}1}=0{,}137+0{,}332=0{,}469\ \text{bit}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{Párok valószínűsége}
+A szimbólumok függetlenek, a pár valószínűsége a szorzat.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle aa:\ 0{,}81\quad ab:\ 0{,}09\quad ba:\ 0{,}09\quad bb:\ 0{,}01$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{Huffman a párokra}
+Összevonás: $bb+ba=0{,}10$, majd $ab+0{,}10=0{,}19$, végül $0{,}19+aa$. Hosszak: aa 1, ab 2, ba 3, bb 3.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle aa\to0\quad ab\to10\quad ba\to110\quad bb\to111$}\end{center}
+\jegyzet{definíció}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \bar L_2=0{,}81\cdot1+0{,}09\cdot2+0{,}09\cdot3+0{,}01\cdot3=1{,}29\ \text{bit/pár}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \bar L=\frac{1{,}29}{2}=0{,}645\ \text{bit/szimbólum}<1$}\end{center}
+\jegyzet{számérték}{}
+\begin{figyelem}[Javítás]
+A hallgató nem adott választ. Egyenként kódolva valóban nem megy, blokk-kódolással igen.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{lehetséges: párokat kódolva }\bar L=0{,}645\ \text{bit/szimbólum}\ (H=0{,}469)$}\end{center}
+\end{eredmeny}

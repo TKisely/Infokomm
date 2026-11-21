@@ -1,0 +1,439 @@
+% Generálva: html/build_tex.js (ai03.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{2}
+\chapter{\texorpdfstring{Rádiós összeköttetések}{Rádiós összeköttetések}}\label{f3}
+Szabadtéri (egyutas) és sík föld feletti (kétutas) terjedés, antennanyereség és hatásos felület. A kulcskérdés mindig az, hogy a vevő az interferenciazónán belül vagy azon túl van-e.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Jelölések és egyutas (szabadtéri) terjedés}{A1. Jelölések és egyutas (szabadtéri) terjedés}}\label{a3-egyutas}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés}\\\midrule
+undefined & adott és vett teljesítmény\\
+undefined & adó- és vevőantenna-nyereség (dB-ben vagy szorzóként)\\
+undefined & szakaszcsillapítás, undefined, az antennákkal együtt\\
+undefined & hullámhossz, undefined, undefined m/s\\
+undefined & távolság\\
+undefined & az adó- és a vevőantenna magassága a visszaverő sík felett\\
+undefined & a talaj reflexiós tényezője (tökéletes tükörnél undefined)\\
+undefined & hatásos felület\\
+\bottomrule\end{tabularx}}\par
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=20\lg\frac{4\pi r}{\lambda}-G_T^\mathrm{dB}-G_R^\mathrm{dB}$}\end{center}
+
+A teljesítménysűrűség a távolság négyzetével csökken, a vevő ebből a hatásos felületével „merít”: $P_R=S\cdot A_h$.
+
+\subsection{\texorpdfstring{A2. Kétutas terjedés sík föld felett}{A2. Kétutas terjedés sík föld felett}}\label{a3-ketutas}
+A vevőbe a direkt és a földről visszavert hullám érkezik, az úthossz-különbség kb. $2h_Th_R/r$. Tökéletes tükörnél ($\Gamma=-1$):
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle |E_R|=2|E_0|\left|\sin\left(\frac{2\pi h_Th_R}{r\lambda}\right)\right|$}\end{center}
+
+Az argumentum $\pi/2$-nél a legtávolabbi \textbf{maximum} (az interferenciazóna határa): $r=4h_Th_R/\lambda$. Az argumentum $\pi$-nél a legtávolabbi \textbf{kioltás}: $r=2h_Th_R/\lambda$. A zónán túl $\sin x\approx x$, és
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=20\lg\frac{r^2}{h_Th_R}-G_T^\mathrm{dB}-G_R^\mathrm{dB}$}\end{center}
+
+Itt a csillapítás nem függ a frekvenciától, és a távolsággal 40 dB/dekád meredeken nő. Ha a föld nem tökéletes tükör, a két hullám nem oltja ki teljesen egymást: $E_{\max}/E_{\min}=(1+|\Gamma|)/(1-|\Gamma|)$.
+
+\subsection{\texorpdfstring{A3. Antennanyereség és hatásos felület}{A3. Antennanyereség és hatásos felület}}\label{a3-antenna}
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G=\frac{4\pi A_h}{\lambda^2}\qquad A_h=\frac{G\lambda^2}{4\pi}$}\end{center}
+
+Parabolánál a hatásos felület közelítőleg a nyílás területe, $A_h\approx R^2\pi$.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{3.1. feladat: Kétutas szakasz, 10 km, 300 MHz (Moodle 2020)}{3.1. feladat: Kétutas szakasz, 10 km, 300 MHz (Moodle 2020)}}\label{ai3_01}
+\setcounter{lepes}{0}
+\begin{feladat}{3.1. feladat}
+$h_T=h_R=10$ m, $r=10$ km, $f=300$ MHz, $G_T=5$ dB, $G_R=3$ dB, tökéletes reflexió. a) Szakaszcsillapítás? b) A vevőantenna magasságának változtatásával mekkora $E_{\max}/E_{\min}$, ha $\Gamma=-0{,}8$?
+
+{\footnotesize\sffamily Forrás: ALL-IN 1. oldal $\cdot$ ai2020\_05\_26\_Q1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $a_\mathrm{sz}$ (szakaszcsillapítás)
+\item b) $E_{\max}/E_{\min}$: a legnagyobb és a legkisebb térerősség aránya, miközben a vevőantenna magasságát változtatjuk
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{h_T}$ & az adóantenna magassága & $10$\,m\\
+$h_R$ & a vevőantenna magassága & \\
+$\cb{r}$ & az adó és a vevő távolsága & $10$\,km\\
+$\cc{f}$ & vivőfrekvencia & $300$\,MHz\\
+$\lambda$ & hullámhossz & \\
+$\cd{G_T}$ & az adóantenna nyeresége & $5$\,dB\\
+$\ce{G_R}$ & a vevőantenna nyeresége & $3$\,dB\\
+$\Gamma$ & a talaj reflexiós tényezője & \\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \emph{keresett}\\
+$r_0$ & a zónahatár távolsága & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{Melyik zónában van a vevő?}
+A zónahatár (a legtávolabbi térerősség-maximum) helye $r_0=4h_Th_R/\lambda$. Ha a vevő ennél messzebb van, a távoli zónában van.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{4h_Th_R}{\lambda}=\frac{4\cdot10\cdot10}{1}=400\ \text{m}\ll10\ \text{km}$}\end{center}
+\jegyzet{behelyettesítés}{távoli zóna, a kétutas képlet kell}
+
+\lepes{a) Szakaszcsillapítás}
+A távoli zónában a kétutas képlet érvényes: $a_\mathrm{sz}=20\lg\frac{r^2}{h_Th_R}-{\cd{G_T}}-{\ce{G_R}}$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=20\lg\frac{(10^4)^2}{10\cdot10}-5-3=20\lg10^6-8=120-8=112\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{b) Nem tökéletes reflexió}
+A vevő magasságát változtatva a két hullám hol azonos, hol ellentétes fázisban adódik össze: a térerősség $1+|\Gamma|$ és $1-|\Gamma|$ között változik (a direkt hullámhoz képest).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{E_{\max}}{E_{\min}}=\frac{1+0{,}8}{1-0{,}8}=\frac{1{,}8}{0{,}2}=9$}\end{center}
+\jegyzet{definíció}{$20\lg9=19$ dB}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }a_\mathrm{sz}=112\ \text{dB}\qquad\text{b) }E_{\max}/E_{\min}=9$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{3.2. feladat: Mezőkovácsháza: zóna, csillapítás, keverés (Moodle 2020)}{3.2. feladat: Mezőkovácsháza: zóna, csillapítás, keverés (Moodle 2020)}}\label{ai3_02}
+\setcounter{lepes}{0}
+\begin{feladat}{3.2. feladat}
+Sík vidék, az adótorony 40 m magas (a talaj 96 m-rel a tengerszint felett), $f=83{,}3$ MHz FM, $f_\mathrm{KF}=10{,}7$ MHz. A vevő 650 m-re, 1 m magasan. a) Felső keverésnél az oszcillátor? b) Tükörfrekvencia? c) Túl van-e a vevő az interferenciazónán? d) Szakaszcsillapítás, ha $G_T=20$ dB, $G_R=10$ dB?
+
+{\footnotesize\sffamily Forrás: ALL-IN 15. oldal $\cdot$ ai2020\_06\_02\_Q7. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_\text{osc}$ (az oszcillátor frekvenciája)
+\item b) $f_t$ (tükörfrekvencia)
+\item c) a vevő helye a zónához képest
+\item d) $a_\mathrm{sz}$ (szakaszcsillapítás)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{h_T}$ & az adóantenna magassága & $40$\,m\\
+$\cb{h_R}$ & a vevőantenna magassága & $1$\,m\\
+$\cc{r}$ & az adó és a vevő távolsága & $650$\,m\\
+$\cd{f}$ & vivőfrekvencia & $83{,}3$\,MHz\\
+$\lambda$ & hullámhossz & \\
+$f_\mathrm{KF}$ & középfrekvencia & \\
+$\ce{G_T}$ & az adóantenna nyeresége & $20$\,dB\\
+$G_R$ & a vevőantenna nyeresége & $10$\,dB\\
+$f_\text{osc}$ & az oszcillátor frekvenciája & \emph{keresett}\\
+$f_t$ & tükörfrekvencia & \emph{keresett}\\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \emph{keresett}\\
+$f_\mathrm{osc}$ & az oszcillátor frekvenciája & \\
+$r_0$ & a zónahatár távolsága & \\
+\end{jeltabla}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért 40 m és nem 136 m?}\par A kétutas modellben az antenna magassága a \textbf{visszaverő sík} fölött számít. Sík vidéken a talaj 96 m-es tengerszint feletti magassága érdektelen.
+\end{elmelet}
+
+\lepes{a), b) Keverés}
+Felső keverésnél az oszcillátor $f_\mathrm{KF}$-fel a vett frekvencia felett van, a tükör még $f_\mathrm{KF}$-fel feljebb.
+\behely{\bh{\cd{f}}{\cd{83{,}3\un{MHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\mathrm{osc}={\cd{83{,}3}}+10{,}7=94\ \text{MHz}\qquad f_t=94+10{,}7=104{,}7\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{c) Zóna}
+A zónahatár (a legtávolabbi térerősség-maximum) helye $r_0=4h_Th_R/\lambda$. Ha a vevő ennél messzebb van, a távoli zónában van.
+\behely{\bh{\ca{h_T}}{\ca{40\un{m}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{4h_Th_R}{\lambda}=\frac{4\cdot{\ca{40}}\cdot1}{3{,}6}=44{,}4\ \text{m}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cc{650}}\ \text{m}>44{,}4\ \text{m}$}\end{center}
+\jegyzet{ellenőrzés}{túl van a zónán}
+
+\lepes{d) Kétutas csillapítás}
+A távoli zónában a kétutas képlet érvényes.
+\behely{\bh{\ce{G_T}}{\ce{20\un{dB}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}={\ce{20}}\lg\frac{650^2}{40\cdot1}-{\ce{20}}-10={\ce{20}}\lg10\,562-30=80{,}5-30=50{,}5\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{}
+\begin{tipp}[A gyűjtemény megoldása]
+A hallgató a zónahatárt 4265 m-nek kapta, és egyutas képlettel 37 dB-t. A javító a c) és d) részt „elszámolva” jelöléssel nem fogadta el.
+\end{tipp}
+\begin{figyelem}[Javítás]
+A zónahatár 44,4 m, a vevő túl van rajta, ezért a kétutas képlet kell: kb. 50,5 dB. A b) indoklása („felső keverésnél messzebb a tükör”) pontatlan, a tükör mindkét keverésnél $2f_\mathrm{KF}$-re van a vett frekvenciától.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }94\ \text{MHz}\qquad\text{b) }104{,}7\ \text{MHz}\qquad\text{c) túl van}\qquad\text{d) }a_\mathrm{sz}\approx50{,}5\ \text{dB}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{3.3. feladat: 900 MHz: ne legyen kioltás 1 km-en túl}{3.3. feladat: 900 MHz: ne legyen kioltás 1 km-en túl}}\label{ai3_03}
+\setcounter{lepes}{0}
+\begin{feladat}{3.3. feladat}
+900 MHz, fix adó ($G_T=10$ dB), mozgó vevő ($G_R=3$ dB, $h_R=1{,}66$ m). a) Mekkora lehet $h_T$, ha 1 km-en túl nincs kioltás? b) Maximális távolság, ha a késleltetés legfeljebb 50 \textmu{}s? c) Szakaszcsillapítás ekkor? d) Adóteljesítmény, ha a vevő 100 pW alatt nem érzékel?
+
+{\footnotesize\sffamily Forrás: ALL-IN 99\ldots{}100. oldal $\cdot$ aiD\_3\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $h_T$ (az adóantenna magassága)
+\item b) $r_{\max}$ (a legnagyobb távolság)
+\item c) $a_\mathrm{sz}$ (szakaszcsillapítás)
+\item d) $P_T$ (adóteljesítmény)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f}$ & vivőfrekvencia & $900$\,MHz\\
+$\lambda$ & hullámhossz & \\
+$\cb{G_T}$ & az adóantenna nyeresége & $10$\,dB\\
+$\cc{G_R}$ & a vevőantenna nyeresége & $3$\,dB\\
+$\cd{h_R}$ & a vevőantenna magassága & $1{,}66$\,m\\
+$h_T$ & az adóantenna magassága & \emph{keresett}\\
+$r_{\max}$ & a legnagyobb távolság & \emph{keresett}\\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \emph{keresett}\\
+$P_T$ & adóteljesítmény & \emph{keresett}\\
+$r$ & az adó és a vevő távolsága & \\
+$c$ & a fénysebesség, $3\cdot10^8$ m/s & \\
+$P_R$ & vett teljesítmény & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item a legtávolabbi kioltás 1 km-en
+\item a terjedési késleltetés legfeljebb 50 \textmu{}s
+\item a vevő érzékenysége 100 pW
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) A legtávolabbi kioltás}
+A kioltás ott van, ahol a szinusz argumentuma $\pi$ (A2): $r=2h_Th_R/\lambda$. Ezt egyenlővé tesszük 1 km-rel.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle h_T=\frac{r\lambda}{2{\cd{h_R}}}=\frac{1000\cdot1/3}{2\cdot{\cd{1{,}66}}}=\frac{333{,}3}{3{,}32}\approx100\ \text{m}$}\end{center}
+\jegyzet{geometria}{}
+
+\lepes{b) Legnagyobb távolság}
+A rádióhullám $c$ sebességgel terjed, 50 \textmu{}s alatt:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle r=c\cdot50\ \mu\text{s}=3\cdot10^8\cdot5\cdot10^{-5}=15\ 000\ \text{m}=15\ \text{km}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{c) Csillapítás 15 km-en}
+15 km messze túl van a zónahatáron ($4h_Th_R/\lambda=2$ km), kétutas képlet.
+\behely{\bh{\cd{h_R}}{\cd{1{,}66\un{m}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=20\lg\frac{(15\cdot10^3)^2}{100\cdot{\cd{1{,}66}}}-10-3=20\lg(1{,}36\cdot10^6)-13=122{,}6-13=109{,}6\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{$\approx$ 110 dB}
+
+\lepes{d) Adóteljesítmény}
+$P_T=P_R\cdot10^{a_\mathrm{sz}/10}$, kerekítve 110 dB-lel.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_T=100\ \text{pW}\cdot10^{11}=10^{-10}\cdot10^{11}=10\ \text{W}$}\end{center}
+\jegyzet{számérték}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }h_T\approx100\ \text{m}\qquad\text{b) }r=15\ \text{km}\qquad\text{c) }a_\mathrm{sz}\approx110\ \text{dB}\qquad\text{d) }P_T\approx10\ \text{W}$}\end{center}
+\end{eredmeny}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item A legtávolabbi kioltást a $4h_Th_R/\lambda$ képlettel keresni: az a legtávolabbi maximum.
+\end{itemize}
+\end{figyelem}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{3.4. feladat: 450 MHz-es mobilrendszer (hivatalos megoldás)}{3.4. feladat: 450 MHz-es mobilrendszer (hivatalos megoldás)}}\label{ai3_04}
+\setcounter{lepes}{0}
+\begin{feladat}{3.4. feladat}
+450 MHz, bázisállomás-antenna 50 m, vevők 1,5 m. a) Hol az interferenciazóna határa? b) A vevő magasságát változtatva mekkora $E_{\max}/E_{\min}$, ha $\Gamma=-1$, illetve $-0{,}9$? c) Kinek pozitív az antennanyeresége? d) Csillapítás a zóna határán ($\Gamma=-1$, nyereségek összege 6 dB)? e) 10 km-en mennyit változik a vett teljesítmény, a térerősség és a csillapítás, ha 3 m magasról hívunk?
+
+{\footnotesize\sffamily Forrás: ALL-IN 101. oldal $\cdot$ aiD\_3\_10. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) zónahatár
+\item b) $E_{\max}/E_{\min}$: a legnagyobb és a legkisebb térerősség aránya a vevő magasságát változtatva
+\item c) melyik antenna nyeresége pozitív
+\item d) $a_\mathrm{sz}$ (szakaszcsillapítás) a határon
+\item e) változások dB-ben
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f}$ & vivőfrekvencia & $450$\,MHz\\
+$\lambda$ & hullámhossz & \\
+$\cb{h_T}$ & az adóantenna magassága & $50$\,m\\
+$\cc{h_R}$ & a vevőantenna magassága & $1{,}5$\,m\\
+$G_T$ & az adóantenna nyeresége & \\
+$G_R$ & a vevőantenna nyeresége & \\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \emph{keresett}\\
+$\Gamma$ & a talaj reflexiós tényezője & \\
+$r_0$ & a zónahatár távolsága & \\
+$P$ & a vett teljesítmény & \\
+$E$ & a térerősség & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Zónahatár}
+A zónahatár (a legtávolabbi maximum) helye $r_0=4h_Th_R/\lambda$.
+\behely{\bh{\ca{f}}{\ca{450\un{MHz}}} \bh{\cb{h_T}}{\cb{50\un{m}}} \bh{\cc{h_R}}{\cc{1{,}5\un{m}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{4h_Th_R}{\lambda}=\frac{4\cdot{\cb{50}}\cdot{\cc{1{,}5}}}{2/3}={\ca{450}}\ \text{m}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{b) Arány}
+Ha a talaj reflexiós tényezője $\Gamma$, a vevő magasságát változtatva a térerősség a direkt hullám $(1+|\Gamma|)$- és $(1-|\Gamma|)$-szerese között ingadozik, ezért $E_{\max}/E_{\min}=(1+|\Gamma|)/(1-|\Gamma|)$. $\Gamma=-1$-nél a minimum 0.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \Gamma=-1:\ \frac{2}{0}=\infty\qquad\Gamma=-0{,}9:\ \frac{1{,}9}{0{,}1}=19$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{c) Antennanyereség}
+A bázisállomás antennája irányított (a vízszintes sík felé koncentrál), nyeresége pozitív. A mobilkészülék antennája kicsi, közel körsugárzó, nyeresége 0 dB körüli, akár negatív.
+
+\lepes{d) Csillapítás a határon}
+A határon a szinusz 1, a térerősség a szabadtéri kétszerese: a teljesítmény 4-szeres, ez 6 dB-lel kisebb csillapítás.
+\behely{\bh{\ca{f}}{\ca{450\un{MHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 20\lg\frac{4\pi\cdot{\ca{450}}}{2/3}=20\lg8482=78{,}57\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{szabadtéri alapcsillapítás}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=78{,}57-6-6=66{,}57\ \text{dB}$}\end{center}
+\jegyzet{számérték}{kétutas nyereség és antennák}
+
+\lepes{e) Kétszeres vevőmagasság 10 km-en}
+10 km a távoli zónában van: a térerősség ${\cc{h_R}}$-rel, a teljesítmény ${\cc{h_R}}^2$-tel arányos.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P:\ 10\lg4=+6\ \text{dB}\qquad E:\ 20\lg2=+6\ \text{dB}\qquad a_\mathrm{sz}:\ -6\ \text{dB}$}\end{center}
+\jegyzet{számérték}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }450\ \text{m}\quad\text{b) }\infty\ \text{és}\ 19\quad\text{c) a bázisállomásé}\quad\text{d) }66{,}57\ \text{dB}\quad\text{e) }+6,\ +6,\ -6\ \text{dB}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{3.5. feladat: Felére csökkentett vevőantenna a távoli zónában}{3.5. feladat: Felére csökkentett vevőantenna a távoli zónában}}\label{ai3_05}
+\setcounter{lepes}{0}
+\begin{feladat}{3.5. feladat}
+Kétutas terjedésnél egy adott távolságban a vett jel kétszerese volt a szükségesnek. Fogható-e még a jel, ha $h_R$-t felére csökkentjük?
+
+{\footnotesize\sffamily Forrás: ALL-IN 18. oldal $\cdot$ ai2016\_01\_05\_2 (emlékezetből leírt feladat). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item fogható-e a jel, ha a vevőantenna magassága a felére ($h_R/2$) csökken
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$h_R$ & a vevőantenna magassága & \emph{keresett}\\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \\
+$r$ & az adó és a vevő távolsága & \\
+$h_T$ & az adóantenna magassága & \\
+$G_T$ & az adóantenna nyeresége & \\
+$G_R$ & a vevőantenna nyeresége & \\
+$a$ & csillapítás (dB) & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item a vett teljesítmény a szükséges kétszerese: 3 dB tartalék
+\item a vevő a távoli zónában van
+\end{itemize}
+\end{jeloles}
+
+\lepes{Mennyit ront a felezés?}
+A távoli zónában $a_\mathrm{sz}=20\lg(r^2/(h_Th_R))-G_T-G_R$, tehát $h_R$ felezése $20\lg2$-vel növeli a csillapítást.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \Delta a=20\lg2=6\ \text{dB}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 6\ \text{dB}>10\lg2=3\ \text{dB}$}\end{center}
+\jegyzet{ellenőrzés}{a tartalék kevés}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{nem fogható: a vett teljesítmény a szükséges fele lesz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A feladat pontos adatai hiányoznak, a hallgatói gondolatmenet helyes.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{3.6. feladat: Hatásos felület és parabolanyereség}{3.6. feladat: Hatásos felület és parabolanyereség}}\label{ai3_06}
+\setcounter{lepes}{0}
+\begin{feladat}{3.6. feladat}
+a) Egy 30 MHz-es antenna nyeresége $10\lg(4\pi)=11$ dB. Mekkora a hullámhossz és a hatásos felület? b) Egy 1,5 GHz-es parabola apertúrájának sugara 1 m. Mekkora a nyeresége dB-ben ($\pi^2\approx10$)?
+
+{\footnotesize\sffamily Forrás: ALL-IN 62., 102. oldal $\cdot$ ai2014\_12\_22\_1, aiD\_3\_11. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $\lambda$ (hullámhossz), $A_h$ (hatásos felület)
+\item b) $G$ dB-ben (antennanyereség)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f}$ & vivőfrekvencia & $30$\,MHz\\
+$\cb{G}$ & antennanyereség & $4$\\
+$\cc{R}$ & a parabola sugara & $1$\,m\\
+$\lambda$ & hullámhossz & \emph{keresett}\\
+$A_h$ & hatásos felület & \emph{keresett}\\
+$c$ & a fénysebesség, $3\cdot10^8$ m/s & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a)}
+$\lambda=c/{\ca{f}}$, majd a hatásos felület $A_h={\cb{G}}\lambda^2/(4\pi)$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \lambda=\frac{3\cdot10^8}{3\cdot10^7}=10\ \text{m}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A_h=\frac{G\lambda^2}{4\pi}=\frac{4\pi\cdot10^2}{4\pi}=100\ \text{m}^2$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{b)}
+$\lambda=3\cdot10^8/1{,}5\cdot10^9=0{,}2$ m. A hatásos felület a nyílás területe, $\pi {\cc{R}}^2=\pi$ m\textsuperscript{2}.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cb{G}}=\frac{4\pi\cdot\pi {\cc{R}}^2}{\lambda^2}=\frac{4\pi^2}{0{,}04}\approx\frac{40}{0{,}04}=1000$}\end{center}
+\jegyzet{behelyettesítés}{$\pi^2\approx10$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10\lg1000={\ca{30}}\ \text{dB}$}\end{center}
+\jegyzet{átalakítás}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }\lambda=10\ \text{m},\ A_h=100\ \text{m}^2\qquad\text{b) }G\approx30\ \text{dB}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{3.7. feladat: Kétutas modell műhold és földi antenna között?}{3.7. feladat: Kétutas modell műhold és földi antenna között?}}\label{ai3_07}
+\setcounter{lepes}{0}
+\begin{feladat}{3.7. feladat}
+Bátran használhatjuk-e a kétutas terjedésnél tanultakat egy műhold és egy földi antenna között?
+
+{\footnotesize\sffamily Forrás: ALL-IN 101. oldal $\cdot$ aiD\_3\_5. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item alkalmazható-e
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$r$ & az adó és a vevő távolsága & \\
+$h_T$ & az adóantenna magassága & \\
+$h_R$ & a vevőantenna magassága & \\
+$h$ & antennamagasság & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item a kétutas modell feltételei: két, közel vízszintesen haladó hullám (direkt és talajról visszavert), $r\gg h_T,h_R$
+\end{itemize}
+\end{jeloles}
+
+\lepes{Indoklás}
+Nem. A földi antenna erősen irányított és felfelé néz: a talajról visszavert hullám a főnyalábon kívülről érkezik, elhanyagolható. A modell geometriai feltétele ($r\gg h$, közel vízszintes sugarak) sem teljesül. Szabadtéri (egyutas) terjedéssel kell számolni.
+\begin{tipp}[A gyűjtemény megoldása]
+A gyűjtemény szerint „a kérdés hülye, nem definiálták a bátran szót”, és a reflexió nélküli határesetre utal. Ez a lényeget nem mondja ki.
+\end{tipp}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{nem, egyutas (szabadtéri) modell kell}$}\end{center}
+\end{eredmeny}

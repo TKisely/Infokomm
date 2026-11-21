@@ -1,0 +1,252 @@
+% Generálva: html/build_tex.js (o07.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{6}
+\chapter{\texorpdfstring{Hang, hallás, kép, látás}{Hang, hallás, kép, látás}}\label{f7}
+Phon és dB, hallásküszöb, és a színes TV jelei: $Y$, $C_b$, $C_r$. Két feladat a színkülönbségi jelekből számol vissza RGB-t.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Hangnyomásszint és hangosság}{A1. Hangnyomásszint és hangosság}}\label{b7-hang}
+\textbf{Hangnyomásszint} (dB): $L=20\lg(p/p_0)$, ahol $p$ a hangnyomás effektív értéke, $p_0=20$ \textmu{}Pa a hallásküszöb 1 kHz-en. Teljesítményre (intenzitásra) $10\lg$, mert a teljesítmény a nyomás négyzetével arányos.
+
+\textbf{Hangosságszint} (phon): annyi phon, ahány dB-es az \textbf{ugyanolyan hangosnak hallott 1 kHz-es} hang. Ezért 1 kHz-en phon = dB, más frekvencián az azonos hangosságú görbékről (Fletcher és Munson) kell leolvasni. Az éppen hallható hang 0 phon. Mély hangoknál a küszöb jóval 0 dB felett van (100 Hz-en kb. 25 dB).
+
+\subsection{\texorpdfstring{A2. Világossági és színkülönbségi jelek}{A2. Világossági és színkülönbségi jelek}}\label{b7-szin}
+$R$, $G$, $B$: a vörös, zöld és kék színjel (0 és 1 között). A világossági jel és a két színkülönbségi jel:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle Y=0{,}3R+0{,}59G+0{,}11B\qquad C_b=B-Y\qquad C_r=R-Y$}\end{center}
+
+(Itt egységnyi szorzóval, a szabványban skálázva.) Visszafelé: $B=C_b+Y$, $R=C_r+Y$, majd $Y$ képletéből $G=(Y-0{,}3R-0{,}11B)/0{,}59$. Szürke (és fehér) színnél $R=G=B$, ezért $Y=R$ és $C_b=C_r=0$.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{7.1. feladat: Milyen szín dominál? Y, Cb, Cr-ből}{7.1. feladat: Milyen szín dominál? Y, Cb, Cr-ből}}\label{o7_01}
+\setcounter{lepes}{0}
+\begin{feladat}{7.1. feladat}
+Milyen szín dominál a képpontban, ha $(Y,C_b,C_r)$ a) $(0{,}220;\ -0{,}120;\ 0{,}280)$, b) $(0{,}182;\ 0{,}118;\ 0{,}118)$?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 21. oldal $\cdot$ 5o\_21\_1 (a gyűjteményben nincs megoldás). Címkék: vizsga, saját megoldás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $R$, $G$, $B$: a vörös, a zöld és a kék színjel, és melyik a legnagyobb
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$Y$ & világossági jel & \\
+$C_b$ & kék színkülönbségi jel & \\
+$B$ & kék színjel & \\
+$C_r$ & vörös színkülönbségi jel & \\
+$R$ & vörös színjel & \\
+$G$ & zöld színjel & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) R és B}
+$C_b=B-Y$ és $C_r=R-Y$, ezért $B=C_b+Y$ és $R=C_r+Y$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B=C_b+Y=-0{,}120+0{,}220=0{,}10\qquad R=C_r+Y=0{,}280+0{,}220=0{,}50$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{a) G}
+A világossági jel $Y=0{,}3R+0{,}59G+0{,}11B$. Ebből kifejezzük $G$-t, és behelyettesítjük a már ismert $R$-t és $B$-t.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G=\frac{Y-0{,}3R-0{,}11B}{0{,}59}=\frac{0{,}22-0{,}15-0{,}011}{0{,}59}=\frac{0{,}059}{0{,}59}=0{,}10$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle (R,G,B)=(0{,}5;\ 0{,}1;\ 0{,}1)$}\end{center}
+\jegyzet{számérték}{a vörös dominál}
+
+\lepes{b)}
+Ugyanígy.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B=0{,}118+0{,}182=0{,}30\qquad R=0{,}118+0{,}182=0{,}30$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G=\frac{0{,}182-0{,}09-0{,}033}{0{,}59}=\frac{0{,}059}{0{,}59}=0{,}10$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle (R,G,B)=(0{,}3;\ 0{,}1;\ 0{,}3)$}\end{center}
+\jegyzet{számérték}{vörös és kék egyformán: bíbor}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) vörös}\ (0{,}5;\ 0{,}1;\ 0{,}1)\qquad\text{b) bíbor (lila)}\ (0{,}3;\ 0{,}1;\ 0{,}3)$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item Visszaszámolva a) $Y=0{,}15+0{,}059+0{,}011=0{,}22$. Egyezik.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{7.2. feladat: Felcserélt Cb és Cr kábel}{7.2. feladat: Felcserélt Cb és Cr kábel}}\label{o7_02}
+\setcounter{lepes}{0}
+\begin{feladat}{7.2. feladat}
+A TV és a DVD-lejátszó között felcseréljük a $C_b$ és $C_r$ kábelt. a) Milyen lesz a fehér ruha? b) Mely színek érzéketlenek a cserére? c) Hogyan változik a világosság, ha $C_b=0{,}7$, $C_r=-0{,}3$? d) Milyen színt látunk, ha $C_b=0{,}7$, $C_r=-0{,}3$, $Y=0{,}3$? e) Mi lesz a paprikavörösből?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 22. oldal $\cdot$ 5o\_22\_3 (gépelt megoldás). Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a), b), c), d), e) a látott színek és a világosság
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$C_b$ & kék színkülönbségi jel & \\
+$C_r$ & vörös színkülönbségi jel & \\
+$Y$ & világossági jel & \\
+$R$ & vörös színjel & \\
+$G$ & zöld színjel & \\
+$B$ & kék színjel & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item a TV $C_b$ (kék színkülönbségi jel) helyett $C_r$-t (vörös színkülönbségi jel) kap és fordítva, az $Y$ (világossági jel) jó marad
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Fehér ruha}
+Fehérnél $R=G=B=1$, ezért $Y=1$ és $C_b=C_r=0$ (A2). A két nulla felcserélése nem változtat semmin.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C_b=C_r=0\ \Rightarrow\ \text{fehér marad}$}\end{center}
+\jegyzet{ellenőrzés}{}
+
+\lepes{b) Érzéketlen színek}
+A csere csak akkor nem változtat, ha a két jel egyenlő.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C_b=C_r\iff B-Y=R-Y\iff R=B$}\end{center}
+\jegyzet{átalakítás}{minden szín, amelyben a vörös és a kék egyforma (pl. a szürkék, a zöld, a bíbor)}
+
+\lepes{c) Világosság}
+Az $Y$ kábel nincs felcserélve, a TV ugyanazt a világossági jelet kapja.
+
+\lepes{d) A látott szín}
+A TV $Y=0{,}3$, $C_b=0{,}7$, $C_r=-0{,}3$ jelekből számol.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B=0{,}7+0{,}3=1\qquad R=-0{,}3+0{,}3=0$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G=\frac{0{,}3-0-0{,}11\cdot1}{0{,}59}=\frac{0{,}19}{0{,}59}=0{,}32$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle (R,G,B)=(0;\ 0{,}32;\ 1)$}\end{center}
+\jegyzet{számérték}{kék}
+
+\lepes{e) Paprikavörös}
+A tiszta vörös $(1,0,0)$ jelei, majd a csere.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle Y=0{,}3\qquad C_b=0-0{,}3=-0{,}3\qquad C_r=1-0{,}3=0{,}7$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{csere után: }C_b=0{,}7,\ C_r=-0{,}3$}\end{center}
+\jegyzet{átalakítás}{pont a d) rész jelei: kék lesz}
+\begin{tipp}[A gyűjtemény megoldása]
+A gépelt megoldásban „R = Cr + Y = 0,3 + 0,3 = 0,6” és „ilyen lilás” áll.
+\end{tipp}
+\begin{figyelem}[Javítás]
+$C_r=-0{,}3$, ezért $R=-0{,}3+0{,}3=0$, a szín $(0;\ 0{,}32;\ 1)$, azaz kék. A $G=0{,}32$ is csak $R=0$-val jön ki.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) fehér marad}\quad\text{b) ahol }R=B\quad\text{c) nem változik}\quad\text{d) kék }(0;\ 0{,}32;\ 1)\quad\text{e) kék lesz}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{7.3. feladat: Függvénygenerátor és hangszóró: phon}{7.3. feladat: Függvénygenerátor és hangszóró: phon}}\label{o7_03}
+\setcounter{lepes}{0}
+\begin{feladat}{7.3. feladat}
+Az éppen hallható 10 kHz-es hang 10 dB, azonos amplitúdóval 1 kHz-en 30 dB, 100 Hz-en 0 dB. Hány phon a 10 kHz-es, az 1 kHz-es, a 100 Hz-es hang? Miért mások a szintek?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 21. oldal $\cdot$ 5o\_21\_3. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a három hang hangosságszintje (phon), és a különböző dB-értékek oka
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 10 kHz: 10 dB, éppen hallható
+\item 1 kHz: 30 dB
+\item 100 Hz: 0 dB
+\item a generátor amplitúdója mindhárom esetben ugyanaz
+\end{itemize}
+\end{jeloles}
+
+\lepes{10 kHz}
+Az éppen hallható hang a definíció szerint 0 phon (a hallásküszöb a 0 phonos görbe).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0\ \text{phon}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{1 kHz}
+1 kHz-en a phon és a dB megegyezik (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 30\ \text{dB}\ \Rightarrow\ 30\ \text{phon}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{100 Hz}
+100 Hz-en a hallásküszöb kb. 25 dB. A 0 dB ez alatt van.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0\ \text{dB}<25\ \text{dB}$}\end{center}
+\jegyzet{ellenőrzés}{nem hallható, 0 phon alatt}
+
+\lepes{Miért mások a szintek?}
+A generátor feszültsége ugyanaz, de a hangszóró (és az erősítő) átvitele frekvenciafüggő: ugyanaz a feszültség különböző hangnyomást ad. Mélyen a kis hangszóró rosszul sugároz, ezért 100 Hz-en kicsi a szint.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10\ \text{kHz: }0\ \text{phon}\qquad1\ \text{kHz: }30\ \text{phon}\qquad100\ \text{Hz: nem hallható}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{7.4. feladat: Rövid fogalmak: láthatóság, 40 phon, 120 dB, váltott sor}{7.4. feladat: Rövid fogalmak: láthatóság, 40 phon, 120 dB, váltott sor}}\label{o7_04}
+\setcounter{lepes}{0}
+\begin{feladat}{7.4. feladat}
+a) A láthatósági függvény és maximuma. b) A hallásküszöb 100-szoros hangnyomása hány phon? c) 120 dB-hez mekkora nyomás kell? d) A váltott soros képalkotás előnye?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 22\ldots{}23. oldal $\cdot$ 5o\_22\_1, 5o\_22\_2, 5o\_23\_1, 5o\_23\_2. Címkék: beugró, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $V(\lambda)$ (láthatósági függvény) alakja és maximuma
+\item b) hangosságszint
+\item c) $p$ (hangnyomás) 120 dB-hez
+\item d) az előny
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{p_0}$ & a hallásküszöb hangnyomása & $20$\,\textmu{}Pa\\
+$p$ & hangnyomás & \emph{keresett}\\
+$L$ & hangnyomásszint & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Láthatósági függvény}
+$V(\lambda)$ a szem relatív érzékenysége a hullámhossz függvényében: harang alakú, kb. 380 és 780 nm között, normált maximuma 1, nappali látásnál 555 nm-en (sárgászöld).
+
+\lepes{b) 100-szoros hangnyomás}
+Nyomásarányból ${\ca{20}}\lg$. A küszöb 1 kHz-re vonatkozik, ott phon = dB.
+\behely{\bh{\ca{p_0}}{\ca{20\un{\mu Pa}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L={\ca{20}}\lg\frac{100{\ca{p_0}}}{p_0}={\ca{20}}\lg100=40\ \text{dB}=40\ \text{phon}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{c) 120 dB}
+$120={\ca{20}}\lg(p/{\ca{p_0}})$-ból kifejezzük $p$-t.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{p}{p_0}=10^{120/{\ca{20}}}=10^6\ \Rightarrow\ p=10^6\cdot{\ca{20}}\ \mu\text{Pa}={\ca{20}}\ \text{Pa}$}\end{center}
+\jegyzet{átalakítás}{}
+
+\lepes{d) Váltott soros képalkotás}
+Egy kép két félképből áll (páratlan, majd páros sorok). Másodpercenként 50 félkép jelenik meg, így a villogás 50 Hz-es, a fúziós frekvencia felett van. A továbbított információ viszont csak 25 teljes kép/s, tehát a sávszélesség a 25 kép/s-é.
+\begin{figyelem}[Javítás]
+d) A gyűjtemény szerint „a fél képet fele idő alatt lehet felrakni”, ez nem a lényeg: 50 félkép/s villog 25 kép/s sávszélességével.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) maximum }1\text{, 555 nm-en}\quad\text{b) }40\ \text{phon}\quad\text{c) }20\ \text{Pa}\quad\text{d) kétszeres villogási frekvencia azonos sávszélességgel}$}\end{center}
+\end{eredmeny}

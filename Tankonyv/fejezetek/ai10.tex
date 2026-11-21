@@ -1,0 +1,363 @@
+% Generálva: html/build_tex.js (ai10.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{9}
+\chapter{\texorpdfstring{Cellás mobilhálózat (GSM)}{Cellás mobilhálózat (GSM)}}\label{f10}
+Kapacitásbecslés klaszterekkel és frekvencia-újrafelhasználással, valamint a roamingos „melyik HLR, melyik SMSC” kérdések. Ezekhez néhány szabályt kell biztosan tudni, a válaszoknál mindig ott van, melyikből jön.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Kapacitás: vivők, időrések, klaszter}{A1. Kapacitás: vivők, időrések, klaszter}}\label{a10-kapacitas}
+GSM 900: irányonként 25 MHz, 200 kHz-es vivők (124 db), vivőnként 8 időrés (TDMA). Egy \textbf{klaszter} $N$ cellából áll ($N$ = FRF, frekvencia-újrafelhasználási tényező): a vivőket szétosztják köztük, így egy klaszter minden vivőt pontosan egyszer használ. $C$ vivővel egy cellában $\approx C/N$ vivő, egyszerre $8C/N$ beszélgetés (a jelzési időréseket elhanyagolva), klaszterenként $8C$.
+
+Nagy $N$: az azonos frekvenciájú cellák távolabb vannak, kisebb az interferencia, de kevesebb vivő jut egy cellára.
+
+\subsection{\texorpdfstring{A2. Elemek és szabályok}{A2. Elemek és szabályok}}\label{a10-roaming}
+MS: készülék. BTS: bázisállomás (rádió). BSC: bázisállomás-vezérlő. MSC: kapcsolóközpont. GMSC: átjáró MSC, a kívülről jövő hívást fogadja és a HLR-t kérdezi. HLR: honi adatbázis (hol van az előfizető). VLR: látogatói adatbázis. AuC: hitelesítés. EIR: készülék-nyilvántartás. SMSC: SMS-központ. Az index ($\alpha$, $\beta$) a szolgáltatót jelöli.
+
+\begin{enumerate}
+\item \textbf{Hívásnál a hívott honi HLR-jét} kérdezik le, a hívott honi hálózatának GMSC-je értesül először.
+\item \textbf{Az SMS-t a küldő honi SMSC-je} fogadja és kézbesíti.
+\item \textbf{Beszélgetés közbeni mozgásról} (hívásátadás) csak a kiszolgáló hálózat BTS-e, BSC-je és MSC-je tud. Hívás nélküli mozgásnál helyzetfrissítés van: a VLR, és VLR-váltáskor a honi HLR is értesül.
+\item Egy eseményről (hívásindítás, bontás) először a kezdeményező saját BTS-e tud.
+\end{enumerate}
+
+Hitelesítés: AuC (Ki, A3 $\to$ SRES, A8 $\to$ Kc), rejtjelezés A5-tel. Készülékellenőrzés: a kiszolgáló hálózat EIR-je (fehér, fekete, szürke = megfigyelt lista). FNR: számhordozhatóság.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.1. feladat: N = 7 klaszter, 70 csatorna (Moodle 2020)}{10.1. feladat: N = 7 klaszter, 70 csatorna (Moodle 2020)}}\label{ai10_01}
+\setcounter{lepes}{0}
+\begin{feladat}{10.1. feladat}
+a) Rajzoljon N = 7-es klasztert két szomszédjával. b) 70 FDM-csatornával hány aktív előfizető lehet a klaszterben? c) Mi az FRF szerepe, mi a nagy N előnye és hátránya?
+
+{\footnotesize\sffamily Forrás: ALL-IN 6. oldal $\cdot$ ai2020\_05\_26\_Q6. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) rajz
+\item b) egyszerre aktív előfizetők a klaszterben
+\item c) indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{N}$ & a klaszter cellaszáma (FRF) & $7$\\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 70 FDM-csatorna (vivő), vivőnként 8 időrés
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Rajz}
+Egy középső hatszög és körülötte hat: ez egy klaszter, 1-től 7-ig számozva. Két szomszéd klaszter ugyanígy, eltolva, úgy, hogy az azonos számú cellák egymástól a lehető legmesszebb kerüljenek.
+
+\lepes{b) Aktív előfizetők}
+A klaszter minden vivőt egyszer használ fel (A1), minden vivőn 8 időrés.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 70\cdot8=560$}\end{center}
+\jegyzet{számérték}{klaszterenként}
+
+\lepes{c) Az FRF szerepe}
+Megadja, hány cella után lehet ugyanazt a vivőt újra használni. Nagy N: az azonos vivőt használó cellák távolabb, kisebb az azonos csatornás interferencia. Hátrány: cellánként kevesebb vivő jut (pl. 120 vivő, N = 12: csak 10 vivő, 80 beszélgetés). Tipikus értékek: 3, 7, 12.
+
+\begin{rajz}
+\textbf{N = 7-es klaszter két szomszédjával}\par
+\begin{center}\begin{tikzpicture}[x=0.02730cm,y=-0.02730cm,line cap=round,line join=round]
+\useasboundingbox (-86,-79) rectangle (216,214);
+\path[fill=black!10,draw=none] (26,-15) -- (26,15) -- (0,30) -- (-26,15) -- (-26,-15) -- (0,-30) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (0,5) {1};
+\path[fill=black!10,draw=none] (77.9,-15) -- (77.9,15) -- (52,30) -- (26,15) -- (26,-15) -- (52,-30) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (52,5) {2};
+\path[fill=black!10,draw=none] (52,-60) -- (52,-30) -- (26,-15) -- (0,-30) -- (0,-60) -- (26,-75) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (26,-40) {3};
+\path[fill=black!10,draw=none] (0,-60) -- (0,-30) -- (-26,-15) -- (-52,-30) -- (-52,-60) -- (-26,-75) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (-26,-40) {4};
+\path[fill=black!10,draw=none] (-26,-15) -- (-26,15) -- (-52,30) -- (-77.9,15) -- (-77.9,-15) -- (-52,-30) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (-52,5) {5};
+\path[fill=black!10,draw=none] (0,30) -- (0,60) -- (-26,75) -- (-52,60) -- (-52,30) -- (-26,15) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (-26,50) {6};
+\path[fill=black!10,draw=none] (52,30) -- (52,60) -- (26,75) -- (0,60) -- (0,30) -- (26,15) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (26,50) {7};
+\path[fill=cA!15,draw=none] (155.9,30) -- (155.9,60) -- (129.9,75) -- (103.9,60) -- (103.9,30) -- (129.9,15) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (129.9,50) {1};
+\path[fill=cA!15,draw=none] (207.8,30) -- (207.8,60) -- (181.9,75) -- (155.9,60) -- (155.9,30) -- (181.9,15) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (181.9,50) {2};
+\path[fill=cA!15,draw=none] (181.9,-15) -- (181.9,15) -- (155.9,30) -- (129.9,15) -- (129.9,-15) -- (155.9,-30) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (155.9,5) {3};
+\path[fill=cA!15,draw=none] (129.9,-15) -- (129.9,15) -- (103.9,30) -- (77.9,15) -- (77.9,-15) -- (103.9,-30) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (103.9,5) {4};
+\path[fill=cA!15,draw=none] (103.9,30) -- (103.9,60) -- (77.9,75) -- (52,60) -- (52,30) -- (77.9,15) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (77.9,50) {5};
+\path[fill=cA!15,draw=none] (129.9,75) -- (129.9,105) -- (103.9,120) -- (77.9,105) -- (77.9,75) -- (103.9,60) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (103.9,95) {6};
+\path[fill=cA!15,draw=none] (181.9,75) -- (181.9,105) -- (155.9,120) -- (129.9,105) -- (129.9,75) -- (155.9,60) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (155.9,95) {7};
+\path[fill=cB!15,draw=none] (52,120) -- (52,150) -- (26,165) -- (0,150) -- (0,120) -- (26,105) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (26,140) {1};
+\path[fill=cB!15,draw=none] (103.9,120) -- (103.9,150) -- (77.9,165) -- (52,150) -- (52,120) -- (77.9,105) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (77.9,140) {2};
+\path[fill=cB!15,draw=none] (77.9,75) -- (77.9,105) -- (52,120) -- (26,105) -- (26,75) -- (52,60) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (52,95) {3};
+\path[fill=cB!15,draw=none] (26,75) -- (26,105) -- (0,120) -- (-26,105) -- (-26,75) -- (0,60) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (0,95) {4};
+\path[fill=cB!15,draw=none] (0,120) -- (0,150) -- (-26,165) -- (-52,150) -- (-52,120) -- (-26,105) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (-26,140) {5};
+\path[fill=cB!15,draw=none] (26,165) -- (26,195) -- (0,210) -- (-26,195) -- (-26,165) -- (0,150) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (0,185) {6};
+\path[fill=cB!15,draw=none] (77.9,165) -- (77.9,195) -- (52,210) -- (26,195) -- (26,165) -- (52,150) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (52,185) {7};
+\end{tikzpicture}\end{center}
+\begin{itemize}
+\item Egy klaszter: egy középső hatszög és a hat szomszédja, 1-től 7-ig számozva. A szomszéd klasztereket úgy told el (két cella egy irányba, egy cella 60\textdegree{}-kal elfordulva), hogy az azonos számú cellák egymástól a lehető legmesszebb legyenek.
+\end{itemize}
+\end{rajz}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) }560\ \text{aktív előfizető}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.2. feladat: Győr: klaszter, egyidejű hívások, VAD, FNR}{10.2. feladat: Győr: klaszter, egyidejű hívások, VAD, FNR}}\label{ai10_02}
+\setcounter{lepes}{0}
+\begin{feladat}{10.2. feladat}
+Győr 170 km\textsuperscript{2}, FRF = 12, kb. 85 GSM-cella. a) Mekkora egy klaszter? b) Hányan telefonálhatnak egyszerre? c) Egy szolgáltató 40 FDM-csatornát használ: hányan egy cellában nála? d) Mi a VAD előnye? e) Mire az FNR és az AuC?
+
+{\footnotesize\sffamily Forrás: ALL-IN 25\ldots{}27., 145. oldal $\cdot$ ai2016\_06\_07\_3. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) a klaszter területe
+\item b) egyidejű hívások
+\item c) egy cellában egy szolgáltatónál
+\item d), e) fogalmak
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$T_\text{cella}$ & egy cella területe & \\
+$T_\text{klaszter}$ & egy klaszter területe & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 124 vivő, vivőnként 8 időrés
+\item c) egy szolgáltató 40 vivőt használ
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Klaszter}
+Először egy cella területe, majd 12 cella.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle T_\text{cella}=\frac{170}{85}=2\ \text{km}^2\qquad T_\text{klaszter}=12\cdot2=24\ \text{km}^2$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{b) Egyidejű hívások}
+Egy cellára $124\cdot8/12=82{,}7$ beszélgetés jut (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 85\cdot\frac{124\cdot8}{12}=85\cdot82{,}7\approx7000$}\end{center}
+\jegyzet{számérték}{ugyanez: $85/12\approx7$ klaszter $\cdot992$}
+
+\lepes{c) Egy szolgáltató}
+A 40 vivő oszlik meg a klaszter 12 cellája között.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{40}{12}=3{,}33\ \text{vivő}\ \Rightarrow\ 3\cdot8=24\ \text{(néhol }4\cdot8=32)$}\end{center}
+\jegyzet{számérték}{átlagosan kb. 26}
+
+\lepes{d), e) Fogalmak}
+VAD + DTX: beszédszünetben nincs adás, kevesebb fogyasztás és interferencia, a vevő komfortzajt generál. FNR: számhordozhatósági adatbázis. AuC: a SIM titkos kulcsának (Ki) tárolása, a hitelesítési adatok (RAND, SRES, Kc) előállítása.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }24\ \text{km}^2\qquad\text{b) }\approx7000\qquad\text{c) }\approx24\ldots32$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item c) A gyűjteményben „passz”, a saját megoldás feltevése, hogy a 40 vivő a klaszterre vonatkozik \texttt{[ELLENŐRIZENDŐ]}.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.3. feladat: Két roamingoló előfizető hívása és SMS-e}{10.3. feladat: Két roamingoló előfizető hívása és SMS-e}}\label{ai10_03}
+\setcounter{lepes}{0}
+\begin{feladat}{10.3. feladat}
+MS-A az $\alpha$, MS-B a $\beta$ előfizetője, egymás hálózatában barangolnak. MS-A felhívja MS-B-t. a) Melyik HLR-t kérdezik? b) Melyik GMSC értesül előbb? c) Ki tud MS-A beszélgetés közbeni mozgásáról? d) Bontás után MS-B SMS-t küld MS-A-nak, melyik SMSC kézbesíti?
+
+{\footnotesize\sffamily Forrás: ALL-IN 21\ldots{}22., 41. oldal $\cdot$ ai2016\_01\_05\_7, ai2016\_01\_05\_7b (és 5-ösöm 27. oldal). Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) HLR
+\item b) GMSC
+\item c) a mozgásról tudó elemek
+\item d) SMSC
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\beta$ & a másik szolgáltató ($\beta$) hálózata, alsó indexben: a $\beta$ hálózat eleme & \\
+$\alpha$ & az egyik szolgáltató ($\alpha$) hálózata, alsó indexben: az $\alpha$ hálózat eleme & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item MS-A: $\alpha$-előfizető, $\beta$-ban van
+\item MS-B: $\beta$-előfizető, $\alpha$-ban van
+\end{itemize}
+\end{jeloles}
+
+\lepes{A hívás útja}
+MS-A $\beta$-ban hív: BTS$_\beta$ $\to$ BSC$_\beta$ $\to$ MSC$_\beta$. A hívott szám $\beta$-beli, ezért a GMSC$_\beta$ fogadja, megkérdezi a HLR$_\beta$-t, amely tudja, hogy MS-B a VLR$_\alpha$ területén van. A hívás innen az $\alpha$ hálózatba megy MS-B-hez.
+
+\lepes{a), b)}
+1. szabály: a hívott (MS-B, $\beta$-előfizető) honi HLR-je, és a honi hálózatának GMSC-je.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{HLR}_\beta,\ \text{GMSC}_\beta$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{c) Mozgás beszélgetés közben}
+3. szabály: hívásátadás MS-A kiszolgáló hálózatában ($\beta$).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{BTS}_\beta,\ \text{BSC}_\beta,\ \text{MSC}_\beta$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{d) SMS}
+2. szabály: a küldő (MS-B, $\beta$-előfizető) honi SMSC-je.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{SMSC}_\beta$}\end{center}
+\jegyzet{definíció}{}
+\begin{figyelem}[Javítás]
+A c) részre a gyűjtemény a HLR$_\alpha$-t és a VLR$_\beta$-t is felsorolja. Hívás közben nincs helyzetfrissítés, ezek csak hívás nélküli mozgásnál értesülnek \texttt{[ELLENŐRIZENDŐ]}.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) HLR}_\beta\quad\text{b) GMSC}_\beta\quad\text{c) BTS}_\beta,\ \text{BSC}_\beta,\ \text{MSC}_\beta\quad\text{d) SMSC}_\beta$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.4. feladat: Két $\alpha$-előfizető, az egyik $\beta$-ban (Moodle 2020)}{10.4. feladat: Két α-előfizető, az egyik β-ban (Moodle 2020)}}\label{ai10_04}
+\setcounter{lepes}{0}
+\begin{feladat}{10.4. feladat}
+MS-A1 és MS-A2 is $\alpha$-előfizető, MS-A2 a $\beta$ hálózatban barangol. MS-A1 hívja MS-A2-t. a) Melyik eszközhöz érkezik először információ a hívásindításról? b) Melyik HLR-t kérdezik? c) Mely eszközök tudnak MS-A2 $\beta$-beli mozgásáról? d) Melyik eszközzel azonosítják MS-A1 SIM-jét?
+
+{\footnotesize\sffamily Forrás: ALL-IN 8. oldal $\cdot$ ai2020\_05\_26\_Q8 (és 5-ösöm 28. oldal). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) az első eszköz
+\item b) HLR
+\item c) a mozgásról tudó elemek
+\item d) a SIM azonosítása
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\alpha$ & az egyik szolgáltató ($\alpha$) hálózata, alsó indexben: az $\alpha$ hálózat eleme & \\
+$\beta$ & a másik szolgáltató ($\beta$) hálózata, alsó indexben: a $\beta$ hálózat eleme & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item MS-A1: $\alpha$-előfizető, $\alpha$-ban
+\item MS-A2: $\alpha$-előfizető, $\beta$-ban
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Hívásindítás}
+4. szabály: a kezdeményező (MS-A1) saját BTS-e.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{BTS}_\alpha$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{b) HLR}
+1. szabály: a hívott (MS-A2) $\alpha$-előfizető.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{HLR}_\alpha$}\end{center}
+\jegyzet{definíció}{ez tudja, hogy MS-A2 a VLR$_\beta$-nál van}
+
+\lepes{c) Mozgás $\beta$-ban}
+Itt a mozgás általában (nem beszélgetés közben) értendő: a helyzetfrissítés elemei is számítanak. A rádiós elemek (BTS, BSC) és az MSC/VLR a kiszolgáló hálózatban, VLR-váltáskor a honi HLR is.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{BTS}_\beta,\ \text{BSC}_\beta,\ \text{MSC}_\beta,\ \text{VLR}_\beta,\ \text{HLR}_\alpha$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{d) SIM azonosítása}
+A SIM titkos kulcsát (Ki) csak a honi AuC ismeri, ez állítja elő a hitelesítési adatokat.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{AuC}_\alpha$}\end{center}
+\jegyzet{definíció}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) BTS}_\alpha\quad\text{b) HLR}_\alpha\quad\text{c) BTS}_\beta,\ \text{BSC}_\beta,\ \text{MSC}_\beta,\ \text{VLR}_\beta,\ \text{HLR}_\alpha\quad\text{d) AuC}_\alpha$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A hallgató c)-ből kihagyta a BTS-t és a BSC-t, a javító ezért vont le pontot.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.5. feladat: GSM-hitelesítés: A3, A8, A5}{10.5. feladat: GSM-hitelesítés: A3, A8, A5}}\label{ai10_05}
+\setcounter{lepes}{0}
+\begin{feladat}{10.5. feladat}
+Az ábrán AuC/HLR, MSC/VLR és MS. Milyen adatokat adnak egymásnak (A, B, C)? Mik a szürke dobozok? Mire való a Kc?
+
+{\footnotesize\sffamily Forrás: ALL-IN 87\ldots{}88. oldal $\cdot$ ai2016\_01\_12c\_5. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item A, B, C, a dobozok, Kc
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$A$ & az ábra A jelű üzenete & \\
+$B$ & az ábra B jelű üzenete & \\
+$C$ & az ábra C jelű üzenete & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item Ki: a SIM titkos kulcsa, csak a SIM és az AuC ismeri
+\end{itemize}
+\end{jeloles}
+
+\lepes{Hitelesítés}
+Az AuC véletlen számot (RAND, 128 bit) állít elő, ebből és a Ki-ből az A3 algoritmussal a várt választ (SRES, 32 bit). A RAND-ot és az SRES-t az MSC/VLR kapja meg. A RAND a készülékhez megy (A), a SIM ugyanazzal az A3-mal kiszámolja a saját SRES-ét és visszaküldi (C). Az MSC összeveti az AuC-tól kapottal (B): ha egyezik, a SIM valódi.
+
+\lepes{Rejtjelezés}
+Az A8 algoritmus mindkét oldalon a RAND-ból és a Ki-ből előállítja a rejtjelező kulcsot (Kc, 64 bit). Az A5 ebből rejtjelező bitsorozatot képez, ezt a rádiós burstök 114 adatbitjével XOR-olják. A Kc soha nem megy át a rádiós szakaszon.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A=\text{RAND},\ B=\text{SRES (AuC-tól)},\ C=\text{SRES (MS-től)}\qquad\text{dobozok: A3, A8 és A5}\qquad\text{Kc: a rádiós szakasz titkosítása}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{10.6. feladat: VAD, EIR, FNR, AuC röviden}{10.6. feladat: VAD, EIR, FNR, AuC röviden}}\label{ai10_06}
+\setcounter{lepes}{0}
+\begin{feladat}{10.6. feladat}
+Hogyan működik a VAD, milyen erőforrás takarítható meg vele (GSM, VoIP)? Mi az EIR, az FNR és az AuC szerepe?
+
+{\footnotesize\sffamily Forrás: ALL-IN 27., 54\ldots{}55., 82. oldal $\cdot$ ai2016\_06\_07\_3, ai2014\_12\_15\_3, ai2014\_01\_14\_3. Címkék: beugró, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item indokolt válaszok
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item fogalmi kérdések
+\end{itemize}
+\end{jeloles}
+
+\lepes{VAD}
+A hangaktivitás-érzékelő felismeri a beszédszünetet, ilyenkor a DTX leállítja az adást. GSM-ben az akkumulátor és a rádiós interferencia, VoIP-ban a sávszélesség (kevesebb csomag) takarítható meg. A vevő komfortzajt generál, hogy a vonal ne tűnjön megszakadtnak.
+
+\lepes{EIR, FNR, AuC}
+EIR: IMEI-listák. Fehér: engedélyezett, fekete: tiltott (pl. lopott), szürke: megfigyelt. FNR: számhordozhatósági adatbázis, megmondja, melyik szolgáltatóhoz került egy hívószám. AuC: a Ki tárolása és a hitelesítési adatok (RAND, SRES, Kc) előállítása.
+\begin{figyelem}[Javítás]
+A gyűjtemény szerint a szürke listás készülékek „minden lépése blokkolva van”: helyesen használhatók, csak megfigyeltek.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{VAD: szünetben nincs adás}\quad\text{EIR: IMEI-listák}\quad\text{FNR: számhordozhatóság}\quad\text{AuC: hitelesítés}$}\end{center}
+\end{eredmeny}

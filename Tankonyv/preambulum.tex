@@ -1,0 +1,120 @@
+% ==================================================================
+%  Infokommunikáció tankönyvek közös preambuluma (a tankönyvsablon alapján)
+%  Fordítás: pdflatex, xelatex vagy lualatex (kétszer), illetve tectonic
+% ==================================================================
+\documentclass[a4paper,11pt,twoside,openany]{book}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+  \usepackage{textcomp}
+\else
+  \usepackage{fontspec}
+\fi
+\usepackage[magyar]{babel}
+\usepackage{microtype}
+\usepackage[a4paper,inner=24mm,outer=20mm,top=24mm,bottom=26mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{icomma}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning,patterns}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tabularx,booktabs,array,longtable}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{cancel}
+\usepackage{adjustbox}
+\usepackage[hidelinks]{hyperref}
+
+% ---------- színek: csak a behelyettesítés jelzésére ----------
+\definecolor{cA}{RGB}{29,95,196}    % kék
+\definecolor{cB}{RGB}{192,84,0}     % narancs
+\definecolor{cC}{RGB}{122,61,179}   % lila
+\definecolor{cD}{RGB}{11,125,112}   % kékeszöld
+\definecolor{cE}{RGB}{180,36,90}    % bíbor
+\definecolor{cR}{RGB}{28,122,49}    % zöld: eredmény
+\definecolor{keret}{gray}{0.35}
+\definecolor{hatter}{gray}{0.95}
+\newcommand{\ca}[1]{{\color{cA}#1}}
+\newcommand{\cb}[1]{{\color{cB}#1}}
+\newcommand{\cc}[1]{{\color{cC}#1}}
+\newcommand{\cd}[1]{{\color{cD}#1}}
+\newcommand{\ce}[1]{{\color{cE}#1}}
+\newcommand{\res}[1]{{\color{cR}\boxed{#1}}}
+\newcommand{\bh}[2]{\mbox{\(#1\;\longmapsto\;#2\)}\hspace{1.4em plus 0.5em}\allowbreak}
+\newcommand{\behely}[1]{\par\smallskip{\raggedright\noindent\hangindent=2em\hangafter=1{\small\sffamily\textbf{Behelyettesítés:}}\hspace{0.8em}#1\par}\smallskip}
+% a megoldási sor jellege (tétel, behelyettesítés, ...) és megjegyzése
+\newcommand{\jegyzet}[2]{\par\vspace{-2pt}{\centering\footnotesize{\sffamily\scshape #1}\if\relax\detokenize{#2}\relax\else\quad #2\fi\par}\smallskip}
+
+% ---------- matematikai rövidítések ----------
+\newcommand{\ld}{\operatorname{ld}}
+\newcommand{\arctg}{\operatorname{arctg}}
+\newcommand{\tg}{\operatorname{tg}}
+\newcommand{\sinc}{\operatorname{sinc}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\eff}{_{\mathrm{eff}}}
+\newcommand{\un}[1]{\,\mathrm{#1}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+% ---------- dobozok ----------
+\tcbset{base/.style={enhanced,breakable,sharp corners,boxrule=0.5pt,colframe=keret,colback=white,
+  fonttitle=\sffamily\bfseries\small,coltitle=black,colbacktitle=hatter,left=3mm,right=3mm,top=1.5mm,bottom=1.5mm,
+  before skip=8pt,after skip=8pt}}
+\newtcolorbox{feladat}[1]{base,title={#1},colframe=black,boxrule=0.8pt}
+\newtcolorbox{keresunk}{base,title={Mit keresünk?}}
+\newtcolorbox{jeloles}{base,title={Jelölések ebben a feladatban}}
+\newtcolorbox{elmelet}[1][Elméleti háttér]{base,title={#1}}
+\newtcolorbox{eredmeny}{base,title={Eredmény},colframe=cR,colbacktitle=cR!10}
+\newtcolorbox{figyelem}[1][Figyelem]{base,title={#1},colframe=cB,colbacktitle=cB!10}
+\newtcolorbox{tipp}[1][Tipp]{base,title={#1},colframe=cA,colbacktitle=cA!8}
+\newtcolorbox{rajz}[1][Rajz: ezt kell felrajzolni]{base,title={#1},colframe=cD,colbacktitle=cD!8}
+
+% jelöléstáblázat egy feladathoz
+\newenvironment{jeltabla}{\par\noindent\small\renewcommand{\arraystretch}{1.25}\tabularx{\dimexpr\linewidth-3pt\relax}{@{}>{\raggedright\arraybackslash}p{2.6cm}X>{\raggedright\arraybackslash}p{2.6cm}@{}}\toprule
+\textbf{Jel} & \textbf{Jelentése ebben a feladatban} & \textbf{Érték, egység}\\\midrule}{\bottomrule\endtabularx\par}
+
+% lépés
+\newcounter{lepes}[section]
+\newcommand{\lepes}[1]{\par\medskip\stepcounter{lepes}\noindent{\sffamily\bfseries\small\arabic{lepes}. lépés: #1}\par\nopagebreak\smallskip}
+
+% ---------- TikZ: tollal rajzolható stílus ----------
+\tikzset{
+  toll/.style={line width=0.7pt,line cap=round,line join=round},
+  vekony/.style={line width=0.4pt},
+  szagg/.style={line width=0.5pt,dash pattern=on 3pt off 2pt},
+  tengely/.style={line width=0.6pt,-{Stealth[length=2.2mm]}},
+  nyil/.style={line width=0.6pt,-{Stealth[length=2mm]}},
+  blokk/.style={draw,line width=0.7pt,minimum width=12mm,minimum height=8mm,font=\small},
+}
+\pgfplotsset{tollplot/.style={axis lines=middle,axis line style={line width=0.6pt,-{Stealth[length=2mm]}},
+  every axis plot/.append style={line width=0.8pt,black},tick style={black},ticklabel style={font=\footnotesize},
+  label style={font=\small},xlabel style={anchor=west},ylabel style={anchor=south},
+  /pgf/number format/use comma,clip=false}}
+
+% ---------- fejléc ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyhead[LO]{\small\sffamily\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.3pt}
+\titleformat{\chapter}[display]{\normalfont\sffamily\bfseries}{\large\thechapter.\ \chaptertitlename}{4pt}{\LARGE}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\titlespacing*{\chapter}{0pt}{0pt}{18pt}
+\titleformat{\section}{\normalfont\sffamily\bfseries\large}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\normalfont\sffamily\bfseries}{\thesubsection}{0.8em}{}
+% a szakaszok a saját számukat (2.4, A1) a címükben hordozzák
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{1}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\allowdisplaybreaks
+\emergencystretch=2em
+\raggedbottom

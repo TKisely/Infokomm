@@ -1,0 +1,376 @@
+% Generálva: html/build_tex.js (ai11.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{10}
+\chapter{\texorpdfstring{Forgalmi méretezés és VoIP}{Forgalmi méretezés és VoIP}}\label{f11}
+Erlang-B táblázat vagy grafikon, exponenciális tartási idő, kihasználtság, és a VoIP csomagsebesség és sávszélesség számítása.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Jelölések, Erlang-B}{A1. Jelölések, Erlang-B}}\label{a11-erlang}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés}\\\midrule
+undefined & hívásintenzitás: átlagosan ennyi hívás érkezik időegységenként (Poisson)\\
+undefined & átlagos tartási idő (exponenciális eloszlású)\\
+undefined & felajánlott forgalom, undefined (Erlang)\\
+undefined & kiszolgálók (vonalak, vevők, kocsik) száma\\
+undefined & blokkolási valószínűség: a beérkező igény nem kap kiszolgálót\\
+undefined & kihasználtság: egy kiszolgáló átlagos foglaltsága\\
+\bottomrule\end{tabularx}}\par
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_b=\frac{A^N/N!}{\sum_{i=0}^NA^i/i!}\qquad a=\frac{A(1-P_b)}{N}$}\end{center}
+
+Rekurzív alak (kézzel is gyors): $E_0=1$, $E_n=AE_{n-1}/(n+AE_{n-1})$, $P_b=E_N$. Táblázatnál a felajánlott forgalmat \textbf{felfelé} kerekítjük, és azt a legkisebb $N$-et keressük, amelynél $P_b$ még a határ alatt van. Exponenciális tartási időnél $P(X>t)=e^{-t/h}$.
+
+\subsection{\texorpdfstring{A2. VoIP sávszélesség}{A2. VoIP sávszélesség}}\label{a11-voip}
+$v_\text{forrás}$: a kodek bitsebessége, $l_p$: egy szegmens hossza (byte), $n$: szegmens csomagonként, $l_\text{fej}$: a fejrészek együtt (byte).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{cs}=\frac{v_\text{forrás}}{8\,n\,l_p}\qquad B=8\,(n\,l_p+l_\text{fej})\cdot v_\text{cs}$}\end{center}
+
+Több szegmens egy csomagban: kevesebb fejrész, kisebb sávszélesség, de nagyobb csomagolási késleltetés, és egy elveszett csomag több beszédet visz el.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{11.1. feladat: DTMF-vevők méretezése}{11.1. feladat: DTMF-vevők méretezése}}\label{ai11_01}
+\setcounter{lepes}{0}
+\begin{feladat}{11.1. feladat}
+A tárcsázás átlagosan 10 s, óránként legalább 60 000 hívás, a blokkolás legfeljebb 0,2\%, exponenciális eloszlások. a) Felajánlott forgalom? b) Hány DTMF-vevő kell (a mellékelt táblázatból: 166 Erl $\to$ 197, 167 Erl $\to$ 198 a 0,2\%-os oszlopban)? c) Kihasználtság?
+
+{\footnotesize\sffamily Forrás: ALL-IN 19., 39\ldots{}40. oldal $\cdot$ ai2016\_01\_05\_3, ai2016\_01\_05\_3b. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $A$ (felajánlott forgalom)
+\item b) $N$ (kiszolgálók száma)
+\item c) $a$ (egy kiszolgáló kihasználtsága)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\lambda$ & hívásintenzitás & \\
+$\ca{h}$ & átlagos tartási idő & $10$\,s\\
+$P_b$ & blokkolási valószínűség & \\
+$A$ & felajánlott forgalom & \emph{keresett}\\
+$N$ & kiszolgálók száma & \emph{keresett}\\
+$a$ & egy kiszolgáló kihasználtsága & \emph{keresett}\\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item $P_b\le0{,}2\%$ (blokkolási valószínűség)
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Felajánlott forgalom}
+$\lambda$-t és ${\ca{h}}$-t azonos időegységre kell hozni.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A=\lambda {\ca{h}}=\frac{60\,000}{3600\ \text{s}}\cdot10\ \text{s}=16{,}67\cdot10=166{,}67\ \text{Erl}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{b) Vevők száma}
+A táblázatban felfelé kerekítünk (167 Erl), különben a blokkolás a határ fölé kerülhet.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 167\ \text{Erl}\ \to\ N=198$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_b(166{,}67;\ 197)=0{,}212\%>0{,}2\%\qquad P_b(166{,}67;\ 198)=0{,}178\%$}\end{center}
+\jegyzet{ellenőrzés}{rekurzióval: 197 kevés}
+
+\lepes{c) Kihasználtság}
+Egy kiszolgáló kihasználtsága a lebonyolított forgalom, $A(1-P_b)$, osztva a kiszolgálók számával.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a=\frac{166{,}67\cdot(1-0{,}0018)}{198}=0{,}84$}\end{center}
+\jegyzet{definíció}{}
+\begin{figyelem}[Javítás]
+Az egyik kézírásos változat 166-ra kerekít lefelé, és 197-et ad. A gépelt változat (167 $\to$ 198) helyes.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }A=166{,}7\ \text{Erl}\qquad\text{b) }N=198\qquad\text{c) }a\approx84\%$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{11.2. feladat: Autókölcsönző két kocsival}{11.2. feladat: Autókölcsönző két kocsival}}\label{ai11_02}
+\setcounter{lepes}{0}
+\begin{feladat}{11.2. feladat}
+Naponta átlagosan 4 ügyfél (Poisson), átlagos bérlés 1,5 nap (exponenciális), 2 kocsi. a) Mekkora a valószínűsége, hogy nem tudnak kocsit adni? b) Átlagos kihasználtság? c) Napi haszon, ha egy kocsi fenntartása 60 USD/nap, a díj 100 USD/nap?
+
+{\footnotesize\sffamily Forrás: ALL-IN 30\ldots{}31. oldal $\cdot$ ai2016\_06\_07\_7. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $P_b$ (blokkolási valószínűség)
+\item b) $a$ (egy kiszolgáló kihasználtsága)
+\item c) napi haszon
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\lambda$ & hívásintenzitás & \\
+$\ca{h}$ & átlagos tartási idő & $1{,}5$\\
+$\cb{N}$ & kiszolgálók száma & $2$\\
+$P_b$ & blokkolási valószínűség & \emph{keresett}\\
+$a$ & egy kiszolgáló kihasználtsága & \emph{keresett}\\
+$A$ & felajánlott forgalom & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item fenntartás 60 USD/kocsi/nap, díj 100 USD/nap
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Blokkolás}
+Felajánlott forgalom, majd Erlang-B ${\cb{N}}=2$-re.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A=4\cdot{\ca{1{,}5}}=6\ \text{Erl}$}\end{center}
+\jegyzet{definíció}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_b=\frac{6^2/2!}{1+6+6^2/2!}=\frac{18}{25}=0{,}72$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{b) Kihasználtság}
+Egy kocsi kihasználtsága a lebonyolított forgalom, $A(1-P_b)$ (ennyi kocsi van átlagosan kint), osztva a kocsik számával.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a=\frac{6\cdot(1-0{,}72)}{2}=\frac{1{,}68}{2}=0{,}84$}\end{center}
+\jegyzet{definíció}{átlagosan 1,68 kocsi van kint}
+
+\lepes{c) Haszon}
+A bevétel a kint lévő kocsik átlagos száma szorozva a napi díjjal, a költség minden kocsira jár.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 1{,}68\cdot100-2\cdot60=168-120=48\ \text{USD/nap}$}\end{center}
+\jegyzet{számérték}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }P_b=72\%\qquad\text{b) }a=84\%\qquad\text{c) }48\ \text{USD/nap}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény az a)-ra „passz”-t ír, pedig a b)-ben kiszámolja ugyanezt, a c) nincs megoldva.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{11.3. feladat: 15 Erlang: hosszú hívások, kiszolgálók, VoIP}{11.3. feladat: 15 Erlang: hosszú hívások, kiszolgálók, VoIP}}\label{ai11_03}
+\setcounter{lepes}{0}
+\begin{feladat}{11.3. feladat}
+Percenként 5 hívás, átlagosan 3 perc. a) Felajánlott forgalom? b) 100 hívásból hány hosszabb 6 percnél? c) Hány kiszolgáló kell 0,1\%-hoz? d) Kihasználtság? e) Elfér-e a forgalom VoIP-pal egy 10 Mbit/s-os vonalon?
+
+{\footnotesize\sffamily Forrás: ALL-IN 46\ldots{}48., 85\ldots{}86. oldal $\cdot$ ai2016\_01\_12\_3, ai2016\_01\_12c\_3. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $A$ (felajánlott forgalom)
+\item b) $P(X>6\ \text{perc})$: annak valószínűsége, hogy egy hívás 6 percnél tovább tart
+\item c) $N$ (kiszolgálók száma)
+\item d) $a$ (egy kiszolgáló kihasználtsága)
+\item e) VoIP-kapacitás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\lambda$ & hívásintenzitás & \\
+$\ca{h}$ & átlagos tartási idő & $3$\,perc\\
+$P_b$ & blokkolási valószínűség & \\
+$A$ & felajánlott forgalom & \emph{keresett}\\
+$X$ & egy hívás tartási ideje (valószínűségi változó) & \emph{keresett}\\
+$N$ & kiszolgálók száma & \emph{keresett}\\
+$a$ & egy kiszolgáló kihasználtsága & \emph{keresett}\\
+$E_0$ & a rekurzió kezdőértéke (0 kiszolgálóra), 1 & \\
+$E_n$ & a blokkolási valószínűség $n$ kiszolgálóval & \\
+$E_{n-1}$ & a blokkolási valószínűség $n-1$ kiszolgálóval & \\
+$n$ & a kiszolgálók száma a rekurzió egy lépésében & \\
+$E_N$ & a blokkolási valószínűség $N$ kiszolgálóval & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item $P_b\le0{,}1\%$ (blokkolási valószínűség)
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Forgalom}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A=5\cdot3=15\ \text{Erl}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{b) Hosszú hívások}
+Exponenciális eloszlásnál $P(X>t)=e^{-t/{\ca{h}}}$ (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P(X>6)=e^{-6/3}=e^{-2}=0{,}135$}\end{center}
+\jegyzet{behelyettesítés}{100-ból kb. 13 vagy 14}
+
+\lepes{c) Kiszolgálók}
+Erlang-B rekurzióval ($E_0=1$, $E_n=AE_{n-1}/(n+AE_{n-1})$, $P_b=E_N$) vagy táblázatból a legkisebb $N$, ahol $P_b\le0{,}1\%$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle N=27:\ P_b=0{,}160\%\qquad N=28:\ P_b=0{,}086\%$}\end{center}
+\jegyzet{számérték}{$N=28$}
+
+\lepes{d) Kihasználtság}
+A lebonyolított forgalom, $A(1-P_b)$, osztva a kiszolgálók számával.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a=\frac{15\cdot0{,}999}{28}=0{,}54$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{e) VoIP}
+Legfeljebb 28 egyidejű hívás. Egy G.711-es (64 kbit/s) hívás a fejrészekkel kb. 80 és 90 kbit/s között (A2).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 28\cdot87\ \text{kbit/s}\approx2{,}4\ \text{Mbit/s}<10\ \text{Mbit/s}$}\end{center}
+\jegyzet{közelítés}{belefér, kétirányú forgalommal is}
+\begin{figyelem}[Javítás]
+A grafikonos változat 29 kiszolgálót olvas le, a közösségi gépelt kidolgozás a helyes 28-at.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }15\ \text{Erl}\quad\text{b) }\approx14\quad\text{c) }N=28\quad\text{d) }a\approx54\%\quad\text{e) belefér}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{11.4. feladat: GSM-cella 1\%-os blokkolással}{11.4. feladat: GSM-cella 1-os blokkolással}}\label{ai11_04}
+\setcounter{lepes}{0}
+\begin{feladat}{11.4. feladat}
+GSM, FRF = 12, a hívások átlagosan 2 percesek. Egy órában átlagosan hányan telefonálhatnak egy cellában, ha a blokkolás legfeljebb 1\%?
+
+{\footnotesize\sffamily Forrás: ALL-IN 60\ldots{}62. oldal $\cdot$ ai2014\_12\_15\_9. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $\lambda$: hívás/óra egy cellában
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{h}$ & átlagos tartási idő & $2$\,perc\\
+$P_b$ & blokkolási valószínűség & \\
+$\lambda$ & hívásintenzitás & \emph{keresett}\\
+$N$ & kiszolgálók száma & \\
+$A$ & felajánlott forgalom & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item $P_b\le1\%$ (blokkolási valószínűség)
+\end{itemize}
+\end{jeloles}
+
+\lepes{Csatornák egy cellában}
+Egy 12 cellás klaszter a GSM 900 mind a 124 vivőjét egyszer használja fel, vivőnként 8 időréssel, így egy cellára a klaszter csatornáinak tizenketted része jut.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{124\cdot8}{12}=82{,}7\ \Rightarrow\ N=82$}\end{center}
+\jegyzet{számérték}{a gyűjtemény 125 vivővel 83-at, kerekítve 80-at vesz}
+
+\lepes{A megengedett forgalom}
+Erlang-B: az a legnagyobb $A$, amelynél $P_b$ még 1\%.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle N=82:\ A=67{,}2\ \text{Erl}\qquad(N=80:\ 65{,}4\qquad N=83:\ 68{,}2)$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{Hívásintenzitás}
+$A=\lambda {\ca{h}}$-ból, ${\ca{h}}$ órában.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \lambda=\frac{A}{h}=\frac{67{,}2}{1/30\ \text{h}}=30\cdot67{,}2\approx2020\ \text{hívás/óra}$}\end{center}
+\jegyzet{átalakítás}{}
+\begin{figyelem}[Javítás]
+A gyűjtemény 80 csatornával 65 Erl-t olvas le (ez jó), és 1950 hívás/órát kap. 83 csatornával 2045, 82-vel 2020 jön ki. Nagyságrendileg mind jó, a kerekítést mindig írd le.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \lambda\approx2000\ \text{hívás/óra (82 csatornával 2020)}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{11.5. feladat: Vállalati VoIP G.711-gyel (Moodle 2020)}{11.5. feladat: Vállalati VoIP G.711-gyel (Moodle 2020)}}\label{ai11_05}
+\setcounter{lepes}{0}
+\begin{feladat}{11.5. feladat}
+10 ms-os szegmensekből 80 byte, csomagonként két szegmens, a fejrészek 47 byte. a) Csomagsebesség? b) A csatorna bitsebessége? c) Milyen hátránya lenne négy szegmensnek csomagonként?
+
+{\footnotesize\sffamily Forrás: ALL-IN 14. oldal $\cdot$ ai2020\_06\_02\_Q6. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $v_\text{cs}$ (csomagsebesség)
+\item b) $B$ (egy hívás sávigénye)
+\item c) $n=4$ (szegmensek száma csomagonként) hátránya
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{l_p}$ & egy beszédszegmens hossza & $80$\,byte\\
+$\cb{n}$ & szegmensek száma csomagonként & $2$\\
+$l_\text{fej}$ & a fejrészek hossza & \\
+$v_\text{cs}$ & csomagsebesség & \emph{keresett}\\
+$B$ & egy hívás sávigénye & \emph{keresett}\\
+$v_\text{forrás}$ & a kodek bitsebessége & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{A forrás}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{forrás}=\frac{80\cdot8\ \text{bit}}{10\ \text{ms}}=64\ \text{kbit/s}$}\end{center}
+\jegyzet{definíció}{G.711}
+
+\lepes{a) Csomagsebesség}
+Egy csomag két szegmens, azaz 20 ms beszéd.
+\behely{\bh{\ca{l_p}}{\ca{80\un{byte}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{cs}=\frac{64\,000}{8\cdot2\cdot{\ca{80}}}=\frac{1}{20\ \text{ms}}=50\ \text{csomag/s}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{b) Bitsebesség}
+Egy csomag $2\cdot{\ca{80}}+47=207$ byte.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B=207\cdot8\cdot50=82\,800\ \text{bit/s}=82{,}8\ \text{kbit/s}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{c) Négy szegmens}
+Kevesebb fej jut a beszédre, de a csomag csak 40 ms beszéd összegyűlése után indulhat, és egy csomag elvesztése 40 ms kiesést jelent.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 25\ \text{csomag/s},\ (320+47)\cdot8\cdot25=73{,}4\ \text{kbit/s}$}\end{center}
+\jegyzet{számérték}{a sávnyereség kicsi, a késés kétszeres}
+\begin{figyelem}[Javítás]
+A hallgató 50 és 100 „bps”-t írt (mértékegység-tévesztés, a fejrészt is kihagyta). A javító 1 + 0 + 0 pontot adott.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }50\ \text{csomag/s}\qquad\text{b) }82{,}8\ \text{kbit/s}\qquad\text{c) 40 ms csomagolási késleltetés}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{11.6. feladat: IP feletti média, fair queuing, WFQ}{11.6. feladat: IP feletti média, fair queuing, WFQ}}\label{ai11_06}
+\setcounter{lepes}{0}
+\begin{feladat}{11.6. feladat}
+a) Mi nehezíti a „best effort” IP-n a multimédiát? b) Miért nem érdemes RTP helyett TCP-t használni? c) Mire való az IGMP? d) A fair queuing előnye a szigorú prioritással szemben, és a WFQ előnye?
+
+{\footnotesize\sffamily Forrás: ALL-IN 28\ldots{}29., 74. oldal $\cdot$ ai2016\_06\_07\_5, ai2014\_01\_07\_7 (és 5-ösöm 29. oldal). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item indokolt válaszok
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item fogalmi kérdések
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Best effort IP}
+Változó késleltetés (jitter), csomagvesztés, sorrendcsere, és nincs garantált sávszélesség. A valós idejű média ezekre érzékeny.
+
+\lepes{b) TCP vagy RTP}
+A TCP az elveszett csomagot újraküldi: mire megérkezik, a lejátszásnál már késő. A torlódásvezérlése ráadásul visszafogja a sebességet. Az RTP (UDP felett) inkább eldobja a késő csomagot, és időbélyeget, sorszámot ad.
+
+\lepes{c) IGMP}
+Multicast csoporttagság kezelése: a vevő ezzel jelzi a routernek, melyik csoport (pl. IPTV-csatorna) forgalmát kéri.
+
+\lepes{d) Ütemezés}
+Szigorú prioritásnál a magas prioritású sor kiéheztetheti a többit. Fair queuing: folyamonként külön sor, körbejárva kiszolgálva, nincs kiéheztetés. WFQ: ugyanez súlyokkal, a folyamok a súlyuk arányában kapnak sávot, mindenki garantált minimummal.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) jitter, vesztés}\quad\text{b) újraküldési késés}\quad\text{c) multicast}\quad\text{d) nincs kiéheztetés, WFQ: arányos részesedés}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény a)-ra a DF és MLR mérőszámokat írja: ezek az IPTV-minőség mérőszámai, nem az okok.
+\end{itemize}
+\end{tipp}

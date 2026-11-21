@@ -1,0 +1,656 @@
+% Generálva: html/build_tex.js (ai09.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{8}
+\chapter{\texorpdfstring{Műsorszórás, sztereó FM, digitális TV}{Műsorszórás, sztereó FM, digitális TV}}\label{f9}
+Szuperheterodin vevő (oszcillátor, tükörfrekvencia), az FM sztereó multiplex jel szerkezete, és a DVB-C, DVB-T bitsebesség-számítása.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Szuperheterodin: oszcillátor és tükör}{A1. Szuperheterodin: oszcillátor és tükör}}\label{a9-szuper}
+A vevő a venni kívánt $f_v$ jelet a helyi oszcillátor $f_\text{osc}$ jelével keveri (szorozza). A különbségi frekvencia az állandó \textbf{középfrekvencia}: $|f_v-f_\text{osc}|=f_\mathrm{KF}$. \textbf{Felső keverés:} $f_\text{osc}=f_v+f_\mathrm{KF}$, a tükör $f_v+2f_\mathrm{KF}$. \textbf{Alsó keverés:} $f_\text{osc}=f_v-f_\mathrm{KF}$, a tükör $|f_v-2f_\mathrm{KF}|$.
+
+A \textbf{tükör} az a másik frekvencia, amely az oszcillátorral \textbf{szintén} $f_\mathrm{KF}$-et ad (az oszcillátor túloldalán). Csak a keverő előtti, hangolt bemeneti (RF) szűrő tudja csillapítani. A felső keverés előnye a kisebb relatív hangolási tartomány.
+
+\subsection{\texorpdfstring{A2. FM sztereó multiplex}{A2. FM sztereó multiplex}}\label{a9-sztereo}
+$L$, $R$: a bal és a jobb csatorna. A multiplex jel (az FM-modulátor bemenete):
+
+\begin{itemize}
+\item $M=L+R$ a 50 Hz és 15 kHz közötti sávban (ezt hallja a mono vevő),
+\item 19 kHz-es pilotjel (a vevő ebből állítja elő a 38 kHz-et),
+\item $S=L-R$ AM-DSB/SC-vel a 38 kHz-es, elnyomott segédvivőn: 23 és 53 kHz között,
+\item RDS 57 kHz-en.
+\end{itemize}
+
+Egy csatornán megszólaló $f$ frekvenciájú hang $M$-ben és $S$-ben is megjelenik, így az összetevők: $f$, $38\pm f$ kHz és a pilot. A 15 kHz feletti hangot a bemeneti szűrő levágja.
+
+\subsection{\texorpdfstring{A3. DVB-C és DVB-T bitsebesség}{A3. DVB-C és DVB-T bitsebesség}}\label{a9-dvb}
+DVB-C (egyvivős QAM): $(1+\alpha)/T\le8$ MHz, bruttó $=\log_2M/T$, nettó $=$ bruttó $\cdot188/204$ (RS(204,188): 204 bájtból 188 a hasznos). DVB-T (OFDM): 6817 vivő, ebből 6048 hasznos, $T_0$ a hasznos szimbólumidő, $GI$ a védőintervallum aránya:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle R_s=\frac{6048}{(1+GI)T_0}\qquad v_\text{nettó}=R_s\log_2M\cdot\text{FEC}\cdot\frac{188}{204}$}\end{center}
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.1. feladat: Felső keverés: 97,6 és 107 MHz}{9.1. feladat: Felső keverés: 97,6 és 107 MHz}}\label{ai9_01}
+\setcounter{lepes}{0}
+\begin{feladat}{9.1. feladat}
+CCIR FM, $f_\mathrm{KF}=10{,}7$ MHz, felső keverés. Hová hangoljuk az oszcillátort, és hol a tükör, ha az adó a) 97,6 MHz, b) 107 MHz?
+
+{\footnotesize\sffamily Forrás: ALL-IN 44., 66\ldots{}67., 74., 141. oldal $\cdot$ ai2016\_01\_12\_2, ai2014\_12\_22\_5, ai2014\_01\_07\_5, aiD\_9\_10 (és 5-ösöm 24. oldal). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $f_\text{osc}$ (az oszcillátor frekvenciája), $f_t$ (tükörfrekvencia)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$f_\mathrm{KF}$ & középfrekvencia & \\
+$\ca{f_v}$ & a venni kívánt adó frekvenciája & $97{,}6$\,MHz\\
+$f_\text{osc}$ & az oszcillátor frekvenciája & \emph{keresett}\\
+$f_t$ & tükörfrekvencia & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) 97,6 MHz}
+Az oszcillátor $f_\mathrm{KF}$-fel a vett frekvencia felett, a tükör még egyszer $f_\mathrm{KF}$-fel feljebb (A1).
+\behely{\bh{\ca{f_v}}{\ca{97{,}6\un{MHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}={\ca{97{,}6}}+10{,}7=108{,}3\ \text{MHz}\qquad f_t=108{,}3+10{,}7=119\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{ellenőrzés: $119-108{,}3=10{,}7$}
+
+\lepes{b) 107 MHz}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}=117{,}7\ \text{MHz}\qquad f_t=128{,}4\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }108{,}3\ \text{és}\ 119\ \text{MHz}\qquad\text{b) }117{,}7\ \text{és}\ 128{,}4\ \text{MHz}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.2. feladat: A teljes CCIR sáv (hivatalos megoldás)}{9.2. feladat: A teljes CCIR sáv (hivatalos megoldás)}}\label{ai9_02}
+\setcounter{lepes}{0}
+\begin{feladat}{9.2. feladat}
+87,5\ldots{}108 MHz, KF 10,7 MHz. a) Felső keverésnél milyen sávban hangolható az oszcillátor? b) Hová a 94,8 MHz-hez? c) A tükre? d) Miért jó a 10,7 MHz?
+
+{\footnotesize\sffamily Forrás: ALL-IN 138. oldal $\cdot$ aiD\_9\_4. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) az oszcillátor tartománya
+\item b) $f_\text{osc}$ (az oszcillátor frekvenciája) a 94,8 MHz-hez
+\item c) $f_t$ (tükörfrekvencia)
+\item d) indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$f_\mathrm{KF}$ & középfrekvencia & \\
+$f_\text{osc}$ & az oszcillátor frekvenciája & \emph{keresett}\\
+$f_t$ & tükörfrekvencia & \emph{keresett}\\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item vételi sáv: 87,5 és 108 MHz között (20,5 MHz széles)
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Tartomány}
+A sáv két szélére:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 87{,}5+10{,}7=98{,}2\ \ldots\ 108+10{,}7=118{,}7\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{b), c) 94,8 MHz}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}=94{,}8+10{,}7=105{,}5\ \text{MHz}\qquad f_t=94{,}8+21{,}4=116{,}2\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{d) Miért jó a 10,7 MHz?}
+A legalsó adó tükre is a sáv fölé esik, mert $2f_\mathrm{KF}=21{,}4$ MHz nagyobb a sáv 20,5 MHz-es szélességénél. A tükrök sávjában (108,9 és 129,4 MHz között) nincs FM-műsor, egy rögzített sávszűrő elég.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 87{,}5+21{,}4=108{,}9>108$}\end{center}
+\jegyzet{ellenőrzés}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }98{,}2\ldots118{,}7\ \text{MHz}\qquad\text{b) }105{,}5\ \text{MHz}\qquad\text{c) }116{,}2\ \text{MHz}\qquad\text{d) }2f_\mathrm{KF}>20{,}5\ \text{MHz}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.3. feladat: 24\ldots{}36 MHz, KF 18 MHz: felső vagy alsó keverés?}{9.3. feladat: 24…36 MHz, KF 18 MHz: felső vagy alsó keverés?}}\label{ai9_03}
+\setcounter{lepes}{0}
+\begin{feladat}{9.3. feladat}
+A vételi sáv 24 és 36 MHz között van, a KF 18 MHz. a) Mekkora tartományt fog át az oszcillátor felső, illetve alsó keverésnél? Melyik jobb? b) Alsó keverésnél hová kell hangolni a 25,5 MHz-hez? c) A tükre, és mi vele a gond?
+
+{\footnotesize\sffamily Forrás: ALL-IN 142. oldal $\cdot$ aiD\_9\_15 (és 5-ösöm 24. oldal). Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_\text{osc}$ (az oszcillátor frekvenciája) tartománya
+\item b) $f_\text{osc}$ (az oszcillátor frekvenciája) alsó keverésnél
+\item c) $f_t$ (tükörfrekvencia)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_v}$ & a venni kívánt adó frekvenciája & $24$\,MHz\\
+$f_\mathrm{KF}$ & középfrekvencia & \\
+$f_\text{osc}$ & az oszcillátor frekvenciája & \emph{keresett}\\
+$f_t$ & tükörfrekvencia & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Hangolási tartomány}
+Az oszcillátort annál könnyebb megépíteni, minél kisebb a legnagyobb és a legkisebb frekvencia aránya.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{felső: }42\ldots54\ \text{MHz},\ \tfrac{54}{42}=1{,}29\qquad\text{alsó: }6\ldots18\ \text{MHz},\ \tfrac{18}{6}=3$}\end{center}
+\jegyzet{behelyettesítés}{a felső a jobb}
+
+\lepes{b) Alsó keverés}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}=25{,}5-18=7{,}5\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{c) A tükör}
+Az a frekvencia, amely 7,5 MHz-cel keverve szintén 18 MHz-et ad. Mivel $7{,}5<18$, ez csak az összegfrekvencián lehet: $f_t+7{,}5=18$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_t=|{\ca{f_v}}-2f_\mathrm{KF}|=|25{,}5-36|=10{,}5\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{ellenőrzés: $10{,}5+7{,}5=18$}
+
+\lepes{c) A gond}
+A tükrök a sáv bejárása közben 12 MHz és 0 között mozognak, ezeket egy hangolt bemeneti szűrőnek kell elnyomnia. Ráadásul a sáv tetején (36 MHz) az oszcillátor 18 MHz-en, pont a KF-en jár, és közvetlenül bejut a KF-erősítőbe. Felső keverésnél ($f_t=60\ldots72$ MHz) ezek a gondok nincsenek.
+\begin{figyelem}[Javítás]
+A gyűjtemény tükörként 33 MHz-et ad ($F+f_0$): ez a keverés összegfrekvenciája, $|33-7{,}5|=25{,}5\ne18$, a 33 MHz-ből nem lesz KF.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) felső: }42\ldots54\ \text{MHz, alsó: }6\ldots18\ \text{MHz, a felső a jobb}\qquad\text{b) }7{,}5\ \text{MHz}\qquad\text{c) }f_t=10{,}5\ \text{MHz}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.4. feladat: Műholdvevő: 10,7\ldots{}11,7 GHz-ből 1\ldots{}2 GHz}{9.4. feladat: Műholdvevő: 10,7…11,7 GHz-ből 1…2 GHz}}\label{ai9_04}
+\setcounter{lepes}{0}
+\begin{feladat}{9.4. feladat}
+A 10,7\ldots{}11,7 GHz-es műholdas sávot egy állandó oszcillátorral az 1\ldots{}2 GHz-es beltéri sávba kell tenni. Adjon meg oszcillátorfrekvenciát, és hol van a tükrök sávja?
+
+{\footnotesize\sffamily Forrás: ALL-IN 141. oldal $\cdot$ aiD\_9\_9 (hivatalos). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $f_\text{osc}$ (az oszcillátor frekvenciája) és a tükrök sávja
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_v}$ & a venni kívánt adó frekvenciája & $10{,}7$\,GHz\\
+$f_\text{osc}$ & az oszcillátor frekvenciája & \emph{keresett}\\
+$f_t$ & tükörfrekvencia & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item kimenő (KF-)sáv: 1 és 2 GHz között
+\end{itemize}
+\end{jeloles}
+
+\lepes{Alsó keverés (oszcillátor a sáv alatt)}
+A sáv alja az 1 GHz-re, a teteje a 2 GHz-re kerüljön.
+\behely{\bh{\ca{f_v}}{\ca{10{,}7\un{GHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}={\ca{10{,}7}}-1=11{,}7-2=9{,}7\ \text{GHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_t=f_\text{osc}-(1\ldots2)=7{,}7\ldots8{,}7\ \text{GHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{Felső keverés (oszcillátor a sáv felett)}
+Itt a sáv megfordul: 10,7 GHz-ből 2 GHz, 11,7-ből 1 GHz lesz.
+\behely{\bh{\ca{f_v}}{\ca{10{,}7\un{GHz}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}={\ca{10{,}7}}+2=11{,}7+1=12{,}7\ \text{GHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_t=f_\text{osc}+(1\ldots2)=13{,}7\ldots14{,}7\ \text{GHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 9{,}7\ \text{GHz (tükrök }7{,}7\ldots8{,}7\ \text{GHz)}\qquad\text{vagy}\qquad12{,}7\ \text{GHz (tükrök }13{,}7\ldots14{,}7\ \text{GHz)}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyakorlatban (LNB) a 9,75 GHz körüli alsó oszcillátor terjedt el, a sáv nem fordul meg.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.5. feladat: A sztereó multiplex jel és egy-egy fütty}{9.5. feladat: A sztereó multiplex jel és egy-egy fütty}}\label{ai9_05}
+\setcounter{lepes}{0}
+\begin{feladat}{9.5. feladat}
+a) Rajzolja fel a sztereó jelet az FM előtt! b) Milyen összetevők jelennek meg, ha valaki 440 Hz-et fütyül a bal mikrofonba? c) Ha a bal mikrofon 10 kHz-et vesz? d) Ha a jobb mikrofon 25 kHz-et?
+
+{\footnotesize\sffamily Forrás: ALL-IN 45\ldots{}46., 139. oldal $\cdot$ ai2016\_01\_12\_2 c), aiD\_9\_5. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item b), c), d) a multiplex jel összetevői
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$M$ & az összegjel (L+R) & \\
+$S$ & a különbségi (L$-$R) jel & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) A spektrum}
+$M$: 0,05 és 15 kHz között, pilot 19 kHz-en, $S$ két oldalsávja 23 és 53 kHz között (a 38 kHz-es segédvivő elnyomva), RDS 57 kHz-en.
+
+\lepes{b) 440 Hz balra}
+Csak $L$-ben van, ezért $M=L+R$ és $S=L-R$ is tartalmazza. $S$ a 38 kHz körül két oldalsávot ad.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0{,}44\ \text{kHz},\quad38\pm0{,}44=37{,}56\ \text{és}\ 38{,}44\ \text{kHz},\quad19\ \text{kHz (pilot)}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{c) 10 kHz balra}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10,\quad38\pm10=28\ \text{és}\ 48,\quad19\ \text{kHz}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{d) 25 kHz jobbra}
+A 15 kHz-es bemeneti aluláteresztő levágja.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 25\ \text{kHz}>15\ \text{kHz}$}\end{center}
+\jegyzet{ellenőrzés}{csak a pilot marad}
+
+\begin{rajz}
+\textbf{A sztereó multiplex jel spektruma}\par
+\begin{center}\begin{tikzpicture}[x=0.01985cm,y=-0.01985cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (680,190);
+\path[draw=black!45,line width=0.35pt] (199.6,156) -- (199.6,16);
+\path[draw=black!45,line width=0.35pt] (238.9,156) -- (238.9,16);
+\path[draw=black!45,line width=0.35pt] (278.3,156) -- (278.3,16);
+\path[draw=black!45,line width=0.35pt] (425.9,156) -- (425.9,16);
+\path[draw=black!45,line width=0.35pt] (573.5,156) -- (573.5,16);
+\path[draw=black!45,line width=0.35pt] (612.8,156) -- (612.8,16);
+\path[draw=black,line width=0.7pt] (52,156) -- (670,156);
+\path[fill=black,draw=none] (676,156) -- (668,152) -- (668,160) -- cycle;
+\path[draw=black,line width=0.7pt] (52,156) -- (52,10);
+\path[fill=black,draw=none] (52,4) -- (48,12) -- (56,12) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (199.6,172) {15};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (238.9,172) {19};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (278.3,172) {23};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (425.9,172) {38};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (573.5,172) {53};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (612.8,172) {57};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (662,186) {f [kHz]};
+\path[fill=black!10,draw=none] (52.5,156) -- (52.5,48.3) -- (199.6,48.3) -- (199.6,156) -- cycle;
+\path[fill=cB!15,draw=none] (278.3,156) -- (278.3,102.2) -- (425.4,102.2) -- (425.4,156) -- cycle;
+\path[fill=cB!15,draw=none] (426.4,156) -- (426.4,102.2) -- (573.5,102.2) -- (573.5,156) -- cycle;
+\path[fill=cA!15,draw=none] (598,156) -- (598,143.1) -- (627.6,143.1) -- (627.6,156) -- cycle;
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (425.9,156) -- (425.9,16);
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (428.9,26) {38 (elnyomva)};
+\path[draw=cA,line width=0.8pt,line width=0.99pt] (238.9,156) -- (238.9,129.1);
+\path[fill=cA,draw=none] (238.9,129.1) circle[radius=0.069cm];
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (238.9,121.1) {pilot};
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (125.8,39.7) {M = L+R};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (352.1,91.4) {S alsó};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (499.7,91.4) {S felső};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (612.8,134.5) {RDS};
+\end{tikzpicture}\end{center}
+\begin{itemize}
+\item $M$: 0,05\ldots{}15 kHz. Pilot: 19 kHz, kis vonal. $S$: 23\ldots{}53 kHz két oldalsávval, a 38 kHz-es segédvivő nincs benne. RDS: 57 kHz.
+\end{itemize}
+
+\textbf{b) 440 Hz-es fütty a bal mikrofonba}\par
+\begin{center}\begin{tikzpicture}[x=0.01985cm,y=-0.01985cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (680,160);
+\path[draw=black!45,line width=0.35pt] (58.4,126) -- (58.4,16);
+\path[draw=black!45,line width=0.35pt] (328,126) -- (328,16);
+\path[draw=black!45,line width=0.35pt] (597.5,126) -- (597.5,16);
+\path[draw=black!45,line width=0.35pt] (610.3,126) -- (610.3,16);
+\path[draw=black,line width=0.7pt] (52,126) -- (670,126);
+\path[fill=black,draw=none] (676,126) -- (668,122) -- (668,130) -- cycle;
+\path[draw=black,line width=0.7pt] (52,126) -- (52,10);
+\path[fill=black,draw=none] (52,4) -- (48,12) -- (56,12) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (58.4,142) {0,44};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (328,142) {19};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (597.5,142) {37,56};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (610.3,142) {38,44};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (662,156) {f [kHz]};
+\path[draw=black,line width=0.8pt,line width=0.99pt] (58.4,126) -- (58.4,41.4);
+\path[fill=black,draw=none] (58.4,41.4) circle[radius=0.069cm];
+\path[draw=cA,line width=0.8pt,line width=0.99pt] (328,126) -- (328,104.8);
+\path[fill=cA,draw=none] (328,104.8) circle[radius=0.069cm];
+\path[draw=cB,line width=0.8pt,line width=0.99pt] (597.5,126) -- (597.5,83.7);
+\path[fill=cB,draw=none] (597.5,83.7) circle[radius=0.069cm];
+\path[draw=cB,line width=0.8pt,line width=0.99pt] (610.3,126) -- (610.3,83.7);
+\path[fill=cB,draw=none] (610.3,83.7) circle[radius=0.069cm];
+\end{tikzpicture}\end{center}
+\begin{itemize}
+\item Négy vonal: 0,44 kHz ($M$), 19 kHz (pilot), 37,56 és 38,44 kHz ($S$ két oldalsávja).
+\end{itemize}
+\end{rajz}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) }0{,}44;\ 19;\ 37{,}56;\ 38{,}44\ \text{kHz}\qquad\text{c) }10;\ 19;\ 28;\ 48\ \text{kHz}\qquad\text{d) csak }19\ \text{kHz}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.6. feladat: Fütty a jobb mikrofonba: két feleletválasztós}{9.6. feladat: Fütty a jobb mikrofonba: két feleletválasztós}}\label{ai9_06}
+\setcounter{lepes}{0}
+\begin{feladat}{9.6. feladat}
+a) 720 Hz: A) 18 280 Hz B) 19 720 Hz C) 19 kHz D) 38 720 Hz. b) 520 Hz: A) 38 520 Hz B) 520 Hz C) 38 kHz D) 19 kHz. Melyek a multiplex jel összetevői?
+
+{\footnotesize\sffamily Forrás: ALL-IN 141\ldots{}142. oldal $\cdot$ aiD\_9\_11 (5.3.), aiD\_9\_13 (5.1.). Címkék: beugró, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a multiplex jel összetevői
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$M$ & az összegjel (L+R) & \\
+$f$ & a fütty frekvenciája & \\
+$S$ & a különbségi (L$-$R) jel & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item egy hang a jobb csatornán
+\end{itemize}
+\end{jeloles}
+
+\lepes{Az összetevők}
+A jobb csatorna hangja $M$-ben $+f$, $S$-ben $-f$ előjellel szerepel, a frekvenciák ugyanazok, mint balra (A2). A 38 kHz-es segédvivő el van nyomva, a pilot mindig jelen van.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f,\quad38\pm f,\quad19\ \text{kHz}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{a) 720 Hz}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0{,}72;\ 19;\ 37{,}28;\ 38{,}72\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{C és D igaz}
+
+\lepes{b) 520 Hz}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0{,}52;\ 19;\ 37{,}48;\ 38{,}52\ \text{kHz}$}\end{center}
+\jegyzet{számérték}{A, B és D igaz, C hamis (elnyomott)}
+\begin{figyelem}[Javítás]
+A gyűjtemény az a)-ra csak D-t (megjegyzéssel: „a C-t nem kéne bejelölni?”), a b)-re A, B-t ad. A pilot a multiplex jel része.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) C és D}\qquad\text{b) A, B és D}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.7. feladat: Ha az S komponens 6 dB-lel csillapodik}{9.7. feladat: Ha az S komponens 6 dB-lel csillapodik}}\label{ai9_07}
+\setcounter{lepes}{0}
+\begin{feladat}{9.7. feladat}
+a) Az FM sztereó alapsávi spektruma. b) Miért halljuk mono vevőn mindkét csatornát? c) Mi történik, ha az amplitúdóhelyes $M$-hez képest $S$ 6 dB-lel csillapodik?
+
+{\footnotesize\sffamily Forrás: ALL-IN 12., 57. oldal $\cdot$ ai2020\_06\_02\_Q2, ai2014\_12\_15\_5. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) spektrum
+\item b) indoklás
+\item c) a visszaállított $L'$ (a vevő bal kimenete), $R'$ (a vevő jobb kimenete)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$S$ & a különbségi (L$-$R) jel & \\
+$M$ & az összegjel (L+R) & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item $S$ (a különbségi (L$-$R) jel) az $M$-hez (az összegjel (L+R)) képest $-6$ dB, azaz feleakkora amplitúdójú
+\end{itemize}
+\end{jeloles}
+
+\lepes{a), b)}
+A multiplex jel: $M=L+R$ 15 kHz-ig, 19 kHz-es pilot, $S=L-R$ a 38 kHz-es elnyomott segédvivő két oldalán (23 és 53 kHz között), RDS 57 kHz-en. A mono vevő a 15 kHz-es aluláteresztő után csak $M=L+R$-et kapja, ebben mindkét csatorna benne van.
+
+\lepes{c) A vevő visszaállítása}
+Legyen $M=(L+R)/2$ és $S=(L-R)/2$, a vevő $L'=M+S$, $R'=M-S$-et képez. Ha $S$ fele akkora:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L'=\frac{L+R}{2}+\frac{L-R}{4}=0{,}75L+0{,}25R\qquad R'=0{,}25L+0{,}75R$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 20\lg\frac{0{,}75}{0{,}25}=20\lg3=9{,}5\ \text{dB}$}\end{center}
+\jegyzet{számérték}{csatornaelválasztás}
+
+\begin{rajz}
+\textbf{Az FM sztereó alapsávi spektruma}\par
+\begin{center}\begin{tikzpicture}[x=0.01985cm,y=-0.01985cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (680,190);
+\path[draw=black!45,line width=0.35pt] (199.6,156) -- (199.6,16);
+\path[draw=black!45,line width=0.35pt] (238.9,156) -- (238.9,16);
+\path[draw=black!45,line width=0.35pt] (278.3,156) -- (278.3,16);
+\path[draw=black!45,line width=0.35pt] (425.9,156) -- (425.9,16);
+\path[draw=black!45,line width=0.35pt] (573.5,156) -- (573.5,16);
+\path[draw=black!45,line width=0.35pt] (612.8,156) -- (612.8,16);
+\path[draw=black,line width=0.7pt] (52,156) -- (670,156);
+\path[fill=black,draw=none] (676,156) -- (668,152) -- (668,160) -- cycle;
+\path[draw=black,line width=0.7pt] (52,156) -- (52,10);
+\path[fill=black,draw=none] (52,4) -- (48,12) -- (56,12) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (199.6,172) {15};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (238.9,172) {19};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (278.3,172) {23};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (425.9,172) {38};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (573.5,172) {53};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (612.8,172) {57};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (662,186) {f [kHz]};
+\path[fill=black!10,draw=none] (52.5,156) -- (52.5,48.3) -- (199.6,48.3) -- (199.6,156) -- cycle;
+\path[fill=cB!15,draw=none] (278.3,156) -- (278.3,102.2) -- (425.4,102.2) -- (425.4,156) -- cycle;
+\path[fill=cB!15,draw=none] (426.4,156) -- (426.4,102.2) -- (573.5,102.2) -- (573.5,156) -- cycle;
+\path[fill=cA!15,draw=none] (598,156) -- (598,143.1) -- (627.6,143.1) -- (627.6,156) -- cycle;
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (425.9,156) -- (425.9,16);
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (428.9,26) {38 (elnyomva)};
+\path[draw=cA,line width=0.8pt,line width=0.99pt] (238.9,156) -- (238.9,129.1);
+\path[fill=cA,draw=none] (238.9,129.1) circle[radius=0.069cm];
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (238.9,121.1) {pilot};
+\node[anchor=base,inner sep=0pt,font=\footnotesize] at (125.8,39.7) {M = L+R};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (352.1,91.4) {S alsó};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (499.7,91.4) {S felső};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (612.8,134.5) {RDS};
+\end{tikzpicture}\end{center}
+\begin{itemize}
+\item $M$: 0,05\ldots{}15 kHz. Pilot: 19 kHz, kis vonal. $S$: 23\ldots{}53 kHz két oldalsávval, a 38 kHz-es segédvivő nincs benne. RDS: 57 kHz.
+\end{itemize}
+\end{rajz}
+\begin{figyelem}[Javítás]
+A Moodle-válasz (a zaj „jobban beleszámít”) 0 pontot kapott, az ALL-IN 2014-es változatában „passz”.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{c) áthallás: a bal csatornában a jobb is szól, csak 9,5 dB-lel halkabban, a sztereó kép összeszűkül}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.8. feladat: DVB-C 256-QAM-mel, $\alpha$ = 1/3}{9.8. feladat: DVB-C 256-QAM-mel, α = 1/3}}\label{ai9_08}
+\setcounter{lepes}{0}
+\begin{feladat}{9.8. feladat}
+8 MHz-es raszter, 33,33\%-os emelt koszinusz, 256-QAM (RS nélkül). a) Szimbólum- és bitsebesség? b) Hány 1,5 Mbit/s-os csatorna fér el, mi a 6 Mbit/s-os kódolás előnye és hátránya? c) Mi az 1024-QAM előnye és hátránya?
+
+{\footnotesize\sffamily Forrás: ALL-IN 32\ldots{}34., 75\ldots{}76., 127. oldal $\cdot$ ai2015\_12\_16\_4, ai2014\_01\_07\_9, aiD\_7\_11 (és 5-ösöm 6. oldal). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $1/T$, $v$ (bitsebesség)
+\item b) csatornaszám
+\item c) 1024-QAM
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{B}$ & a csatorna sávszélessége & $8$\,MHz\\
+$\alpha$ & lekerekítési tényező & \\
+$\cb{M}$ & az összegjel (L+R) & $256$\\
+$v$ & bitsebesség & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Szimbólumsebesség}
+Vivőfrekvenciás emelt koszinusz: $(1+\alpha)/T\le {\ca{B}}$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac43\cdot\frac1T\le8\ \text{MHz}\ \Rightarrow\ \frac1T=6\ \text{MBd}$}\end{center}
+\jegyzet{tétel}{}
+
+\lepes{a), b) Bitsebesség, csatornák}
+$\log_2256=8$ bit/szimbólum.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 6\cdot8=48\ \text{Mbit/s}\qquad\frac{48}{1{,}5}=32\ \text{csatorna}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{48}{6}=8\ \text{csatorna}$}\end{center}
+\jegyzet{számérték}{6 Mbit/s-mal: jobb kép (HD), de kevesebb műsor}
+
+\lepes{c) 1024-QAM}
+10 bit/szimbólum: $6\cdot10=60$ Mbit/s (40 csatorna). A pontok sűrűbbek: kisebb zaj- és fázistűrés (kb. 1,8\textdegree{}), nagyobb jel-zaj viszony kell.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }6\ \text{MBd},\ 48\ \text{Mbit/s}\qquad\text{b) }32\ \text{csatorna (6 Mbit/s-mal 8)}\qquad\text{c) 60 Mbit/s, de kisebb zajtűrés}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.9. feladat: DVB-C 64-QAM-mel, $\alpha$ = 15\%, RS(204,188)}{9.9. feladat: DVB-C 64-QAM-mel, α = 15, RS(204,188)}}\label{ai9_09}
+\setcounter{lepes}{0}
+\begin{feladat}{9.9. feladat}
+Hány 1,5 Mbit/s-os csatorna fér el egy 8 MHz-es raszterben 64-QAM-mel, 15\%-os lekerekítéssel és RS(204,188) kóddal?
+
+{\footnotesize\sffamily Forrás: ALL-IN 58\ldots{}60. oldal $\cdot$ ai2014\_12\_15\_7. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a csatornák száma
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{B}$ & a csatorna sávszélessége & $8$\,MHz\\
+$\alpha$ & lekerekítési tényező & \\
+$\cb{M}$ & az összegjel (L+R) & $64$\\
+$T$ & a szimbólumidő & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item RS(204,188): 204 bájtból 188 hasznos, kódarány $188/204$
+\end{itemize}
+\end{jeloles}
+
+\lepes{Szimbólumsebesség}
+$(1+\alpha)/T\le {\ca{B}}$, ez felső korlát, felfelé nem kerekíthetünk.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac1T=\frac{8}{1{,}15}=6{,}957\ \text{MBd}$}\end{center}
+\jegyzet{tétel}{}
+
+\lepes{Nettó bitsebesség és csatornák}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 6{,}957\cdot6\cdot\frac{188}{204}=41{,}74\cdot0{,}922=38{,}47\ \text{Mbit/s}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{38{,}47}{1{,}5}=25{,}6\ \Rightarrow\ 25\ \text{csatorna}$}\end{center}
+\jegyzet{számérték}{csak egész csatorna fér el}
+\begin{figyelem}[Javítás]
+A gyűjtemény 7 MBd-ra kerekít felfelé (ehhez már 8,05 MHz kellene). A csatornaszám véletlenül ugyanaz.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 25\ \text{csatorna}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.10. feladat: Fogalmak: QAM, AM-VSB, OFDM, egyfrekvenciás hálózat}{9.10. feladat: Fogalmak: QAM, AM-VSB, OFDM, egyfrekvenciás hálózat}}\label{ai9_10}
+\setcounter{lepes}{0}
+\begin{feladat}{9.10. feladat}
+Miért QAM és AM-VSB a műsorszórásban? Ismertesse az analóg földi és műholdas, a digitális földi TV és az egyfrekvenciás hálózat jellemzőit! Miért lehet OFDM-mel SFN-t építeni?
+
+{\footnotesize\sffamily Forrás: ALL-IN 137., 140., 145. oldal $\cdot$ aiD\_9\_3, aiD\_9\_6, aiD\_10\_1 (és 5-ösöm 24. oldal). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item indokolt válaszok
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item fogalmi kérdések
+\end{itemize}
+\end{jeloles}
+
+\lepes{QAM}
+Két, egymásra merőleges (koszinusz és szinusz) vivővel két független jelet (a két színkülönbségi jelet, illetve két adatcsatornát) visz ugyanabban a sávban, egymás zavarása nélkül.
+
+\lepes{AM-VSB}
+A képjel széles (kb. 5 MHz) és egyenszintet is tartalmaz. AM-DSB-vel 10 MHz kellene: pazarló. SSB-hez a vivő közvetlen közelében kellene éles szűrő, ez DC-tartalmú jelnél nem megy. A csonka oldalsáv majdnem felezi a sávot, és a jel burkolóval demodulálható.
+
+\lepes{A rendszerek}
+Analóg földi TV: kép AM-VSB, szín QAM, hang FM, 7 vagy 8 MHz-es csatorna. Analóg műholdas: FM, 10,7 és 12,75 GHz között, kb. 27 MHz. DVB-T: OFDM (2k vagy 8k vivő), QPSK, 16-QAM vagy 64-QAM, konvolúciós kód és RS(204,188), 7,61 MHz.
+
+\lepes{SFN és OFDM}
+Egyfrekvenciás hálózat (SFN): több adó szinkronban, ugyanazon a frekvencián sugározza ugyanazt. A vevőben a többi adó jele késleltetett visszhangként jelenik meg. Az OFDM szimbólumai hosszúak, és védőintervallum előzi meg őket: ha a késés ezen belül van, a visszhang nem okoz ISI-t, sőt a teljesítménye hasznosul.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{QAM: két jel egy sávban}\quad\text{VSB: fél sáv, burkolós vétel}\quad\text{SFN: a védőintervallumon belüli visszhang hasznos}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{9.11. feladat: PDH és E1: négy állítás}{9.11. feladat: PDH és E1: négy állítás}}\label{ai9_11}
+\setcounter{lepes}{0}
+\begin{feladat}{9.11. feladat}
+A) Pleziokron Digitális Hierarchia. B) E1 szinten 32 időrésben beszéd. C) Egy időrés 3,9 \textmu{}s ($\pm$1\%). D) Csatornánként a jelzés 2 kbit/s.
+
+{\footnotesize\sffamily Forrás: ALL-IN 142. oldal $\cdot$ aiD\_9\_14 (5.2.). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item melyik állítás igaz
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item E1: 2,048 Mbit/s, 125 \textmu{}s-os keret (8 kHz-es mintavétel), 32 időrés, időrésenként 8 bit
+\item TS0: keretszinkron, TS16: jelzés, a többi 30 beszéd
+\end{itemize}
+\end{jeloles}
+
+\lepes{A), B)}
+A PDH a Plesiochronous Digital Hierarchy rövidítése: A igaz. A 32 időrésből csak 30 beszéd: B hamis.
+
+\lepes{C) Időrés hossza}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{125\ \mu\text{s}}{32}=3{,}906\ \mu\text{s}$}\end{center}
+\jegyzet{számérték}{C igaz}
+
+\lepes{D) Jelzés csatornánként}
+A TS16 16 keretből álló multikeretben váltakozva viszi a 30 csatorna jelzését: csatornánként 4 bitet 16 keretenként.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{4\ \text{bit}}{16\cdot125\ \mu\text{s}}=\frac{4}{2\ \text{ms}}=2\ \text{kbit/s}$}\end{center}
+\jegyzet{számérték}{D igaz}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{A, C, D igaz, B hamis}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény A, D-t ad. A C számszerűen igaz, a kérdező szándéka \texttt{[ELLENŐRIZENDŐ]}.
+\end{itemize}
+\end{tipp}

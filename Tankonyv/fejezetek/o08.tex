@@ -1,0 +1,236 @@
+% Generálva: html/build_tex.js (o08.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{7}
+\chapter{\texorpdfstring{Műsorszórás és digitális TV}{Műsorszórás és digitális TV}}\label{f8}
+Szuperheterodin vevő és tükörfrekvencia, valamint a DVB-T multiplex nettó bitsebessége.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Szuperheterodin vevő}{A1. Szuperheterodin vevő}}\label{b8-szuper}
+A vevő a venni kívánt $f_v$ frekvenciájú jelet egy helyi oszcillátor ($f_\text{osc}$) jelével keveri (szorozza). A szorzat a különbségi és az összegfrekvencián jelenik meg. A különbségi frekvencia az állandó \textbf{középfrekvencia} ($f_\mathrm{KF}$), ezt erősíti és szűri a vevő, az összeget eldobja:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle |f_v-f_\text{osc}|=f_\mathrm{KF}$}\end{center}
+
+\textbf{Felső keverés:} $f_\text{osc}=f_v+f_\mathrm{KF}$. \textbf{Alsó keverés:} $f_\text{osc}=f_v-f_\mathrm{KF}$.
+
+A \textbf{tükörfrekvencia} ($f_t$) az a másik frekvencia, amelyik ugyanazzal az oszcillátorral szintén $f_\mathrm{KF}$-et ad: az oszcillátor túloldalán, tőle $f_\mathrm{KF}$-re. Felső keverésnél $f_t=f_\text{osc}+f_\mathrm{KF}=f_v+2f_\mathrm{KF}$, alsónál $f_t=|f_\text{osc}-f_\mathrm{KF}|=|f_v-2f_\mathrm{KF}|$. A tükröt a keverő \textbf{előtt} kell kiszűrni, utána már nem különböztethető meg a hasznos jeltől.
+
+\subsection{\texorpdfstring{A2. DVB-T (OFDM)}{A2. DVB-T (OFDM)}}\label{b8-dvb}
+Sok keskeny vivő egymás mellett, mindegyik egy-egy QAM-szimbólumot visz. $T_0$ a hasznos szimbólumidő, a vivőköz $1/T_0$. Minden szimbólum elé védőintervallum kerül ($GI$, a $T_0$ hányadában), így egy OFDM-szimbólum $(1+GI)T_0$ ideig tart. A sávszélesség kb. $(N_\text{vivő}+1)/T_0$. Csak a hasznos vivők visznek adatot:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle R_s=\frac{N_\text{hasznos}}{(1+GI)T_0}\qquad v_\text{nettó}=R_s\cdot\log_2M\cdot\text{FEC}\cdot\frac{188}{204}$}\end{center}
+
+A FEC a konvolúciós kód aránya, a $188/204$ az RS(204,188) kódé (204 bájtból 188 a hasznos).
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.1. feladat: Felső keverés: 97,6 és 107 MHz}{8.1. feladat: Felső keverés: 97,6 és 107 MHz}}\label{o8_01}
+\setcounter{lepes}{0}
+\begin{feladat}{8.1. feladat}
+KF 10,7 MHz, felső keverés. Oszcillátor és tükör a 97,6 és a 107 MHz-es adóhoz?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 24. oldal $\cdot$ 5o\_24\_2, 5o\_24\_3. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $f_\text{osc}$: az oszcillátor frekvenciája
+\item $f_t$: tükörfrekvencia
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$f_\mathrm{KF}$ & középfrekvencia & \\
+$\ca{f_v}$ & a venni kívánt adó frekvenciája & $97{,}6$\\
+$f_\text{osc}$ & az oszcillátor frekvenciája & \emph{keresett}\\
+$f_t$ & tükörfrekvencia & \emph{keresett}\\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item felső keverés: az oszcillátor a vett frekvencia fölött
+\end{itemize}
+\end{jeloles}
+
+\lepes{97,6 MHz}
+Felső keverésnél az oszcillátor $f_\mathrm{KF}$-fel a vett frekvencia felett van, a tükör még egyszer $f_\mathrm{KF}$-fel feljebb (A1).
+\behely{\bh{\ca{f_v}}{\ca{97{,}6}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}={\ca{97{,}6}}+10{,}7=108{,}3\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_t=108{,}3+10{,}7=119\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{ellenőrzés: $119-108{,}3=10{,}7$}
+
+\lepes{107 MHz}
+Ugyanígy.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}=107+10{,}7=117{,}7\ \text{MHz}\qquad f_t=117{,}7+10{,}7=128{,}4\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 97{,}6\ \text{MHz: }f_\text{osc}=108{,}3,\ f_t=119\ \text{MHz}\qquad107\ \text{MHz: }f_\text{osc}=117{,}7,\ f_t=128{,}4\ \text{MHz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item Mindkét tükör a CCIR FM-sáv (87,5 és 108 MHz) fölött van, ezért egy sávszűrő kiszűri. Ezért választják a 10,7 MHz-et: $2f_\mathrm{KF}=21{,}4$ MHz nagyobb a sáv szélességénél (20,5 MHz).
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.2. feladat: 24\ldots{}36 MHz, KF 18 MHz}{8.2. feladat: 24…36 MHz, KF 18 MHz}}\label{o8_02}
+\setcounter{lepes}{0}
+\begin{feladat}{8.2. feladat}
+A vételi sáv 24 és 36 MHz között van, a KF 18 MHz. a) Az oszcillátor tartománya felső és alsó keverésnél, melyik jobb? b) Alsó keverésnél a 25,5 MHz-hez? c) Tükörfrekvencia, mi vele a gond?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 24. oldal $\cdot$ 5o\_24\_4. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $f_\text{osc}$ (az oszcillátor frekvenciája) tartománya mindkét esetben
+\item b) $f_\text{osc}$ (az oszcillátor frekvenciája) a 25,5 MHz-hez, alsó keverés
+\item c) $f_t$ (tükörfrekvencia) és a gond vele
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f_v}$ & a venni kívánt adó frekvenciája & $24$\,MHz\\
+$f_\mathrm{KF}$ & középfrekvencia & \\
+$f_\text{osc}$ & az oszcillátor frekvenciája & \emph{keresett}\\
+$f_t$ & tükörfrekvencia & \emph{keresett}\\
+$f$ & a keresett zavaró (tükör) frekvencia & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Hangolási tartomány}
+A sáv két szélére kiszámoljuk az oszcillátort (A1). Egy oszcillátort annál könnyebb megépíteni, minél kisebb a legnagyobb és a legkisebb frekvencia aránya.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{felső: }24+18=42\ \ldots\ 36+18=54\ \text{MHz}\qquad\frac{54}{42}=1{,}29$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{alsó: }24-18=6\ \ldots\ 36-18=18\ \text{MHz}\qquad\frac{18}{6}=3$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 1{,}29<3$}\end{center}
+\jegyzet{ellenőrzés}{a felső keverés a jobb}
+
+\lepes{b) Alsó keverés, 25,5 MHz}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_\text{osc}=25{,}5-18=7{,}5\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{c) A tükör}
+Az a másik frekvencia, amely 7,5 MHz-cel keverve szintén 18 MHz-et ad. A különbség $f-7{,}5=\pm18$ ad 25,5-et (a hasznos jelet) és $-10{,}5$-et, ami a 10,5 MHz-es jelnek felel meg: ezt az \textbf{összegfrekvencia} viszi a KF-re.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle f_t=|{\ca{f_v}}-2f_\mathrm{KF}|=|25{,}5-36|=10{,}5\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10{,}5+7{,}5=18\ \text{MHz}$}\end{center}
+\jegyzet{ellenőrzés}{tényleg a KF-re esik}
+
+\lepes{c) Mi vele a gond?}
+A tükrök a sáv bejárásakor $|{\ca{24}}-36|=12$ MHz és $|36-36|=0$ között mozognak: ezt a keverő előtt egy hangolt szűrőnek kell elnyomnia. Ráadásul alsó keverésnél az oszcillátor a sáv tetején 18 MHz-en, pont a KF-en jár, és közvetlenül bejut a KF-erősítőbe. Felső keverésnél ($f_t=60\ldots72$ MHz) ezek a gondok nincsenek.
+\begin{tipp}[A gyűjtemény megoldása]
+A gyűjtemény tükörként $F+f_0=25{,}5+7{,}5=33$ MHz-et ad.
+\end{tipp}
+\begin{figyelem}[Javítás]
+A 33 MHz a keverés összegfrekvenciája, nem tükör: $|33-7{,}5|=25{,}5\ne18$. A tükör 10,5 MHz.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) felső: }42\ldots54\ \text{MHz, alsó: }6\ldots18\ \text{MHz, a felső a jobb}\qquad\text{b) }7{,}5\ \text{MHz}\qquad\text{c) }f_t=10{,}5\ \text{MHz}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.3. feladat: DVB-T.HU multiplex nettó bitsebessége}{8.3. feladat: DVB-T.HU multiplex nettó bitsebessége}}\label{o8_03}
+\setcounter{lepes}{0}
+\begin{feladat}{8.3. feladat}
+6817 vivő, ebből 6048 hasznos, $T_0=896$ \textmu{}s, $GI=1/4$, 64-QAM, RS(204,188), FEC 3/4. Mekkora a nettó bitsebesség, és hány 1,5 Mbit/s-os csatorna fér el?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 25\ldots{}26. oldal $\cdot$ 5o\_25\_2. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $v_\text{nettó}$ (nettó bitsebesség) és a csatornák száma
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{N}$ & az OFDM-vivők száma & $6817$\\
+$N_\text{hasznos}$ & az adatot vivő vivők száma & \\
+$\cb{T_0}$ & hasznos szimbólumidő & $896$\,\textmu{}s\\
+$GI$ & a védőintervallum aránya & \\
+$v_\text{nettó}$ & nettó bitsebesség & \emph{keresett}\\
+$B$ & a csatorna sávszélessége & \\
+$R_s$ & szimbólumsebesség vivőnként & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item FEC 3/4 és RS(204,188): a két hibajavító kód aránya
+\end{itemize}
+\end{jeloles}
+
+\lepes{Sávszélesség (ellenőrzésképpen)}
+A vivőköz $1/{\cb{T_0}}=1{,}116$ kHz, a vivők sávja kb. $({\ca{N}}+1)/{\cb{T_0}}$ (A2).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B=\frac{6818}{896\ \mu\text{s}}=7{,}61\ \text{MHz}$}\end{center}
+\jegyzet{behelyettesítés}{belefér a 8 MHz-es csatornába}
+
+\lepes{Szimbólumsebesség}
+Egy OFDM-szimbólum a védőintervallummal $(1+1/4)\cdot{\cb{896}}=1120$ \textmu{}s. Ennyi idő alatt 6048 hasznos QAM-szimbólum megy át.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle R_s=\frac{6048}{1120\ \mu\text{s}}=5{,}4\ \text{MBd}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{Nettó bitsebesség}
+Szorozzuk a bit/szimbólummal, majd a két kód arányával.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 5{,}4\cdot6=32{,}4\ \text{Mbit/s}$}\end{center}
+\jegyzet{számérték}{bruttó}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 32{,}4\cdot\frac34\cdot\frac{188}{204}=24{,}3\cdot0{,}922=22{,}4\ \text{Mbit/s}$}\end{center}
+\jegyzet{számérték}{nettó}
+
+\lepes{Csatornák}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{22{,}4}{1{,}5}=14{,}9\ \Rightarrow\ 14\ \text{csatorna}$}\end{center}
+\jegyzet{számérték}{egész számú csatorna fér el}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v_\text{nettó}=22{,}4\ \text{Mbit/s}\qquad14\ \text{teljes csatorna (14,9)}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.4. feladat: Miért QAM és AM-VSB?}{8.4. feladat: Miért QAM és AM-VSB?}}\label{o8_04}
+\setcounter{lepes}{0}
+\begin{feladat}{8.4. feladat}
+Miért használunk a műsorszórásban QAM-et és AM-VSB-t?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 24. oldal $\cdot$ 5o\_24\_1. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a két modulációs mód indoklása
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item az analóg színes TV jelei: széles sávú, egyenszintet is tartalmazó képjel ($Y$) és két színkülönbségi jel
+\end{itemize}
+\end{jeloles}
+
+\lepes{QAM}
+A színsegédvivőt két, egymásra merőleges (koszinusz és szinusz) vivővel modulálják: két független jelet, a két színkülönbségi jelet visz ugyanabban a sávban, egymás zavarása nélkül. Ugyanez az elv a digitális QAM-nél: két kvadratúra-csatorna egy sávban.
+
+\lepes{AM-VSB}
+A képjel 5 MHz körüli széles és egyenszintet (0 Hz körüli összetevőt) is tartalmaz. AM-DSB-vel a sáv 10 MHz lenne: pazarló. SSB-hez a vivő közvetlen közelében kellene éles szűrő, ez DC-tartalmú jelnél nem valósítható meg. A csonka oldalsáv (VSB) az egyik oldalsávot nagyrészt levágja, csak egy kis maradékot hagy: a sáv majdnem a felére csökken, és a jel egyszerű burkolódetektorral demodulálható.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{QAM: két független jel egy sávban}\qquad\text{AM-VSB: majdnem fele sáv, burkolódetektorral vehető}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény válasza („a QAM két szín esetén hasznos, frekvencianyereséggel jár (?)”) bizonytalan, a VSB-részlet nagyjából jó.
+\end{itemize}
+\end{tipp}

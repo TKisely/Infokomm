@@ -1,0 +1,259 @@
+<svg role="img" aria-label="Általános moduláló spektrum és az alsó oldalsávos jel spektruma tükrözött állásban" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 410.4 274.899961" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 274.899961 
+L 410.4 274.899961 
+L 410.4 0 
+L 0 0 
+L 0 274.899961 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 4.32 98.958438 
+L 406.08 98.958438 
+L 406.08 18.318438 
+L 4.32 18.318438 
+L 4.32 98.958438 
+z
+" style="fill: none"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 245.376 98.958438 
+L 245.376 34.446438 
+L 365.904 98.958438 
+z
+" clip-path="url(#pfa0515399a)" style="fill: var(--jcol); opacity: 0.25"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 165.024 98.958438 
+L 165.024 34.446438 
+L 44.496 98.958438 
+z
+" clip-path="url(#pfa0515399a)" style="fill: var(--jcol); opacity: 0.25"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="md0a51ed51a" d="M 0 0 
+L 0 3.5 
+" style="stroke: var(--fg); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#md0a51ed51a" x="44.496" y="98.958438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="44.496" y="113.936797" transform="rotate(-0 44.496 113.936797)">−fₕ</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="165.024" y="98.958438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="165.024" y="113.936797" transform="rotate(-0 165.024 113.936797)">−fₐ</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="205.2" y="98.958438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="205.2" y="113.935977" transform="rotate(-0 205.2 113.935977)">0</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="245.376" y="98.958438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="245.376" y="113.936797" transform="rotate(-0 245.376 113.936797)">fₐ</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="365.904" y="98.958438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="365.904" y="113.936797" transform="rotate(-0 365.904 113.936797)">fₕ</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="205.2" y="128.437617" transform="rotate(-0 205.2 128.437617)">f</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2"/>
+   <g id="line2d_6">
+    <path d="M 245.376 98.958438 
+L 245.376 34.446438 
+L 365.904 98.958438 
+" clip-path="url(#pfa0515399a)" style="fill: none; stroke: var(--jcol); stroke-width: 1.6; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_7">
+    <path d="M 165.024 98.958438 
+L 165.024 34.446438 
+L 44.496 98.958438 
+" clip-path="url(#pfa0515399a)" style="fill: none; stroke: var(--jcol); stroke-width: 1.6; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 4.32 98.958438 
+L 406.08 98.958438 
+" clip-path="url(#pfa0515399a)" style="fill: none; stroke: var(--fg); stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 4.32 98.958438 
+L 406.08 98.958438 
+" style="fill: none; stroke: var(--fg); stroke-width: 0.9; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: var(--muted)" x="4.32" y="12.318438" transform="rotate(-0 4.32 12.318438)">moduláló jel spektruma, |X(f)|</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_6">
+    <path d="M 4.32 240.078438 
+L 406.08 240.078438 
+L 406.08 159.438438 
+L 4.32 159.438438 
+L 4.32 240.078438 
+z
+" style="fill: none"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 56.4 240.078438 
+L 168 175.046179 
+L 168 240.078438 
+z
+" clip-path="url(#pe5b5ab7816)" style="fill: var(--acc); opacity: 0.25"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_6">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="56.4" y="240.078438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="56.4" y="253.917031" transform="rotate(-0 56.4 253.917031)">fᵥ−fₕ</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="168" y="240.078438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="168" y="253.917031" transform="rotate(-0 168 253.917031)">fᵥ−fₐ</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="205.2" y="240.078438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="205.2" y="253.917031" transform="rotate(-0 205.2 253.917031)">fᵥ</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="242.4" y="240.078438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="242.4" y="253.917031" transform="rotate(-0 242.4 253.917031)">fᵥ+fₐ</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#md0a51ed51a" x="354" y="240.078438" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="354" y="253.917031" transform="rotate(-0 354 253.917031)">fᵥ+fₕ</text>
+     </g>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="205.2" y="268.0575" transform="rotate(-0 205.2 268.0575)">f</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4"/>
+   <g id="line2d_14">
+    <path d="M 56.4 240.078438 
+L 168 175.046179 
+L 168 240.078438 
+" clip-path="url(#pe5b5ab7816)" style="fill: none; stroke: var(--acc); stroke-width: 1.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_15">
+    <path d="M 205.2 240.078438 
+" clip-path="url(#pe5b5ab7816)" style="fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: square"/>
+    <defs>
+     <path id="m2fdb12c8b3" d="M -4 4 
+L 4 -4 
+M -4 -4 
+L 4 4 
+" style="stroke: var(--muted); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#pe5b5ab7816)">
+     <use xlink:href="#m2fdb12c8b3" x="205.2" y="240.078438" style="fill: var(--muted); stroke: var(--muted); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="line2d_16">
+    <path d="M 242.4 240.078438 
+L 242.4 175.046179 
+L 354 240.078438 
+" clip-path="url(#pe5b5ab7816)" style="fill: none; stroke-dasharray: 1.2,1.98; stroke-dashoffset: 0; stroke: var(--muted); stroke-width: 1.2"/>
+   </g>
+   <g id="line2d_17">
+    <path d="M 4.32 240.078438 
+L 406.08 240.078438 
+" clip-path="url(#pe5b5ab7816)" style="fill: none; stroke: var(--fg); stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 4.32 240.078438 
+L 406.08 240.078438 
+" style="fill: none; stroke: var(--fg); stroke-width: 0.9; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--muted)" x="205.2" y="228.372631" transform="rotate(-0 205.2 228.372631)">elnyomott vivő</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--muted)" transform="translate(280.653477 190.516758)">levágott</text>
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--muted)" transform="translate(269.144609 201.059083)">felső oldalsáv</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--acc)" transform="translate(86.860391 190.516758)">alsó</text>
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--acc)" transform="translate(77.86168 201.059083)">oldalsáv</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: var(--muted)" x="4.32" y="153.438438" transform="rotate(-0 4.32 153.438438)">AM/SSB-SC/LSB jel spektruma, pozitív frekvenciák (a negatív oldalon tükörkép)</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pfa0515399a">
+   <rect x="4.32" y="18.318438" width="401.76" height="80.64"/>
+  </clipPath>
+  <clipPath id="pe5b5ab7816">
+   <rect x="4.32" y="159.438438" width="401.76" height="80.64"/>
+  </clipPath>
+ </defs>
+</svg>

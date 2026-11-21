@@ -1,0 +1,281 @@
+% Generálva: html/build_tex.js (ai01.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{0}
+\chapter{\texorpdfstring{Jelek, teljesítmény, csúcstényező}{Jelek, teljesítmény, csúcstényező}}\label{f1}
+Rövid, de a vizsgán gyakori kérdések: mekkora egy összetett jel csúcsértéke, teljesítménye és csúcstényezője. A kulcs: azonos frekvenciájú összetevők egyetlen szinusszá adódnak össze, különböző frekvenciájúak nem.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Jelölések: teljesítmény és csúcstényező}{A1. Jelölések: teljesítmény és csúcstényező}}\label{a1-teljesitmeny}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés}\\\midrule
+undefined & csúcsérték: a jel legnagyobb abszolút értéke\\
+undefined & átlagteljesítmény 1 $\Omega$-on: a jel négyzetének időátlaga, undefined\\
+undefined & effektív érték, undefined\\
+undefined & csúcstényező, undefined\\
+\bottomrule\end{tabularx}}\par
+
+Egy $A$ amplitúdójú szinusz teljesítménye $A^2/2$, mert $\sin^2$ átlaga egy perióduson $1/2$. Ezért szinuszra $C=A/(A/\sqrt2)=\sqrt2$. Négyszögjelre $C=1$, háromszögjelre $\sqrt3$.
+
+Különböző frekvenciájú szinuszok szorzatának átlaga 0, ezért a teljesítményük \textbf{összeadódik}: $P=\sum A_i^2/2$. Ugyanez igaz egy azonos frekvenciájú $\sin$ és $\cos$ párra is.
+
+\subsection{\texorpdfstring{A2. Azonos frekvenciájú összetevők összeadása}{A2. Azonos frekvenciájú összetevők összeadása}}\label{a1-fazor}
+Az addíciós tétellel $A\sin(\omega t+\varphi)=A\cos\varphi\sin\omega t+A\sin\varphi\cos\omega t$. Összevetve az $a\sin\omega t+b\cos\omega t$ alakkal: $A\cos\varphi=a$, $A\sin\varphi=b$, ezért
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi),\qquad\mathrm{tg}\,\varphi=\frac ba$}\end{center}
+
+Gondolj két egymásra merőleges nyílra: az eredő hossza Pitagorasz-tétellel jön ki. A csúcsérték ezért nem $a+b$, hanem $\sqrt{a^2+b^2}$.
+
+Ha a frekvenciák aránya irracionális (pl. $\sqrt2$), a két szinusz előbb-utóbb tetszőlegesen közel kerül egyszerre a csúcsához, ezért a csúcsérték az amplitúdók \textbf{összege}.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{1.1. feladat: $3\sin+4\cos$: csúcsérték, teljesítmény, csúcstényező}{1.1. feladat: 3sin+4cos: csúcsérték, teljesítmény, csúcstényező}}\label{ai1_01}
+\setcounter{lepes}{0}
+\begin{feladat}{1.1. feladat}
+Határozza meg az $x(t)=3\sin(2\pi Ft)+4\cos(2\pi Ft)$ jel csúcstényezőjét, maximális értékét és teljesítményét!
+
+{\footnotesize\sffamily Forrás: ALL-IN 90. oldal $\cdot$ aiD\_1\_1 (és 5-ösöm 2. oldal). Címkék: beugró, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $C$: csúcstényező
+\item $\hat x$: legnagyobb érték
+\item $P$: átlagteljesítmény (1 $\Omega$-on)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$F$ & a jel frekvenciája & \\
+$C$ & csúcstényező: csúcsérték osztva az effektív értékkel & \emph{keresett}\\
+$\hat x$ & csúcsérték, a jel legnagyobb abszolút értéke & \emph{keresett}\\
+$P$ & átlagteljesítmény 1 $\Omega$-on & \emph{keresett}\\
+$a$ & a szinuszos tag együtthatója (3) & \\
+$\omega$ & körfrekvencia, a frekvencia 2$\pi$-szerese & \\
+$b$ & a koszinuszos tag együtthatója (4) & \\
+$\varphi$ & az összevont szinusz kezdőfázisa & \\
+$A$ & az összevont szinusz amplitúdója, 5 & \\
+$x_\text{eff}$ & a jel effektív értéke & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item $x(t)$: két azonos, $F$ frekvenciájú tag, a szinuszos amplitúdója 3, a koszinuszosé 4
+\item $F$: a két tag közös frekvenciája. Az értéke nem kell, az eredmény nem függ tőle
+\end{itemize}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért nem $3+4=7$ a csúcs?}\par Mert a szinusz és a koszinusz negyed periódussal el van tolva, soha nem érik el egyszerre a csúcsukat. Az eredő egyetlen szinusz (A2).
+\end{elmelet}
+
+\lepes{Egyetlen szinusszá alakítás}
+Az $a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi)$ összevonással, ahol $a=3$, $b=4$ és $\omega=2\pi F$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A=\sqrt{a^2+b^2}=\sqrt{3^2+4^2}=\sqrt{25}=5$}\end{center}
+\jegyzet{tétel}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \mathrm{tg}\,\varphi=\tfrac43\ \Rightarrow\ \varphi=53{,}1^{\circ}$}\end{center}
+\jegyzet{számérték}{$x(t)=5\sin(\omega t+53{,}1^{\circ})$}
+
+\lepes{A maximális érték}
+A szinusz legnagyobb értéke 1, ezért a jelé az amplitúdó.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat x=5$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{A teljesítmény}
+A $\sin$ és a $\cos$ szorzatának átlaga 0, ezért a két tag teljesítménye összeadódik (A1). Ugyanez jön ki az összevont szinuszból is.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P=\frac{3^2}{2}+\frac{4^2}{2}=4{,}5+8=12{,}5\ \text{W}$}\end{center}
+\jegyzet{definíció}{1 $\Omega$-on}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{5^2}{2}=12{,}5$}\end{center}
+\jegyzet{ellenőrzés}{egyezik}
+
+\lepes{A csúcstényező}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle x_\text{eff}=\sqrt{12{,}5}=3{,}54\qquad C=\frac{\hat x}{x_\text{eff}}=\frac{5}{3{,}54}=\sqrt2$}\end{center}
+\jegyzet{definíció}{mint minden szinuszé}
+\begin{tipp}[A gyűjtemény megoldása]
+A csúcstényezőt ($\sqrt2$) és a teljesítményt jól adja, a maximumot viszont ott keresi, ahol $\sin=\cos$, és $7/\sqrt2\approx4{,}95$-öt kap.
+\end{tipp}
+\begin{figyelem}[Javítás]
+A maximum nem a $\sin=\cos$ (45\textdegree{}-os) pontban van, hanem $\varphi=53{,}1^{\circ}$-nál. Helyesen $\hat x=5$.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C=\sqrt2\qquad\hat x=5\qquad P=12{,}5\ \text{W (1 }\Omega\text{-on)}$}\end{center}
+\end{eredmeny}
+\begin{figyelem}[Tipikus hibák]
+\begin{itemize}
+\item A két amplitúdó összeadása ($7$), vagy egy önkényesen választott időpontban vett érték.
+\end{itemize}
+\end{figyelem}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{1.2. feladat: Két koszinusz, $f_1/f_2=\sqrt2$}{1.2. feladat: Két koszinusz, f1/f2=√2}}\label{ai1_02}
+\setcounter{lepes}{0}
+\begin{feladat}{1.2. feladat}
+Mekkora az $x(t)=2\cos(2\pi f_1t)+2\cos(2\pi f_2t)$ jel csúcstényezője, legnagyobb értéke és teljesítménye, ha $f_1/f_2=\sqrt2$?
+
+{\footnotesize\sffamily Forrás: ALL-IN 90. oldal $\cdot$ aiD\_1\_2. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $C$ (csúcstényező: csúcsérték osztva az effektív értékkel), $\hat x$ (csúcsérték, a jel legnagyobb abszolút értéke), $P$ (átlagteljesítmény 1 $\Omega$-on)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$f_1$ & az első koszinusz frekvenciája & \\
+$f_2$ & a második koszinusz frekvenciája & \\
+$C$ & csúcstényező: csúcsérték osztva az effektív értékkel & \emph{keresett}\\
+$\hat x$ & csúcsérték, a jel legnagyobb abszolút értéke & \emph{keresett}\\
+$P$ & átlagteljesítmény 1 $\Omega$-on & \emph{keresett}\\
+$x$ & a vizsgált jel, x(t) & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item két koszinusz, mindkettő 2 amplitúdójú
+\end{itemize}
+\end{jeloles}
+\begin{elmelet}[Miért így? Egyszerűen]
+\textbf{Miért $4$ a csúcs?}\par Az irracionális frekvenciaarány miatt a két fázis „mindenféle” párosítást bejár, köztük tetszőlegesen közel kerülnek a $(0,0)$ fázispárhoz, ahol mindkét koszinusz 1 (A2).
+\end{elmelet}
+
+\lepes{A legnagyobb érték}
+Egyik tag sem lehet 2-nél nagyobb, és a két csúcs tetszőlegesen közel kerül egymáshoz.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat x=2+2=4$}\end{center}
+\jegyzet{közelítés}{tetszőlegesen megközelíthető}
+
+\lepes{A teljesítmény}
+Különböző frekvenciák, a teljesítmények összeadódnak (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P=\frac{2^2}{2}+\frac{2^2}{2}=2+2=4$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{A csúcstényező}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C=\frac{\hat x}{\sqrt P}=\frac{4}{\sqrt4}=2$}\end{center}
+\jegyzet{definíció}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat x=4\qquad P=4\ (\text{W, }1\,\Omega)\qquad C=2$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény is 2, 4, 4 értéket ad. Ha a frekvenciák egyformák lennének, $x=4\cos$, $C=\sqrt2$ jönne ki: a különbség az összemérhetetlenségből adódik.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{1.3. feladat: $4\sin-3\cos$: négy állítás}{1.3. feladat: 4sin-3cos: négy állítás}}\label{ai1_03}
+\setcounter{lepes}{0}
+\begin{feladat}{1.3. feladat}
+Az $s(t)=4\sin(2\pi f_0t)-3\cos(2\pi f_0t)$ jel: A) csúcsértéke 4. B) csúcstényezője $1/\sqrt2$. C) $t=42/f_0$-ban az értéke $-4$. D) átlagteljesítménye 3,5. Melyik igaz?
+
+{\footnotesize\sffamily Forrás: ALL-IN 91. oldal $\cdot$ aiD\_1\_3 (feleletválasztós 4.6.). Címkék: beugró, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item melyik állítás igaz
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$s$ & a vizsgált jel, s(t) & \\
+$f_0$ & a két tag közös frekvenciája & \\
+$a$ & a szinuszos tag együtthatója (4) & \\
+$\omega$ & körfrekvencia, a frekvencia 2$\pi$-szerese & \\
+$b$ & a koszinuszos tag együtthatója ($-$3) & \\
+$\varphi$ & az összevont szinusz kezdőfázisa & \\
+$\hat s$ & a jel csúcsértéke & \\
+$C$ & csúcstényező: csúcsérték osztva az effektív értékkel & \\
+$P$ & átlagteljesítmény 1 $\Omega$-on & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item azonos frekvenciájú szinusz (4) és koszinusz ($-3$)
+\end{itemize}
+\end{jeloles}
+
+\lepes{A) csúcsérték}
+Az $a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi)$ összevonással, ahol $a=4$, $b=-3$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \hat s=\sqrt{4^2+(-3)^2}=5$}\end{center}
+\jegyzet{tétel}{A hamis}
+
+\lepes{B) csúcstényező}
+Az összeg egyetlen szinusz, ezért $C=\sqrt2$. Az $1/\sqrt2$ már csak azért is rossz, mert $C\ge1$ mindig.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C=\frac{5}{5/\sqrt2}=\sqrt2$}\end{center}
+\jegyzet{számérték}{B hamis}
+
+\lepes{C) A jel értéke a $t=42/f_0$ időpontban}
+Behelyettesítve az argumentum $2\pi\cdot42$, ez egész számú periódus.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle s=4\sin(84\pi)-3\cos(84\pi)=4\cdot0-3\cdot1=-3$}\end{center}
+\jegyzet{behelyettesítés}{C hamis}
+
+\lepes{D) átlagteljesítmény}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P=\frac{4^2}{2}+\frac{3^2}{2}=8+4{,}5=12{,}5$}\end{center}
+\jegyzet{definíció}{D hamis}
+\begin{figyelem}[Javítás]
+A gyűjtemény lapján A, B, C be van karikázva. Ha ez a „hamis” jelölése, a megoldás helyes, igaznak jelölve mindhárom rossz.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{egyik állítás sem igaz}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{1.4. feladat: $2\sin+2\cos$ csúcstényezője}{1.4. feladat: 2sin+2cos csúcstényezője}}\label{ai1_04}
+\setcounter{lepes}{0}
+\begin{feladat}{1.4. feladat}
+Határozza meg az $x(t)=2\sin(2\pi ft)+2\cos(2\pi ft)$ jel csúcstényezőjét!
+
+{\footnotesize\sffamily Forrás: ALL-IN 91. oldal $\cdot$ aiD\_1\_5. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $C$ (csúcstényező: csúcsérték osztva az effektív értékkel)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$C$ & csúcstényező: csúcsérték osztva az effektív értékkel & \emph{keresett}\\
+$x$ & a vizsgált jel, x(t) & \\
+$f$ & a két tag közös frekvenciája & \\
+$a$ & a szinuszos tag együtthatója (2) & \\
+$\omega$ & körfrekvencia, a frekvencia 2$\pi$-szerese & \\
+$b$ & a koszinuszos tag együtthatója (2) & \\
+$\varphi$ & az összevont szinusz kezdőfázisa & \\
+$A$ & az összevont szinusz amplitúdója, $2\sqrt2$ & \\
+$\hat x$ & csúcsérték, a jel legnagyobb abszolút értéke & \\
+$P$ & átlagteljesítmény 1 $\Omega$-on & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item azonos frekvenciájú szinusz és koszinusz, mindkettő 2 amplitúdójú
+\end{itemize}
+\end{jeloles}
+
+\lepes{Egyetlen szinusz}
+Az $a\sin\omega t+b\cos\omega t=\sqrt{a^2+b^2}\,\sin(\omega t+\varphi)$ összevonással, ahol $a=b=2$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A=\sqrt{2^2+2^2}=2\sqrt2\qquad\mathrm{tg}\,\varphi=1\ \Rightarrow\ \varphi=45^{\circ}$}\end{center}
+\jegyzet{tétel}{$x=2\sqrt2\sin(2\pi ft+45^{\circ})$}
+
+\lepes{Csúcstényező}
+Szinuszos jel, $\hat x=2\sqrt2$, $P=(2\sqrt2)^2/2=4$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C=\frac{2\sqrt2}{\sqrt4}=\sqrt2$}\end{center}
+\jegyzet{definíció}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle C=\sqrt2\qquad(\hat x=2\sqrt2,\ P=4)$}\end{center}
+\end{eredmeny}

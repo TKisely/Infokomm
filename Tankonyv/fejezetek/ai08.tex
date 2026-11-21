@@ -1,0 +1,518 @@
+% Generálva: html/build_tex.js (ai08.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{7}
+\chapter{\texorpdfstring{Hang, hallás, kép, látás}{Hang, hallás, kép, látás}}\label{f8}
+Decibel és phon különbsége, a hallásküszöb frekvenciafüggése, valamint a színes kép világossági jele. Rövid, de pontos fogalmakat kérnek.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Jelölések, hangnyomásszint és hangosság}{A1. Jelölések, hangnyomásszint és hangosság}}\label{a8-hang}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés}\\\midrule
+undefined, undefined & hangnyomás (effektív érték), és a 1 kHz-es hallásküszöb: undefined \textmu{}Pa\\
+undefined, undefined & hangintenzitás (W/m\textsuperscript{2}), a küszöbhöz tartozó undefined W/m\textsuperscript{2}\\
+undefined & hangnyomásszint (dB)\\
+undefined & hangosságszint (phon)\\
+\bottomrule\end{tabularx}}\par
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L=20\lg\frac{p}{p_0}=10\lg\frac{I}{I_0}$}\end{center}
+
+A két alak azért egyezik, mert az intenzitás a nyomás négyzetével arányos. A \textbf{phon} a hangosságérzet egysége: egy hang annyi phon, ahány dB-es az azonos hangosnak érzett 1 kHz-es szinusz. 1 kHz-en a phon és a dB megegyezik, az éppen hallható hang minden frekvencián 0 phon. Mély frekvencián a fül érzéketlenebb (100 Hz-en a küszöb kb. 25 dB, 400 Hz-en kb. 10 dB).
+
+Pontforrás szabad térben: az intenzitás $1/r^2$-tel csökken, tízszeres távolságon 20 dB-lel kisebb a szint.
+
+\subsection{\texorpdfstring{A2. Világossági jel és színkülönbségi jelek}{A2. Világossági jel és színkülönbségi jelek}}\label{a8-kep}
+$R$, $G$, $B$: a vörös, zöld, kék színjel (0 és 1 között). A világossági jel a szem érzékenységével súlyozott összeg:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle Y=0{,}3R+0{,}59G+0{,}11B\qquad C_b\propto B-Y,\ C_r\propto R-Y$}\end{center}
+
+Azonos intenzitásnál a fekete-fehér képen a zöld a legvilágosabb, a kék a legsötétebb. A láthatósági függvény $V(\lambda)$ a szem relatív érzékenysége, maximuma 1 (normált), nappali látásnál 555 nm-nél.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.1. feladat: Hangsugárzó: 1 W-tal 93 dB (Moodle 2020)}{8.1. feladat: Hangsugárzó: 1 W-tal 93 dB (Moodle 2020)}}\label{ai8_01}
+\setcounter{lepes}{0}
+\begin{feladat}{8.1. feladat}
+1 W, 1 kHz, 1 m-re 93 dB. a) Mekkora teljesítmény kell a fájdalomküszöbhöz? b) A mikrofon helyén hány phon az a) esetben? c) Miért mérhető 100 Hz-en azonos teljesítménnyel 109 dB?
+
+{\footnotesize\sffamily Forrás: ALL-IN 5. oldal $\cdot$ ai2020\_05\_26\_Q5. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $P$ (elektromos teljesítmény)
+\item b) $L_N$ (hangosságszint (phon))
+\item c) indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$P$ & elektromos teljesítmény & \emph{keresett}\\
+$L_N$ & hangosságszint (phon) & \emph{keresett}\\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 1 W elektromos teljesítménnyel 1 kHz-en 1 m-re 93 dB
+\item fájdalomküszöb: 120 dB (egyes források 123 dB)
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Teljesítmény}
+A szint a teljesítménnyel $10\lg$ szerint nő (azonos frekvencián és helyen). 93 dB-ről 120 dB-re 27 dB kell.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 10\lg\frac{P}{1\ \text{W}}=120-93=27\ \Rightarrow\ P=10^{2{,}7}\ \text{W}\approx500\ \text{W}$}\end{center}
+\jegyzet{behelyettesítés}{123 dB-es küszöbbel $10^3=1000$ W}
+
+\lepes{b) Phon}
+1 kHz-en a phon egyenlő a dB-lel (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L_N=120\ \text{phon}$}\end{center}
+\jegyzet{definíció}{az a) esetben}
+
+\lepes{c) 100 Hz}
+A dB fizikai mennyiség, nem érzet. Azonos elektromos teljesítményre a hangszóró (és a mikrofon) más-más hangnyomást ad különböző frekvenciákon: az átvitelük frekvenciafüggő. Itt 100 Hz-en 16 dB-lel hatékonyabban sugároz. Hangosságban viszont a 109 dB 100 Hz-en kevesebb phon, mert ott érzéketlenebb a fül.
+\begin{figyelem}[Javítás]
+A b) válasza 93 phon volt: ez a kiinduló helyzetre igaz, az a) esetre a fájdalomküszöb phonértéke a helyes. A javító teljes pontot adott, a 123 dB-es feltevést is elfogadta, mert le volt írva.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }\approx500\ \text{W}\qquad\text{b) }120\ \text{phon}\qquad\text{c) a hangszóró és a mikrofon frekvenciafüggése}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.2. feladat: Függvénygenerátor és hangszóró: hány phon?}{8.2. feladat: Függvénygenerátor és hangszóró: hány phon?}}\label{ai8_02}
+\setcounter{lepes}{0}
+\begin{feladat}{8.2. feladat}
+Az éppen hallható 10 kHz-es hang 10 (illetve 15) dB, ugyanazzal az amplitúdóval 1 kHz-en 30 dB, 100 Hz-en 0 dB. a) A 10 kHz-es hang hangossága? b) Az 1 kHz-esé? c) A 100 Hz-esé? d) Miért mások a szintek azonos amplitúdónál?
+
+{\footnotesize\sffamily Forrás: ALL-IN 82\ldots{}83., 135. oldal $\cdot$ ai2014\_01\_14\_4, aiD\_8\_9 (és 5-ösöm 21. oldal). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a), b), c) hangosságszint phonban
+\item d) indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 10 kHz: 10 (15) dB, éppen hallható
+\item 1 kHz: 30 dB
+\item 100 Hz: 0 dB
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) 10 kHz}
+Az éppen hallható hang definíció szerint 0 phon.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0\ \text{phon}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{b) 1 kHz}
+1 kHz-en phon = dB.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 30\ \text{dB}\ \Rightarrow\ 30\ \text{phon}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{c) 100 Hz}
+100 Hz-en a hallásküszöb kb. 25 dB.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0\ \text{dB}<25\ \text{dB}$}\end{center}
+\jegyzet{ellenőrzés}{nem hallható}
+
+\lepes{d) Miért mások?}
+Ugyanaz a generátorfeszültség a hangszóró frekvenciafüggő átvitele miatt más-más hangnyomást ad.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }0\ \text{phon}\qquad\text{b) }30\ \text{phon}\qquad\text{c) nem hallható}\qquad\text{d) a hangszóró frekvenciafüggése}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item c) A gyűjtemény szerint „0 dB a légköri nyomás”: helyesen a 20 \textmu{}Pa-os referencia-hangnyomás.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.3. feladat: A hallásküszöb 1000-szeres és 100-szoros hangnyomása}{8.3. feladat: A hallásküszöb 1000-szeres és 100-szoros hangnyomása}}\label{ai8_03}
+\setcounter{lepes}{0}
+\begin{feladat}{8.3. feladat}
+Hány phon az 1 kHz-es szinusz, amelynek hangnyomása a hallásküszöbhöz tartozó a) 1000-szerese, b) 100-szorosa? Hány dB, mennyire érezzük hangosnak?
+
+{\footnotesize\sffamily Forrás: ALL-IN 136. oldal $\cdot$ aiD\_8\_14, aiD\_8\_15 (hivatalos). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $L$ dB-ben (hangnyomásszint) és phonban
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{p}$ & hangnyomás & $1000$\\
+$p_0$ & a hallásküszöb hangnyomása & \\
+$L$ & hangnyomásszint & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{Számolás}
+Nyomásarányból $20\lg$ (A1), 1 kHz-en phon = dB.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a)\ 20\lg{\ca{1000}}=60\ \text{dB}=60\ \text{phon}\qquad b)\ 20\lg100=40\ \text{dB}=40\ \text{phon}$}\end{center}
+\jegyzet{definíció}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }60\ \text{phon (iroda, vendéglő)}\qquad\text{b) }40\ \text{phon (csendes lakás, éjjel)}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.4. feladat: 120 dB-hez mekkora hangnyomás kell?}{8.4. feladat: 120 dB-hez mekkora hangnyomás kell?}}\label{ai8_04}
+\setcounter{lepes}{0}
+\begin{feladat}{8.4. feladat}
+A hallásküszöb 20 \textmu{}Pa, 120 dB-es tartományban hallunk. Mekkora nyomású „zavar” kell a tartomány tetejéhez?
+
+{\footnotesize\sffamily Forrás: ALL-IN 134. oldal $\cdot$ aiD\_8\_5. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $p_1$ (a keresett hangnyomás)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{p_0}$ & a hallásküszöb hangnyomása & $20$\,\textmu{}Pa\\
+$\cb{L}$ & hangnyomásszint & $120$\,dB\\
+$p_1$ & a keresett hangnyomás & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{Számolás}
+${\cb{L}}={\ca{20}}\lg(p_1/{\ca{p_0}})$-ból kifejezzük $p_1$-et. ${\ca{20}}\lg$, mert nyomásról (amplitúdó jellegű mennyiségről) van szó.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{p_1}{p_0}=10^{120/{\ca{20}}}=10^6\ \Rightarrow\ p_1=10^6\cdot{\ca{20}}\ \mu\text{Pa}={\ca{20}}\ \text{Pa}$}\end{center}
+\jegyzet{átalakítás}{a légköri nyomás ($10^5$ Pa) ötezred része}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle p_1=20\ \text{Pa}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.5. feladat: 100 Hz, 1 nW/m\textsuperscript{2}}{8.5. feladat: 100 Hz, 1 nW/m²}}\label{ai8_05}
+\setcounter{lepes}{0}
+\begin{feladat}{8.5. feladat}
+Milyen hangos a 100 Hz-es, 1 nW/m\textsuperscript{2} intenzitású szinusz? A) 1000 phon B) 30 phon. Hány dB a szintje? C) 20 dB D) 30 dB
+
+{\footnotesize\sffamily Forrás: ALL-IN 134. oldal $\cdot$ aiD\_8\_8 (4.2.). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $L$ (hangnyomásszint) és $L_N$ (hangosságszint (phon))
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{I}$ & hangintenzitás & $10$\,W/m\\
+$\cb{f}$ & frekvencia & $100$\,Hz\\
+$L$ & hangnyomásszint & \emph{keresett}\\
+$L_N$ & hangosságszint (phon) & \emph{keresett}\\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{A szint}
+Intenzitásból $10\lg$ (A1).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L=10\lg\frac{10^{-9}}{10^{-12}}=10\lg1000=30\ \text{dB}$}\end{center}
+\jegyzet{definíció}{D igaz, C hamis}
+
+\lepes{A hangosság}
+100 Hz-en a küszöb kb. 25 dB, így a 30 dB alig van felette: néhány phon. 30 phon csak 1 kHz-en lenne. Az 1000 phon értelmetlen.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L_N\ll30\ \text{phon}$}\end{center}
+\jegyzet{ellenőrzés}{A és B hamis}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{csak D igaz: }30\ \text{dB, néhány phon}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.6. feladat: 400 Hz vagy 1 kHz: melyik hangosabb?}{8.6. feladat: 400 Hz vagy 1 kHz: melyik hangosabb?}}\label{ai8_06}
+\setcounter{lepes}{0}
+\begin{feladat}{8.6. feladat}
+a) 400 Hz 20 phon vagy 1 kHz 20 phon? b) 400 Hz 20 dB vagy 1 kHz 20 dB?
+
+{\footnotesize\sffamily Forrás: ALL-IN 133. oldal $\cdot$ aiD\_8\_2. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item melyik hangosabb
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$L_N$ & hangosságszint (phon) & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item két hang, a) phonban, b) dB-ben megadva
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Phonban}
+A phon definíció szerint az érzett hangosság: azonos phon azonos hangosság.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 20\ \text{phon}=20\ \text{phon}$}\end{center}
+\jegyzet{definíció}{egyformák}
+
+\lepes{b) dB-ben}
+1 kHz-en a 20 dB 20 phon. 400 Hz-en a küszöb kb. 10 dB, ezért a 20 dB ott kevesebb, kb. 12 és 15 phon közötti hangosság.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L_N(400\ \text{Hz},\ 20\ \text{dB})<20\ \text{phon}$}\end{center}
+\jegyzet{közelítés}{az 1 kHz-es hangosabb}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) egyformák}\qquad\text{b) az 1 kHz-es}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény b) indoklása („a 400 Hz-es 20 dB a küszöb alatt van”) nem igaz, a következtetés jó. A küszöbértéket az izofon-ábráról kell venni \texttt{[ELLENŐRIZENDŐ]}.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.7. feladat: Elromlott mikrofon: 2 m-en 30 dB, a terem végén?}{8.7. feladat: Elromlott mikrofon: 2 m-en 30 dB, a terem végén?}}\label{ai8_07}
+\setcounter{lepes}{0}
+\begin{feladat}{8.7. feladat}
+2 m-re az előadótól 30 dB. a) Körülbelül mennyi a terem végén (20 m)? b) Mi befolyásolja, hogy hátul hallják-e?
+
+{\footnotesize\sffamily Forrás: ALL-IN 88. oldal $\cdot$ ai2016\_01\_12c\_6. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $L_2$ (a szint a második helyen)
+\item b) indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{L_1}$ & a szint az első helyen & $30$\,dB\\
+$\cb{r_1}$ & a forrástól mért távolság & $2$\,m\\
+$\cc{r_2}$ & a forrástól mért távolság & $20$\,m\\
+$L_2$ & a szint a második helyen & \emph{keresett}\\
+$I$ & hangintenzitás & \\
+$r$ & a forrástól mért távolság & \\
+$L$ & hangnyomásszint & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Távolságtörvény}
+Pontforrás szabad térben: $I\propto1/r^2$, ezért a szint ${\cc{20}}\lg$ szerint csökken a távolsággal.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \Delta L=10\lg\frac{r_2^2}{r_1^2}={\cc{20}}\lg\frac{20}{2}={\cc{20}}\ \text{dB}$}\end{center}
+\jegyzet{tétel}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle L_2={\ca{30}}-{\cc{20}}=10\ \text{dB}$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{b) Mi befolyásolja?}
+Zárt teremben a visszaverődések (zengő tér) miatt a csökkenés kisebb. Döntő a háttérzaj (elfedés), a terem akusztikája, és hogy 10 dB-en a beszéd mély és magas összetevői a hallásküszöb alatt vannak.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }\approx10\ \text{dB}\qquad\text{b) háttérzaj, teremakusztika, a hallásküszöb frekvenciafüggése}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.8. feladat: Színsávok fekete-fehér TV-n és RGB-hármasok világossága}{8.8. feladat: Színsávok fekete-fehér TV-n és RGB-hármasok világossága}}\label{ai8_08}
+\setcounter{lepes}{0}
+\begin{feladat}{8.8. feladat}
+a) Három egyforma intenzitású sáv: kék, zöld, vörös. Melyik a legsötétebb a fekete-fehér képen, és hogyan olvaszthatnánk össze két csíkot a zöld fényességével? b) Melyik kelti a legnagyobb világosságérzetet: $(0{,}1;\ 0;\ 0{,}1)$, $(0{,}3;\ 0{,}1;\ 0{,}3)$, $(0;\ 0{,}1;\ 0{,}1)$, $(0{,}4;\ 0{,}1;\ 0{,}2)$?
+
+{\footnotesize\sffamily Forrás: ALL-IN 134. oldal $\cdot$ aiD\_8\_4, aiD\_8\_7 (3.5.). Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) a legsötétebb sáv, és a zöld csökkentése
+\item b) a legnagyobb $Y$ (világossági jel)
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{Y}$ & világossági jel & $0{,}3$\\
+$R$ & vörös színjel & \\
+$G$ & zöld színjel & \\
+$B$ & kék színjel & \\
+$Y_G$ & a tiszta zöld sáv világossága & \\
+$Y_R$ & a tiszta vörös sáv világossága & \\
+$Y_B$ & a tiszta kék sáv világossága & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item b) négy $(R;\ G;\ B)$ hármas
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Fekete-fehér kép}
+A fekete-fehér TV csak ${\ca{Y}}$-t mutatja. Egyforma intenzitásnál a súlyok döntenek.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle Y_G=0{,}59>Y_R={\ca{0{,}3}}>Y_B=0{,}11$}\end{center}
+\jegyzet{definíció}{a kék a legsötétebb}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0{,}59\,G'={\ca{0{,}3}}\ \Rightarrow\ G'=0{,}51$}\end{center}
+\jegyzet{átalakítás}{a zöldet kb. a felére csökkentve a vörössel egyforma szürke lesz}
+
+\lepes{b) Világosság}
+Mindegyikre kiszámoljuk ${\ca{Y}}$-t.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0{,}03+0+0{,}011=0{,}041\qquad0{,}09+0{,}059+0{,}033=0{,}182$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0+0{,}059+0{,}011=0{,}070\qquad0{,}12+0{,}059+0{,}022=0{,}201$}\end{center}
+\jegyzet{behelyettesítés}{a negyedik a legnagyobb}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) a kék a legsötétebb, a zöld}\times0{,}51\qquad\text{b) }(0{,}4;\ 0{,}1;\ 0{,}2),\ Y=0{,}201$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.9. feladat: Primitív színes rendszer 2 és 1 bites RGB-vel (hivatalos)}{8.9. feladat: Primitív színes rendszer 2 és 1 bites RGB-vel (hivatalos)}}\label{ai8_09}
+\setcounter{lepes}{0}
+\begin{feladat}{8.9. feladat}
+R, G, B egyenként 2 bites (0, 33, 67, 100\%). a) Hány színérzet? b) Hány fényességérték? c) Hány szürke? d) 1 bites színjelekkel sorolja fel a színeket fényesség szerint!
+
+{\footnotesize\sffamily Forrás: ALL-IN 140\ldots{}141. oldal $\cdot$ aiD\_9\_7. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) színek száma
+\item b) különböző $Y$ (világossági jel) értékek
+\item c) szürkék
+\item d) 1 bites színek $Y$ (világossági jel) szerint
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$Y$ & világossági jel & \emph{keresett}\\
+$R$ & vörös színjel & \\
+$a$ & a vörös színjel szintjének sorszáma (0\ldots{}3) & \\
+$G$ & zöld színjel & \\
+$b$ & a zöld színjel szintjének sorszáma (0\ldots{}3) & \\
+$B$ & kék színjel & \\
+$c$ & a kék színjel szintjének sorszáma (0\ldots{}3) & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item színjelenként 2 bit: 4 szint (0, 1/3, 2/3, 1)
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Színek}
+Három független jel, mindegyik 4 értékű.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 4^3=2^{3\cdot2}=64$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{b) Fényességértékek}
+A négy szint $R=a/3$, $G=b/3$, $B=c/3$, ahol $a,b,c\in\{0,1,2,3\}$. Ezért $Y=0{,}3R+0{,}59G+0{,}11B=(30a+59b+11c)/3$ százalék. A 64 kombináció mind különböző $Y$-t ad (a 30, 59 és 11 súlyok miatt nincs két egyforma összeg).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 64\ \text{különböző }Y$}\end{center}
+\jegyzet{ellenőrzés}{}
+
+\lepes{c) Szürkék}
+Szürke: $R=G=B$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0,\ 33,\ 67,\ 100\%:\ 4\ \text{szürke}$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{d) 1 bites színek}
+Minden jel 0 vagy 1, $Y$ az összeadott súlyok.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 0,\ 11,\ 30,\ 41,\ 59,\ 70,\ 89,\ 100\%$}\end{center}
+\jegyzet{számérték}{fekete, kék, vörös, bíbor, zöld, kékeszöld, sárga, fehér}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }64\quad\text{b) }64\quad\text{c) }4\quad\text{d) fekete}<\text{kék}<\text{vörös}<\text{bíbor}<\text{zöld}<\text{kékeszöld}<\text{sárga}<\text{fehér}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{8.10. feladat: Fogalmak: metamer szín, fúziós frekvencia, váltott sor, láthatóság}{8.10. feladat: Fogalmak: metamer szín, fúziós frekvencia, váltott sor, láthatóság}}\label{ai8_10}
+\setcounter{lepes}{0}
+\begin{feladat}{8.10. feladat}
+a) Mi a metamer szín? b) Mi a látás fúziós frekvenciája? c) Mi a váltott soros képalkotás előnye? d) Rajzolja fel a láthatósági függvényt, mekkora a maximuma?
+
+{\footnotesize\sffamily Forrás: ALL-IN 133., 135\ldots{}136. oldal $\cdot$ aiD\_8\_1, aiD\_8\_6, aiD\_8\_13, aiD\_8\_16 (és 5-ösöm 22\ldots{}23. oldal). Címkék: beugró, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a), b), c), d) definíciók és indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$V$ & láthatósági függvény, $V(\lambda)$ & \\
+$\lambda$ & a fény hullámhossza & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item fogalmi kérdések
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Metamer szín}
+Két különböző spektrális összetételű fény, amely azonos színérzetet kelt. A szem csak három csatornán (három csapfajtával) mér, ezért sokféle spektrum ad ugyanolyan hármast. Ezen alapul a háromszínes (RGB) képmegjelenítés.
+
+\lepes{b) Fúziós frekvencia}
+Az a villogási frekvencia (kb. 45 és 60 Hz között, fényerőfüggő), amely fölött a villogó fényt folyamatosnak látjuk. A mozgás folyamatosságához ennél kevesebb, 10\ldots{}20 kép/s is elég.
+
+\lepes{c) Váltott soros képalkotás}
+Egy kép két félképből áll (páratlan, majd páros sorok). 50 félkép/s villog, ez a fúziós frekvencia felett van, a sávszélesség viszont csak 25 teljes kép/s-é.
+
+\lepes{d) Láthatósági függvény}
+$V(\lambda)$ harang alakú, kb. 400 és 700 nm között számottevő, maximuma 1 (normált), nappali látásnál 555 nm-en (sárgászöld).
+
+\begin{rajz}
+\textbf{A láthatósági függvény (közelítő görbe)}\par
+\begin{center}\begin{tikzpicture}[x=0.01985cm,y=-0.01985cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (680,200);
+\path[draw=black!45,line width=0.35pt] (82.5,166) -- (82.5,16);
+\path[draw=black!45,line width=0.35pt] (158.8,166) -- (158.8,16);
+\path[draw=black!45,line width=0.35pt] (235,166) -- (235,16);
+\path[draw=black!45,line width=0.35pt] (318.9,166) -- (318.9,16);
+\path[draw=black!45,line width=0.35pt] (387.5,166) -- (387.5,16);
+\path[draw=black!45,line width=0.35pt] (463.8,166) -- (463.8,16);
+\path[draw=black!45,line width=0.35pt] (540,166) -- (540,16);
+\path[draw=black!45,line width=0.35pt] (616.3,166) -- (616.3,16);
+\path[draw=black!45,line width=0.35pt] (52,35.6) -- (662,35.6);
+\path[draw=black!45,line width=0.35pt] (52,100.8) -- (662,100.8);
+\path[draw=black,line width=0.7pt] (52,166) -- (670,166);
+\path[fill=black,draw=none] (676,166) -- (668,162) -- (668,170) -- cycle;
+\path[draw=black,line width=0.7pt] (52,166) -- (52,10);
+\path[fill=black,draw=none] (52,4) -- (48,12) -- (56,12) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (82.5,182) {400};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (158.8,182) {450};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (235,182) {500};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (318.9,182) {555};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (387.5,182) {600};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (463.8,182) {650};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (540,182) {700};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (616.3,182) {750};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (46,39.6) {1};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (46,104.8) {0,5};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (662,196) {$\lambda$ [nm]};
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (60,14) {V($\lambda$)};
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (318.9,166) -- (318.9,16);
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (321.9,26) {max: 555 nm};
+\path[draw=black,line width=0.8pt] (52,166) -- (52.8,166) -- (53.5,166) -- (54.3,166) -- (55.1,166) -- (55.8,166) -- (56.6,166) -- (57.3,166) -- (58.1,166) -- (58.9,166) -- (59.6,166) -- (60.4,166) -- (61.2,166) -- (61.9,166) -- (62.7,166) -- (63.4,166) -- (64.2,166) -- (65,166) -- (65.7,166) -- (66.5,166) -- (67.3,166) -- (68,166) -- (68.8,166) -- (69.5,166) -- (70.3,166) -- (71.1,166) -- (71.8,165.9) -- (72.6,165.9) -- (73.4,165.9) -- (74.1,165.9) -- (74.9,165.9) -- (75.6,165.9) -- (76.4,165.9) -- (77.2,165.9) -- (77.9,165.9) -- (78.7,165.9) -- (79.5,165.9) -- (80.2,165.9) -- (81,165.9) -- (81.7,165.9) -- (82.5,165.9) -- (83.3,165.9) -- (84,165.9) -- (84.8,165.9) -- (85.6,165.9) -- (86.3,165.9) -- (87.1,165.9) -- (87.8,165.9) -- (88.6,165.9) -- (89.4,165.9) -- (90.1,165.8) -- (90.9,165.8) -- (91.7,165.8) -- (92.4,165.8) -- (93.2,165.8) -- (93.9,165.8) -- (94.7,165.8) -- (95.5,165.8) -- (96.2,165.8) -- (97,165.8) -- (97.8,165.8) -- (98.5,165.8) -- (99.3,165.7) -- (100,165.7) -- (100.8,165.7) -- (101.6,165.7) -- (102.3,165.7) -- (103.1,165.7) -- (103.9,165.7) -- (104.6,165.7) -- (105.4,165.6) -- (106.1,165.6) -- (106.9,165.6) -- (107.7,165.6) -- (108.4,165.6) -- (109.2,165.6) -- (110,165.5) -- (110.7,165.5) -- (111.5,165.5) -- (112.2,165.5) -- (113,165.5) -- (113.8,165.4) -- (114.5,165.4) -- (115.3,165.4) -- (116.1,165.4) -- (116.8,165.3) -- (117.6,165.3) -- (118.3,165.3) -- (119.1,165.3) -- (119.9,165.2) -- (120.6,165.2) -- (121.4,165.2) -- (122.2,165.1) -- (122.9,165.1) -- (123.7,165.1) -- (124.4,165) -- (125.2,165) -- (126,165) -- (126.7,164.9) -- (127.5,164.9) -- (128.3,164.8) -- (129,164.8) -- (129.8,164.8) -- (130.5,164.7) -- (131.3,164.7) -- (132.1,164.6) -- (132.8,164.6) -- (133.6,164.5) -- (134.4,164.5) -- (135.1,164.4) -- (135.9,164.3) -- (136.6,164.3) -- (137.4,164.2) -- (138.2,164.2) -- (138.9,164.1) -- (139.7,164) -- (140.5,164) -- (141.2,163.9) -- (142,163.8) -- (142.7,163.7) -- (143.5,163.7) -- (144.3,163.6) -- (145,163.5) -- (145.8,163.4) -- (146.6,163.3) -- (147.3,163.2) -- (148.1,163.1) -- (148.8,163) -- (149.6,162.9) -- (150.4,162.8) -- (151.1,162.7) -- (151.9,162.6) -- (152.7,162.5) -- (153.4,162.4) -- (154.2,162.3) -- (154.9,162.2) -- (155.7,162.1) -- (156.5,161.9) -- (157.2,161.8) -- (158,161.7) -- (158.8,161.5) -- (159.5,161.4) -- (160.3,161.2) -- (161,161.1) -- (161.8,160.9) -- (162.6,160.8) -- (163.3,160.6) -- (164.1,160.5) -- (164.9,160.3) -- (165.6,160.1) -- (166.4,159.9) -- (167.1,159.8) -- (167.9,159.6) -- (168.7,159.4) -- (169.4,159.2) -- (170.2,159) -- (171,158.8) -- (171.7,158.6) -- (172.5,158.3) -- (173.2,158.1) -- (174,157.9) -- (174.8,157.7) -- (175.5,157.4) -- (176.3,157.2) -- (177.1,156.9) -- (177.8,156.7) -- (178.6,156.4) -- (179.3,156.2) -- (180.1,155.9) -- (180.9,155.6) -- (181.6,155.3) -- (182.4,155) -- (183.2,154.7) -- (183.9,154.4) -- (184.7,154.1) -- (185.4,153.8) -- (186.2,153.5) -- (187,153.2) -- (187.7,152.8) -- (188.5,152.5) -- (189.3,152.1) -- (190,151.8) -- (190.8,151.4) -- (191.5,151.1) -- (192.3,150.7) -- (193.1,150.3) -- (193.8,149.9) -- (194.6,149.5) -- (195.4,149.1) -- (196.1,148.7) -- (196.9,148.3) -- (197.6,147.8) -- (198.4,147.4) -- (199.2,146.9) -- (199.9,146.5) -- (200.7,146) -- (201.5,145.6) -- (202.2,145.1) -- (203,144.6) -- (203.7,144.1) -- (204.5,143.6) -- (205.3,143.1) -- (206,142.6) -- (206.8,142.1) -- (207.6,141.5) -- (208.3,141) -- (209.1,140.4) -- (209.8,139.9) -- (210.6,139.3) -- (211.4,138.7) -- (212.1,138.1) -- (212.9,137.6) -- (213.7,137) -- (214.4,136.3) -- (215.2,135.7) -- (215.9,135.1) -- (216.7,134.5) -- (217.5,133.8) -- (218.2,133.2) -- (219,132.5) -- (219.8,131.8) -- (220.5,131.2) -- (221.3,130.5) -- (222,129.8) -- (222.8,129.1) -- (223.6,128.4) -- (224.3,127.7) -- (225.1,126.9) -- (225.9,126.2) -- (226.6,125.5) -- (227.4,124.7) -- (228.1,123.9) -- (228.9,123.2) -- (229.7,122.4) -- (230.4,121.6) -- (231.2,120.8) -- (232,120) -- (232.7,119.2) -- (233.5,118.4) -- (234.2,117.6) -- (235,116.8) -- (235.8,116) -- (236.5,115.1) -- (237.3,114.3) -- (238.1,113.4) -- (238.8,112.6) -- (239.6,111.7) -- (240.3,110.8) -- (241.1,109.9) -- (241.9,109.1) -- (242.6,108.2) -- (243.4,107.3) -- (244.2,106.4) -- (244.9,105.5) -- (245.7,104.6) -- (246.4,103.7) -- (247.2,102.7) -- (248,101.8) -- (248.7,100.9) -- (249.5,100) -- (250.3,99) -- (251,98.1) -- (251.8,97.1) -- (252.5,96.2) -- (253.3,95.2) -- (254.1,94.3) -- (254.8,93.3) -- (255.6,92.4) -- (256.4,91.4) -- (257.1,90.5) -- (257.9,89.5) -- (258.6,88.5) -- (259.4,87.6) -- (260.2,86.6) -- (260.9,85.7) -- (261.7,84.7) -- (262.5,83.7) -- (263.2,82.8) -- (264,81.8) -- (264.7,80.9) -- (265.5,79.9) -- (266.3,78.9) -- (267,78) -- (267.8,77) -- (268.5,76.1) -- (269.3,75.1) -- (270.1,74.2) -- (270.8,73.2) -- (271.6,72.3) -- (272.4,71.4) -- (273.1,70.4) -- (273.9,69.5) -- (274.7,68.6) -- (275.4,67.7) -- (276.2,66.8) -- (276.9,65.9) -- (277.7,65) -- (278.5,64.1) -- (279.2,63.2) -- (280,62.3) -- (280.8,61.4) -- (281.5,60.6) -- (282.3,59.7) -- (283,58.9) -- (283.8,58.1) -- (284.6,57.2) -- (285.3,56.4) -- (286.1,55.6) -- (286.9,54.8) -- (287.6,54) -- (288.4,53.2) -- (289.1,52.5) -- (289.9,51.7) -- (290.7,51) -- (291.4,50.2) -- (292.2,49.5) -- (293,48.8) -- (293.7,48.1) -- (294.5,47.4) -- (295.2,46.8) -- (296,46.1) -- (296.8,45.5) -- (297.5,44.8) -- (298.3,44.2) -- (299.1,43.6) -- (299.8,43) -- (300.6,42.5) -- (301.3,41.9) -- (302.1,41.4) -- (302.9,40.8) -- (303.6,40.3) -- (304.4,39.8) -- (305.2,39.3) -- (305.9,38.9) -- (306.7,38.4) -- (307.4,38) -- (308.2,37.6) -- (309,37.2) -- (309.7,36.8) -- (310.5,36.5) -- (311.3,36.1) -- (312,35.8) -- (312.8,35.5) -- (313.5,35.2) -- (314.3,34.9) -- (315.1,34.7) -- (315.8,34.4) -- (316.6,34.2) -- (317.4,34) -- (318.1,33.9) -- (318.9,33.7) -- (319.6,33.6) -- (320.4,33.4) -- (321.2,33.3) -- (321.9,33.2) -- (322.7,33.2) -- (323.5,33.1) -- (324.2,33.1) -- (325,33.1) -- (325.7,33.1) -- (326.5,33.1) -- (327.3,33.2) -- (328,33.2) -- (328.8,33.3) -- (329.6,33.4) -- (330.3,33.6) -- (331.1,33.7) -- (331.8,33.9) -- (332.6,34) -- (333.4,34.2) -- (334.1,34.4) -- (334.9,34.7) -- (335.7,34.9) -- (336.4,35.2) -- (337.2,35.5) -- (337.9,35.8) -- (338.7,36.1) -- (339.5,36.5) -- (340.2,36.8) -- (341,37.2) -- (341.8,37.6) -- (342.5,38) -- (343.3,38.4) -- (344,38.9) -- (344.8,39.3) -- (345.6,39.8) -- (346.3,40.3) -- (347.1,40.8) -- (347.8,41.4) -- (348.6,41.9) -- (349.4,42.5) -- (350.1,43) -- (350.9,43.6) -- (351.7,44.2) -- (352.4,44.8) -- (353.2,45.5) -- (354,46.1) -- (354.7,46.8) -- (355.5,47.4) -- (356.2,48.1) -- (357,48.8) -- (357.8,49.5) -- (358.5,50.2) -- (359.3,51) -- (360.1,51.7) -- (360.8,52.5) -- (361.6,53.2) -- (362.3,54) -- (363.1,54.8) -- (363.9,55.6) -- (364.6,56.4) -- (365.4,57.2) -- (366.2,58.1) -- (366.9,58.9) -- (367.7,59.7) -- (368.4,60.6) -- (369.2,61.4) -- (370,62.3) -- (370.7,63.2) -- (371.5,64.1) -- (372.3,65) -- (373,65.9) -- (373.8,66.8) -- (374.5,67.7) -- (375.3,68.6) -- (376.1,69.5) -- (376.8,70.4) -- (377.6,71.4) -- (378.4,72.3) -- (379.1,73.2) -- (379.9,74.2) -- (380.6,75.1) -- (381.4,76.1) -- (382.2,77) -- (382.9,78) -- (383.7,78.9) -- (384.5,79.9) -- (385.2,80.9) -- (386,81.8) -- (386.7,82.8) -- (387.5,83.7) -- (388.3,84.7) -- (389,85.7) -- (389.8,86.6) -- (390.6,87.6) -- (391.3,88.5) -- (392.1,89.5) -- (392.8,90.5) -- (393.6,91.4) -- (394.4,92.4) -- (395.1,93.3) -- (395.9,94.3) -- (396.7,95.2) -- (397.4,96.2) -- (398.2,97.1) -- (398.9,98.1) -- (399.7,99) -- (400.5,100) -- (401.2,100.9) -- (402,101.8) -- (402.8,102.7) -- (403.5,103.7) -- (404.3,104.6) -- (405,105.5) -- (405.8,106.4) -- (406.6,107.3) -- (407.3,108.2) -- (408.1,109.1) -- (408.8,109.9) -- (409.6,110.8) -- (410.4,111.7) -- (411.1,112.6) -- (411.9,113.4) -- (412.7,114.3) -- (413.4,115.1) -- (414.2,116) -- (415,116.8) -- (415.7,117.6) -- (416.5,118.4) -- (417.2,119.2) -- (418,120) -- (418.8,120.8) -- (419.5,121.6) -- (420.3,122.4) -- (421.1,123.2) -- (421.8,123.9) -- (422.6,124.7) -- (423.3,125.5) -- (424.1,126.2) -- (424.9,126.9) -- (425.6,127.7) -- (426.4,128.4) -- (427.2,129.1) -- (427.9,129.8) -- (428.7,130.5) -- (429.4,131.2) -- (430.2,131.8) -- (431,132.5) -- (431.7,133.2) -- (432.5,133.8) -- (433.3,134.5) -- (434,135.1) -- (434.8,135.7) -- (435.5,136.3) -- (436.3,137) -- (437.1,137.6) -- (437.8,138.1) -- (438.6,138.7) -- (439.4,139.3) -- (440.1,139.9) -- (440.9,140.4) -- (441.6,141) -- (442.4,141.5) -- (443.2,142.1) -- (443.9,142.6) -- (444.7,143.1) -- (445.5,143.6) -- (446.2,144.1) -- (447,144.6) -- (447.7,145.1) -- (448.5,145.6) -- (449.3,146) -- (450,146.5) -- (450.8,146.9) -- (451.6,147.4) -- (452.3,147.8) -- (453.1,148.3) -- (453.8,148.7) -- (454.6,149.1) -- (455.4,149.5) -- (456.1,149.9) -- (456.9,150.3) -- (457.7,150.7) -- (458.4,151.1) -- (459.2,151.4) -- (459.9,151.8) -- (460.7,152.1) -- (461.5,152.5) -- (462.2,152.8) -- (463,153.2) -- (463.8,153.5) -- (464.5,153.8) -- (465.3,154.1) -- (466,154.4) -- (466.8,154.7) -- (467.6,155) -- (468.3,155.3) -- (469.1,155.6) -- (469.9,155.9) -- (470.6,156.2) -- (471.4,156.4) -- (472.1,156.7) -- (472.9,156.9) -- (473.7,157.2) -- (474.4,157.4) -- (475.2,157.7) -- (476,157.9) -- (476.7,158.1) -- (477.5,158.3) -- (478.2,158.6) -- (479,158.8) -- (479.8,159) -- (480.5,159.2) -- (481.3,159.4) -- (482.1,159.6) -- (482.8,159.8) -- (483.6,159.9) -- (484.3,160.1) -- (485.1,160.3) -- (485.9,160.5) -- (486.6,160.6) -- (487.4,160.8) -- (488.2,160.9) -- (488.9,161.1) -- (489.7,161.2) -- (490.4,161.4) -- (491.2,161.5) -- (492,161.7) -- (492.7,161.8) -- (493.5,161.9) -- (494.3,162.1) -- (495,162.2) -- (495.8,162.3) -- (496.5,162.4) -- (497.3,162.5) -- (498.1,162.6) -- (498.8,162.7) -- (499.6,162.8) -- (500.4,162.9) -- (501.1,163) -- (501.9,163.1) -- (502.6,163.2) -- (503.4,163.3) -- (504.2,163.4) -- (504.9,163.5) -- (505.7,163.6) -- (506.5,163.7) -- (507.2,163.7) -- (508,163.8) -- (508.7,163.9) -- (509.5,164) -- (510.3,164) -- (511,164.1) -- (511.8,164.2) -- (512.6,164.2) -- (513.3,164.3) -- (514.1,164.3) -- (514.8,164.4) -- (515.6,164.5) -- (516.4,164.5) -- (517.1,164.6) -- (517.9,164.6) -- (518.7,164.7) -- (519.4,164.7) -- (520.2,164.8) -- (520.9,164.8) -- (521.7,164.8) -- (522.5,164.9) -- (523.2,164.9) -- (524,165) -- (524.8,165) -- (525.5,165) -- (526.3,165.1) -- (527,165.1) -- (527.8,165.1) -- (528.6,165.2) -- (529.3,165.2) -- (530.1,165.2) -- (530.9,165.3) -- (531.6,165.3) -- (532.4,165.3) -- (533.1,165.3) -- (533.9,165.4) -- (534.7,165.4) -- (535.4,165.4) -- (536.2,165.4) -- (537,165.5) -- (537.7,165.5) -- (538.5,165.5) -- (539.2,165.5) -- (540,165.5) -- (540.8,165.6) -- (541.5,165.6) -- (542.3,165.6) -- (543.1,165.6) -- (543.8,165.6) -- (544.6,165.6) -- (545.3,165.7) -- (546.1,165.7) -- (546.9,165.7) -- (547.6,165.7) -- (548.4,165.7) -- (549.2,165.7) -- (549.9,165.7) -- (550.7,165.7) -- (551.4,165.8) -- (552.2,165.8) -- (553,165.8) -- (553.7,165.8) -- (554.5,165.8) -- (555.3,165.8) -- (556,165.8) -- (556.8,165.8) -- (557.5,165.8) -- (558.3,165.8) -- (559.1,165.8) -- (559.8,165.8) -- (560.6,165.9) -- (561.3,165.9) -- (562.1,165.9) -- (562.9,165.9) -- (563.6,165.9) -- (564.4,165.9) -- (565.2,165.9) -- (565.9,165.9) -- (566.7,165.9) -- (567.4,165.9) -- (568.2,165.9) -- (569,165.9) -- (569.7,165.9) -- (570.5,165.9) -- (571.3,165.9) -- (572,165.9) -- (572.8,165.9) -- (573.6,165.9) -- (574.3,165.9) -- (575.1,165.9) -- (575.8,165.9) -- (576.6,165.9) -- (577.4,165.9) -- (578.1,165.9) -- (578.9,166) -- (579.7,166) -- (580.4,166) -- (581.2,166) -- (581.9,166) -- (582.7,166) -- (583.5,166) -- (584.2,166) -- (585,166) -- (585.8,166) -- (586.5,166) -- (587.3,166) -- (588,166) -- (588.8,166) -- (589.6,166) -- (590.3,166) -- (591.1,166) -- (591.9,166) -- (592.6,166) -- (593.4,166) -- (594.1,166) -- (594.9,166) -- (595.7,166) -- (596.4,166) -- (597.2,166) -- (598,166) -- (598.7,166) -- (599.5,166) -- (600.2,166) -- (601,166) -- (601.8,166) -- (602.5,166) -- (603.3,166) -- (604.1,166) -- (604.8,166) -- (605.6,166) -- (606.3,166) -- (607.1,166) -- (607.9,166) -- (608.6,166) -- (609.4,166) -- (610.2,166) -- (610.9,166) -- (611.7,166) -- (612.4,166) -- (613.2,166) -- (614,166) -- (614.7,166) -- (615.5,166) -- (616.3,166) -- (617,166) -- (617.8,166) -- (618.5,166) -- (619.3,166) -- (620.1,166) -- (620.8,166) -- (621.6,166) -- (622.4,166) -- (623.1,166) -- (623.9,166) -- (624.6,166) -- (625.4,166) -- (626.2,166) -- (626.9,166) -- (627.7,166) -- (628.4,166) -- (629.2,166) -- (630,166) -- (630.7,166) -- (631.5,166) -- (632.3,166) -- (633,166) -- (633.8,166) -- (634.6,166) -- (635.3,166) -- (636.1,166) -- (636.8,166) -- (637.6,166) -- (638.4,166) -- (639.1,166) -- (639.9,166) -- (640.7,166) -- (641.4,166) -- (642.2,166) -- (642.9,166) -- (643.7,166) -- (644.5,166) -- (645.2,166) -- (646,166) -- (646.8,166) -- (647.5,166) -- (648.3,166) -- (649,166) -- (649.8,166) -- (650.6,166) -- (651.3,166) -- (652.1,166) -- (652.9,166) -- (653.6,166) -- (654.4,166) -- (655.1,166) -- (655.9,166) -- (656.7,166) -- (657.4,166) -- (658.2,166) -- (659,166) -- (659.7,166) -- (660.5,166) -- (661.2,166) -- (662,166);
+\end{tikzpicture}\end{center}
+\begin{itemize}
+\item Harang alakú görbe kb. 400 és 700 nm között, a maximuma 1 (normált) 555 nm-nél (sárgászöld). A rajz a szokásos Gauss-közelítés, alakra jó, pontos értékekre a CIE-táblázat a mérvadó.
+\end{itemize}
+\end{rajz}
+\begin{figyelem}[Javítás]
+A gyűjtemény c) válasza („a fél képet fele annyi idő alatt lehet felrakni”) nem mondja ki a lényeget: a sávszélesség változatlan, a villogás a fúziós frekvencia fölé kerül.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) azonos színérzet más spektrummal}\quad\text{b) kb. 50 Hz}\quad\text{c) kétszeres villogás azonos sávval}\quad\text{d) max. 1, 555 nm}$}\end{center}
+\end{eredmeny}

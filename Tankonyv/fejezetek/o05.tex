@@ -1,0 +1,399 @@
+% Generálva: html/build_tex.js (o05.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{4}
+\chapter{\texorpdfstring{Rádiós összeköttetések}{Rádiós összeköttetések}}\label{f5}
+Teljesítménymérleg dB-ben, kétutas terjedés zónahatára és kioltása, antennanyereség és hatásos felület, GPS-összeköttetés.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Jelölések}{A1. Jelölések}}\label{b5-jel}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés} & \textbf{Egység}\\\midrule
+undefined & az adóantennába juttatott, illetve a vevőantenna által leadott teljesítmény & W vagy dBW\\
+undefined & az adó- és a vevőantenna nyeresége (az izotróp antennához képest) & dB vagy szorzó\\
+undefined & szakaszcsillapítás: undefined dB-ben, az antennanyereségekkel együtt & dB\\
+undefined & hullámhossz, undefined, undefined m/s & m\\
+undefined & az adó és a vevő távolsága & m\\
+undefined & az adó- és a vevőantenna magassága a sík föld felett & m\\
+undefined & hatásos felület: a vett teljesítmény osztva a beeső teljesítménysűrűséggel & m\textsuperscript{2}\\
+\bottomrule\end{tabularx}}\par
+
+Teljesítménymérleg dB-ben: $P_R=P_T-a_\mathrm{sz}$. A dBW a wattban mért teljesítmény $10\lg$-e: $20$ dBW $=100$ W, $-65$ dBW $=10^{-6{,}5}$ W.
+
+\subsection{\texorpdfstring{A2. Képletek egy helyen}{A2. Képletek egy helyen}}\label{b5-radio}
+Szabadtéri (egyutas) terjedés és kétutas terjedés sík föld felett, távoli zónában:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=20\lg\frac{4\pi r}{\lambda}-G_T-G_R\qquad a_\mathrm{sz}^\text{kétutas}=20\lg\frac{r^2}{h_Th_R}-G_T-G_R$}\end{center}
+
+Antennanyereség és hatásos felület kapcsolata (parabolánál $A_h\approx$ a nyílás felülete):
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A_h=\frac{G\lambda^2}{4\pi}$}\end{center}
+
+Kétutas terjedésnél a direkt és a földről visszavert hullám összege: $|E_R|=2|E_0|\left|\sin\frac{2\pi h_Th_R}{r\lambda}\right|$. A \textbf{zónahatár} (legtávolabbi maximum): az argumentum $\pi/2$, ebből $r=4h_Th_R/\lambda$. Ezen túl (távoli zóna) a térerősség monoton csökken. A \textbf{legtávolabbi kioltás}: az argumentum $\pi$, $r=2h_Th_R/\lambda$.
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{5.1. feladat: 100 MHz, 85 dB csillapítás: vett teljesítmény}{5.1. feladat: 100 MHz, 85 dB csillapítás: vett teljesítmény}}\label{o5_01}
+\setcounter{lepes}{0}
+\begin{feladat}{5.1. feladat}
+Szabadtéri összeköttetés 100 MHz-en, 25 kHz-es mérőjel, 75 kHz-es löket. Az adóantennába 20 dBW jut, a teljes szakaszcsillapítás 85 dB. a) A vett teljesítmény? b) A sávszélesség analóg FM-nél?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 14. oldal $\cdot$ 5o\_14\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $P_R$: vett teljesítmény
+\item b) $B_v$: az FM-jel sávszélessége
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{P_T}$ & adóteljesítmény & $20$\,dB\\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \\
+$\cb{f_m}$ & a moduláló (mérő)jel frekvenciája & $25$\,kHz\\
+$\cc{f_D}$ & frekvencialöket & $75$\,kHz\\
+$P_R$ & vett teljesítmény & \emph{keresett}\\
+$B_v$ & a modulált jel sávszélessége & \emph{keresett}\\
+$\Phi_D$ & fázislöket (modulációs index) & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Vett teljesítmény}
+dB-ben a mérleg kivonás (A1).
+\behely{\bh{\ca{P_T}}{\ca{20\un{dB}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_R={\ca{P_T}}-a_\mathrm{sz}={\ca{20}}-85=-65\ \text{dBW}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_R=10^{-65/10}\ \text{W}=10^{-6{,}5}\ \text{W}=3{,}16\cdot10^{-7}\ \text{W}\approx0{,}32\ \mu\text{W}$}\end{center}
+\jegyzet{átalakítás}{}
+
+\lepes{b) Sávszélesség}
+Szinuszos mérőjellel modulált FM-jel sávja a Carson-szabállyal becsülhető.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B_v\approx2({\cc{f_D}}+{\cb{f_m}})=2({\cc{75}}+{\cb{25}})=200\ \text{kHz}$}\end{center}
+\jegyzet{tétel}{a fázislöket $\Phi_D=75/25=3$ rad}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }P_R=-65\ \text{dBW}\approx0{,}32\ \mu\text{W}\qquad\text{b) }B_v\approx200\ \text{kHz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A kézírás „(1/3)$\cdot$10\textsuperscript{6}”-t ír, a kitevő előjele hibás (helyesen $10^{-6}$ nagyságrend). A b) a gyűjteményben nincs kidolgozva.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{5.2. feladat: Rádióamatőr űrállomás 350 km-en}{5.2. feladat: Rádióamatőr űrállomás 350 km-en}}\label{o5_02}
+\setcounter{lepes}{0}
+\begin{feladat}{5.2. feladat}
+10 GHz, az űrállomás 350 km magasan 2 kW-tal sugároz, a földi parabola átmérője 1 m, a vevő érzékenysége 40 pW. a) Legalább mekkora az űrállomás antennájának hatásos felülete? b) Beszélgethetnek-e egyszerre?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 14. oldal $\cdot$ 5o\_14\_2. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $A_{h,T}$: az űrállomás antennájának hatásos felülete (legalább)
+\item b) beszélgethetnek-e egyszerre
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f}$ & vivőfrekvencia & $10$\,GHz\\
+$\lambda$ & hullámhossz & \\
+$\cb{r}$ & az adó és a vevő távolsága & $350$\,km\\
+$\cc{P_T}$ & adóteljesítmény & $2$\,kW\\
+$\cd{d}$ & átmérő & $1$\,m\\
+$P_{R,\min}$ & a vevő érzékenysége (a legkisebb vehető teljesítmény) & \\
+$A_{h,T}$ & az adóantenna hatásos felülete & \emph{keresett}\\
+$a_\text{max}$ & a megengedhető legnagyobb csillapítás & \\
+$G$ & antennanyereség & \\
+$A_h$ & hatásos felület & \\
+$A_{h,R}$ & a földi (vevő) parabola hatásos felülete & \\
+$G_R$ & a vevőantenna nyeresége & \\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \\
+$G_T$ & az adóantenna nyeresége & \\
+$c$ & a fénysebesség, $3\cdot10^8$ m/s & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{A megengedett csillapítás}
+A vett teljesítmény nem lehet kisebb az érzékenységnél, így a csillapítás legfeljebb ${\cc{P_T}}/P_{R,\min}$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\text{max}=10\lg\frac{2000}{4\cdot10^{-11}}=10\lg(5\cdot10^{13})=137\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{A földi parabola nyeresége}
+A hatásos felületet a nyílás felületével közelítjük, és a $G=4\pi A_h/\lambda^2$ összefüggést használjuk (A2).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A_{h,R}=\pi\cdot0{,}5^2=0{,}785\ \text{m}^2$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G_R=\frac{4\pi\cdot0{,}785}{0{,}03^2}=1{,}1\cdot10^4\ \Rightarrow\ 10\lg(1{,}1\cdot10^4)=40{,}4\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{A szabadtéri alapcsillapítás}
+Az antennanyereségek nélküli tag, ${\cb{r}}=3{,}5\cdot10^5$ m.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 20\lg\frac{4\pi\cdot3{,}5\cdot10^5}{0{,}03}=20\lg(1{,}47\cdot10^8)=163{,}3\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\lepes{a) Az adóantenna}
+$a_\mathrm{sz}=163{,}3-G_T-40{,}4\le137$, ebből $G_T$, majd a hatásos felület.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle G_T\ge163{,}3-40{,}4-137=-14{,}1\ \text{dB}\ \Rightarrow\ G_T\ge0{,}039$}\end{center}
+\jegyzet{átalakítás}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A_{h,T}=\frac{G_T\lambda^2}{4\pi}=\frac{0{,}039\cdot0{,}03^2}{4\pi}=2{,}8\cdot10^{-6}\ \text{m}^2$}\end{center}
+\jegyzet{behelyettesítés}{gyakorlatilag bármilyen antenna elég}
+
+\lepes{b) Beszélgetés}
+A jel terjedési ideje ${\cb{r}}/c=3{,}5\cdot10^5/3\cdot10^8=1{,}2$ ms, ez a beszélgetést nem zavarja. Egyszerre beszélni (duplex) csak két külön frekvencián lehet, egy frekvencián (szimplex) felváltva.
+\begin{tipp}[A gyűjtemény megoldása]
+A kézírás a 40 pW-ot $4\cdot10^{-12}$ W-nak veszi, így 147 dB-es megengedett csillapítást kap.
+\end{tipp}
+\begin{figyelem}[Javítás]
+$40\ \text{pW}=4\cdot10^{-11}$ W, a megengedett csillapítás 137 dB. A feladat adatai \texttt{[ELLENŐRIZENDŐ]}: velük a „legalább mekkora” kérdés triviális.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }G_T\ge-14\ \text{dB},\ A_{h,T}\ge2{,}8\cdot10^{-6}\ \text{m}^2\qquad\text{b) 1,2 ms késés, duplexhez két frekvencia kell}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{5.3. feladat: 900 MHz: zónahatár 1 km-en, csillapítás 15 km-en}{5.3. feladat: 900 MHz: zónahatár 1 km-en, csillapítás 15 km-en}}\label{o5_03}
+\setcounter{lepes}{0}
+\begin{feladat}{5.3. feladat}
+$G_T=13$ dB, $G_R=3$ dB, $h_R=1{,}66$ m (lg 830 $\approx$ 3, lg 225 $\approx$ 2,35). a) Mekkora $h_T$, ha az interferenciazóna határa 1 km-en van? b) A szakaszcsillapítás 15 km-en?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 14. oldal $\cdot$ 5o\_14\_3. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $h_T$: az adóantenna magassága
+\item b) $a_\mathrm{sz}$ (szakaszcsillapítás) 15 km-en
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{f}$ & vivőfrekvencia & $900$\,MHz\\
+$\lambda$ & hullámhossz & \\
+$\cb{G_T}$ & az adóantenna nyeresége & $13$\,dB\\
+$\cc{G_R}$ & a vevőantenna nyeresége & $3$\,dB\\
+$\cd{h_R}$ & a vevőantenna magassága & $1{,}66$\,m\\
+$\ce{r_0}$ & a zónahatár távolsága & $1$\,km\\
+$h_T$ & az adóantenna magassága & \emph{keresett}\\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \emph{keresett}\\
+$r$ & az adó és a vevő távolsága & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Az adóantenna magassága}
+A zónahatár (a legtávolabbi maximum) helye ${\ce{r_0}}=4h_Th_R/\lambda$ (A2). Ebből kifejezzük $h_T$-t.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle h_T=\frac{r_0\lambda}{4{\cd{h_R}}}=\frac{1000\cdot1/3}{4\cdot{\cd{1{,}66}}}=\frac{333{,}3}{6{,}64}=50\ \text{m}$}\end{center}
+\jegyzet{geometria}{}
+
+\lepes{b) Melyik képlet?}
+15 km jóval a zónahatáron (1 km) túl van, a távoli zónában a kétutas képlet érvényes.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=20\lg\frac{r^2}{h_Th_R}-{\cb{G_T}}-{\cc{G_R}}$}\end{center}
+\jegyzet{tétel}{}
+
+\lepes{b) Behelyettesítés}
+$r^2=(15\cdot10^3)^2=2{,}25\cdot10^8$, $h_Th_R=50\cdot{\cd{1{,}66}}=83{,}3$. A lg-et tényezőkre bontjuk, a megadott logaritmusokkal.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 20\lg(2{,}25\cdot10^8)=20(\lg225+6)=20\cdot8{,}35=167$}\end{center}
+\jegyzet{átalakítás}{$\lg225\approx2{,}35$}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 20\lg83{,}3=20(\lg833-1)\approx20\cdot1{,}92=38{,}4$}\end{center}
+\jegyzet{átalakítás}{$\lg833\approx2{,}92$, a feladat „lg 830 $\approx$ 3” tippje itt túl durva}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=167-38{,}4-{\cb{13}}-3=112{,}6\ \text{dB}$}\end{center}
+\jegyzet{számérték}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }h_T=50\ \text{m}\qquad\text{b) }a_\mathrm{sz}\approx112{,}6\ \text{dB}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A kézírás $20\lg83{,}3$ helyett 40-et ír (a „lg 830 $\approx$ 3” durva tippjével), így 111 dB-t kap. Pontosan $\lg830=2{,}92$.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{5.4. feladat: A zóna határán felezett és duplázott antennamagasság}{5.4. feladat: A zóna határán felezett és duplázott antennamagasság}}\label{o5_04}
+\setcounter{lepes}{0}
+\begin{feladat}{5.4. feladat}
+900 MHz, a vevőantenna (5 m) az interferenciazóna határán van. Hány dB-t változik a teljesítmény, ha a magasságot a) felére csökkentjük, b) kétszeresére növeljük?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 15. oldal $\cdot$ 5o\_15\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a), b) a vett teljesítmény változása dB-ben
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{h_R}$ & a vevőantenna magassága & $5$\,m\\
+$E_R$ & a vett térerősség & \\
+$E_0$ & a közvetlen hullám térerőssége & \\
+$x$ & a két hullám fáziskülönbségének fele & \\
+$h_T$ & az adóantenna magassága & \\
+$r$ & az adó és a vevő távolsága & \\
+$\lambda$ & hullámhossz & \\
+$x_0$ & az x értéke a zónahatáron & \\
+$P$ & a vett teljesítmény az új antennamagassággal & \\
+$P_0$ & a vett teljesítmény az eredeti antennamagassággal & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{A kiindulás}
+A kétutas térerősség $|E_R|=2|E_0||\sin x|$, ahol $x=2\pi h_Th_R/(r\lambda)$ (A2). A zónahatáron $x=\pi/2$, ott $|\sin x|=1$, a térerősség a legnagyobb. Az $x$ egyenesen arányos ${\ca{h_R}}$-rel.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle x_0=\frac\pi2\qquad|E_R|=2|E_0|$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{a) Felezett magasság}
+${\ca{h_R}}$ felére csökken, ezért $x$ is.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle x=\frac\pi4\ \Rightarrow\ |E_R|=2|E_0|\sin\frac\pi4=2|E_0|\cdot0{,}707$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{P}{P_0}=0{,}707^2=0{,}5\ \Rightarrow\ 10\lg0{,}5=-3\ \text{dB}$}\end{center}
+\jegyzet{átalakítás}{a teljesítmény a térerősség négyzetével arányos}
+
+\lepes{b) Duplázott magasság}
+${\ca{h_R}}$ kétszeres, ezért $x=\pi$.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle |E_R|=2|E_0|\sin\pi=0\ \Rightarrow\ 10\lg0=-\infty\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{kioltás: a két hullám ellenfázisban}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }-3\ \text{dB}\qquad\text{b) }-\infty\ \text{dB (kioltás)}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{5.5. feladat: Rövid botantenna 600 kHz-en}{5.5. feladat: Rövid botantenna 600 kHz-en}}\label{o5_05}
+\setcounter{lepes}{0}
+\begin{feladat}{5.5. feladat}
+A rövid függőleges botantenna nyeresége sík föld felett 4,76 dB (3). Mekkora a hatásos felülete 600 kHz-en ($4\pi\approx12{,}5$)? Mit jelent, hogy $G=3$?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 15. oldal $\cdot$ 5o\_15\_2. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item $A_h$: hatásos felület
+\item a $G=3$ (antennanyereség) jelentése
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{G}$ & antennanyereség & $3$\\
+$\cb{f}$ & vivőfrekvencia & $600$\,kHz\\
+$A_h$ & hatásos felület & \emph{keresett}\\
+$\lambda$ & hullámhossz & \\
+$c$ & a fénysebesség, $3\cdot10^8$ m/s & \\
+$S_{\max}$ & a teljesítménysűrűség a főirányban & \\
+$S_0$ & egy ugyanakkora teljesítményű izotróp antenna teljesítménysűrűsége & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{Hullámhossz}
+
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \lambda=\frac{c}{f}=\frac{3\cdot10^8}{6\cdot10^5}=500\ \text{m}$}\end{center}
+\jegyzet{definíció}{}
+
+\lepes{Hatásos felület}
+A nyereség és a hatásos felület kapcsolata (A2), a megadott $4\pi\approx12{,}5$-del.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A_h=\frac{G\lambda^2}{4\pi}=\frac{3\cdot500^2}{12{,}5}=\frac{750\,000}{12{,}5}=60\,000\ \text{m}^2$}\end{center}
+\jegyzet{behelyettesítés}{egy 245 m oldalú négyzet}
+
+\lepes{Mit jelent G = 3?}
+A nyereség a főirányban mért teljesítménysűrűség és egy ugyanakkora teljesítményű izotróp antenna teljesítménysűrűségének aránya: ${\ca{G}}=S_{\max}/S_0$. A főirányban háromszor akkora a sűrűség. Vételnél: háromszor annyi teljesítményt vesz, mint az izotróp antenna.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A_h=60\,000\ \text{m}^2\qquad G=3:\ \text{a főirányban háromszoros teljesítménysűrűség az izotróphoz képest}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A hatásos felület nem a fizikai méret: egy rövid bot is nagy felületről „gyűjt” teljesítményt, mert a hullámhossz nagy.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{5.6. feladat: GPS: csillapítás, tartalék, antennaátmérő}{5.6. feladat: GPS: csillapítás, tartalék, antennaátmérő}}\label{o5_06}
+\setcounter{lepes}{0}
+\begin{feladat}{5.6. feladat}
+20 000 km, 1500 MHz, 25 W, $G_T=13$ dB, $G_R=3$ dB, a vevő érzékenysége $-$160 dBW. a) Járulékos csillapítás-tartalék? b) A műhold parabolájának átmérője? c), d) Miért nem nagyobb nyereségű a műhold és a vevő antennája?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 15\ldots{}16. oldal $\cdot$ 5o\_15\_3, 5o\_16\_1 (gépelt megoldás). Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $a_\mathrm{sz}$ (szakaszcsillapítás) és a tartalék (mennyi járulékos csillapítás férhet még bele)
+\item b) $d$: a műholdantenna átmérője
+\item c), d) indoklás
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{r}$ & az adó és a vevő távolsága & $2\cdot10^7$\,m\\
+$\cb{f}$ & vivőfrekvencia & $1500$\,MHz\\
+$\lambda$ & hullámhossz & \\
+$\cc{P_T}$ & adóteljesítmény & $25$\,W\\
+$\cd{G_T}$ & az adóantenna nyeresége & $13$\,dB\\
+$\ce{G_R}$ & a vevőantenna nyeresége & $3$\,dB\\
+$P_{R,\min}$ & a vevő érzékenysége (a legkisebb vehető teljesítmény) & \\
+$a_\mathrm{sz}$ & szakaszcsillapítás & \emph{keresett}\\
+$d$ & átmérő & \emph{keresett}\\
+$P_R$ & vett teljesítmény & \\
+$A_h$ & hatásos felület & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Szakaszcsillapítás}
+Szabadtéri terjedés (A2).
+\behely{\bh{\ca{r}}{\ca{2\cdot10^7\un{m}}}}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 20\lg\frac{4\pi\cdot{\ca{2\cdot10^7}}}{0{,}2}=20\lg(1{,}26\cdot10^9)=182\ \text{dB}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle a_\mathrm{sz}=182-{\cd{13}}-3=166\ \text{dB}$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{a) Tartalék}
+A vett teljesítményt összevetjük az érzékenységgel.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle P_R=14-166=-152\ \text{dBW}$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle -152-(-160)=8\ \text{dB}$}\end{center}
+\jegyzet{számérték}{ennyi járulékos csillapítás (eső, lomb, épület) fér még bele}
+
+\lepes{b) Az antenna átmérője}
+A 13 dB-es nyereségből a hatásos felület, abból kör alakú nyílást feltételezve az átmérő.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\cd{G_T}}=10^{1{,}3}=20$}\end{center}
+\jegyzet{átalakítás}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle A_h=\frac{G_T\lambda^2}{4\pi}=\frac{20\cdot0{,}2^2}{4\pi}=0{,}0635\ \text{m}^2$}\end{center}
+\jegyzet{behelyettesítés}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d=2\sqrt{\frac{A_h}{\pi}}=2\sqrt{0{,}0202}=0{,}284\ \text{m}$}\end{center}
+\jegyzet{geometria}{$A_h=\pi(d/2)^2$}
+
+\lepes{c) Miért nem nagyobb a műhold nyeresége?}
+A nagyobb nyereségű antenna keskenyebb nyalábot ad: a műholdnak a Föld egész látható felét kell besugároznia. Nagyobb nyereséggel kisebb területet fedne le, több műhold kellene.
+
+\lepes{d) Miért nem nagyobb a vevőé?}
+A vevő nem tudja, merre van a műhold, és egyszerre több (legalább négy) műholdat kell vennie különböző irányokból. Ehhez közel körsugárzó antenna kell.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }a_\mathrm{sz}=166\ \text{dB},\ \text{tartalék }8\ \text{dB}\qquad\text{b) }d\approx28\ \text{cm}$}\end{center}
+\end{eredmeny}

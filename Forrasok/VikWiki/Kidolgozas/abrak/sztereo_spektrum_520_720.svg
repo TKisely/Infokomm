@@ -1,0 +1,204 @@
+<svg role="img" aria-label="Kétoldalas sztereó multiplex spektrum: 520 és 720 Hz az összegjelben, 19 kHz-es pilot, a különbségjel oldalvonalai 37,28–38,72 kHz-en" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 415.506766 185.20482" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 185.20482 
+L 415.506766 185.20482 
+L 415.506766 0 
+L 0 0 
+L 0 185.20482 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 4.32 148.464 
+L 406.08 148.464 
+L 406.08 4.32 
+L 4.32 4.32 
+L 4.32 148.464 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="mb41ba3eb1d" d="M 0 0 
+L 0 3.5 
+" style="stroke: var(--fg); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mb41ba3eb1d" x="35.568" y="148.464" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="35.568" y="163.441539" transform="rotate(-0 35.568 163.441539)">−38</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#mb41ba3eb1d" x="120.384" y="148.464" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="120.384" y="163.441539" transform="rotate(-0 120.384 163.441539)">−19</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#mb41ba3eb1d" x="205.2" y="148.464" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="205.2" y="163.441539" transform="rotate(-0 205.2 163.441539)">0</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#mb41ba3eb1d" x="290.016" y="148.464" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="290.016" y="163.441539" transform="rotate(-0 290.016 163.441539)">19</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#mb41ba3eb1d" x="374.832" y="148.464" style="fill: var(--fg); stroke: var(--fg); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="374.832" y="163.441539" transform="rotate(-0 374.832 163.441539)">38</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--fg)" x="205.2" y="178.362359" transform="rotate(-0 205.2 178.362359)">f [kHz]   (× = elnyomott 38 kHz-es segédvivő; a vonalak magassága relatív)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2"/>
+   <g id="line2d_6">
+    <path d="M 207.52128 148.464 
+L 207.52128 52.368 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--acc); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_7">
+    <path d="M 202.87872 148.464 
+L 202.87872 52.368 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--acc); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 208.41408 148.464 
+L 208.41408 52.368 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--acc); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_9">
+    <path d="M 201.98592 148.464 
+L 201.98592 52.368 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--acc); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_10">
+    <path d="M 290.016 148.464 
+L 290.016 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_11">
+    <path d="M 120.384 148.464 
+L 120.384 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_12">
+    <path d="M 371.61792 148.464 
+L 371.61792 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 38.78208 148.464 
+L 38.78208 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_14">
+    <path d="M 372.51072 148.464 
+L 372.51072 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_15">
+    <path d="M 37.88928 148.464 
+L 37.88928 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_16">
+    <path d="M 377.15328 148.464 
+L 377.15328 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_17">
+    <path d="M 33.24672 148.464 
+L 33.24672 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_18">
+    <path d="M 378.04608 148.464 
+L 378.04608 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_19">
+    <path d="M 32.35392 148.464 
+L 32.35392 100.416 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--jcol); stroke-width: 2.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 4.32 148.464 
+L 406.08 148.464 
+" clip-path="url(#p9a25865f41)" style="fill: none; stroke: var(--fg); stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_21">
+    <defs>
+     <path id="m7f9617f0da" d="M -3 3 
+L 3 -3 
+M -3 -3 
+L 3 3 
+" style="stroke: var(--muted)"/>
+    </defs>
+    <g clip-path="url(#p9a25865f41)">
+     <use xlink:href="#m7f9617f0da" x="374.832" y="148.464" style="fill: var(--muted); stroke: var(--muted)"/>
+     <use xlink:href="#m7f9617f0da" x="35.568" y="148.464" style="fill: var(--muted); stroke: var(--muted)"/>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 4.32 148.464 
+L 406.08 148.464 
+" style="fill: none; stroke: var(--fg); stroke-width: 0.9; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--acc)" x="205.2" y="40.83648" transform="rotate(-0 205.2 40.83648)">M: 520 és 720 Hz</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--muted)" transform="translate(280.689906 80.604076)">pilot</text>
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--muted)" transform="translate(275.369438 90.8064)">19 kHz</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--jcol)" transform="translate(351.381297 67.509593)">S (DSB-SC)</text>
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--jcol)" transform="translate(346.283953 77.711254)">37,28; 37,48;</text>
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; fill: var(--jcol)" transform="translate(338.477234 87.913578)">38,52; 38,72 kHz</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--jcol)" x="35.568" y="90.8064" transform="rotate(-0 35.568 90.8064)">S</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: var(--muted)" x="120.384" y="90.8064" transform="rotate(-0 120.384 90.8064)">pilot</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p9a25865f41">
+   <rect x="4.32" y="4.32" width="401.76" height="144.144"/>
+  </clipPath>
+ </defs>
+</svg>

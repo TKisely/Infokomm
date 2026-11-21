@@ -1,0 +1,479 @@
+% Generálva: html/build_tex.js (o02.js). Kézzel ne szerkeszd, a forrás a html/data mappa.
+\setcounter{chapter}{1}
+\chapter{\texorpdfstring{QAM és PSK}{QAM és PSK}}\label{f2}
+DVB-C bitsebesség, PSK és QAM hibatűrés, és a tribites QAM-feladat a megfigyelt pontokkal. Minden lépésnél ott van, melyik pont és melyik döntési határ számít, és miért.
+
+\section{Alapok, egyszerűen}
+\subsection{\texorpdfstring{A1. Jelölések ebben a fejezetben}{A1. Jelölések ebben a fejezetben}}\label{b2-jel}
+\par\noindent{\small\renewcommand{\arraystretch}{1.25}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{Jel} & \textbf{Jelentés} & \textbf{Egység}\\\midrule
+undefined & a szimbólumok (konstellációs pontok) száma & 1\\
+undefined & egy szimbólum által vitt bitek száma & bit\\
+undefined & jelzési idő, egy szimbólum hossza & s\\
+undefined & szimbólumsebesség & Bd\\
+undefined & bitsebesség, undefined & bit/s\\
+undefined & az emelt koszinuszos spektrum lekerekítési tényezője & 1 vagy \%\\
+undefined & a modulált (vivőfrekvenciás) jel sávszélessége & Hz\\
+undefined & fázishiba: ennyivel fordul el a vett konstelláció & fok\\
+\bottomrule\end{tabularx}}\par
+
+\subsection{\texorpdfstring{A2. Sávszélesség és hibatűrés}{A2. Sávszélesség és hibatűrés}}\label{b2-qam}
+\textbf{Sávszélesség.} Alapsávban az emelt koszinuszos elemi jel $(1+\alpha)/(2T)$-ig terjed. A vivőre ültetve mindkét oldalsáv megjelenik, ezért a vivőfrekvenciás sáv kétszerese: $B=(1+\alpha)/T$.
+
+\textbf{Erősítés- és csillapítástűrés.} Ha a csatorna minden pontot ugyanazzal a $k$ tényezővel szoroz, egy pont addig dönthető jól, amíg a saját döntési tartományában marad. Négyzetrácsnál ($\pm1,\pm3,\ldots$) a határok félúton vannak ($0,\pm2,\ldots$). Csillapításnál a legkülső szint esik elsőként a belső határra, erősítésnél a legkülső előtti szint lépi át a következő határt.
+
+\textbf{Fázistűrés.} Elforgatásnál a \textbf{sarokpont} lép ki elsőként, mert az van a legmesszebb: $L$ szintű sarokpontra $L\sqrt2\cos(45^{\circ}+\varphi)=L-1$ a határeset. $M$-PSK-nál a szomszédos pontok $360^{\circ}/M$-re vannak, a határ félúton, így a fázistűrés $180^{\circ}/M$, az amplitúdótűrés elméletben végtelen (csak a szög dönt).
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.1. feladat: DVB-C 256-QAM-mel}{2.1. feladat: DVB-C 256-QAM-mel}}\label{o2_01}
+\setcounter{lepes}{0}
+\begin{feladat}{2.1. feladat}
+DVB-C-ben 64-QAM helyett 256-QAM, 8 MHz-es raszter, 33,33\%-os emelt koszinusz. a) Szimbólum- és bitsebesség, hány 1,5 Mbit/s-os csatorna fér el? b) A 6 Mbit/s-os kódoló előnye, hátránya? c) Az 1024-QAM előnye, hátránya?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 6. oldal $\cdot$ 5o\_06\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) $R_s$ szimbólumsebesség, $v$ bitsebesség, a csatornák száma
+\item b), c) előnyök és hátrányok
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{B}$ & a rendelkezésre álló sávszélesség & $8$\,MHz\\
+$\alpha$ & lekerekítési tényező & \\
+$\cb{M}$ & a konstelláció pontjainak száma & $256$\\
+$R_s$ & szimbólumsebesség & \emph{keresett}\\
+$v$ & bitsebesség & \emph{keresett}\\
+$T$ & jelzési (bit-) idő & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 1,5 Mbit/s: egy tévécsatorna kódolt bitsebessége
+\end{itemize}
+\end{jeloles}
+
+\lepes{a) Szimbólumsebesség}
+A vivőfrekvenciás emelt koszinuszos jel sávja ${\ca{B}}=(1+\alpha)/T$ (A2). Ezt egyenlővé tesszük a 8 MHz-cel, és kifejezzük $1/T$-t.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle {\ca{B}}=\frac{1+\alpha}{T}\ \Rightarrow\ \frac1T=\frac{B}{1+\alpha}=\frac{8\ \text{MHz}}{4/3}=6\ \text{MBd}$}\end{center}
+\jegyzet{tétel}{$1+\alpha=1+1/3=4/3$}
+
+\lepes{a) Bitsebesség és csatornaszám}
+Egy 256-QAM szimbólum $\log_2256=8$ bitet visz.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle v=\frac1T\log_2{\cb{M}}=6\cdot8=48\ \text{Mbit/s}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{48\ \text{Mbit/s}}{1{,}5\ \text{Mbit/s}}=32\ \text{csatorna}$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{b) 6 Mbit/s-os kódoló}
+Négyszer annyi bit jut egy műsorra, ezért jobb a kép (akár HD). Cserébe csak $48/6=8$ csatorna fér el a 32 helyett.
+
+\lepes{c) 1024-QAM}
+Szimbólumonként $\log_21024=10$ bit a 8 helyett, így ugyanabban a sávban $6\cdot10=60$ Mbit/s (40 csatorna). A pontok azonos csúcsteljesítménynél sűrűbbek, ezért kisebb a zaj- és a fázistűrés (kb. 1,8\textdegree{}), több teljesítmény vagy jobb csatorna kell.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 6\ \text{MBd}\cdot10=60\ \text{Mbit/s}$}\end{center}
+\jegyzet{számérték}{}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) }6\ \text{MBd},\ 48\ \text{Mbit/s},\ 32\ \text{csatorna}\qquad\text{b) jobb kép, 8 csatorna}\qquad\text{c) 60 Mbit/s, de kisebb zajtűrés}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.2. feladat: 36-QAM négyzetrácson}{2.2. feladat: 36-QAM négyzetrácson}}\label{o2_02}
+\setcounter{lepes}{0}
+\begin{feladat}{2.2. feladat}
+36-féle szimbólum, négyzetrács. a) Konstelláció. b) A négyzetrács előnye? c) Hány százalék erősítés- és csillapításhibát visel el zajmentesen? d) Mi lenne, ha a sarokpontokat a tengelyek mellé tennénk?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 7. oldal $\cdot$ 5o\_07\_1. Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) a pontok koordinátái
+\item b) a négyzetrács előnye
+\item c) a megengedett $k$ (erősítési tényező) erősítés, illetve csillapítás, és a fázistűrés $\varphi$ (fázishiba)
+\item d) a sarokpontok áthelyezésének hatása
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{M}$ & a konstelláció pontjainak száma & $36$\\
+$k$ & erősítési tényező & \emph{keresett}\\
+$\varphi$ & fázishiba & \emph{keresett}\\
+$\varphi_{\max}$ & a megengedett fázishiba & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Konstelláció}
+Tengelyenként 6 szint, egyenlő (2 egységnyi) közökkel, a nullára szimmetrikusan. A döntési határok a szintek között félúton vannak.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{szintek: }\pm1,\ \pm3,\ \pm5\qquad\text{határok: }0,\ \pm2,\ \pm4$}\end{center}
+\jegyzet{definíció}{$6\times6=36$ pont}
+
+\lepes{b) A négyzetrács előnye}
+A két koordinátáról (a két kvadratúra-csatornáról) egymástól függetlenül lehet dönteni, egyszerű küszöbökkel: a 36-QAM döntés két hatszintű PAM-döntésre bomlik.
+
+\lepes{c) Csillapítástűrés}
+A csatorna minden koordinátát $k<1$-gyel szoroz. Elsőként az 5-ös szint ér le a 4-es határra (a 3-as a 2-esre csak $k=2/3$-nál, az a lazább).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 5k>4\ \Rightarrow\ k>\frac45=0{,}8$}\end{center}
+\jegyzet{behelyettesítés}{azaz legfeljebb $-20\%$}
+
+\lepes{c) Erősítéstűrés}
+Most $k>1$. Az 5-ös szintnek nincs felső határa, a 3-as szint lépi át elsőként a 4-es határt (az 1-es a 2-est csak $k=2$-nél).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 3k<4\ \Rightarrow\ k<\frac43=1{,}33$}\end{center}
+\jegyzet{behelyettesítés}{azaz legfeljebb $+33\%$}
+
+\lepes{c) Fázistűrés}
+Elforgatásnál a sarokpont, az $(5,5)$ mozdul el a legtöbbet. A szöge 45\textdegree{}, a távolsága $5\sqrt2$. Ha $\varphi$-vel elfordul, az egyik koordinátája $5\sqrt2\cos(45^{\circ}+\varphi)$ lesz, ennek a 4-es határ felett kell maradnia.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 5\sqrt2\cos(45^{\circ}+\varphi)>4\ \Rightarrow\ \cos(45^{\circ}+\varphi)>\frac{4}{5\sqrt2}=0{,}566$}\end{center}
+\jegyzet{geometria}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 45^{\circ}+\varphi<55{,}6^{\circ}\ \Rightarrow\ \varphi<10{,}6^{\circ}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle (5,1):\ \mathrm{arctg}\tfrac15=11{,}3^{\circ}\qquad(5,3):\ 10{,}9^{\circ}$}\end{center}
+\jegyzet{ellenőrzés}{a többi pont ennél többet tűr, a sarok a szűk keresztmetszet}
+
+\lepes{d) A sarokpontok áthelyezése}
+Az $(5,5)$ helyett a $(7,1)$ pont távolsága ugyanannyi, tehát sem a csúcs-, sem az átlagteljesítmény nem csökken. A $(7,1)$ szöge viszont csak $8{,}1^{\circ}$ a tengelytől, ekkora elfordulás után átlép a $0$-s határon.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \sqrt{5^2+5^2}=\sqrt{1^2+7^2}=\sqrt{50}$}\end{center}
+\jegyzet{ellenőrzés}{azonos távolság}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \mathrm{arctg}\tfrac17=8{,}1^{\circ}<10{,}6^{\circ}$}\end{center}
+\jegyzet{geometria}{a fázistűrés romlik}
+
+\begin{rajz}
+\textbf{36-QAM konstelláció a döntési határokkal}\par
+\begin{center}\begin{tikzpicture}[x=0.01600cm,y=-0.01600cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (520,500);
+\path[draw=black!45,line width=0.35pt] (138.5,466) -- (138.5,16);
+\path[draw=black!45,line width=0.35pt] (207.8,466) -- (207.8,16);
+\path[draw=black!45,line width=0.35pt] (346.2,466) -- (346.2,16);
+\path[draw=black!45,line width=0.35pt] (415.5,466) -- (415.5,16);
+\path[draw=black!45,line width=0.35pt] (52,379.5) -- (502,379.5);
+\path[draw=black!45,line width=0.35pt] (52,310.2) -- (502,310.2);
+\path[draw=black!45,line width=0.35pt] (52,171.8) -- (502,171.8);
+\path[draw=black!45,line width=0.35pt] (52,102.5) -- (502,102.5);
+\path[draw=black,line width=0.7pt] (52,241) -- (510,241);
+\path[fill=black,draw=none] (516,241) -- (508,237) -- (508,245) -- cycle;
+\path[draw=black,line width=0.7pt] (277,466) -- (277,10);
+\path[fill=black,draw=none] (277,4) -- (273,12) -- (281,12) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (138.5,482) {$-$4};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (207.8,482) {$-$2};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (346.2,482) {2};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (415.5,482) {4};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,383.5) {$-$4};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,314.2) {$-$2};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,175.8) {2};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,106.5) {4};
+\path[draw=black!45,line width=0.35pt] (277,241) -- (450.1,67.9);
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (415.5,462.5) -- (415.5,19.5);
+\path[draw=cB,line width=0.8pt,dash pattern=on 3pt off 2pt] (277,241) ellipse[x radius=3.917cm,y radius=3.917cm];
+\path[fill=black,draw=none] (103.9,414.1) circle[radius=0.064cm];
+\path[fill=black,draw=none] (103.9,344.8) circle[radius=0.064cm];
+\path[fill=black,draw=none] (103.9,275.6) circle[radius=0.064cm];
+\path[fill=black,draw=none] (103.9,206.4) circle[radius=0.064cm];
+\path[fill=black,draw=none] (103.9,137.2) circle[radius=0.064cm];
+\path[fill=black,draw=none] (103.9,67.9) circle[radius=0.064cm];
+\path[fill=black,draw=none] (173.2,414.1) circle[radius=0.064cm];
+\path[fill=black,draw=none] (173.2,344.8) circle[radius=0.064cm];
+\path[fill=black,draw=none] (173.2,275.6) circle[radius=0.064cm];
+\path[fill=black,draw=none] (173.2,206.4) circle[radius=0.064cm];
+\path[fill=black,draw=none] (173.2,137.2) circle[radius=0.064cm];
+\path[fill=black,draw=none] (173.2,67.9) circle[radius=0.064cm];
+\path[fill=black,draw=none] (242.4,414.1) circle[radius=0.064cm];
+\path[fill=black,draw=none] (242.4,344.8) circle[radius=0.064cm];
+\path[fill=black,draw=none] (242.4,275.6) circle[radius=0.064cm];
+\path[fill=black,draw=none] (242.4,206.4) circle[radius=0.064cm];
+\path[fill=black,draw=none] (242.4,137.2) circle[radius=0.064cm];
+\path[fill=black,draw=none] (242.4,67.9) circle[radius=0.064cm];
+\path[fill=black,draw=none] (311.6,414.1) circle[radius=0.064cm];
+\path[fill=black,draw=none] (311.6,344.8) circle[radius=0.064cm];
+\path[fill=black,draw=none] (311.6,275.6) circle[radius=0.064cm];
+\path[fill=black,draw=none] (311.6,206.4) circle[radius=0.064cm];
+\path[fill=black,draw=none] (311.6,137.2) circle[radius=0.064cm];
+\path[fill=black,draw=none] (311.6,67.9) circle[radius=0.064cm];
+\path[fill=black,draw=none] (380.8,414.1) circle[radius=0.064cm];
+\path[fill=black,draw=none] (380.8,344.8) circle[radius=0.064cm];
+\path[fill=black,draw=none] (380.8,275.6) circle[radius=0.064cm];
+\path[fill=black,draw=none] (380.8,206.4) circle[radius=0.064cm];
+\path[fill=black,draw=none] (380.8,137.2) circle[radius=0.064cm];
+\path[fill=black,draw=none] (380.8,67.9) circle[radius=0.064cm];
+\path[fill=black,draw=none] (450.1,414.1) circle[radius=0.064cm];
+\path[fill=black,draw=none] (450.1,344.8) circle[radius=0.064cm];
+\path[fill=black,draw=none] (450.1,275.6) circle[radius=0.064cm];
+\path[fill=black,draw=none] (450.1,206.4) circle[radius=0.064cm];
+\path[fill=black,draw=none] (450.1,137.2) circle[radius=0.064cm];
+\path[fill=black,draw=none] (450.1,67.9) circle[radius=0.064cm];
+\path[fill=cB,draw=none] (415.5,39.2) circle[radius=0.064cm];
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (401.6,27) {a sarokpont 10,6\textdegree{}-kal elfordulva};
+\end{tikzpicture}\end{center}
+\begin{itemize}
+\item $6\times6$ pont a $\pm1$, $\pm3$, $\pm5$ koordinátákon, a döntési határok (rács) a 0, $\pm2$, $\pm4$ értékeknél.
+\item A sarokpont $(5,5)$ a legmesszebb van, $5\sqrt2$ sugarú körön mozog elforduláskor. 10,6\textdegree{}-nál éri el a 4-es határt (piros szaggatott).
+\end{itemize}
+\end{rajz}
+\begin{tipp}[A gyűjtemény megoldása]
+A gyűjtemény fázistűrése $\arcsin(1/5)=11{,}5^{\circ}$ (az $(5,1)$ pontra), d)-re „a fázishiba nem változik”, b)-re „pontosabban megállapíthatók a hibák”.
+\end{tipp}
+\begin{figyelem}[Javítás]
+A szűk keresztmetszet a sarokpont (10,6\textdegree{}), nem az $(5,1)$ pont. A d) részben a fázistűrés 8,1\textdegree{}-ra romlik. A b) lényege a két csatorna független döntése. Nagyobb rácsnál van értelme az áthelyezésnek: a 64-QAM $(7,7)$ pontja $7\sqrt2=9{,}9$, a $(9,1)$ csak $\sqrt{82}=9{,}06$ távolságra van.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{c) }-20\%\ \text{és}\ +33\%,\ \varphi_{\max}=10{,}6^{\circ}\qquad\text{d) itt nincs előnye, a fázistűrés }8{,}1^{\circ}\text{-ra romlik}$}\end{center}
+\end{eredmeny}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.3. feladat: 16-PSK hibatűrése, 500 kbit/s sávigénye}{2.3. feladat: 16-PSK hibatűrése, 500 kbit/s sávigénye}}\label{o2_03}
+\setcounter{lepes}{0}
+\begin{feladat}{2.3. feladat}
+a) A 16-PSK elméleti amplitúdó- és fázishibatűrése? Mi határolja a gyakorlatban az amplitúdótűrést? b) 500 kbit/s ISI-mentes átvitele legalább mekkora sávot kíván 16-PSK-val?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 8. oldal $\cdot$ 5o\_08\_1. Címkék: vizsga}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item a) amplitúdó- és fázistűrés
+\item b) $B_{\min}$: a legkisebb sávszélesség
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$\ca{M}$ & a konstelláció pontjainak száma & $16$\\
+$\cb{v}$ & bitsebesség & $500$\,kbit/s\\
+$B_{\min}$ & a legkisebb sávszélesség & \emph{keresett}\\
+$\varphi_{\max}$ & a megengedett fázishiba & \\
+$\alpha$ & lekerekítési tényező & \\
+$B$ & a rendelkezésre álló sávszélesség & \\
+$T$ & jelzési (bit-) idő & \\
+$R_s$ & szimbólumsebesség & \\
+\end{jeltabla}
+\end{jeloles}
+
+\lepes{a) Fázistűrés}
+A 16 pont $360^{\circ}/{\ca{16}}=22{,}5^{\circ}$-onként van. A döntési határ két pont között félúton húzódik, így egy pont mindkét irányban a szögköz felével fordulhat el.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \varphi_{\max}=\frac{360^{\circ}}{16}\cdot\frac12=11{,}25^{\circ}$}\end{center}
+\jegyzet{geometria}{}
+
+\lepes{a) Amplitúdótűrés}
+A PSK-ban minden pont ugyanazon a körön van, a döntés csak a szögtől függ. Az amplitúdó változása elméletben nem okoz hibát: a tűrés végtelen. A gyakorlatban a zaj határol: kis amplitúdónál ugyanaz a zaj nagyobb szögben forgatja el a pontot, így könnyebben átkerül a szomszéd szektorba.
+
+\lepes{b) A legkisebb sáv}
+Egy 16-PSK szimbólum $\log_216=4$ bitet visz. A legkisebb sáv $\alpha=0$-val adódik, vivőfrekvenciás átvitelnél $B=(1+\alpha)/T$ (A2).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle R_s=\frac{v}{\log_2{\ca{M}}}=\frac{500}{4}=125\ \text{kBd}$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle B_{\min}=\frac{1+0}{T}=R_s=125\ \text{kHz}$}\end{center}
+\jegyzet{tétel}{$\alpha=0$}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{a) amplitúdó: elméletben végtelen, fázis: }\pm11{,}25^{\circ}\qquad\text{b) }B_{\min}=125\ \text{kHz}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjtemény „$\cdot$2?” kérdésére: vivőfrekvenciás átvitelnél nem kell kétszerezni, mert a $(1+\alpha)/T$ már a két oldalsávot tartalmazza. Alapsávban a fele, 62,5 kHz lenne.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.4. feladat: 64-QAM kevesebb teljesítménnyel}{2.4. feladat: 64-QAM kevesebb teljesítménnyel}}\label{o2_04}
+\setcounter{lepes}{0}
+\begin{feladat}{2.4. feladat}
+64-QAM-nél azonos hibaarány mellett csökkenteni kell a teljesítményt. Tippek?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 8. oldal $\cdot$ 5o\_08\_2. Címkék: beugró}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item ötletek a teljesítmény csökkentésére
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$d$ & egy pont távolsága az origótól & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item 64-QAM: $8\times8$-as rács, szintek $\pm1,\pm3,\pm5,\pm7$ tengelyenként
+\item a hibaarányt (zajos csatornán) a pontok közti legkisebb távolság szabja meg, ez maradjon 2
+\end{itemize}
+\end{jeloles}
+
+\lepes{Hol van a teljesítmény?}
+Egy pont teljesítménye a távolsága négyzetével arányos. Az átlagos teljesítmény tengelyenként a négyzetek átlaga, a sarokpont ennek több mint kétszerese.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \overline{d^2}=2\cdot\frac{1+9+25+49}{4}=42$}\end{center}
+\jegyzet{számérték}{a két tengely összesen}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle d^2_\text{sarok}=7^2+7^2=98$}\end{center}
+\jegyzet{számérték}{a (7,7) pont}
+
+\lepes{1. ötlet: más alakú konstelláció}
+A sarokpontokat beljebb, a tengelyek közelébe, üres rácshelyekre kell tenni, a legkisebb 2-es távolságot megtartva. Így kereszt alakú, ideálisan közel kör alakú elrendezés lesz: csökken az átlag- és a csúcsteljesítmény, a hibaarány nem változik.
+
+\lepes{További ötletek}
+Hibajavító kódolás (kódolási nyereség: ugyanakkora hibaarány kisebb jel-zaj viszonnyal), kisebb zajú vevő, nagyobb nyereségű antenna.
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{kör vagy kereszt alakú konstelláció azonos legkisebb távolsággal, illetve hibajavító kód}$}\end{center}
+\end{eredmeny}
+\begin{tipp}[Ellenőrzés]
+\begin{itemize}
+\item A gyűjteményben „64$\times$64-es mátrix” áll, helyesen 8$\times$8-as rács.
+\end{itemize}
+\end{tipp}
+
+
+% ------------------------------------------------------------------
+\section{\texorpdfstring{2.5. feladat: Tribites QAM a megfigyelt pontokkal}{2.5. feladat: Tribites QAM a megfigyelt pontokkal}}\label{o2_05}
+\setcounter{lepes}{0}
+\begin{feladat}{2.5. feladat}
+Tribitek $(d_k,c_k)$: 000 (+1,+1), 001 (0,+3), 010 ($-$1,+1), 011 ($-$3,0), 100 ($-$1,$-$1), 101 (0,$-$3), 110 (+1,$-$1), 111 (+3,0). Megfigyelve: $(-0{,}20;\ 2{,}99)$, $(-0{,}94;\ -1{,}07)$, $(-1{,}08;\ 0{,}93)$, $(-2{,}98;\ -0{,}21)$. b) Tribitsorozat? c) Erősítéshiba? d) Fázishiba? e) Zaj?
+
+{\footnotesize\sffamily Forrás: 5-ösöm 9. oldal $\cdot$ 5o\_09\_1 (gépelt megoldás). Címkék: vizsga, javítás}
+\end{feladat}
+\begin{keresunk}
+\begin{itemize}
+\item b) melyik tribitet küldték
+\item c) erősítéshiba: a vett és az ideális távolság aránya
+\item d) fázishiba: a vett és az ideális szög különbsége
+\item e) a zaj nagysága
+\end{itemize}
+\end{keresunk}
+\begin{jeloles}
+\begin{jeltabla}
+$d_k$ & a vízszintes koordináta & \\
+$c_k$ & a függőleges koordináta & \\
+$k$ & erősítési tényező & \\
+$c$ & a vett pont függőleges koordinátája & \\
+$d$ & a vett pont vízszintes koordinátája & \\
+$\varphi$ & fázishiba & \\
+\end{jeltabla}
+\par\smallskip\textbf{Adott még:}
+\begin{itemize}
+\item a nyolc ideális pont $(d_k,c_k)$ koordinátái: $d_k$ a vízszintes, $c_k$ a függőleges tengely
+\item négy vett (zajos, torzult) pont
+\end{itemize}
+\end{jeloles}
+
+\lepes{b) A legközelebbi ideális pont}
+Minden vett ponthoz megkeressük a legközelebbi ideális pontot (minimális távolságú döntés).
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle (-0{,}20;\ 2{,}99)\to(0,3)=001\qquad(-0{,}94;\ -1{,}07)\to(-1,-1)=100$}\end{center}
+\jegyzet{számérték}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle (-1{,}08;\ 0{,}93)\to(-1,1)=010\qquad(-2{,}98;\ -0{,}21)\to(-3,0)=011$}\end{center}
+\jegyzet{számérték}{}
+
+\lepes{c) Erősítéshiba}
+A vett pont origótól mért távolságát osztjuk az ideáliséval.
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{\sqrt{0{,}20^2+2{,}99^2}}{3}=\frac{2{,}997}{3}=0{,}999\qquad\frac{\sqrt{0{,}94^2+1{,}07^2}}{\sqrt2}=\frac{1{,}424}{1{,}414}=1{,}007$}\end{center}
+\jegyzet{geometria}{}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \frac{1{,}425}{1{,}414}=1{,}008\qquad\frac{2{,}987}{3}=0{,}996$}\end{center}
+\jegyzet{geometria}{a harmadik és a negyedik pont}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle k\approx1$}\end{center}
+\jegyzet{számérték}{nincs számottevő erősítéshiba}
+
+\lepes{d) Fázishiba}
+A szöget az $\mathrm{atan2}(c,d)$ adja, ami a síknegyedet is helyesen kezeli. Az ideális szögekkel összevetve:
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 93{,}8^{\circ}-90^{\circ}=3{,}8^{\circ}\qquad228{,}7^{\circ}-225^{\circ}=3{,}7^{\circ}$}\end{center}
+\jegyzet{geometria}{1. és 2. pont}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle 139{,}3^{\circ}-135^{\circ}=4{,}3^{\circ}\qquad184{,}0^{\circ}-180^{\circ}=4{,}0^{\circ}$}\end{center}
+\jegyzet{geometria}{3. és 4. pont}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \varphi\approx4^{\circ}$}\end{center}
+\jegyzet{számérték}{mind a négy ugyanannyit fordult}
+
+\lepes{e) Zaj}
+Ha zaj okozná az eltérést, a pontok véletlenszerűen, különböző irányba mozdulnának el. Itt mind a négy ugyanannyit fordult (3,7\textdegree{} és 4,3\textdegree{} között) és a távolságuk 1\%-on belül egyezik: a maradék szórás nagyon kicsi, a zaj elhanyagolható.
+
+\begin{rajz}
+\textbf{A nyolc tribit és a vett pontok}\par
+\begin{center}\begin{tikzpicture}[x=0.01600cm,y=-0.01600cm,line cap=round,line join=round]
+\useasboundingbox (0,0) rectangle (520,500);
+\path[draw=black!45,line width=0.35pt] (108.3,466) -- (108.3,16);
+\path[draw=black!45,line width=0.35pt] (164.5,466) -- (164.5,16);
+\path[draw=black!45,line width=0.35pt] (220.8,466) -- (220.8,16);
+\path[draw=black!45,line width=0.35pt] (277,466) -- (277,16);
+\path[draw=black!45,line width=0.35pt] (333.3,466) -- (333.3,16);
+\path[draw=black!45,line width=0.35pt] (389.5,466) -- (389.5,16);
+\path[draw=black!45,line width=0.35pt] (445.8,466) -- (445.8,16);
+\path[draw=black!45,line width=0.35pt] (52,409.8) -- (502,409.8);
+\path[draw=black!45,line width=0.35pt] (52,353.5) -- (502,353.5);
+\path[draw=black!45,line width=0.35pt] (52,297.3) -- (502,297.3);
+\path[draw=black!45,line width=0.35pt] (52,241) -- (502,241);
+\path[draw=black!45,line width=0.35pt] (52,184.8) -- (502,184.8);
+\path[draw=black!45,line width=0.35pt] (52,128.5) -- (502,128.5);
+\path[draw=black!45,line width=0.35pt] (52,72.3) -- (502,72.3);
+\path[draw=black,line width=0.7pt] (52,241) -- (510,241);
+\path[fill=black,draw=none] (516,241) -- (508,237) -- (508,245) -- cycle;
+\path[draw=black,line width=0.7pt] (277,466) -- (277,10);
+\path[fill=black,draw=none] (277,4) -- (273,12) -- (281,12) -- cycle;
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (108.3,482) {$-$3};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (164.5,482) {$-$2};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (220.8,482) {$-$1};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (277,482) {0};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (333.3,482) {1};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (389.5,482) {2};
+\node[anchor=base,inner sep=0pt,font=\scriptsize] at (445.8,482) {3};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,413.8) {$-$3};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,357.5) {$-$2};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,301.3) {$-$1};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,245) {0};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,188.8) {1};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,132.5) {2};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (271,76.3) {3};
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (502,496) {d};
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (285,14) {c};
+\path[fill=black,draw=none] (333.3,184.8) circle[radius=0.064cm];
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (340.3,178.8) {000};
+\path[fill=black,draw=none] (277,72.3) circle[radius=0.064cm];
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (284,66.3) {001};
+\path[fill=black,draw=none] (220.8,184.8) circle[radius=0.064cm];
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (213.8,178.8) {010};
+\path[fill=black,draw=none] (108.3,241) circle[radius=0.064cm];
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (115.3,235) {011};
+\path[fill=black,draw=none] (220.8,297.3) circle[radius=0.064cm];
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (213.8,291.3) {100};
+\path[fill=black,draw=none] (277,409.8) circle[radius=0.064cm];
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (284,403.8) {101};
+\path[fill=black,draw=none] (333.3,297.3) circle[radius=0.064cm];
+\node[anchor=base west,inner sep=0pt,font=\scriptsize] at (340.3,291.3) {110};
+\path[fill=black,draw=none] (445.8,241) circle[radius=0.064cm];
+\node[anchor=base east,inner sep=0pt,font=\scriptsize] at (438.8,235) {111};
+\path[fill=cB,draw=none] (265.8,72.8) circle[radius=0.064cm];
+\path[fill=cB,draw=none] (224.1,301.2) circle[radius=0.064cm];
+\path[fill=cB,draw=none] (216.3,188.7) circle[radius=0.064cm];
+\path[fill=cB,draw=none] (109.4,252.8) circle[radius=0.064cm];
+\end{tikzpicture}\end{center}
+\begin{itemize}
+\item Kék pontok: az ideális tribitek. Piros pontok: a vett értékek, mind kb. 4\textdegree{}-kal az óramutatóval ellentétesen elfordulva, ugyanazon a sugáron.
+\end{itemize}
+\end{rajz}
+\begin{tipp}[A gyűjtemény megoldása]
+A gépelt megoldás szerint „a fázishiba nagy: $\tan^{-1}(-1{,}08/0{,}93)=130{,}73^{\circ}\ne145^{\circ}$”.
+\end{tipp}
+\begin{figyelem}[Javítás]
+A gyűjtemény felcserélte a tengelyeket és rossz síknegyedet vett. Helyesen $\mathrm{atan2}(0{,}93;\,-1{,}08)=139{,}3^{\circ}$ a várt 135\textdegree{} helyett, a fázishiba kb. 4\textdegree{}.
+\end{figyelem}
+\begin{eredmeny}
+
+\begin{center}\adjustbox{max width=\linewidth}{$\displaystyle \text{b) }001\ 100\ 010\ 011\qquad\text{c) }k\approx1\qquad\text{d) }\varphi\approx4^{\circ}\qquad\text{e) a zaj elhanyagolható}$}\end{center}
+\end{eredmeny}
